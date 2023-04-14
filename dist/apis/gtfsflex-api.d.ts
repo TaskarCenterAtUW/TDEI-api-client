@@ -115,7 +115,7 @@ export declare const GTFSFlexApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listFlexVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<VersionList>>>>;
+    listFlexVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<VersionList>>>;
     /**
      * This call allows a user to upload or create a new gtfs flex file. The caller must provide metadata about the file. Required metadata includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
      * @summary upload a new gtfs_flex file
@@ -170,7 +170,7 @@ export declare const GTFSFlexApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listFlexVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<VersionList>>>;
+    listFlexVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>>;
     /**
      * This call allows a user to upload or create a new gtfs flex file. The caller must provide metadata about the file. Required metadata includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
      * @summary upload a new gtfs_flex file
@@ -231,7 +231,7 @@ export declare class GTFSFlexApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
      */
-    listFlexVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<VersionList>>>;
+    listFlexVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>>;
     /**
      * This call allows a user to upload or create a new gtfs flex file. The caller must provide metadata about the file. Required metadata includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
      * @summary upload a new gtfs_flex file
