@@ -3,10 +3,12 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38,7 +40,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -82,7 +84,7 @@ var base_1 = require("../base");
  * GeneralApi - axios parameter creator
  * @export
  */
-exports.GeneralApiAxiosParamCreator = function (configuration) {
+var GeneralApiAxiosParamCreator = function (configuration) {
     var _this = this;
     return {
         /**
@@ -397,11 +399,12 @@ exports.GeneralApiAxiosParamCreator = function (configuration) {
         },
     };
 };
+exports.GeneralApiAxiosParamCreator = GeneralApiAxiosParamCreator;
 /**
  * GeneralApi - functional programming interface
  * @export
  */
-exports.GeneralApiFp = function (configuration) {
+var GeneralApiFp = function (configuration) {
     return {
         /**
          * Authenticates the user to the TDEI system. Returns access token.
@@ -415,7 +418,7 @@ exports.GeneralApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GeneralApiAxiosParamCreator(configuration).authenticate(body, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GeneralApiAxiosParamCreator)(configuration).authenticate(body, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -440,7 +443,7 @@ exports.GeneralApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GeneralApiAxiosParamCreator(configuration).getStatus(tdeiRecordId, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GeneralApiAxiosParamCreator)(configuration).getStatus(tdeiRecordId, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -464,7 +467,7 @@ exports.GeneralApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GeneralApiAxiosParamCreator(configuration).listApiVersions(options)];
+                        case 0: return [4 /*yield*/, (0, exports.GeneralApiAxiosParamCreator)(configuration).listApiVersions(options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -490,7 +493,7 @@ exports.GeneralApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GeneralApiAxiosParamCreator(configuration).listOrganizations(page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GeneralApiAxiosParamCreator)(configuration).listOrganizations(page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -517,7 +520,7 @@ exports.GeneralApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GeneralApiAxiosParamCreator(configuration).listStations(tdei_org_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GeneralApiAxiosParamCreator)(configuration).listStations(tdei_org_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -532,11 +535,12 @@ exports.GeneralApiFp = function (configuration) {
         },
     };
 };
+exports.GeneralApiFp = GeneralApiFp;
 /**
  * GeneralApi - factory interface
  * @export
  */
-exports.GeneralApiFactory = function (configuration, basePath, axios) {
+var GeneralApiFactory = function (configuration, basePath, axios) {
     return {
         /**
          * Authenticates the user to the TDEI system. Returns access token.
@@ -548,7 +552,7 @@ exports.GeneralApiFactory = function (configuration, basePath, axios) {
         authenticate: function (body, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GeneralApiFp(configuration).authenticate(body, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GeneralApiFp)(configuration).authenticate(body, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -562,7 +566,7 @@ exports.GeneralApiFactory = function (configuration, basePath, axios) {
         getStatus: function (tdeiRecordId, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GeneralApiFp(configuration).getStatus(tdeiRecordId, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GeneralApiFp)(configuration).getStatus(tdeiRecordId, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -575,7 +579,7 @@ exports.GeneralApiFactory = function (configuration, basePath, axios) {
         listApiVersions: function (options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GeneralApiFp(configuration).listApiVersions(options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GeneralApiFp)(configuration).listApiVersions(options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -590,7 +594,7 @@ exports.GeneralApiFactory = function (configuration, basePath, axios) {
         listOrganizations: function (page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GeneralApiFp(configuration).listOrganizations(page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GeneralApiFp)(configuration).listOrganizations(page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -606,12 +610,13 @@ exports.GeneralApiFactory = function (configuration, basePath, axios) {
         listStations: function (tdei_org_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GeneralApiFp(configuration).listStations(tdei_org_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GeneralApiFp)(configuration).listStations(tdei_org_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
     };
 };
+exports.GeneralApiFactory = GeneralApiFactory;
 /**
  * GeneralApi - object-oriented interface
  * @export
@@ -635,7 +640,7 @@ var GeneralApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GeneralApiFp(this.configuration).authenticate(body, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).authenticate(body, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -651,7 +656,7 @@ var GeneralApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GeneralApiFp(this.configuration).getStatus(tdeiRecordId, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).getStatus(tdeiRecordId, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -666,7 +671,7 @@ var GeneralApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GeneralApiFp(this.configuration).listApiVersions(options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).listApiVersions(options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -683,7 +688,7 @@ var GeneralApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GeneralApiFp(this.configuration).listOrganizations(page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).listOrganizations(page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -701,7 +706,7 @@ var GeneralApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GeneralApiFp(this.configuration).listStations(tdei_org_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).listStations(tdei_org_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

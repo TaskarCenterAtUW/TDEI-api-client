@@ -3,10 +3,12 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38,7 +40,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -82,7 +84,7 @@ var base_1 = require("../base");
  * GTFSFlexApi - axios parameter creator
  * @export
  */
-exports.GTFSFlexApiAxiosParamCreator = function (configuration) {
+var GTFSFlexApiAxiosParamCreator = function (configuration) {
     var _this = this;
     return {
         /**
@@ -104,7 +106,7 @@ exports.GTFSFlexApiAxiosParamCreator = function (configuration) {
                                 throw new base_1.RequiredError('tdei_record_id', 'Required parameter tdei_record_id was null or undefined when calling getFlexFile.');
                             }
                             localVarPath = "/api/v1/gtfs-flex/{tdei_record_id}"
-                                .replace("{" + "tdei_record_id" + "}", encodeURIComponent(String(tdei_record_id)));
+                                .replace("{".concat("tdei_record_id", "}"), encodeURIComponent(String(tdei_record_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -411,11 +413,12 @@ exports.GTFSFlexApiAxiosParamCreator = function (configuration) {
         },
     };
 };
+exports.GTFSFlexApiAxiosParamCreator = GTFSFlexApiAxiosParamCreator;
 /**
  * GTFSFlexApi - functional programming interface
  * @export
  */
-exports.GTFSFlexApiFp = function (configuration) {
+var GTFSFlexApiFp = function (configuration) {
     return {
         /**
          * returns a specific gtfs_flex file identified by the tdei_record_id
@@ -429,7 +432,7 @@ exports.GTFSFlexApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GTFSFlexApiAxiosParamCreator(configuration).getFlexFile(tdei_record_id, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GTFSFlexApiAxiosParamCreator)(configuration).getFlexFile(tdei_record_id, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -461,7 +464,7 @@ exports.GTFSFlexApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GTFSFlexApiAxiosParamCreator(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GTFSFlexApiAxiosParamCreator)(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -488,7 +491,7 @@ exports.GTFSFlexApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GTFSFlexApiAxiosParamCreator(configuration).listFlexServices(tdei_org_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GTFSFlexApiAxiosParamCreator)(configuration).listFlexServices(tdei_org_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -512,7 +515,7 @@ exports.GTFSFlexApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GTFSFlexApiAxiosParamCreator(configuration).listFlexVersions(options)];
+                        case 0: return [4 /*yield*/, (0, exports.GTFSFlexApiAxiosParamCreator)(configuration).listFlexVersions(options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -538,7 +541,7 @@ exports.GTFSFlexApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GTFSFlexApiAxiosParamCreator(configuration).uploadGtfsFlexFileForm(meta, file, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GTFSFlexApiAxiosParamCreator)(configuration).uploadGtfsFlexFileForm(meta, file, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -553,11 +556,12 @@ exports.GTFSFlexApiFp = function (configuration) {
         },
     };
 };
+exports.GTFSFlexApiFp = GTFSFlexApiFp;
 /**
  * GTFSFlexApi - factory interface
  * @export
  */
-exports.GTFSFlexApiFactory = function (configuration, basePath, axios) {
+var GTFSFlexApiFactory = function (configuration, basePath, axios) {
     return {
         /**
          * returns a specific gtfs_flex file identified by the tdei_record_id
@@ -569,7 +573,7 @@ exports.GTFSFlexApiFactory = function (configuration, basePath, axios) {
         getFlexFile: function (tdei_record_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GTFSFlexApiFp(configuration).getFlexFile(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GTFSFlexApiFp)(configuration).getFlexFile(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -590,7 +594,7 @@ exports.GTFSFlexApiFactory = function (configuration, basePath, axios) {
         listFlexFiles: function (tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GTFSFlexApiFp(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GTFSFlexApiFp)(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -606,7 +610,7 @@ exports.GTFSFlexApiFactory = function (configuration, basePath, axios) {
         listFlexServices: function (tdei_org_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GTFSFlexApiFp(configuration).listFlexServices(tdei_org_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GTFSFlexApiFp)(configuration).listFlexServices(tdei_org_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -619,7 +623,7 @@ exports.GTFSFlexApiFactory = function (configuration, basePath, axios) {
         listFlexVersions: function (options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GTFSFlexApiFp(configuration).listFlexVersions(options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GTFSFlexApiFp)(configuration).listFlexVersions(options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -634,12 +638,13 @@ exports.GTFSFlexApiFactory = function (configuration, basePath, axios) {
         uploadGtfsFlexFileForm: function (meta, file, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GTFSFlexApiFp(configuration).uploadGtfsFlexFileForm(meta, file, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GTFSFlexApiFp)(configuration).uploadGtfsFlexFileForm(meta, file, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
     };
 };
+exports.GTFSFlexApiFactory = GTFSFlexApiFactory;
 /**
  * GTFSFlexApi - object-oriented interface
  * @export
@@ -663,7 +668,7 @@ var GTFSFlexApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GTFSFlexApiFp(this.configuration).getFlexFile(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GTFSFlexApiFp)(this.configuration).getFlexFile(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -686,7 +691,7 @@ var GTFSFlexApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GTFSFlexApiFp(this.configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GTFSFlexApiFp)(this.configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -704,7 +709,7 @@ var GTFSFlexApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GTFSFlexApiFp(this.configuration).listFlexServices(tdei_org_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GTFSFlexApiFp)(this.configuration).listFlexServices(tdei_org_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -719,7 +724,7 @@ var GTFSFlexApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GTFSFlexApiFp(this.configuration).listFlexVersions(options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GTFSFlexApiFp)(this.configuration).listFlexVersions(options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -736,7 +741,7 @@ var GTFSFlexApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GTFSFlexApiFp(this.configuration).uploadGtfsFlexFileForm(meta, file, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GTFSFlexApiFp)(this.configuration).uploadGtfsFlexFileForm(meta, file, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
