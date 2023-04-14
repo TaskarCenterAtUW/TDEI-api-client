@@ -17,7 +17,7 @@ import { Organization } from '../models';
 import { RecordStatus } from '../models';
 import { Station } from '../models';
 import { TokenResponse } from '../models';
-import { VersionSpec } from '../models';
+import { VersionList } from '../models';
 /**
  * GeneralApi - axios parameter creator
  * @export
@@ -93,7 +93,7 @@ export declare const GeneralApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listApiVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<VersionSpec>>>;
+    listApiVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<VersionList>>>;
     /**
      * Path used to retrieve the list of organizations with data in the TDEI system. Allows callers to get the tdei_org_id id for an organization.  Returns the tdei_org_id and organization information for all organizations with data in the TDEI system.
      * @summary List organizations
@@ -141,7 +141,7 @@ export declare const GeneralApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listApiVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionSpec>>;
+    listApiVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>>;
     /**
      * Path used to retrieve the list of organizations with data in the TDEI system. Allows callers to get the tdei_org_id id for an organization.  Returns the tdei_org_id and organization information for all organizations with data in the TDEI system.
      * @summary List organizations
@@ -194,7 +194,7 @@ export declare class GeneralApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GeneralApi
      */
-    listApiVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionSpec>>;
+    listApiVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>>;
     /**
      * Path used to retrieve the list of organizations with data in the TDEI system. Allows callers to get the tdei_org_id id for an organization.  Returns the tdei_org_id and organization information for all organizations with data in the TDEI system.
      * @summary List organizations

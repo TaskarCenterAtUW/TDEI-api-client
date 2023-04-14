@@ -21,7 +21,7 @@ import { Organization } from '../models';
 import { RecordStatus } from '../models';
 import { Station } from '../models';
 import { TokenResponse } from '../models';
-import { VersionSpec } from '../models';
+import { VersionList } from '../models';
 /**
  * GeneralApi - axios parameter creator
  * @export
@@ -334,7 +334,7 @@ export const GeneralApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listApiVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<VersionSpec>>> {
+        async listApiVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<VersionList>>> {
             const localVarAxiosArgs = await GeneralApiAxiosParamCreator(configuration).listApiVersions(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -407,7 +407,7 @@ export const GeneralApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listApiVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionSpec>> {
+        async listApiVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>> {
             return GeneralApiFp(configuration).listApiVersions(options).then((request) => request(axios, basePath));
         },
         /**
@@ -472,7 +472,7 @@ export class GeneralApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GeneralApi
      */
-    public async listApiVersions(options?: AxiosRequestConfig) : Promise<AxiosResponse<VersionSpec>> {
+    public async listApiVersions(options?: AxiosRequestConfig) : Promise<AxiosResponse<VersionList>> {
         return GeneralApiFp(this.configuration).listApiVersions(options).then((request) => request(this.axios, this.basePath));
     }
     /**
