@@ -57,7 +57,7 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    uploadOswFileForm: (meta: OswUpload, file: Blob, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    uploadOswFileForm: (meta: OswUpload, file: any, options?: AxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * OSWApi - functional programming interface
@@ -101,7 +101,7 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    uploadOswFileForm(meta: OswUpload, file: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    uploadOswFileForm(meta: OswUpload, file: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
 };
 /**
  * OSWApi - factory interface
@@ -195,5 +195,5 @@ export declare class OSWApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    uploadOswFileForm(meta: OswUpload, file: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    uploadOswFileForm(meta: OswUpload, file: any, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
 }

@@ -206,7 +206,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadOswFileForm: async (meta: OswUpload, file: Blob, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadOswFileForm: async (meta: OswUpload, file: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'meta' is not null or undefined
             if (meta === null || meta === undefined) {
                 throw new RequiredError('meta','Required parameter meta was null or undefined when calling uploadOswFileForm.');
@@ -231,11 +231,11 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
             if (meta !== undefined) { 
-                localVarFormParams.append('meta', meta as any);
+                localVarFormParams.append('meta', JSON.stringify(meta));
             }
 
             if (file !== undefined) { 
-                localVarFormParams.append('file', file as any);
+                localVarFormParams.append('file', file);
             }
 
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
@@ -250,6 +250,8 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = localVarFormParams;
+            localVarRequestOptions.maxBodyLength = Infinity;
+            // maxBodyLength: Infinity,
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -320,10 +322,11 @@ export const OSWApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadOswFileForm(meta: OswUpload, file: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+        async uploadOswFileForm(meta: OswUpload, file: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
             const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).uploadOswFileForm(meta, file, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+               
                 return axios.request(axiosRequestArgs);
             };
         },
@@ -439,7 +442,7 @@ export class OSWApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async uploadOswFileForm(meta: OswUpload, file: Blob, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+    public async uploadOswFileForm(meta: OswUpload, file: any, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
         return OSWApiFp(this.configuration).uploadOswFileForm(meta, file, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -3,10 +3,12 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38,7 +40,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -82,7 +84,7 @@ var base_1 = require("../base");
  * GTFSPathwaysApi - axios parameter creator
  * @export
  */
-exports.GTFSPathwaysApiAxiosParamCreator = function (configuration) {
+var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
     var _this = this;
     return {
         /**
@@ -104,7 +106,7 @@ exports.GTFSPathwaysApiAxiosParamCreator = function (configuration) {
                                 throw new base_1.RequiredError('tdei_record_id', 'Required parameter tdei_record_id was null or undefined when calling getPathwaysFile.');
                             }
                             localVarPath = "/api/v1/gtfs-pathways/{tdei_record_id}"
-                                .replace("{" + "tdei_record_id" + "}", encodeURIComponent(String(tdei_record_id)));
+                                .replace("{".concat("tdei_record_id", "}"), encodeURIComponent(String(tdei_record_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -411,11 +413,12 @@ exports.GTFSPathwaysApiAxiosParamCreator = function (configuration) {
         },
     };
 };
+exports.GTFSPathwaysApiAxiosParamCreator = GTFSPathwaysApiAxiosParamCreator;
 /**
  * GTFSPathwaysApi - functional programming interface
  * @export
  */
-exports.GTFSPathwaysApiFp = function (configuration) {
+var GTFSPathwaysApiFp = function (configuration) {
     return {
         /**
          * returns a specific gtfs_pathways file identified by the tdei_record_id
@@ -429,7 +432,7 @@ exports.GTFSPathwaysApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GTFSPathwaysApiAxiosParamCreator(configuration).getPathwaysFile(tdei_record_id, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GTFSPathwaysApiAxiosParamCreator)(configuration).getPathwaysFile(tdei_record_id, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -461,7 +464,7 @@ exports.GTFSPathwaysApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GTFSPathwaysApiAxiosParamCreator(configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GTFSPathwaysApiAxiosParamCreator)(configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -485,7 +488,7 @@ exports.GTFSPathwaysApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GTFSPathwaysApiAxiosParamCreator(configuration).listPathwaysVersions(options)];
+                        case 0: return [4 /*yield*/, (0, exports.GTFSPathwaysApiAxiosParamCreator)(configuration).listPathwaysVersions(options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -512,7 +515,7 @@ exports.GTFSPathwaysApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GTFSPathwaysApiAxiosParamCreator(configuration).listStations(tdei_org_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GTFSPathwaysApiAxiosParamCreator)(configuration).listStations(tdei_org_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -538,7 +541,7 @@ exports.GTFSPathwaysApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.GTFSPathwaysApiAxiosParamCreator(configuration).uploadPathwaysFileForm(meta, file, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GTFSPathwaysApiAxiosParamCreator)(configuration).uploadPathwaysFileForm(meta, file, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -553,11 +556,12 @@ exports.GTFSPathwaysApiFp = function (configuration) {
         },
     };
 };
+exports.GTFSPathwaysApiFp = GTFSPathwaysApiFp;
 /**
  * GTFSPathwaysApi - factory interface
  * @export
  */
-exports.GTFSPathwaysApiFactory = function (configuration, basePath, axios) {
+var GTFSPathwaysApiFactory = function (configuration, basePath, axios) {
     return {
         /**
          * returns a specific gtfs_pathways file identified by the tdei_record_id
@@ -569,7 +573,7 @@ exports.GTFSPathwaysApiFactory = function (configuration, basePath, axios) {
         getPathwaysFile: function (tdei_record_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GTFSPathwaysApiFp(configuration).getPathwaysFile(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(configuration).getPathwaysFile(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -590,7 +594,7 @@ exports.GTFSPathwaysApiFactory = function (configuration, basePath, axios) {
         listPathwaysFiles: function (bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GTFSPathwaysApiFp(configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -603,7 +607,7 @@ exports.GTFSPathwaysApiFactory = function (configuration, basePath, axios) {
         listPathwaysVersions: function (options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GTFSPathwaysApiFp(configuration).listPathwaysVersions(options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(configuration).listPathwaysVersions(options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -619,7 +623,7 @@ exports.GTFSPathwaysApiFactory = function (configuration, basePath, axios) {
         listStations: function (tdei_org_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GTFSPathwaysApiFp(configuration).listStations(tdei_org_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(configuration).listStations(tdei_org_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -634,12 +638,13 @@ exports.GTFSPathwaysApiFactory = function (configuration, basePath, axios) {
         uploadPathwaysFileForm: function (meta, file, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.GTFSPathwaysApiFp(configuration).uploadPathwaysFileForm(meta, file, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(configuration).uploadPathwaysFileForm(meta, file, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
     };
 };
+exports.GTFSPathwaysApiFactory = GTFSPathwaysApiFactory;
 /**
  * GTFSPathwaysApi - object-oriented interface
  * @export
@@ -663,7 +668,7 @@ var GTFSPathwaysApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GTFSPathwaysApiFp(this.configuration).getPathwaysFile(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(this.configuration).getPathwaysFile(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -686,7 +691,7 @@ var GTFSPathwaysApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GTFSPathwaysApiFp(this.configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(this.configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -701,7 +706,7 @@ var GTFSPathwaysApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GTFSPathwaysApiFp(this.configuration).listPathwaysVersions(options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(this.configuration).listPathwaysVersions(options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -719,7 +724,7 @@ var GTFSPathwaysApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GTFSPathwaysApiFp(this.configuration).listStations(tdei_org_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(this.configuration).listStations(tdei_org_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -736,7 +741,7 @@ var GTFSPathwaysApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.GTFSPathwaysApiFp(this.configuration).uploadPathwaysFileForm(meta, file, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(this.configuration).uploadPathwaysFileForm(meta, file, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
