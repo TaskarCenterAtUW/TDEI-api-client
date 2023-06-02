@@ -23,43 +23,43 @@ export interface OswDownload {
      * @type {string}
      * @memberof OswDownload
      */
-    tdei_org_id: string;
+    tdeiOrgId: string;
     /**
      * Description of who data was collected by. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof OswDownload
      */
-    collected_by: string;
+    collectedBy: string;
     /**
      * date-time that data was collected
      * @type {string}
      * @memberof OswDownload
      */
-    collection_date: string;
+    collectionDate: string;
     /**
      * Method by which the data was collected. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof OswDownload
      */
-    collection_method: OswDownloadCollectionMethodEnum;
+    collectionMethod: OswDownloadCollectionMethodEnum;
     /**
      * Date of publication of the file
      * @type {string}
      * @memberof OswDownload
      */
-    publication_date?: string;
+    publicationDate?: string;
     /**
      * tdei-generated confidence level. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
      * @type {number}
      * @memberof OswDownload
      */
-    confidence_level: number;
+    confidenceLevel: number;
     /**
      * Description of data source or sources from which the data was collected. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof OswDownload
      */
-    data_source: OswDownloadDataSourceEnum;
+    dataSource: OswDownloadDataSourceEnum;
     /**
      * 
      * @type {GeoJsonObject}
@@ -71,19 +71,19 @@ export interface OswDownload {
      * @type {string}
      * @memberof OswDownload
      */
-    tdei_record_id: string;
+    tdeiRecordId: string;
     /**
      * version of osw schema this file conforms to
      * @type {string}
      * @memberof OswDownload
      */
-    osw_schema_version: string;
+    oswSchemaVersion: string;
     /**
      * The url from which this file can be downloaded.
      * @type {string}
      * @memberof OswDownload
      */
-    download_url: string;
+    downloadUrl: string;
 }
 
 /**

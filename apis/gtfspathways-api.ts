@@ -29,17 +29,17 @@ export const GTFSPathwaysApiAxiosParamCreator = function (configuration?: Config
         /**
          * returns a specific gtfs_pathways file identified by the tdei_record_id
          * @summary returns a gtfs_pathways file
-         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {string} tdeiRecordId tdei_record_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPathwaysFile: async (tdei_record_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tdei_record_id' is not null or undefined
-            if (tdei_record_id === null || tdei_record_id === undefined) {
-                throw new RequiredError('tdei_record_id','Required parameter tdei_record_id was null or undefined when calling getPathwaysFile.');
+        getPathwaysFile: async (tdeiRecordId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tdeiRecordId' is not null or undefined
+            if (tdeiRecordId === null || tdeiRecordId === undefined) {
+                throw new RequiredError('tdeiRecordId','Required parameter tdeiRecordId was null or undefined when calling getPathwaysFile.');
             }
             const localVarPath = `/api/v1/gtfs-pathways/{tdei_record_id}`
-                .replace(`{${"tdei_record_id"}}`, encodeURIComponent(String(tdei_record_id)));
+                .replace(`{${"tdei_record_id"}}`, encodeURIComponent(String(tdeiRecordId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -59,6 +59,13 @@ export const GTFSPathwaysApiAxiosParamCreator = function (configuration?: Config
             }
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -80,17 +87,17 @@ export const GTFSPathwaysApiAxiosParamCreator = function (configuration?: Config
          * This endpoint returns a json list of all gtfs pathways files stored in the TDEI system that meet the specified criteria. Criteria that can be specified include: polygon (bounding box), minimum confidence level, pathways version, date time and agency id.  This endpoint can be used by an application developer to obtain a list of gtfs pathways files in the TDEI system meeting the specified criteria. This endpoint returns a list of file-metadata including the uris of the file, which can be used to fetch the files themselves.
          * @summary List pathways files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
-         * @param {string} [tdei_station_id] Id of a station in the tdei system. gtfs station ids may not be unique.
-         * @param {string} [pathways_schema_version] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
-         * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
-         * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+         * @param {string} [tdeiStationId] Id of a station in the tdei system. gtfs station ids may not be unique.
+         * @param {string} [pathwaysSchemaVersion] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
+         * @param {string} [dateTime] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
+         * @param {string} [tdeiOrgId] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdeiRecordId] tdei_record_id, unique id represents file.
+         * @param {number} [pageNo] Integer, defaults to 1.
+         * @param {number} [pageSize] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPathwaysFiles: async (bbox?: Array<number>, tdei_station_id?: string, pathways_schema_version?: string, date_time?: string, tdei_org_id?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listPathwaysFiles: async (bbox?: Array<number>, tdeiStationId?: string, pathwaysSchemaVersion?: string, dateTime?: string, tdeiOrgId?: string, tdeiRecordId?: string, pageNo?: number, pageSize?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/gtfs-pathways`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -111,37 +118,44 @@ export const GTFSPathwaysApiAxiosParamCreator = function (configuration?: Config
             }
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
             if (bbox) {
                 localVarQueryParameter['bbox'] = bbox;
             }
 
-            if (tdei_station_id !== undefined) {
-                localVarQueryParameter['tdei_station_id'] = tdei_station_id;
+            if (tdeiStationId !== undefined) {
+                localVarQueryParameter['tdei_station_id'] = tdeiStationId;
             }
 
-            if (pathways_schema_version !== undefined) {
-                localVarQueryParameter['pathways_schema_version'] = pathways_schema_version;
+            if (pathwaysSchemaVersion !== undefined) {
+                localVarQueryParameter['pathways_schema_version'] = pathwaysSchemaVersion;
             }
 
-            if (date_time !== undefined) {
-                localVarQueryParameter['date_time'] = date_time;
+            if (dateTime !== undefined) {
+                localVarQueryParameter['date_time'] = dateTime;
             }
 
-            if (tdei_org_id !== undefined) {
-                localVarQueryParameter['tdei_org_id'] = tdei_org_id;
+            if (tdeiOrgId !== undefined) {
+                localVarQueryParameter['tdei_org_id'] = tdeiOrgId;
             }
 
-            if (tdei_record_id !== undefined) {
-                localVarQueryParameter['tdei_record_id'] = tdei_record_id;
+            if (tdeiRecordId !== undefined) {
+                localVarQueryParameter['tdei_record_id'] = tdeiRecordId;
             }
 
-            if (page_no !== undefined) {
-                localVarQueryParameter['page_no'] = page_no;
+            if (pageNo !== undefined) {
+                localVarQueryParameter['page_no'] = pageNo;
             }
 
-            if (page_size !== undefined) {
-                localVarQueryParameter['page_size'] = page_size;
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -187,6 +201,13 @@ export const GTFSPathwaysApiAxiosParamCreator = function (configuration?: Config
             }
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -207,13 +228,13 @@ export const GTFSPathwaysApiAxiosParamCreator = function (configuration?: Config
         /**
          * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization. 
          * @summary List Stations
-         * @param {string} [tdei_org_id] TDEI organization id.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+         * @param {string} [tdeiOrgId] TDEI organization id.
+         * @param {number} [pageNo] Integer, defaults to 1.
+         * @param {number} [pageSize] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listStations: async (tdei_org_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listStations: async (tdeiOrgId?: string, pageNo?: number, pageSize?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/gtfs-pathways/stations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -234,17 +255,24 @@ export const GTFSPathwaysApiAxiosParamCreator = function (configuration?: Config
             }
 
             // authentication AuthorizationToken required
-
-            if (tdei_org_id !== undefined) {
-                localVarQueryParameter['tdei_org_id'] = tdei_org_id;
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
             }
 
-            if (page_no !== undefined) {
-                localVarQueryParameter['page_no'] = page_no;
+            if (tdeiOrgId !== undefined) {
+                localVarQueryParameter['tdei_org_id'] = tdeiOrgId;
             }
 
-            if (page_size !== undefined) {
-                localVarQueryParameter['page_size'] = page_size;
+            if (pageNo !== undefined) {
+                localVarQueryParameter['page_no'] = pageNo;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['page_size'] = pageSize;
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -293,6 +321,13 @@ export const GTFSPathwaysApiAxiosParamCreator = function (configuration?: Config
             const localVarFormParams = new FormData();
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
 
             if (meta !== undefined) { 
@@ -333,12 +368,12 @@ export const GTFSPathwaysApiFp = function(configuration?: Configuration) {
         /**
          * returns a specific gtfs_pathways file identified by the tdei_record_id
          * @summary returns a gtfs_pathways file
-         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {string} tdeiRecordId tdei_record_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPathwaysFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await GTFSPathwaysApiAxiosParamCreator(configuration).getPathwaysFile(tdei_record_id, options);
+        async getPathwaysFile(tdeiRecordId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await GTFSPathwaysApiAxiosParamCreator(configuration).getPathwaysFile(tdeiRecordId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -348,18 +383,18 @@ export const GTFSPathwaysApiFp = function(configuration?: Configuration) {
          * This endpoint returns a json list of all gtfs pathways files stored in the TDEI system that meet the specified criteria. Criteria that can be specified include: polygon (bounding box), minimum confidence level, pathways version, date time and agency id.  This endpoint can be used by an application developer to obtain a list of gtfs pathways files in the TDEI system meeting the specified criteria. This endpoint returns a list of file-metadata including the uris of the file, which can be used to fetch the files themselves.
          * @summary List pathways files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
-         * @param {string} [tdei_station_id] Id of a station in the tdei system. gtfs station ids may not be unique.
-         * @param {string} [pathways_schema_version] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
-         * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
-         * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+         * @param {string} [tdeiStationId] Id of a station in the tdei system. gtfs station ids may not be unique.
+         * @param {string} [pathwaysSchemaVersion] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
+         * @param {string} [dateTime] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
+         * @param {string} [tdeiOrgId] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdeiRecordId] tdei_record_id, unique id represents file.
+         * @param {number} [pageNo] Integer, defaults to 1.
+         * @param {number} [pageSize] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPathwaysFiles(bbox?: Array<number>, tdei_station_id?: string, pathways_schema_version?: string, date_time?: string, tdei_org_id?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GtfsPathwaysDownload>>>> {
-            const localVarAxiosArgs = await GTFSPathwaysApiAxiosParamCreator(configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options);
+        async listPathwaysFiles(bbox?: Array<number>, tdeiStationId?: string, pathwaysSchemaVersion?: string, dateTime?: string, tdeiOrgId?: string, tdeiRecordId?: string, pageNo?: number, pageSize?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GtfsPathwaysDownload>>>> {
+            const localVarAxiosArgs = await GTFSPathwaysApiAxiosParamCreator(configuration).listPathwaysFiles(bbox, tdeiStationId, pathwaysSchemaVersion, dateTime, tdeiOrgId, tdeiRecordId, pageNo, pageSize, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -381,14 +416,14 @@ export const GTFSPathwaysApiFp = function(configuration?: Configuration) {
         /**
          * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization. 
          * @summary List Stations
-         * @param {string} [tdei_org_id] TDEI organization id.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+         * @param {string} [tdeiOrgId] TDEI organization id.
+         * @param {number} [pageNo] Integer, defaults to 1.
+         * @param {number} [pageSize] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listStations(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Station>>>> {
-            const localVarAxiosArgs = await GTFSPathwaysApiAxiosParamCreator(configuration).listStations(tdei_org_id, page_no, page_size, options);
+        async listStations(tdeiOrgId?: string, pageNo?: number, pageSize?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Station>>>> {
+            const localVarAxiosArgs = await GTFSPathwaysApiAxiosParamCreator(configuration).listStations(tdeiOrgId, pageNo, pageSize, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -421,29 +456,29 @@ export const GTFSPathwaysApiFactory = function (configuration?: Configuration, b
         /**
          * returns a specific gtfs_pathways file identified by the tdei_record_id
          * @summary returns a gtfs_pathways file
-         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {string} tdeiRecordId tdei_record_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPathwaysFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return GTFSPathwaysApiFp(configuration).getPathwaysFile(tdei_record_id, options).then((request) => request(axios, basePath));
+        async getPathwaysFile(tdeiRecordId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return GTFSPathwaysApiFp(configuration).getPathwaysFile(tdeiRecordId, options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint returns a json list of all gtfs pathways files stored in the TDEI system that meet the specified criteria. Criteria that can be specified include: polygon (bounding box), minimum confidence level, pathways version, date time and agency id.  This endpoint can be used by an application developer to obtain a list of gtfs pathways files in the TDEI system meeting the specified criteria. This endpoint returns a list of file-metadata including the uris of the file, which can be used to fetch the files themselves.
          * @summary List pathways files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
-         * @param {string} [tdei_station_id] Id of a station in the tdei system. gtfs station ids may not be unique.
-         * @param {string} [pathways_schema_version] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
-         * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
-         * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+         * @param {string} [tdeiStationId] Id of a station in the tdei system. gtfs station ids may not be unique.
+         * @param {string} [pathwaysSchemaVersion] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
+         * @param {string} [dateTime] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
+         * @param {string} [tdeiOrgId] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdeiRecordId] tdei_record_id, unique id represents file.
+         * @param {number} [pageNo] Integer, defaults to 1.
+         * @param {number} [pageSize] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPathwaysFiles(bbox?: Array<number>, tdei_station_id?: string, pathways_schema_version?: string, date_time?: string, tdei_org_id?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsPathwaysDownload>>> {
-            return GTFSPathwaysApiFp(configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options).then((request) => request(axios, basePath));
+        async listPathwaysFiles(bbox?: Array<number>, tdeiStationId?: string, pathwaysSchemaVersion?: string, dateTime?: string, tdeiOrgId?: string, tdeiRecordId?: string, pageNo?: number, pageSize?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsPathwaysDownload>>> {
+            return GTFSPathwaysApiFp(configuration).listPathwaysFiles(bbox, tdeiStationId, pathwaysSchemaVersion, dateTime, tdeiOrgId, tdeiRecordId, pageNo, pageSize, options).then((request) => request(axios, basePath));
         },
         /**
          * Lists the versions of GTFS pathways data which are supported by TDEI. Returns a json list of the GTFS pathways versions supported by TDEI.
@@ -457,14 +492,14 @@ export const GTFSPathwaysApiFactory = function (configuration?: Configuration, b
         /**
          * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization. 
          * @summary List Stations
-         * @param {string} [tdei_org_id] TDEI organization id.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+         * @param {string} [tdeiOrgId] TDEI organization id.
+         * @param {number} [pageNo] Integer, defaults to 1.
+         * @param {number} [pageSize] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listStations(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Station>>> {
-            return GTFSPathwaysApiFp(configuration).listStations(tdei_org_id, page_no, page_size, options).then((request) => request(axios, basePath));
+        async listStations(tdeiOrgId?: string, pageNo?: number, pageSize?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Station>>> {
+            return GTFSPathwaysApiFp(configuration).listStations(tdeiOrgId, pageNo, pageSize, options).then((request) => request(axios, basePath));
         },
         /**
          * This call allows a user to upload or create a new gtfs pathways file. The caller must provide metadata about the file. Required metadata includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
@@ -490,31 +525,31 @@ export class GTFSPathwaysApi extends BaseAPI {
     /**
      * returns a specific gtfs_pathways file identified by the tdei_record_id
      * @summary returns a gtfs_pathways file
-     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {string} tdeiRecordId tdei_record_id for a file, represented as a uuid
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GTFSPathwaysApi
      */
-    public async getPathwaysFile(tdei_record_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return GTFSPathwaysApiFp(this.configuration).getPathwaysFile(tdei_record_id, options).then((request) => request(this.axios, this.basePath));
+    public async getPathwaysFile(tdeiRecordId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return GTFSPathwaysApiFp(this.configuration).getPathwaysFile(tdeiRecordId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This endpoint returns a json list of all gtfs pathways files stored in the TDEI system that meet the specified criteria. Criteria that can be specified include: polygon (bounding box), minimum confidence level, pathways version, date time and agency id.  This endpoint can be used by an application developer to obtain a list of gtfs pathways files in the TDEI system meeting the specified criteria. This endpoint returns a list of file-metadata including the uris of the file, which can be used to fetch the files themselves.
      * @summary List pathways files meeting criteria.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
-     * @param {string} [tdei_station_id] Id of a station in the tdei system. gtfs station ids may not be unique.
-     * @param {string} [pathways_schema_version] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
-     * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
-     * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+     * @param {string} [tdeiStationId] Id of a station in the tdei system. gtfs station ids may not be unique.
+     * @param {string} [pathwaysSchemaVersion] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
+     * @param {string} [dateTime] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
+     * @param {string} [tdeiOrgId] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdeiRecordId] tdei_record_id, unique id represents file.
+     * @param {number} [pageNo] Integer, defaults to 1.
+     * @param {number} [pageSize] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GTFSPathwaysApi
      */
-    public async listPathwaysFiles(bbox?: Array<number>, tdei_station_id?: string, pathways_schema_version?: string, date_time?: string, tdei_org_id?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<GtfsPathwaysDownload>>> {
-        return GTFSPathwaysApiFp(this.configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
+    public async listPathwaysFiles(bbox?: Array<number>, tdeiStationId?: string, pathwaysSchemaVersion?: string, dateTime?: string, tdeiOrgId?: string, tdeiRecordId?: string, pageNo?: number, pageSize?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<GtfsPathwaysDownload>>> {
+        return GTFSPathwaysApiFp(this.configuration).listPathwaysFiles(bbox, tdeiStationId, pathwaysSchemaVersion, dateTime, tdeiOrgId, tdeiRecordId, pageNo, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Lists the versions of GTFS pathways data which are supported by TDEI. Returns a json list of the GTFS pathways versions supported by TDEI.
@@ -529,15 +564,15 @@ export class GTFSPathwaysApi extends BaseAPI {
     /**
      * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization. 
      * @summary List Stations
-     * @param {string} [tdei_org_id] TDEI organization id.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+     * @param {string} [tdeiOrgId] TDEI organization id.
+     * @param {number} [pageNo] Integer, defaults to 1.
+     * @param {number} [pageSize] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GTFSPathwaysApi
      */
-    public async listStations(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Station>>> {
-        return GTFSPathwaysApiFp(this.configuration).listStations(tdei_org_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
+    public async listStations(tdeiOrgId?: string, pageNo?: number, pageSize?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Station>>> {
+        return GTFSPathwaysApiFp(this.configuration).listStations(tdeiOrgId, pageNo, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This call allows a user to upload or create a new gtfs pathways file. The caller must provide metadata about the file. Required metadata includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.

@@ -23,37 +23,37 @@ export interface OswUpload {
      * @type {string}
      * @memberof OswUpload
      */
-    tdei_org_id: string;
+    tdeiOrgId: string;
     /**
      * Description of who data was collected by. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof OswUpload
      */
-    collected_by: string;
+    collectedBy: string;
     /**
      * Date-time that data was collected. If uploader includes time, time should be specified in UTC time. If uploader does not include time, time will be registered as 12:01am UTC time on the date specified.
      * @type {string}
      * @memberof OswUpload
      */
-    collection_date: string;
+    collectionDate: string;
     /**
      * Method by which the data was collected. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof OswUpload
      */
-    collection_method: OswUploadCollectionMethodEnum;
+    collectionMethod: OswUploadCollectionMethodEnum;
     /**
      * Date of publication of the file
      * @type {string}
      * @memberof OswUpload
      */
-    publication_date?: string;
+    publicationDate?: string;
     /**
      * Description of data source or sources from which the data was collected. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof OswUpload
      */
-    data_source: OswUploadDataSourceEnum;
+    dataSource: OswUploadDataSourceEnum;
     /**
      * 
      * @type {GeoJsonObject}
@@ -65,7 +65,7 @@ export interface OswUpload {
      * @type {string}
      * @memberof OswUpload
      */
-    osw_schema_version: string;
+    oswSchemaVersion: string;
 }
 
 /**

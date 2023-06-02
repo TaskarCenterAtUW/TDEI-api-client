@@ -28,11 +28,11 @@ export interface Organization {
      * @type {string}
      * @memberof Organization
      */
-    tdei_org_id?: string;
+    tdeiOrgId?: string;
     /**
      * org_name name. For transit agencies, typically the agency name used in GTFS releases.
      * @type {string}
      * @memberof Organization
      */
-    org_name: string;
+    orgName: string;
 }

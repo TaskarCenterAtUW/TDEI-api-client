@@ -29,11 +29,11 @@ export interface GtfsFlexServiceModel {
      * @type {string}
      * @memberof GtfsFlexServiceModel
      */
-    service_name: string;
+    serviceName: string;
     /**
      * tdei assigned service id. Necessary to ensure that service ids are unique.
      * @type {string}
      * @memberof GtfsFlexServiceModel
      */
-    tdei_service_id: string;
+    tdeiServiceId: string;
 }

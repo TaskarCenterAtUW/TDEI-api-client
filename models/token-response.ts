@@ -22,23 +22,23 @@ export interface TokenResponse {
      * @type {string}
      * @memberof TokenResponse
      */
-    access_token?: string;
+    accessToken?: string;
     /**
      * 
      * @type {number}
      * @memberof TokenResponse
      */
-    expires_in?: number;
+    expiresIn?: number;
     /**
      * 
      * @type {number}
      * @memberof TokenResponse
      */
-    refresh_expires_in?: number;
+    refreshExpiresIn?: number;
     /**
      * 
      * @type {string}
      * @memberof TokenResponse
      */
-    refresh_token?: string;
+    refreshToken?: string;
 }

@@ -29,11 +29,11 @@ export interface Station {
      * @type {string}
      * @memberof Station
      */
-    tdei_station_id: string;
+    tdeiStationId: string;
     /**
      * typically the station_name used in GTFS files
      * @type {string}
      * @memberof Station
      */
-    station_name: string;
+    stationName: string;
 }

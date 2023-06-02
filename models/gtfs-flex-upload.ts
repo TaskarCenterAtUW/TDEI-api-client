@@ -23,49 +23,49 @@ export interface GtfsFlexUpload {
      * @type {string}
      * @memberof GtfsFlexUpload
      */
-    tdei_org_id: string;
+    tdeiOrgId: string;
     /**
      * TDEI id of a GTFS Flex service
      * @type {string}
      * @memberof GtfsFlexUpload
      */
-    tdei_service_id: string;
+    tdeiServiceId: string;
     /**
      * Description of who data was collected by. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof GtfsFlexUpload
      */
-    collected_by: string;
+    collectedBy: string;
     /**
      * date-time that data was collected
      * @type {string}
      * @memberof GtfsFlexUpload
      */
-    collection_date: string;
+    collectionDate: string;
     /**
      * Method by which the data was collected. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof GtfsFlexUpload
      */
-    collection_method: GtfsFlexUploadCollectionMethodEnum;
+    collectionMethod: GtfsFlexUploadCollectionMethodEnum;
     /**
      * date from which this file is valid
      * @type {string}
      * @memberof GtfsFlexUpload
      */
-    valid_from: string;
+    validFrom: string;
     /**
      * date until which this data is valid
      * @type {string}
      * @memberof GtfsFlexUpload
      */
-    valid_to?: string;
+    validTo?: string;
     /**
      * Description of data source or sources from which the data was collected. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof GtfsFlexUpload
      */
-    data_source: GtfsFlexUploadDataSourceEnum;
+    dataSource: GtfsFlexUploadDataSourceEnum;
     /**
      * 
      * @type {GeoJsonObject}
@@ -77,7 +77,7 @@ export interface GtfsFlexUpload {
      * @type {string}
      * @memberof GtfsFlexUpload
      */
-    flex_schema_version: string;
+    flexSchemaVersion: string;
 }
 
 /**

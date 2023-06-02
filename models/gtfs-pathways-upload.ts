@@ -23,49 +23,49 @@ export interface GtfsPathwaysUpload {
      * @type {string}
      * @memberof GtfsPathwaysUpload
      */
-    tdei_org_id: string;
+    tdeiOrgId: string;
     /**
      * tdei-assigned station id. Represented as UUID. Station ids can be retrieved using the /api/v1.0/stations path.
      * @type {string}
      * @memberof GtfsPathwaysUpload
      */
-    tdei_station_id: string;
+    tdeiStationId: string;
     /**
      * Description of who data was collected by.
      * @type {string}
      * @memberof GtfsPathwaysUpload
      */
-    collected_by: string;
+    collectedBy: string;
     /**
      * date-time that data was collected
      * @type {string}
      * @memberof GtfsPathwaysUpload
      */
-    collection_date: string;
+    collectionDate: string;
     /**
      * Method by which the data was collected.
      * @type {string}
      * @memberof GtfsPathwaysUpload
      */
-    collection_method: GtfsPathwaysUploadCollectionMethodEnum;
+    collectionMethod: GtfsPathwaysUploadCollectionMethodEnum;
     /**
      * date from which this file is valid
      * @type {string}
      * @memberof GtfsPathwaysUpload
      */
-    valid_from: string;
+    validFrom: string;
     /**
      * date until which this data is valid
      * @type {string}
      * @memberof GtfsPathwaysUpload
      */
-    valid_to?: string;
+    validTo?: string;
     /**
      * Description of data source or sources from which the data was collected. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof GtfsPathwaysUpload
      */
-    data_source: GtfsPathwaysUploadDataSourceEnum;
+    dataSource: GtfsPathwaysUploadDataSourceEnum;
     /**
      * 
      * @type {GeoJsonObject}
@@ -77,7 +77,7 @@ export interface GtfsPathwaysUpload {
      * @type {string}
      * @memberof GtfsPathwaysUpload
      */
-    pathways_schema_version: string;
+    pathwaysSchemaVersion: string;
 }
 
 /**

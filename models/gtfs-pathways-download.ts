@@ -23,55 +23,55 @@ export interface GtfsPathwaysDownload {
      * @type {string}
      * @memberof GtfsPathwaysDownload
      */
-    tdei_org_id: string;
+    tdeiOrgId: string;
     /**
      * tdei-assigned station id. Represented as UUID. Station ids can be retrieved using the /api/v1/stations path.
      * @type {string}
      * @memberof GtfsPathwaysDownload
      */
-    tdei_station_id: string;
+    tdeiStationId: string;
     /**
      * Description of who data was collected by. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof GtfsPathwaysDownload
      */
-    collected_by: string;
+    collectedBy: string;
     /**
      * date-time that data was collected
      * @type {string}
      * @memberof GtfsPathwaysDownload
      */
-    collection_date: string;
+    collectionDate: string;
     /**
      * Method by which the data was collected. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof GtfsPathwaysDownload
      */
-    collection_method: GtfsPathwaysDownloadCollectionMethodEnum;
+    collectionMethod: GtfsPathwaysDownloadCollectionMethodEnum;
     /**
      * date from which this file is valid
      * @type {string}
      * @memberof GtfsPathwaysDownload
      */
-    valid_from: string;
+    validFrom: string;
     /**
      * date until which this data is valid
      * @type {string}
      * @memberof GtfsPathwaysDownload
      */
-    valid_to?: string;
+    validTo?: string;
     /**
      * tdei-generated confidence level. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
      * @type {number}
      * @memberof GtfsPathwaysDownload
      */
-    confidence_level: number;
+    confidenceLevel: number;
     /**
      * Description of data source or sources from which the data was collected. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof GtfsPathwaysDownload
      */
-    data_source: GtfsPathwaysDownloadDataSourceEnum;
+    dataSource: GtfsPathwaysDownloadDataSourceEnum;
     /**
      * 
      * @type {GeoJsonObject}
@@ -83,19 +83,19 @@ export interface GtfsPathwaysDownload {
      * @type {string}
      * @memberof GtfsPathwaysDownload
      */
-    tdei_record_id: string;
+    tdeiRecordId: string;
     /**
      * version of gtfs pathways schema this file conforms to
      * @type {string}
      * @memberof GtfsPathwaysDownload
      */
-    pathways_schema_version: string;
+    pathwaysSchemaVersion: string;
     /**
      * The url from which this file can be downloaded.
      * @type {string}
      * @memberof GtfsPathwaysDownload
      */
-    download_url: string;
+    downloadUrl: string;
 }
 
 /**
