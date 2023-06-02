@@ -1,0 +1,13 @@
+---
+    ######### Dev Workflow  ########
+    on:
+      workflow_dispatch:
+    
+    jobs:
+      GenerateAPIClient:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v2
+          - name: Generate API Client
+            run: |
+                bash autogenerate_api_client.sh
