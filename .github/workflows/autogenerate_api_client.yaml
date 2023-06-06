@@ -10,4 +10,4 @@
           - uses: actions/checkout@v2
           - name: Generate API Client
             run: |
-                bash autogenerate_api_client.sh
+                bash autogenerate_api_client.sh ${{github.event.inputs.endPoint}}

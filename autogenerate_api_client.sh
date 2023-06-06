@@ -1,18 +1,39 @@
-curl -X POST https://generator3.swagger.io/api/generate -H 'content-type: application/json' -d '{ "specURL" : "https://tdei-gateway-dev.azurewebsites.net/v3/api-docs", "lang" : "typescript-axios", "type" : "CLIENT", "codegenVersion" : "V3"}' --output tdei-client-axios.zip
-unzip -qo tdei-client-axios.zip
+# Get current version number
+current_version=`npm pkg get version --workspaces=false | tr -d \"`
+
+# Increment the current version number
+new_version=`echo ${current_version} | awk -F. -v OFS=. '{$NF += 1 ; print}'`
+
+curl --location 'https://generator3.swagger.io/api/generate' \
+--header 'Content-Type: application/json' \
+--data '{
+    "specURL": "'$1'",
+    "lang": "typescript-axios",
+    "type": "CLIENT",
+    "codegenVersion": "V3",
+    "options": {
+        "additionalProperties": {
+            "modelPropertyNaming": "original",
+             "npmName":"tdei-client",
+             "npmVersion":"'$new_version'"
+        }
+    }
+}' --output tdei-client.zip
+
+unzip -qo tdei-client.zip
 
 if which git >/dev/null 2>&1; then
-  git branch -D scratch/api-client
-  git checkout -b scratch/api-client
-  git add . 
-  git commit -m "system:auto generated API client"
-  git push -fu origin scratch/api-client
+    git branch -D feature-generate-api-client
+    git checkout -b feature-generate-api-client
+    git add .
+    git commit -m "system:auto generated API client"
+    git push -fu origin feature-generate-api-client
 else
     echo "Git is not installed."
 fi
 
 if which gh >/dev/null 2>&1; then
-    gh pr create --base main --fill 
+    gh pr create --base main --fill
 else
     echo "GitHub-CLI is not installed."
 fi
