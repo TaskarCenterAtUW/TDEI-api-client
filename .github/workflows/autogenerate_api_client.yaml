@@ -35,11 +35,7 @@ jobs:
             exit 1
           fi
 
-          if which gh >/dev/null 2>&1; then
-            gh pr create --base main --fill
-          else
-            echo "GitHub CLI is not installed."
-            exit 1
-          fi
+          gh pr create --base main --fill
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
