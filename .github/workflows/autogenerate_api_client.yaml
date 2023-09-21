@@ -15,3 +15,24 @@ jobs:
       - name: Generate API Client
         run: |
           bash autogenerate_api_client.sh ${{github.event.inputs.endpoint}}
+          
+
+      - name: Run Bash Script
+        run: |
+          if which git >/dev/null 2>&1; then
+            git branch -D feature-generate-api-client
+            git checkout -b feature-generate-api-client
+            git add .
+            git commit -m "system:auto generated API client"
+            git push -fu origin feature-generate-api-client
+          else
+            echo "Git is not installed."
+            exit 1
+          fi
+
+          if which gh >/dev/null 2>&1; then
+            gh pr create --base main --fill
+          else
+            echo "GitHub CLI is not installed."
+            exit 1
+          fi
