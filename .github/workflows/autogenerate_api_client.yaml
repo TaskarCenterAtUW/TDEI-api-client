@@ -34,8 +34,12 @@ jobs:
             echo "Git is not installed."
             exit 1
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-          gh pr create --base main --fill
-
+      - name: Run GitHub CLI Command
+        uses: ./.github/actions
+        with:
+          command: 'pr create --base main --fill'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
