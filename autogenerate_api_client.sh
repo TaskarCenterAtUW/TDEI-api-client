@@ -19,5 +19,3 @@ curl --location 'https://generator3.swagger.io/api/generate' \
         }
     }
 }' --output tdei-client.zip
-
-unzip -qo tdei-client.zip
