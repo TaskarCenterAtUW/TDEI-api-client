@@ -3,7 +3,7 @@
 on:
   workflow_dispatch:
     inputs:
-      spec_url:
+      endpoint:
         description: "Open API spec spec_url"
         required: true
 
@@ -14,4 +14,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: Generate API Client
         run: |
-          bash autogenerate_api_client.sh ${{github.event.inputs.endPoint}}
+          bash autogenerate_api_client.sh ${{github.event.inputs.endpoint}}
