@@ -1,13 +1,17 @@
 ---
-    ######### Dev Workflow  ########
-    on:
-      workflow_dispatch:
-    
-    jobs:
-      GenerateAPIClient:
-        runs-on: ubuntu-latest
-        steps:
-          - uses: actions/checkout@v2
-          - name: Generate API Client
-            run: |
-                bash autogenerate_api_client.sh ${{github.event.inputs.endPoint}}
+######### Dev Workflow  ########
+on:
+  workflow_dispatch:
+    inputs:
+      spec_url:
+        description: "Open API spec spec_url"
+        required: true
+
+jobs:
+  GenerateAPIClient:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate API Client
+        run: |
+          bash autogenerate_api_client.sh ${{github.event.inputs.endPoint}}
