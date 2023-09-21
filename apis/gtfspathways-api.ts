@@ -59,6 +59,13 @@ export const GTFSPathwaysApiAxiosParamCreator = function (configuration?: Config
             }
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -111,6 +118,13 @@ export const GTFSPathwaysApiAxiosParamCreator = function (configuration?: Config
             }
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
             if (bbox) {
                 localVarQueryParameter['bbox'] = bbox;
@@ -187,6 +201,13 @@ export const GTFSPathwaysApiAxiosParamCreator = function (configuration?: Config
             }
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -234,6 +255,13 @@ export const GTFSPathwaysApiAxiosParamCreator = function (configuration?: Config
             }
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
             if (tdei_org_id !== undefined) {
                 localVarQueryParameter['tdei_org_id'] = tdei_org_id;
@@ -293,6 +321,13 @@ export const GTFSPathwaysApiAxiosParamCreator = function (configuration?: Config
             const localVarFormParams = new FormData();
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
 
             if (meta !== undefined) { 

@@ -16,11 +16,8 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { LoginModel } from '../models';
 import { Organization } from '../models';
 import { RecordStatus } from '../models';
-import { Station } from '../models';
-import { TokenResponse } from '../models';
 import { VersionList } from '../models';
 /**
  * GeneralApi - axios parameter creator
@@ -28,59 +25,6 @@ import { VersionList } from '../models';
  */
 export const GeneralApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * Authenticates the user to the TDEI system. Returns access token.
-         * @summary Authenticates the user to the TDEI system.
-         * @param {LoginModel} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authenticate: async (body: LoginModel, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling authenticate.');
-            }
-            const localVarPath = `/api/v1/authenticate`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication ApiKey required
-            if (configuration && configuration.apiKey) {
-                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
-                    ? await configuration.apiKey("x-api-key")
-                    : await configuration.apiKey;
-                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-            }
-
-            // authentication AuthorizationToken required
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.params) {
-                query.set(key, options.params[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * Fetches the status of an uploaded record
          * @summary Get status
@@ -113,6 +57,13 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
             }
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
             if (tdeiRecordId !== undefined) {
                 localVarQueryParameter['tdeiRecordId'] = tdeiRecordId;
@@ -161,6 +112,13 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
             }
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -207,64 +165,12 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
             }
 
             // authentication AuthorizationToken required
-
-            if (page_no !== undefined) {
-                localVarQueryParameter['page_no'] = page_no;
-            }
-
-            if (page_size !== undefined) {
-                localVarQueryParameter['page_size'] = page_size;
-            }
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.params) {
-                query.set(key, options.params[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization. 
-         * @summary List Stations
-         * @param {string} [tdei_org_id] TDEI organization id.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listStations: async (tdei_org_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/gtfs-pathways/stations`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication ApiKey required
-            if (configuration && configuration.apiKey) {
-                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
-                    ? await configuration.apiKey("x-api-key")
-                    : await configuration.apiKey;
-                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-            }
-
-            // authentication AuthorizationToken required
-
-            if (tdei_org_id !== undefined) {
-                localVarQueryParameter['tdei_org_id'] = tdei_org_id;
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
             }
 
             if (page_no !== undefined) {
@@ -300,20 +206,6 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
  */
 export const GeneralApiFp = function(configuration?: Configuration) {
     return {
-        /**
-         * Authenticates the user to the TDEI system. Returns access token.
-         * @summary Authenticates the user to the TDEI system.
-         * @param {LoginModel} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenResponse>>> {
-            const localVarAxiosArgs = await GeneralApiAxiosParamCreator(configuration).authenticate(body, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
         /**
          * Fetches the status of an uploaded record
          * @summary Get status
@@ -356,22 +248,6 @@ export const GeneralApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
-        /**
-         * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization. 
-         * @summary List Stations
-         * @param {string} [tdei_org_id] TDEI organization id.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listStations(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Station>>>> {
-            const localVarAxiosArgs = await GeneralApiAxiosParamCreator(configuration).listStations(tdei_org_id, page_no, page_size, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
     }
 };
 
@@ -381,16 +257,6 @@ export const GeneralApiFp = function(configuration?: Configuration) {
  */
 export const GeneralApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
-        /**
-         * Authenticates the user to the TDEI system. Returns access token.
-         * @summary Authenticates the user to the TDEI system.
-         * @param {LoginModel} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>> {
-            return GeneralApiFp(configuration).authenticate(body, options).then((request) => request(axios, basePath));
-        },
         /**
          * Fetches the status of an uploaded record
          * @summary Get status
@@ -421,18 +287,6 @@ export const GeneralApiFactory = function (configuration?: Configuration, basePa
         async listOrganizations(page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Organization>>> {
             return GeneralApiFp(configuration).listOrganizations(page_no, page_size, options).then((request) => request(axios, basePath));
         },
-        /**
-         * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization. 
-         * @summary List Stations
-         * @param {string} [tdei_org_id] TDEI organization id.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listStations(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Station>>> {
-            return GeneralApiFp(configuration).listStations(tdei_org_id, page_no, page_size, options).then((request) => request(axios, basePath));
-        },
     };
 };
 
@@ -443,17 +297,6 @@ export const GeneralApiFactory = function (configuration?: Configuration, basePa
  * @extends {BaseAPI}
  */
 export class GeneralApi extends BaseAPI {
-    /**
-     * Authenticates the user to the TDEI system. Returns access token.
-     * @summary Authenticates the user to the TDEI system.
-     * @param {LoginModel} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GeneralApi
-     */
-    public async authenticate(body: LoginModel, options?: AxiosRequestConfig) : Promise<AxiosResponse<TokenResponse>> {
-        return GeneralApiFp(this.configuration).authenticate(body, options).then((request) => request(this.axios, this.basePath));
-    }
     /**
      * Fetches the status of an uploaded record
      * @summary Get status
@@ -486,18 +329,5 @@ export class GeneralApi extends BaseAPI {
      */
     public async listOrganizations(page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Organization>>> {
         return GeneralApiFp(this.configuration).listOrganizations(page_no, page_size, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization. 
-     * @summary List Stations
-     * @param {string} [tdei_org_id] TDEI organization id.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GeneralApi
-     */
-    public async listStations(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Station>>> {
-        return GeneralApiFp(this.configuration).listStations(tdei_org_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
     }
 }
