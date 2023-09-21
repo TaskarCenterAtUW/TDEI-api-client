@@ -41,3 +41,5 @@ jobs:
             echo "GitHub CLI is not installed."
             exit 1
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
