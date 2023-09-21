@@ -20,8 +20,10 @@ jobs:
       - name: Run Bash Script
         run: |
           if which git >/dev/null 2>&1; then
-            git branch -D feature-generate-api-client
-            git checkout -b feature-generate-api-client
+            if git rev-parse --verify feature-generate-api-client >/dev/null 2>&1; then
+              git branch -D feature-generate-api-client
+            fi
+          git checkout -b feature-generate-api-client
             git add .
             git commit -m "system:auto generated API client"
             git push -fu origin feature-generate-api-client
