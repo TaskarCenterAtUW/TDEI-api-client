@@ -88,69 +88,6 @@ var GeneralApiAxiosParamCreator = function (configuration) {
     var _this = this;
     return {
         /**
-         * Authenticates the user to the TDEI system. Returns access token.
-         * @summary Authenticates the user to the TDEI system.
-         * @param {LoginModel} body
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authenticate: function (body, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, query, key, key, headersFromBaseOptions, needsSerialization;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
-                        case 0:
-                            // verify required parameter 'body' is not null or undefined
-                            if (body === null || body === undefined) {
-                                throw new base_1.RequiredError('body', 'Required parameter body was null or undefined when calling authenticate.');
-                            }
-                            localVarPath = "/api/v1/authenticate";
-                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
-                            if (configuration) {
-                                baseOptions = configuration.baseOptions;
-                            }
-                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
-                            localVarHeaderParameter = {};
-                            localVarQueryParameter = {};
-                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
-                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
-                        case 1:
-                            _a = _b.sent();
-                            return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, configuration.apiKey];
-                        case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
-                        case 4:
-                            localVarApiKeyValue = _a;
-                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _b.label = 5;
-                        case 5:
-                            // authentication AuthorizationToken required
-                            localVarHeaderParameter['Content-Type'] = 'application/json';
-                            query = new URLSearchParams(localVarUrlObj.search);
-                            for (key in localVarQueryParameter) {
-                                query.set(key, localVarQueryParameter[key]);
-                            }
-                            for (key in options.params) {
-                                query.set(key, options.params[key]);
-                            }
-                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                            needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-                            localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-                            return [2 /*return*/, {
-                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                                    options: localVarRequestOptions,
-                                }];
-                    }
-                });
-            });
-        },
-        /**
          * Fetches the status of an uploaded record
          * @summary Get status
          * @param {string} tdeiRecordId tdeiRecordId received during upload
@@ -160,9 +97,9 @@ var GeneralApiAxiosParamCreator = function (configuration) {
         getStatus: function (tdeiRecordId, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             // verify required parameter 'tdeiRecordId' is not null or undefined
                             if (tdeiRecordId === null || tdeiRecordId === undefined) {
@@ -180,18 +117,32 @@ var GeneralApiAxiosParamCreator = function (configuration) {
                             if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.apiKey("x-api-key")];
                         case 1:
-                            _a = _b.sent();
+                            _a = _c.sent();
                             return [3 /*break*/, 4];
                         case 2: return [4 /*yield*/, configuration.apiKey];
                         case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
+                            _a = _c.sent();
+                            _c.label = 4;
                         case 4:
                             localVarApiKeyValue = _a;
                             localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _b.label = 5;
+                            _c.label = 5;
                         case 5:
-                            // authentication AuthorizationToken required
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
                             if (tdeiRecordId !== undefined) {
                                 localVarQueryParameter['tdeiRecordId'] = tdeiRecordId;
                             }
@@ -222,9 +173,9 @@ var GeneralApiAxiosParamCreator = function (configuration) {
         listApiVersions: function (options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             localVarPath = "/api/v1/api";
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -238,17 +189,32 @@ var GeneralApiAxiosParamCreator = function (configuration) {
                             if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.apiKey("x-api-key")];
                         case 1:
-                            _a = _b.sent();
+                            _a = _c.sent();
                             return [3 /*break*/, 4];
                         case 2: return [4 /*yield*/, configuration.apiKey];
                         case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
+                            _a = _c.sent();
+                            _c.label = 4;
                         case 4:
                             localVarApiKeyValue = _a;
                             localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _b.label = 5;
+                            _c.label = 5;
                         case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
                             query = new URLSearchParams(localVarUrlObj.search);
                             for (key in localVarQueryParameter) {
                                 query.set(key, localVarQueryParameter[key]);
@@ -278,9 +244,9 @@ var GeneralApiAxiosParamCreator = function (configuration) {
         listOrganizations: function (page_no, page_size, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             localVarPath = "/api/v1/organizations";
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -294,85 +260,32 @@ var GeneralApiAxiosParamCreator = function (configuration) {
                             if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.apiKey("x-api-key")];
                         case 1:
-                            _a = _b.sent();
+                            _a = _c.sent();
                             return [3 /*break*/, 4];
                         case 2: return [4 /*yield*/, configuration.apiKey];
                         case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
+                            _a = _c.sent();
+                            _c.label = 4;
                         case 4:
                             localVarApiKeyValue = _a;
                             localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _b.label = 5;
+                            _c.label = 5;
                         case 5:
-                            // authentication AuthorizationToken required
-                            if (page_no !== undefined) {
-                                localVarQueryParameter['page_no'] = page_no;
-                            }
-                            if (page_size !== undefined) {
-                                localVarQueryParameter['page_size'] = page_size;
-                            }
-                            query = new URLSearchParams(localVarUrlObj.search);
-                            for (key in localVarQueryParameter) {
-                                query.set(key, localVarQueryParameter[key]);
-                            }
-                            for (key in options.params) {
-                                query.set(key, options.params[key]);
-                            }
-                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                            return [2 /*return*/, {
-                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                                    options: localVarRequestOptions,
-                                }];
-                    }
-                });
-            });
-        },
-        /**
-         * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
-         * @summary List Stations
-         * @param {string} [tdei_org_id] TDEI organization id.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listStations: function (tdei_org_id, page_no, page_size, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
-                        case 0:
-                            localVarPath = "/api/v1/gtfs-pathways/stations";
-                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
-                            if (configuration) {
-                                baseOptions = configuration.baseOptions;
-                            }
-                            localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
-                            localVarHeaderParameter = {};
-                            localVarQueryParameter = {};
-                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
-                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
-                        case 1:
-                            _a = _b.sent();
-                            return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, configuration.apiKey];
-                        case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
-                        case 4:
-                            localVarApiKeyValue = _a;
-                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _b.label = 5;
-                        case 5:
-                            // authentication AuthorizationToken required
-                            if (tdei_org_id !== undefined) {
-                                localVarQueryParameter['tdei_org_id'] = tdei_org_id;
-                            }
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
                             if (page_no !== undefined) {
                                 localVarQueryParameter['page_no'] = page_no;
                             }
@@ -406,31 +319,6 @@ exports.GeneralApiAxiosParamCreator = GeneralApiAxiosParamCreator;
  */
 var GeneralApiFp = function (configuration) {
     return {
-        /**
-         * Authenticates the user to the TDEI system. Returns access token.
-         * @summary Authenticates the user to the TDEI system.
-         * @param {LoginModel} body
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authenticate: function (body, options) {
-            return __awaiter(this, void 0, void 0, function () {
-                var localVarAxiosArgs;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.GeneralApiAxiosParamCreator)(configuration).authenticate(body, options)];
-                        case 1:
-                            localVarAxiosArgs = _a.sent();
-                            return [2 /*return*/, function (axios, basePath) {
-                                    if (axios === void 0) { axios = axios_1.default; }
-                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
-                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
-                                    return axios.request(axiosRequestArgs);
-                                }];
-                    }
-                });
-            });
-        },
         /**
          * Fetches the status of an uploaded record
          * @summary Get status
@@ -506,33 +394,6 @@ var GeneralApiFp = function (configuration) {
                 });
             });
         },
-        /**
-         * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
-         * @summary List Stations
-         * @param {string} [tdei_org_id] TDEI organization id.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listStations: function (tdei_org_id, page_no, page_size, options) {
-            return __awaiter(this, void 0, void 0, function () {
-                var localVarAxiosArgs;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.GeneralApiAxiosParamCreator)(configuration).listStations(tdei_org_id, page_no, page_size, options)];
-                        case 1:
-                            localVarAxiosArgs = _a.sent();
-                            return [2 /*return*/, function (axios, basePath) {
-                                    if (axios === void 0) { axios = axios_1.default; }
-                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
-                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
-                                    return axios.request(axiosRequestArgs);
-                                }];
-                    }
-                });
-            });
-        },
     };
 };
 exports.GeneralApiFp = GeneralApiFp;
@@ -542,20 +403,6 @@ exports.GeneralApiFp = GeneralApiFp;
  */
 var GeneralApiFactory = function (configuration, basePath, axios) {
     return {
-        /**
-         * Authenticates the user to the TDEI system. Returns access token.
-         * @summary Authenticates the user to the TDEI system.
-         * @param {LoginModel} body
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authenticate: function (body, options) {
-            return __awaiter(this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.GeneralApiFp)(configuration).authenticate(body, options).then(function (request) { return request(axios, basePath); })];
-                });
-            });
-        },
         /**
          * Fetches the status of an uploaded record
          * @summary Get status
@@ -598,22 +445,6 @@ var GeneralApiFactory = function (configuration, basePath, axios) {
                 });
             });
         },
-        /**
-         * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
-         * @summary List Stations
-         * @param {string} [tdei_org_id] TDEI organization id.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listStations: function (tdei_org_id, page_no, page_size, options) {
-            return __awaiter(this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.GeneralApiFp)(configuration).listStations(tdei_org_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
-                });
-            });
-        },
     };
 };
 exports.GeneralApiFactory = GeneralApiFactory;
@@ -628,22 +459,6 @@ var GeneralApi = /** @class */ (function (_super) {
     function GeneralApi() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    /**
-     * Authenticates the user to the TDEI system. Returns access token.
-     * @summary Authenticates the user to the TDEI system.
-     * @param {LoginModel} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GeneralApi
-     */
-    GeneralApi.prototype.authenticate = function (body, options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).authenticate(body, options).then(function (request) { return request(_this.axios, _this.basePath); })];
-            });
-        });
-    };
     /**
      * Fetches the status of an uploaded record
      * @summary Get status
@@ -689,24 +504,6 @@ var GeneralApi = /** @class */ (function (_super) {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).listOrganizations(page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
-            });
-        });
-    };
-    /**
-     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
-     * @summary List Stations
-     * @param {string} [tdei_org_id] TDEI organization id.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GeneralApi
-     */
-    GeneralApi.prototype.listStations = function (tdei_org_id, page_no, page_size, options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).listStations(tdei_org_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

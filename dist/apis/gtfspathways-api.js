@@ -97,9 +97,9 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
         getPathwaysFile: function (tdei_record_id, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             // verify required parameter 'tdei_record_id' is not null or undefined
                             if (tdei_record_id === null || tdei_record_id === undefined) {
@@ -118,17 +118,32 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
                             if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.apiKey("x-api-key")];
                         case 1:
-                            _a = _b.sent();
+                            _a = _c.sent();
                             return [3 /*break*/, 4];
                         case 2: return [4 /*yield*/, configuration.apiKey];
                         case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
+                            _a = _c.sent();
+                            _c.label = 4;
                         case 4:
                             localVarApiKeyValue = _a;
                             localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _b.label = 5;
+                            _c.label = 5;
                         case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
                             query = new URLSearchParams(localVarUrlObj.search);
                             for (key in localVarQueryParameter) {
                                 query.set(key, localVarQueryParameter[key]);
@@ -164,9 +179,9 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
         listPathwaysFiles: function (bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             localVarPath = "/api/v1/gtfs-pathways";
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -180,18 +195,32 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
                             if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.apiKey("x-api-key")];
                         case 1:
-                            _a = _b.sent();
+                            _a = _c.sent();
                             return [3 /*break*/, 4];
                         case 2: return [4 /*yield*/, configuration.apiKey];
                         case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
+                            _a = _c.sent();
+                            _c.label = 4;
                         case 4:
                             localVarApiKeyValue = _a;
                             localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _b.label = 5;
+                            _c.label = 5;
                         case 5:
-                            // authentication AuthorizationToken required
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
                             if (bbox) {
                                 localVarQueryParameter['bbox'] = bbox;
                             }
@@ -243,9 +272,9 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
         listPathwaysVersions: function (options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             localVarPath = "/api/v1/gtfs-pathways/versions";
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -259,17 +288,32 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
                             if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.apiKey("x-api-key")];
                         case 1:
-                            _a = _b.sent();
+                            _a = _c.sent();
                             return [3 /*break*/, 4];
                         case 2: return [4 /*yield*/, configuration.apiKey];
                         case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
+                            _a = _c.sent();
+                            _c.label = 4;
                         case 4:
                             localVarApiKeyValue = _a;
                             localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _b.label = 5;
+                            _c.label = 5;
                         case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
                             query = new URLSearchParams(localVarUrlObj.search);
                             for (key in localVarQueryParameter) {
                                 query.set(key, localVarQueryParameter[key]);
@@ -300,9 +344,9 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
         listStations: function (tdei_org_id, page_no, page_size, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             localVarPath = "/api/v1/gtfs-pathways/stations";
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -316,18 +360,32 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
                             if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.apiKey("x-api-key")];
                         case 1:
-                            _a = _b.sent();
+                            _a = _c.sent();
                             return [3 /*break*/, 4];
                         case 2: return [4 /*yield*/, configuration.apiKey];
                         case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
+                            _a = _c.sent();
+                            _c.label = 4;
                         case 4:
                             localVarApiKeyValue = _a;
                             localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _b.label = 5;
+                            _c.label = 5;
                         case 5:
-                            // authentication AuthorizationToken required
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
                             if (tdei_org_id !== undefined) {
                                 localVarQueryParameter['tdei_org_id'] = tdei_org_id;
                             }
@@ -366,48 +424,65 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
         uploadPathwaysFileForm: function (meta, file, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_a) {
-                    // verify required parameter 'meta' is not null or undefined
-                    if (meta === null || meta === undefined) {
-                        throw new base_1.RequiredError('meta', 'Required parameter meta was null or undefined when calling uploadPathwaysFileForm.');
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, accessToken, _a, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            // verify required parameter 'meta' is not null or undefined
+                            if (meta === null || meta === undefined) {
+                                throw new base_1.RequiredError('meta', 'Required parameter meta was null or undefined when calling uploadPathwaysFileForm.');
+                            }
+                            // verify required parameter 'file' is not null or undefined
+                            if (file === null || file === undefined) {
+                                throw new base_1.RequiredError('file', 'Required parameter file was null or undefined when calling uploadPathwaysFileForm.');
+                            }
+                            localVarPath = "/api/v1/gtfs-pathways";
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            localVarFormParams = new FormData();
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 1:
+                            _a = _b.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.accessToken];
+                        case 3:
+                            _a = _b.sent();
+                            _b.label = 4;
+                        case 4:
+                            accessToken = _a;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _b.label = 5;
+                        case 5:
+                            if (meta !== undefined) {
+                                localVarFormParams.append('meta', meta);
+                            }
+                            if (file !== undefined) {
+                                localVarFormParams.append('file', file);
+                            }
+                            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            localVarRequestOptions.data = localVarFormParams;
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
                     }
-                    // verify required parameter 'file' is not null or undefined
-                    if (file === null || file === undefined) {
-                        throw new base_1.RequiredError('file', 'Required parameter file was null or undefined when calling uploadPathwaysFileForm.');
-                    }
-                    localVarPath = "/api/v1/gtfs-pathways";
-                    localVarUrlObj = new URL(localVarPath, 'https://example.com');
-                    if (configuration) {
-                        baseOptions = configuration.baseOptions;
-                    }
-                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
-                    localVarHeaderParameter = {};
-                    localVarQueryParameter = {};
-                    localVarFormParams = new FormData();
-                    // authentication AuthorizationToken required
-                    if (meta !== undefined) {
-                        localVarFormParams.append('meta', meta);
-                    }
-                    if (file !== undefined) {
-                        localVarFormParams.append('file', file);
-                    }
-                    localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-                    query = new URLSearchParams(localVarUrlObj.search);
-                    for (key in localVarQueryParameter) {
-                        query.set(key, localVarQueryParameter[key]);
-                    }
-                    for (key in options.params) {
-                        query.set(key, options.params[key]);
-                    }
-                    localVarUrlObj.search = (new URLSearchParams(query)).toString();
-                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                    localVarRequestOptions.data = localVarFormParams;
-                    return [2 /*return*/, {
-                            url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                            options: localVarRequestOptions,
-                        }];
                 });
             });
         },
