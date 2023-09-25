@@ -1,13 +1,45 @@
 ---
-    ######### Dev Workflow  ########
-    on:
-      workflow_dispatch:
-    
-    jobs:
-      GenerateAPIClient:
-        runs-on: ubuntu-latest
-        steps:
-          - uses: actions/checkout@v2
-          - name: Generate API Client
-            run: |
-                bash autogenerate_api_client.sh ${{github.event.inputs.endPoint}}
+######### Dev Workflow  ########
+on:
+  workflow_dispatch:
+    inputs:
+      endpoint:
+        description: "Open API spec spec_url"
+        required: true
+
+jobs:
+  GenerateAPIClient:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # needed by "gh pr create"
+          fetch-depth: 0
+      - name: Generate API Client
+        run: |
+          bash autogenerate_api_client.sh ${{github.event.inputs.endpoint}}
+          
+
+      - name: Run Bash Script
+        run: |
+          unzip -qo tdei-client.zip
+          
+          if which git >/dev/null 2>&1; then
+            if git rev-parse --verify feature-generate-api-client >/dev/null 2>&1; then
+              git branch -D feature-generate-api-client
+            fi
+            git config --global user.email "workflow_dummy@gaussian.com"
+            git config --global user.name "workflow item"
+
+            git checkout -b feature-generate-api-client
+            git add .
+            git commit -m "system:auto generated API client"
+            git push -fu origin feature-generate-api-client
+          else
+            echo "Git is not installed."
+            exit 1
+          fi
+          gh pr create --base main --fill
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

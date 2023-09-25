@@ -19,21 +19,3 @@ curl --location 'https://generator3.swagger.io/api/generate' \
         }
     }
 }' --output tdei-client.zip
-
-unzip -qo tdei-client.zip
-
-if which git >/dev/null 2>&1; then
-    git branch -D feature-generate-api-client
-    git checkout -b feature-generate-api-client
-    git add .
-    git commit -m "system:auto generated API client"
-    git push -fu origin feature-generate-api-client
-else
-    echo "Git is not installed."
-fi
-
-if which gh >/dev/null 2>&1; then
-    gh pr create --base main --fill
-else
-    echo "GitHub-CLI is not installed."
-fi

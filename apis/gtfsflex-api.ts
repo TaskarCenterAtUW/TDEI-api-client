@@ -36,7 +36,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
         getFlexFile: async (tdei_record_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tdei_record_id' is not null or undefined
             if (tdei_record_id === null || tdei_record_id === undefined) {
-                throw new RequiredError('tdei_record_id', 'Required parameter tdei_record_id was null or undefined when calling getFlexFile.');
+                throw new RequiredError('tdei_record_id','Required parameter tdei_record_id was null or undefined when calling getFlexFile.');
             }
             const localVarPath = `/api/v1/gtfs-flex/{tdei_record_id}`
                 .replace(`{${"tdei_record_id"}}`, encodeURIComponent(String(tdei_record_id)));
@@ -46,7 +46,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options };
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -59,6 +59,13 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             }
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -69,7 +76,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             }
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -82,7 +89,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} [tdei_service_id] Id of the flex service.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-         * @param {string} [_tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
          * @param {number} [page_no] Integer, defaults to 1.
@@ -90,7 +97,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFlexFiles: async (tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, _tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listFlexFiles: async (tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/gtfs-flex`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -98,7 +105,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options };
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -111,6 +118,13 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             }
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
             if (tdei_service_id !== undefined) {
                 localVarQueryParameter['tdei_service_id'] = tdei_service_id;
@@ -124,8 +138,8 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
                 localVarQueryParameter['flex_schema_version'] = flex_schema_version;
             }
 
-            if (_tdei_org_id !== undefined) {
-                localVarQueryParameter[' tdei_org_id'] = _tdei_org_id;
+            if (tdei_org_id !== undefined) {
+                localVarQueryParameter['tdei_org_id'] = tdei_org_id;
             }
 
             if (date_time !== undefined) {
@@ -153,7 +167,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             }
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -177,7 +191,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options };
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -190,6 +204,13 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             }
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
             if (tdei_org_id !== undefined) {
                 localVarQueryParameter['tdei_org_id'] = tdei_org_id;
@@ -212,7 +233,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             }
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -233,7 +254,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options };
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -246,6 +267,13 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             }
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -256,7 +284,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             }
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -274,11 +302,11 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
         uploadGtfsFlexFileForm: async (meta: GtfsFlexUpload, file: Blob, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'meta' is not null or undefined
             if (meta === null || meta === undefined) {
-                throw new RequiredError('meta', 'Required parameter meta was null or undefined when calling uploadGtfsFlexFileForm.');
+                throw new RequiredError('meta','Required parameter meta was null or undefined when calling uploadGtfsFlexFileForm.');
             }
             // verify required parameter 'file' is not null or undefined
             if (file === null || file === undefined) {
-                throw new RequiredError('file', 'Required parameter file was null or undefined when calling uploadGtfsFlexFileForm.');
+                throw new RequiredError('file','Required parameter file was null or undefined when calling uploadGtfsFlexFileForm.');
             }
             const localVarPath = `/api/v1/gtfs-flex`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -287,19 +315,26 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             if (configuration) {
                 baseOptions = configuration.baseOptions;
             }
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options };
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new FormData();
 
             // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
 
 
-            if (meta !== undefined) {
+            if (meta !== undefined) { 
                 localVarFormParams.append('meta', meta as any);
             }
 
-            if (file !== undefined) {
+            if (file !== undefined) { 
                 localVarFormParams.append('file', file as any);
             }
 
@@ -313,7 +348,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             }
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = localVarFormParams;
 
             return {
@@ -328,7 +363,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
  * GTFSFlexApi - functional programming interface
  * @export
  */
-export const GTFSFlexApiFp = function (configuration?: Configuration) {
+export const GTFSFlexApiFp = function(configuration?: Configuration) {
     return {
         /**
          * returns a specific gtfs_flex file identified by the tdei_record_id
@@ -340,7 +375,7 @@ export const GTFSFlexApiFp = function (configuration?: Configuration) {
         async getFlexFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
             const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).getFlexFile(tdei_record_id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs: AxiosRequestConfig = { ...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url };
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
@@ -350,7 +385,7 @@ export const GTFSFlexApiFp = function (configuration?: Configuration) {
          * @param {string} [tdei_service_id] Id of the flex service.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-         * @param {string} [_tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
          * @param {number} [page_no] Integer, defaults to 1.
@@ -358,10 +393,10 @@ export const GTFSFlexApiFp = function (configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, _tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GtfsFlexDownload>>>> {
-            const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options);
+        async listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GtfsFlexDownload>>>> {
+            const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs: AxiosRequestConfig = { ...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url };
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
@@ -377,7 +412,7 @@ export const GTFSFlexApiFp = function (configuration?: Configuration) {
         async listFlexServices(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GtfsFlexServiceModel>>>> {
             const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).listFlexServices(tdei_org_id, page_no, page_size, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs: AxiosRequestConfig = { ...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url };
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
@@ -390,7 +425,7 @@ export const GTFSFlexApiFp = function (configuration?: Configuration) {
         async listFlexVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<VersionList>>> {
             const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).listFlexVersions(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs: AxiosRequestConfig = { ...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url };
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
@@ -405,7 +440,7 @@ export const GTFSFlexApiFp = function (configuration?: Configuration) {
         async uploadGtfsFlexFileForm(meta: GtfsFlexUpload, file: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
             const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).uploadGtfsFlexFileForm(meta, file, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs: AxiosRequestConfig = { ...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url };
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
@@ -434,7 +469,7 @@ export const GTFSFlexApiFactory = function (configuration?: Configuration, baseP
          * @param {string} [tdei_service_id] Id of the flex service.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-         * @param {string} [_tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
          * @param {number} [page_no] Integer, defaults to 1.
@@ -442,8 +477,8 @@ export const GTFSFlexApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, _tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexDownload>>> {
-            return GTFSFlexApiFp(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(axios, basePath));
+        async listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexDownload>>> {
+            return GTFSFlexApiFp(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(axios, basePath));
         },
         /**
          * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_org_id param is used, will return services for that organization.
@@ -495,7 +530,7 @@ export class GTFSFlexApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
      */
-    public async getFlexFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+    public async getFlexFile(tdei_record_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
         return GTFSFlexApiFp(this.configuration).getFlexFile(tdei_record_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -504,7 +539,7 @@ export class GTFSFlexApi extends BaseAPI {
      * @param {string} [tdei_service_id] Id of the flex service.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-     * @param {string} [_tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
      * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
      * @param {number} [page_no] Integer, defaults to 1.
@@ -513,8 +548,8 @@ export class GTFSFlexApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
      */
-    public async listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, _tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexDownload>>> {
-        return GTFSFlexApiFp(this.configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
+    public async listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<GtfsFlexDownload>>> {
+        return GTFSFlexApiFp(this.configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_org_id param is used, will return services for that organization.
@@ -526,7 +561,7 @@ export class GTFSFlexApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
      */
-    public async listFlexServices(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexServiceModel>>> {
+    public async listFlexServices(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<GtfsFlexServiceModel>>> {
         return GTFSFlexApiFp(this.configuration).listFlexServices(tdei_org_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -536,7 +571,7 @@ export class GTFSFlexApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
      */
-    public async listFlexVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>> {
+    public async listFlexVersions(options?: AxiosRequestConfig) : Promise<AxiosResponse<VersionList>> {
         return GTFSFlexApiFp(this.configuration).listFlexVersions(options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -548,7 +583,7 @@ export class GTFSFlexApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
      */
-    public async uploadGtfsFlexFileForm(meta: GtfsFlexUpload, file: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+    public async uploadGtfsFlexFileForm(meta: GtfsFlexUpload, file: Blob, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
         return GTFSFlexApiFp(this.configuration).uploadGtfsFlexFileForm(meta, file, options).then((request) => request(this.axios, this.basePath));
     }
 }
