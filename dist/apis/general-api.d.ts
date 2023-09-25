@@ -12,25 +12,14 @@
 import { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 import { RequestArgs, BaseAPI } from '../base';
-import { LoginModel } from '../models';
 import { Organization } from '../models';
 import { RecordStatus } from '../models';
-import { Station } from '../models';
-import { TokenResponse } from '../models';
 import { VersionList } from '../models';
 /**
  * GeneralApi - axios parameter creator
  * @export
  */
 export declare const GeneralApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     * Authenticates the user to the TDEI system. Returns access token.
-     * @summary Authenticates the user to the TDEI system.
-     * @param {LoginModel} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authenticate: (body: LoginModel, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Fetches the status of an uploaded record
      * @summary Get status
@@ -55,30 +44,12 @@ export declare const GeneralApiAxiosParamCreator: (configuration?: Configuration
      * @throws {RequiredError}
      */
     listOrganizations: (page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
-     * @summary List Stations
-     * @param {string} [tdei_org_id] TDEI organization id.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    listStations: (tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * GeneralApi - functional programming interface
  * @export
  */
 export declare const GeneralApiFp: (configuration?: Configuration) => {
-    /**
-     * Authenticates the user to the TDEI system. Returns access token.
-     * @summary Authenticates the user to the TDEI system.
-     * @param {LoginModel} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenResponse>>>;
     /**
      * Fetches the status of an uploaded record
      * @summary Get status
@@ -103,30 +74,12 @@ export declare const GeneralApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     listOrganizations(page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Organization>>>>;
-    /**
-     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
-     * @summary List Stations
-     * @param {string} [tdei_org_id] TDEI organization id.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    listStations(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Station>>>>;
 };
 /**
  * GeneralApi - factory interface
  * @export
  */
 export declare const GeneralApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     * Authenticates the user to the TDEI system. Returns access token.
-     * @summary Authenticates the user to the TDEI system.
-     * @param {LoginModel} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
     /**
      * Fetches the status of an uploaded record
      * @summary Get status
@@ -151,16 +104,6 @@ export declare const GeneralApiFactory: (configuration?: Configuration, basePath
      * @throws {RequiredError}
      */
     listOrganizations(page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Organization>>>;
-    /**
-     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
-     * @summary List Stations
-     * @param {string} [tdei_org_id] TDEI organization id.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    listStations(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Station>>>;
 };
 /**
  * GeneralApi - object-oriented interface
@@ -170,15 +113,6 @@ export declare const GeneralApiFactory: (configuration?: Configuration, basePath
  */
 export declare class GeneralApi extends BaseAPI {
     /**
-     * Authenticates the user to the TDEI system. Returns access token.
-     * @summary Authenticates the user to the TDEI system.
-     * @param {LoginModel} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GeneralApi
-     */
-    authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
-    /**
      * Fetches the status of an uploaded record
      * @summary Get status
      * @param {string} tdeiRecordId tdeiRecordId received during upload
@@ -205,15 +139,4 @@ export declare class GeneralApi extends BaseAPI {
      * @memberof GeneralApi
      */
     listOrganizations(page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Organization>>>;
-    /**
-     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
-     * @summary List Stations
-     * @param {string} [tdei_org_id] TDEI organization id.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GeneralApi
-     */
-    listStations(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Station>>>;
 }

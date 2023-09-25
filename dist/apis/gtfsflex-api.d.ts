@@ -35,7 +35,7 @@ export declare const GTFSFlexApiAxiosParamCreator: (configuration?: Configuratio
      * @param {string} [tdei_service_id] Id of the flex service.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-     * @param {string} [_tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
      * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
      * @param {number} [page_no] Integer, defaults to 1.
@@ -43,7 +43,7 @@ export declare const GTFSFlexApiAxiosParamCreator: (configuration?: Configuratio
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listFlexFiles: (tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, _tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    listFlexFiles: (tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_org_id param is used, will return services for that organization.
      * @summary List GTFS Flex Services
@@ -90,7 +90,7 @@ export declare const GTFSFlexApiFp: (configuration?: Configuration) => {
      * @param {string} [tdei_service_id] Id of the flex service.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-     * @param {string} [_tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
      * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
      * @param {number} [page_no] Integer, defaults to 1.
@@ -98,7 +98,7 @@ export declare const GTFSFlexApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, _tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GtfsFlexDownload>>>>;
+    listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GtfsFlexDownload>>>>;
     /**
      * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_org_id param is used, will return services for that organization.
      * @summary List GTFS Flex Services
@@ -145,7 +145,7 @@ export declare const GTFSFlexApiFactory: (configuration?: Configuration, basePat
      * @param {string} [tdei_service_id] Id of the flex service.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-     * @param {string} [_tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
      * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
      * @param {number} [page_no] Integer, defaults to 1.
@@ -153,7 +153,7 @@ export declare const GTFSFlexApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, _tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexDownload>>>;
+    listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexDownload>>>;
     /**
      * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_org_id param is used, will return services for that organization.
      * @summary List GTFS Flex Services
@@ -203,7 +203,7 @@ export declare class GTFSFlexApi extends BaseAPI {
      * @param {string} [tdei_service_id] Id of the flex service.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-     * @param {string} [_tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
      * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
      * @param {number} [page_no] Integer, defaults to 1.
@@ -212,7 +212,7 @@ export declare class GTFSFlexApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
      */
-    listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, _tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexDownload>>>;
+    listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexDownload>>>;
     /**
      * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_org_id param is used, will return services for that organization.
      * @summary List GTFS Flex Services

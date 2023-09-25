@@ -97,9 +97,9 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
         getFlexFile: function (tdei_record_id, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             // verify required parameter 'tdei_record_id' is not null or undefined
                             if (tdei_record_id === null || tdei_record_id === undefined) {
@@ -118,17 +118,32 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
                             if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.apiKey("x-api-key")];
                         case 1:
-                            _a = _b.sent();
+                            _a = _c.sent();
                             return [3 /*break*/, 4];
                         case 2: return [4 /*yield*/, configuration.apiKey];
                         case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
+                            _a = _c.sent();
+                            _c.label = 4;
                         case 4:
                             localVarApiKeyValue = _a;
                             localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _b.label = 5;
+                            _c.label = 5;
                         case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
                             query = new URLSearchParams(localVarUrlObj.search);
                             for (key in localVarQueryParameter) {
                                 query.set(key, localVarQueryParameter[key]);
@@ -153,7 +168,7 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
          * @param {string} [tdei_service_id] Id of the flex service.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-         * @param {string} [_tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
          * @param {number} [page_no] Integer, defaults to 1.
@@ -161,12 +176,12 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFlexFiles: function (tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options) {
+        listFlexFiles: function (tdei_service_id, bbox, flex_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             localVarPath = "/api/v1/gtfs-flex";
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -180,18 +195,32 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
                             if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.apiKey("x-api-key")];
                         case 1:
-                            _a = _b.sent();
+                            _a = _c.sent();
                             return [3 /*break*/, 4];
                         case 2: return [4 /*yield*/, configuration.apiKey];
                         case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
+                            _a = _c.sent();
+                            _c.label = 4;
                         case 4:
                             localVarApiKeyValue = _a;
                             localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _b.label = 5;
+                            _c.label = 5;
                         case 5:
-                            // authentication AuthorizationToken required
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
                             if (tdei_service_id !== undefined) {
                                 localVarQueryParameter['tdei_service_id'] = tdei_service_id;
                             }
@@ -201,8 +230,8 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
                             if (flex_schema_version !== undefined) {
                                 localVarQueryParameter['flex_schema_version'] = flex_schema_version;
                             }
-                            if (_tdei_org_id !== undefined) {
-                                localVarQueryParameter[' tdei_org_id'] = _tdei_org_id;
+                            if (tdei_org_id !== undefined) {
+                                localVarQueryParameter['tdei_org_id'] = tdei_org_id;
                             }
                             if (date_time !== undefined) {
                                 localVarQueryParameter['date_time'] = date_time;
@@ -246,9 +275,9 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
         listFlexServices: function (tdei_org_id, page_no, page_size, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             localVarPath = "/api/v1/gtfs-flex/services";
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -262,18 +291,32 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
                             if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.apiKey("x-api-key")];
                         case 1:
-                            _a = _b.sent();
+                            _a = _c.sent();
                             return [3 /*break*/, 4];
                         case 2: return [4 /*yield*/, configuration.apiKey];
                         case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
+                            _a = _c.sent();
+                            _c.label = 4;
                         case 4:
                             localVarApiKeyValue = _a;
                             localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _b.label = 5;
+                            _c.label = 5;
                         case 5:
-                            // authentication AuthorizationToken required
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
                             if (tdei_org_id !== undefined) {
                                 localVarQueryParameter['tdei_org_id'] = tdei_org_id;
                             }
@@ -310,9 +353,9 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
         listFlexVersions: function (options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             localVarPath = "/api/v1/gtfs-flex/versions";
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -326,17 +369,32 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
                             if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.apiKey("x-api-key")];
                         case 1:
-                            _a = _b.sent();
+                            _a = _c.sent();
                             return [3 /*break*/, 4];
                         case 2: return [4 /*yield*/, configuration.apiKey];
                         case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
+                            _a = _c.sent();
+                            _c.label = 4;
                         case 4:
                             localVarApiKeyValue = _a;
                             localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _b.label = 5;
+                            _c.label = 5;
                         case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
                             query = new URLSearchParams(localVarUrlObj.search);
                             for (key in localVarQueryParameter) {
                                 query.set(key, localVarQueryParameter[key]);
@@ -366,48 +424,65 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
         uploadGtfsFlexFileForm: function (meta, file, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_a) {
-                    // verify required parameter 'meta' is not null or undefined
-                    if (meta === null || meta === undefined) {
-                        throw new base_1.RequiredError('meta', 'Required parameter meta was null or undefined when calling uploadGtfsFlexFileForm.');
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, accessToken, _a, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            // verify required parameter 'meta' is not null or undefined
+                            if (meta === null || meta === undefined) {
+                                throw new base_1.RequiredError('meta', 'Required parameter meta was null or undefined when calling uploadGtfsFlexFileForm.');
+                            }
+                            // verify required parameter 'file' is not null or undefined
+                            if (file === null || file === undefined) {
+                                throw new base_1.RequiredError('file', 'Required parameter file was null or undefined when calling uploadGtfsFlexFileForm.');
+                            }
+                            localVarPath = "/api/v1/gtfs-flex";
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            localVarFormParams = new FormData();
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 1:
+                            _a = _b.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.accessToken];
+                        case 3:
+                            _a = _b.sent();
+                            _b.label = 4;
+                        case 4:
+                            accessToken = _a;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _b.label = 5;
+                        case 5:
+                            if (meta !== undefined) {
+                                localVarFormParams.append('meta', meta);
+                            }
+                            if (file !== undefined) {
+                                localVarFormParams.append('file', file);
+                            }
+                            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            localVarRequestOptions.data = localVarFormParams;
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
                     }
-                    // verify required parameter 'file' is not null or undefined
-                    if (file === null || file === undefined) {
-                        throw new base_1.RequiredError('file', 'Required parameter file was null or undefined when calling uploadGtfsFlexFileForm.');
-                    }
-                    localVarPath = "/api/v1/gtfs-flex";
-                    localVarUrlObj = new URL(localVarPath, 'https://example.com');
-                    if (configuration) {
-                        baseOptions = configuration.baseOptions;
-                    }
-                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
-                    localVarHeaderParameter = {};
-                    localVarQueryParameter = {};
-                    localVarFormParams = new FormData();
-                    // authentication AuthorizationToken required
-                    if (meta !== undefined) {
-                        localVarFormParams.append('meta', meta);
-                    }
-                    if (file !== undefined) {
-                        localVarFormParams.append('file', file);
-                    }
-                    localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-                    query = new URLSearchParams(localVarUrlObj.search);
-                    for (key in localVarQueryParameter) {
-                        query.set(key, localVarQueryParameter[key]);
-                    }
-                    for (key in options.params) {
-                        query.set(key, options.params[key]);
-                    }
-                    localVarUrlObj.search = (new URLSearchParams(query)).toString();
-                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                    localVarRequestOptions.data = localVarFormParams;
-                    return [2 /*return*/, {
-                            url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                            options: localVarRequestOptions,
-                        }];
                 });
             });
         },
@@ -451,7 +526,7 @@ var GTFSFlexApiFp = function (configuration) {
          * @param {string} [tdei_service_id] Id of the flex service.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-         * @param {string} [_tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
          * @param {number} [page_no] Integer, defaults to 1.
@@ -459,12 +534,12 @@ var GTFSFlexApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFlexFiles: function (tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options) {
+        listFlexFiles: function (tdei_service_id, bbox, flex_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.GTFSFlexApiAxiosParamCreator)(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GTFSFlexApiAxiosParamCreator)(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -583,7 +658,7 @@ var GTFSFlexApiFactory = function (configuration, basePath, axios) {
          * @param {string} [tdei_service_id] Id of the flex service.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-         * @param {string} [_tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
          * @param {number} [page_no] Integer, defaults to 1.
@@ -591,10 +666,10 @@ var GTFSFlexApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFlexFiles: function (tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options) {
+        listFlexFiles: function (tdei_service_id, bbox, flex_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.GTFSFlexApiFp)(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GTFSFlexApiFp)(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -678,7 +753,7 @@ var GTFSFlexApi = /** @class */ (function (_super) {
      * @param {string} [tdei_service_id] Id of the flex service.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-     * @param {string} [_tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
      * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
      * @param {number} [page_no] Integer, defaults to 1.
@@ -687,11 +762,11 @@ var GTFSFlexApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
      */
-    GTFSFlexApi.prototype.listFlexFiles = function (tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options) {
+    GTFSFlexApi.prototype.listFlexFiles = function (tdei_service_id, bbox, flex_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.GTFSFlexApiFp)(this.configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, _tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GTFSFlexApiFp)(this.configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
