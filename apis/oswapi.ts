@@ -87,7 +87,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
          * @summary List osw files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
-         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
          * @param {number} [page_no] Integer, defaults to 1.
@@ -95,7 +95,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: async (bbox?: Array<number>, osw_schema_version?: string, tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listOswFiles: async (bbox?: Array<number>, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/osw`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -132,8 +132,8 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
                 localVarQueryParameter['osw_schema_version'] = osw_schema_version;
             }
 
-            if (tdei_org_id !== undefined) {
-                localVarQueryParameter['tdei_org_id'] = tdei_org_id;
+            if (tdei_project_group_id !== undefined) {
+                localVarQueryParameter['tdei_project_group_id'] = tdei_project_group_id;
             }
 
             if (date_time !== undefined) {
@@ -312,7 +312,7 @@ export const OSWApiFp = function(configuration?: Configuration) {
          * @summary List osw files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
-         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
          * @param {number} [page_no] Integer, defaults to 1.
@@ -320,8 +320,8 @@ export const OSWApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listOswFiles(bbox?: Array<number>, osw_schema_version?: string, tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OswDownload>>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).listOswFiles(bbox, osw_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options);
+        async listOswFiles(bbox?: Array<number>, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OswDownload>>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).listOswFiles(bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -379,7 +379,7 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
          * @summary List osw files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
-         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
          * @param {number} [page_no] Integer, defaults to 1.
@@ -387,8 +387,8 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listOswFiles(bbox?: Array<number>, osw_schema_version?: string, tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>> {
-            return OSWApiFp(configuration).listOswFiles(bbox, osw_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(axios, basePath));
+        async listOswFiles(bbox?: Array<number>, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>> {
+            return OSWApiFp(configuration).listOswFiles(bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(axios, basePath));
         },
         /**
          * Lists the versions of OSW data which are supported by TDEI.
@@ -436,7 +436,7 @@ export class OSWApi extends BaseAPI {
      * @summary List osw files meeting criteria.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
-     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
      * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
      * @param {number} [page_no] Integer, defaults to 1.
@@ -445,8 +445,8 @@ export class OSWApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async listOswFiles(bbox?: Array<number>, osw_schema_version?: string, tdei_org_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<OswDownload>>> {
-        return OSWApiFp(this.configuration).listOswFiles(bbox, osw_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
+    public async listOswFiles(bbox?: Array<number>, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<OswDownload>>> {
+        return OSWApiFp(this.configuration).listOswFiles(bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Lists the versions of OSW data which are supported by TDEI.
