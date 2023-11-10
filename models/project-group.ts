@@ -14,25 +14,25 @@
 /**
  * Includes gtfs agency information and a tdei agency id. Necessary as gtfs agency id may not be unique across agencies.
  * @export
- * @interface Organization
+ * @interface ProjectGroup
  */
-export interface Organization {
+export interface ProjectGroup {
     /**
      * geo-json polygon.
      * @type {any}
-     * @memberof Organization
+     * @memberof ProjectGroup
      */
     polygon: any;
     /**
-     * tdei-assigned organization id. Necessary to ensure that organization ids are unique. Represented as a UUID.
+     * tdei-assigned project group id. Necessary to ensure that project group ids are unique. Represented as a UUID.
      * @type {string}
-     * @memberof Organization
+     * @memberof ProjectGroup
      */
-    tdei_org_id?: string;
+    tdei_project_group_id?: string;
     /**
-     * org_name name. For transit agencies, typically the agency name used in GTFS releases.
+     * project_group_name name. For transit agencies, typically the agency name used in GTFS releases.
      * @type {string}
-     * @memberof Organization
+     * @memberof ProjectGroup
      */
-    org_name: string;
+    project_group_name: string;
 }
