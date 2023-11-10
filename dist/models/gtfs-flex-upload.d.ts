@@ -17,11 +17,11 @@ import { GeoJsonObject } from './geo-json-object';
  */
 export interface GtfsFlexUpload {
     /**
-     * tdei-assigned organization id. Represented as UUID. Organization ids can be retrieved using the /api/v1.0/organizations path.
+     * tdei-assigned project group id. Represented as UUID. Project Group ids can be retrieved using the /api/v1.0/project-group path.
      * @type {string}
      * @memberof GtfsFlexUpload
      */
-    tdei_org_id: string;
+    tdei_project_group_id: string;
     /**
      * TDEI id of a GTFS Flex service
      * @type {string}

@@ -36,14 +36,14 @@ export declare const GTFSPathwaysApiAxiosParamCreator: (configuration?: Configur
      * @param {string} [tdei_station_id] Id of a station in the tdei system. gtfs station ids may not be unique.
      * @param {string} [pathways_schema_version] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
      * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listPathwaysFiles: (bbox?: Array<number>, tdei_station_id?: string, pathways_schema_version?: string, date_time?: string, tdei_org_id?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    listPathwaysFiles: (bbox?: Array<number>, tdei_station_id?: string, pathways_schema_version?: string, date_time?: string, tdei_project_group_id?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Lists the versions of GTFS pathways data which are supported by TDEI. Returns a json list of the GTFS pathways versions supported by TDEI.
      * @summary List available GTFS Pathways versions
@@ -52,15 +52,15 @@ export declare const GTFSPathwaysApiAxiosParamCreator: (configuration?: Configur
      */
     listPathwaysVersions: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
+     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_project_group_id param is specified, will return stations for that project group.
      * @summary List Stations
-     * @param {string} [tdei_org_id] TDEI organization id.
+     * @param {string} [tdei_project_group_id] TDEI project group id.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listStations: (tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    listStations: (tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * This call allows a user to upload or create a new gtfs pathways file. The caller must provide metadata about the file. Required metadata includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
      * @summary create pathways file
@@ -91,14 +91,14 @@ export declare const GTFSPathwaysApiFp: (configuration?: Configuration) => {
      * @param {string} [tdei_station_id] Id of a station in the tdei system. gtfs station ids may not be unique.
      * @param {string} [pathways_schema_version] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
      * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listPathwaysFiles(bbox?: Array<number>, tdei_station_id?: string, pathways_schema_version?: string, date_time?: string, tdei_org_id?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GtfsPathwaysDownload>>>>;
+    listPathwaysFiles(bbox?: Array<number>, tdei_station_id?: string, pathways_schema_version?: string, date_time?: string, tdei_project_group_id?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GtfsPathwaysDownload>>>>;
     /**
      * Lists the versions of GTFS pathways data which are supported by TDEI. Returns a json list of the GTFS pathways versions supported by TDEI.
      * @summary List available GTFS Pathways versions
@@ -107,15 +107,15 @@ export declare const GTFSPathwaysApiFp: (configuration?: Configuration) => {
      */
     listPathwaysVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<VersionList>>>;
     /**
-     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
+     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_project_group_id param is specified, will return stations for that project group.
      * @summary List Stations
-     * @param {string} [tdei_org_id] TDEI organization id.
+     * @param {string} [tdei_project_group_id] TDEI project group id.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listStations(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Station>>>>;
+    listStations(tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Station>>>>;
     /**
      * This call allows a user to upload or create a new gtfs pathways file. The caller must provide metadata about the file. Required metadata includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
      * @summary create pathways file
@@ -146,14 +146,14 @@ export declare const GTFSPathwaysApiFactory: (configuration?: Configuration, bas
      * @param {string} [tdei_station_id] Id of a station in the tdei system. gtfs station ids may not be unique.
      * @param {string} [pathways_schema_version] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
      * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listPathwaysFiles(bbox?: Array<number>, tdei_station_id?: string, pathways_schema_version?: string, date_time?: string, tdei_org_id?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsPathwaysDownload>>>;
+    listPathwaysFiles(bbox?: Array<number>, tdei_station_id?: string, pathways_schema_version?: string, date_time?: string, tdei_project_group_id?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsPathwaysDownload>>>;
     /**
      * Lists the versions of GTFS pathways data which are supported by TDEI. Returns a json list of the GTFS pathways versions supported by TDEI.
      * @summary List available GTFS Pathways versions
@@ -162,15 +162,15 @@ export declare const GTFSPathwaysApiFactory: (configuration?: Configuration, bas
      */
     listPathwaysVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>>;
     /**
-     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
+     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_project_group_id param is specified, will return stations for that project group.
      * @summary List Stations
-     * @param {string} [tdei_org_id] TDEI organization id.
+     * @param {string} [tdei_project_group_id] TDEI project group id.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listStations(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Station>>>;
+    listStations(tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Station>>>;
     /**
      * This call allows a user to upload or create a new gtfs pathways file. The caller must provide metadata about the file. Required metadata includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
      * @summary create pathways file
@@ -204,7 +204,7 @@ export declare class GTFSPathwaysApi extends BaseAPI {
      * @param {string} [tdei_station_id] Id of a station in the tdei system. gtfs station ids may not be unique.
      * @param {string} [pathways_schema_version] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
      * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
@@ -212,7 +212,7 @@ export declare class GTFSPathwaysApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GTFSPathwaysApi
      */
-    listPathwaysFiles(bbox?: Array<number>, tdei_station_id?: string, pathways_schema_version?: string, date_time?: string, tdei_org_id?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsPathwaysDownload>>>;
+    listPathwaysFiles(bbox?: Array<number>, tdei_station_id?: string, pathways_schema_version?: string, date_time?: string, tdei_project_group_id?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsPathwaysDownload>>>;
     /**
      * Lists the versions of GTFS pathways data which are supported by TDEI. Returns a json list of the GTFS pathways versions supported by TDEI.
      * @summary List available GTFS Pathways versions
@@ -222,16 +222,16 @@ export declare class GTFSPathwaysApi extends BaseAPI {
      */
     listPathwaysVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>>;
     /**
-     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
+     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_project_group_id param is specified, will return stations for that project group.
      * @summary List Stations
-     * @param {string} [tdei_org_id] TDEI organization id.
+     * @param {string} [tdei_project_group_id] TDEI project group id.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GTFSPathwaysApi
      */
-    listStations(tdei_org_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Station>>>;
+    listStations(tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Station>>>;
     /**
      * This call allows a user to upload or create a new gtfs pathways file. The caller must provide metadata about the file. Required metadata includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
      * @summary create pathways file

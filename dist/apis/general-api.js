@@ -234,21 +234,21 @@ var GeneralApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * Path used to retrieve the list of organizations with data in the TDEI system. Allows callers to get the tdei_org_id id for an organization.  Returns the tdei_org_id and organization information for all organizations with data in the TDEI system.
-         * @summary List organizations
+         * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
+         * @summary List project groups
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrganizations: function (page_no, page_size, options) {
+        listProjectGroups: function (page_no, page_size, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
                 return __generator(this, function (_c) {
                     switch (_c.label) {
                         case 0:
-                            localVarPath = "/api/v1/organizations";
+                            localVarPath = "/api/v1/project-group";
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -369,19 +369,19 @@ var GeneralApiFp = function (configuration) {
             });
         },
         /**
-         * Path used to retrieve the list of organizations with data in the TDEI system. Allows callers to get the tdei_org_id id for an organization.  Returns the tdei_org_id and organization information for all organizations with data in the TDEI system.
-         * @summary List organizations
+         * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
+         * @summary List project groups
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrganizations: function (page_no, page_size, options) {
+        listProjectGroups: function (page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.GeneralApiAxiosParamCreator)(configuration).listOrganizations(page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GeneralApiAxiosParamCreator)(configuration).listProjectGroups(page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -431,17 +431,17 @@ var GeneralApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * Path used to retrieve the list of organizations with data in the TDEI system. Allows callers to get the tdei_org_id id for an organization.  Returns the tdei_org_id and organization information for all organizations with data in the TDEI system.
-         * @summary List organizations
+         * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
+         * @summary List project groups
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrganizations: function (page_no, page_size, options) {
+        listProjectGroups: function (page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.GeneralApiFp)(configuration).listOrganizations(page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GeneralApiFp)(configuration).listProjectGroups(page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -491,19 +491,19 @@ var GeneralApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * Path used to retrieve the list of organizations with data in the TDEI system. Allows callers to get the tdei_org_id id for an organization.  Returns the tdei_org_id and organization information for all organizations with data in the TDEI system.
-     * @summary List organizations
+     * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
+     * @summary List project groups
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GeneralApi
      */
-    GeneralApi.prototype.listOrganizations = function (page_no, page_size, options) {
+    GeneralApi.prototype.listProjectGroups = function (page_no, page_size, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).listOrganizations(page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).listProjectGroups(page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

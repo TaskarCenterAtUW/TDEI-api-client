@@ -167,7 +167,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
          * @summary List osw files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
-         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
          * @param {number} [page_no] Integer, defaults to 1.
@@ -175,7 +175,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: function (bbox, osw_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options) {
+        listOswFiles: function (bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
@@ -226,8 +226,8 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             if (osw_schema_version !== undefined) {
                                 localVarQueryParameter['osw_schema_version'] = osw_schema_version;
                             }
-                            if (tdei_org_id !== undefined) {
-                                localVarQueryParameter['tdei_org_id'] = tdei_org_id;
+                            if (tdei_project_group_id !== undefined) {
+                                localVarQueryParameter['tdei_project_group_id'] = tdei_project_group_id;
                             }
                             if (date_time !== undefined) {
                                 localVarQueryParameter['date_time'] = date_time;
@@ -440,7 +440,7 @@ var OSWApiFp = function (configuration) {
          * @summary List osw files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
-         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
          * @param {number} [page_no] Integer, defaults to 1.
@@ -448,12 +448,12 @@ var OSWApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: function (bbox, osw_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options) {
+        listOswFiles: function (bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).listOswFiles(bbox, osw_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).listOswFiles(bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -544,7 +544,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
          * @summary List osw files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
-         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
          * @param {number} [page_no] Integer, defaults to 1.
@@ -552,10 +552,10 @@ var OSWApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: function (bbox, osw_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options) {
+        listOswFiles: function (bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).listOswFiles(bbox, osw_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).listOswFiles(bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -622,7 +622,7 @@ var OSWApi = /** @class */ (function (_super) {
      * @summary List osw files meeting criteria.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
-     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
      * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
      * @param {number} [page_no] Integer, defaults to 1.
@@ -631,11 +631,11 @@ var OSWApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    OSWApi.prototype.listOswFiles = function (bbox, osw_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options) {
+    OSWApi.prototype.listOswFiles = function (bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).listOswFiles(bbox, osw_schema_version, tdei_org_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).listOswFiles(bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
