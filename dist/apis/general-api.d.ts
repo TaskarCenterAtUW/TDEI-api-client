@@ -12,7 +12,7 @@
 import { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 import { RequestArgs, BaseAPI } from '../base';
-import { Organization } from '../models';
+import { ProjectGroup } from '../models';
 import { RecordStatus } from '../models';
 import { VersionList } from '../models';
 /**
@@ -36,14 +36,14 @@ export declare const GeneralApiAxiosParamCreator: (configuration?: Configuration
      */
     listApiVersions: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Path used to retrieve the list of organizations with data in the TDEI system. Allows callers to get the tdei_org_id id for an organization.  Returns the tdei_org_id and organization information for all organizations with data in the TDEI system.
-     * @summary List organizations
+     * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
+     * @summary List project groups
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOrganizations: (page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    listProjectGroups: (page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * GeneralApi - functional programming interface
@@ -66,14 +66,14 @@ export declare const GeneralApiFp: (configuration?: Configuration) => {
      */
     listApiVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<VersionList>>>;
     /**
-     * Path used to retrieve the list of organizations with data in the TDEI system. Allows callers to get the tdei_org_id id for an organization.  Returns the tdei_org_id and organization information for all organizations with data in the TDEI system.
-     * @summary List organizations
+     * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
+     * @summary List project groups
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOrganizations(page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Organization>>>>;
+    listProjectGroups(page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<ProjectGroup>>>>;
 };
 /**
  * GeneralApi - factory interface
@@ -96,14 +96,14 @@ export declare const GeneralApiFactory: (configuration?: Configuration, basePath
      */
     listApiVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>>;
     /**
-     * Path used to retrieve the list of organizations with data in the TDEI system. Allows callers to get the tdei_org_id id for an organization.  Returns the tdei_org_id and organization information for all organizations with data in the TDEI system.
-     * @summary List organizations
+     * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
+     * @summary List project groups
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOrganizations(page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Organization>>>;
+    listProjectGroups(page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<ProjectGroup>>>;
 };
 /**
  * GeneralApi - object-oriented interface
@@ -130,13 +130,13 @@ export declare class GeneralApi extends BaseAPI {
      */
     listApiVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>>;
     /**
-     * Path used to retrieve the list of organizations with data in the TDEI system. Allows callers to get the tdei_org_id id for an organization.  Returns the tdei_org_id and organization information for all organizations with data in the TDEI system.
-     * @summary List organizations
+     * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
+     * @summary List project groups
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GeneralApi
      */
-    listOrganizations(page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Organization>>>;
+    listProjectGroups(page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<ProjectGroup>>>;
 }

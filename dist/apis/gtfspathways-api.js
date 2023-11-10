@@ -169,14 +169,14 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
          * @param {string} [tdei_station_id] Id of a station in the tdei system. gtfs station ids may not be unique.
          * @param {string} [pathways_schema_version] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPathwaysFiles: function (bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options) {
+        listPathwaysFiles: function (bbox, tdei_station_id, pathways_schema_version, date_time, tdei_project_group_id, tdei_record_id, page_no, page_size, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
@@ -233,8 +233,8 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
                             if (date_time !== undefined) {
                                 localVarQueryParameter['date_time'] = date_time;
                             }
-                            if (tdei_org_id !== undefined) {
-                                localVarQueryParameter['tdei_org_id'] = tdei_org_id;
+                            if (tdei_project_group_id !== undefined) {
+                                localVarQueryParameter['tdei_project_group_id'] = tdei_project_group_id;
                             }
                             if (tdei_record_id !== undefined) {
                                 localVarQueryParameter['tdei_record_id'] = tdei_record_id;
@@ -333,15 +333,15 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
+         * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_project_group_id param is specified, will return stations for that project group.
          * @summary List Stations
-         * @param {string} [tdei_org_id] TDEI organization id.
+         * @param {string} [tdei_project_group_id] TDEI project group id.
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listStations: function (tdei_org_id, page_no, page_size, options) {
+        listStations: function (tdei_project_group_id, page_no, page_size, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
@@ -386,8 +386,8 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
                             localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
                             _c.label = 10;
                         case 10:
-                            if (tdei_org_id !== undefined) {
-                                localVarQueryParameter['tdei_org_id'] = tdei_org_id;
+                            if (tdei_project_group_id !== undefined) {
+                                localVarQueryParameter['tdei_project_group_id'] = tdei_project_group_id;
                             }
                             if (page_no !== undefined) {
                                 localVarQueryParameter['page_no'] = page_no;
@@ -527,19 +527,19 @@ var GTFSPathwaysApiFp = function (configuration) {
          * @param {string} [tdei_station_id] Id of a station in the tdei system. gtfs station ids may not be unique.
          * @param {string} [pathways_schema_version] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPathwaysFiles: function (bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options) {
+        listPathwaysFiles: function (bbox, tdei_station_id, pathways_schema_version, date_time, tdei_project_group_id, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.GTFSPathwaysApiAxiosParamCreator)(configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GTFSPathwaysApiAxiosParamCreator)(configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_project_group_id, tdei_record_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -577,20 +577,20 @@ var GTFSPathwaysApiFp = function (configuration) {
             });
         },
         /**
-         * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
+         * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_project_group_id param is specified, will return stations for that project group.
          * @summary List Stations
-         * @param {string} [tdei_org_id] TDEI organization id.
+         * @param {string} [tdei_project_group_id] TDEI project group id.
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listStations: function (tdei_org_id, page_no, page_size, options) {
+        listStations: function (tdei_project_group_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.GTFSPathwaysApiAxiosParamCreator)(configuration).listStations(tdei_org_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GTFSPathwaysApiAxiosParamCreator)(configuration).listStations(tdei_project_group_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -659,17 +659,17 @@ var GTFSPathwaysApiFactory = function (configuration, basePath, axios) {
          * @param {string} [tdei_station_id] Id of a station in the tdei system. gtfs station ids may not be unique.
          * @param {string} [pathways_schema_version] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-         * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+         * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPathwaysFiles: function (bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options) {
+        listPathwaysFiles: function (bbox, tdei_station_id, pathways_schema_version, date_time, tdei_project_group_id, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_project_group_id, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -687,18 +687,18 @@ var GTFSPathwaysApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
+         * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_project_group_id param is specified, will return stations for that project group.
          * @summary List Stations
-         * @param {string} [tdei_org_id] TDEI organization id.
+         * @param {string} [tdei_project_group_id] TDEI project group id.
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listStations: function (tdei_org_id, page_no, page_size, options) {
+        listStations: function (tdei_project_group_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(configuration).listStations(tdei_org_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(configuration).listStations(tdei_project_group_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -754,7 +754,7 @@ var GTFSPathwaysApi = /** @class */ (function (_super) {
      * @param {string} [tdei_station_id] Id of a station in the tdei system. gtfs station ids may not be unique.
      * @param {string} [pathways_schema_version] version name of the pathways schema version that the application requests. list of versions can be found with /api/v1/gtfs-pathways/versions
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-     * @param {string} [tdei_org_id] tdei-assigned organization id. Represented as a UUID.
+     * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
      * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
@@ -762,11 +762,11 @@ var GTFSPathwaysApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof GTFSPathwaysApi
      */
-    GTFSPathwaysApi.prototype.listPathwaysFiles = function (bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options) {
+    GTFSPathwaysApi.prototype.listPathwaysFiles = function (bbox, tdei_station_id, pathways_schema_version, date_time, tdei_project_group_id, tdei_record_id, page_no, page_size, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(this.configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_org_id, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(this.configuration).listPathwaysFiles(bbox, tdei_station_id, pathways_schema_version, date_time, tdei_project_group_id, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -786,20 +786,20 @@ var GTFSPathwaysApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_org_id param is specified, will return stations for that organization.
+     * Path used to retrieve the list of stations with data in the TDEI system. Allows callers to get the tdei_station_id id for a station.  Returns the tdei_station_id and station information for all stations with data in the TDEI system.  If tdei_project_group_id param is specified, will return stations for that project group.
      * @summary List Stations
-     * @param {string} [tdei_org_id] TDEI organization id.
+     * @param {string} [tdei_project_group_id] TDEI project group id.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GTFSPathwaysApi
      */
-    GTFSPathwaysApi.prototype.listStations = function (tdei_org_id, page_no, page_size, options) {
+    GTFSPathwaysApi.prototype.listStations = function (tdei_project_group_id, page_no, page_size, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(this.configuration).listStations(tdei_org_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(this.configuration).listStations(tdei_project_group_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
