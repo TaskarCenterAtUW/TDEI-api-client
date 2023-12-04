@@ -1,15 +1,10 @@
-name: generate_api_client
+name: auto_generate_api_client
 on:
   repository_dispatch:
-    types: [generate_api_client]
-  workflow_dispatch:
-    inputs:
-      endpoint:
-        description: "Open API spec spec_url"
-        required: true
+    types: [auto_generate_api_client]
 
 jobs:
-  GenerateAPIClient:
+  AutoGenerateAPIClient:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
