@@ -11,67 +11,92 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+
 import { GeoJsonObject } from './geo-json-object';
+import {
+    GeoJsonObject,
+} from ".";
+
 /**
  * represents a osw data file.
+ *
  * @export
  * @interface OswUpload
  */
 export interface OswUpload {
+
     /**
      * tdei-assigned project group id. Represented as UUID. Project Group ids can be retrieved using the /api/v1/project-group path.
+     *
      * @type {string}
      * @memberof OswUpload
+     * @example 4e991e7a-5c16-4ebf-ad31-3a3625bcca10
      */
     tdei_project_group_id: string;
+
     /**
      * Description of who data was collected by. See Best Practices document for information on how to format this string.
+     *
      * @type {string}
      * @memberof OswUpload
+     * @example See best practices document
      */
     collected_by: string;
+
     /**
      * Date-time that data was collected. If uploader includes time, time should be specified in UTC time. If uploader does not include time, time will be registered as 12:01am UTC time on the date specified.
+     *
      * @type {string}
      * @memberof OswUpload
+     * @example 2018-02-10T09:30Z
      */
     collection_date: string;
+
     /**
      * Method by which the data was collected. See Best Practices document for information on how to format this string.
+     *
      * @type {string}
      * @memberof OswUpload
      */
     collection_method: OswUploadCollectionMethodEnum;
+
     /**
      * Date of publication of the file
+     *
      * @type {string}
      * @memberof OswUpload
+     * @example 2023-03-02T04:22:42.493Z
      */
     publication_date?: string;
+
     /**
      * Description of data source or sources from which the data was collected. See Best Practices document for information on how to format this string.
+     *
      * @type {string}
      * @memberof OswUpload
      */
     data_source: OswUploadDataSourceEnum;
+
     /**
-     * 
      * @type {GeoJsonObject}
      * @memberof OswUpload
      */
     polygon: GeoJsonObject;
+
     /**
      * version of osw schema this file conforms to
+     *
      * @type {string}
      * @memberof OswUpload
+     * @example v0.1
      */
     osw_schema_version: string;
 }
 
 /**
-    * @export
-    * @enum {string}
-    */
+ * @export
+ * @enum {string}
+ */
 export enum OswUploadCollectionMethodEnum {
     Manual = 'manual',
     Transform = 'transform',
@@ -79,9 +104,9 @@ export enum OswUploadCollectionMethodEnum {
     Other = 'other'
 }
 /**
-    * @export
-    * @enum {string}
-    */
+ * @export
+ * @enum {string}
+ */
 export enum OswUploadDataSourceEnum {
     _3rdParty = '3rdParty',
     TDEITools = 'TDEITools',
