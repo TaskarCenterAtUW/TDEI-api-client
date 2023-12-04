@@ -20,31 +20,16 @@ import {
  * 
  *
  * @export
- * @interface TokenResponse
+ * @interface OSWConfidenceRequest
  */
-export interface TokenResponse {
+export interface OSWConfidenceRequest {
 
     /**
+     * TDEI record ID of the dataset to calculate confidence metric
+     *
      * @type {string}
-     * @memberof TokenResponse
+     * @memberof OSWConfidenceRequest
+     * @example 5e991e7a-5c16-4ebf-ad31-3a3625bcca10
      */
-    access_token?: string;
-
-    /**
-     * @type {number}
-     * @memberof TokenResponse
-     */
-    expires_in?: number;
-
-    /**
-     * @type {number}
-     * @memberof TokenResponse
-     */
-    refresh_expires_in?: number;
-
-    /**
-     * @type {string}
-     * @memberof TokenResponse
-     */
-    refresh_token?: string;
+    tdeiRecordId: string;
 }
