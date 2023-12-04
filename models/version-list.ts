@@ -11,15 +11,23 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+
 import { VersionSpec } from './version-spec';
+import {
+    VersionSpec,
+} from ".";
+
 /**
  * List of versions.
+ *
  * @export
  * @interface VersionList
  */
 export interface VersionList {
+
     /**
      * A list of the versions of a data standard (GTFS-Flex, GTFS-Pathways, OSW) supported by TDEI.
+     *
      * @type {Array<VersionSpec>}
      * @memberof VersionList
      */

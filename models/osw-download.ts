@@ -11,85 +11,119 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+
 import { GeoJsonObject } from './geo-json-object';
+import {
+    GeoJsonObject,
+} from ".";
+
 /**
  * represents a osw data file.
+ *
  * @export
  * @interface OswDownload
  */
 export interface OswDownload {
+
     /**
      * tdei-assigned project group id. Represented as UUID. Project Group ids can be retrieved using the /api/v1/project-group path.
+     *
      * @type {string}
      * @memberof OswDownload
+     * @example 4e991e7a-5c16-4ebf-ad31-3a3625bcca10
      */
     tdei_project_group_id: string;
+
     /**
      * Description of who data was collected by. See Best Practices document for information on how to format this string.
+     *
      * @type {string}
      * @memberof OswDownload
+     * @example See best practices document
      */
     collected_by: string;
+
     /**
      * date-time that data was collected
+     *
      * @type {string}
      * @memberof OswDownload
+     * @example 2018-02-10T09:30Z
      */
     collection_date: string;
+
     /**
      * Method by which the data was collected. See Best Practices document for information on how to format this string.
+     *
      * @type {string}
      * @memberof OswDownload
      */
     collection_method: OswDownloadCollectionMethodEnum;
+
     /**
      * Date of publication of the file
+     *
      * @type {string}
      * @memberof OswDownload
+     * @example 2023-03-02T04:22:42.493Z
      */
     publication_date?: string;
+
     /**
      * tdei-generated confidence level. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
+     *
      * @type {number}
      * @memberof OswDownload
+     * @example 41
      */
     confidence_level: number;
+
     /**
      * Description of data source or sources from which the data was collected. See Best Practices document for information on how to format this string.
+     *
      * @type {string}
      * @memberof OswDownload
      */
     data_source: OswDownloadDataSourceEnum;
+
     /**
-     * 
      * @type {GeoJsonObject}
      * @memberof OswDownload
      */
     polygon: GeoJsonObject;
+
     /**
      * unique id identifying the file in the tdei system, can be used to retrieve the file itself.
+     *
      * @type {string}
      * @memberof OswDownload
+     * @example 4e991e7a-5c16-4ebf-ad31-3a3625bcca10
      */
     tdei_record_id: string;
+
     /**
      * version of osw schema this file conforms to
+     *
      * @type {string}
      * @memberof OswDownload
+     * @example v1.1
      */
     osw_schema_version: string;
+
     /**
      * The url from which this file can be downloaded.
+     *
      * @type {string}
      * @memberof OswDownload
+     * @example /api/v1/osw/{tdei_record_id}
      */
     download_url: string;
 }
 
 /**
-    * @export
-    * @enum {string}
-    */
+ * @export
+ * @enum {string}
+ */
 export enum OswDownloadCollectionMethodEnum {
     Manual = 'manual',
     Transform = 'transform',
@@ -97,9 +131,9 @@ export enum OswDownloadCollectionMethodEnum {
     Other = 'other'
 }
 /**
-    * @export
-    * @enum {string}
-    */
+ * @export
+ * @enum {string}
+ */
 export enum OswDownloadDataSourceEnum {
     _3rdParty = '3rdParty',
     TDEITools = 'TDEITools',
