@@ -18,7 +18,7 @@ jobs:
           fetch-depth: 0
       - name: Generate API Client
         run: |
-          bash autogenerate_api_client.sh ${{github.event.inputs.endpoint}}
+          bash autogenerate_api_client.sh https://raw.githubusercontent.com/TaskarCenterAtUW/TDEI-ExternalAPIs/gs-api-gateway-implementation/tdei-api-gateway.json
           
 
       - name: Run Bash Script
