@@ -20,31 +20,23 @@ import {
  * 
  *
  * @export
- * @interface TokenResponse
+ * @interface OSWFormatResponse
  */
-export interface TokenResponse {
+export interface OSWFormatResponse {
 
     /**
+     * jobId of the format request
+     *
      * @type {string}
-     * @memberof TokenResponse
+     * @memberof OSWFormatResponse
      */
-    access_token?: string;
+    jobId?: string;
 
     /**
-     * @type {number}
-     * @memberof TokenResponse
-     */
-    expires_in?: number;
-
-    /**
-     * @type {number}
-     * @memberof TokenResponse
-     */
-    refresh_expires_in?: number;
-
-    /**
+     * the url to fetch the status of the job
+     *
      * @type {string}
-     * @memberof TokenResponse
+     * @memberof OSWFormatResponse
      */
-    refresh_token?: string;
+    statusUrl?: string;
 }

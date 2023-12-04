@@ -1,4 +1,5 @@
 export * from './feature';
+export * from './format-upload-body';
 export * from './geo-json-object';
 export * from './geometry';
 export * from './gtfs-flex-download';
@@ -7,6 +8,11 @@ export * from './gtfs-flex-upload';
 export * from './gtfs-pathways-download';
 export * from './gtfs-pathways-upload';
 export * from './login-model';
+export * from './oswconfidence-request';
+export * from './oswconfidence-response';
+export * from './oswconfidence-status';
+export * from './oswformat-response';
+export * from './oswformat-status-response';
 export * from './osw-download';
 export * from './osw-upload';
 export * from './project-group';
