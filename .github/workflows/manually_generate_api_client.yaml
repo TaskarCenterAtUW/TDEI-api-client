@@ -1,5 +1,8 @@
 name: manually_generate_api_client
 on:
+  push:
+    branches-ignore:
+      '**'
   workflow_dispatch:
     inputs:
       endpoint:
