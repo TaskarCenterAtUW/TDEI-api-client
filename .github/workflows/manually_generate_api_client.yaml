@@ -42,3 +42,10 @@ jobs:
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run API Tester Workflow
+          run: |
+            curl -X POST https://api.github.com/repos/TaskarCenterAtUW/TDEI-api-tester/dispatches \
+            -H 'Accept: application/vnd.github.everest-preview+json' \
+            -u ${{ secrets.ACTIONS_KEY }} \
+            --data '{"event_type": "run_api_tests"}'
