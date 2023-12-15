@@ -20,31 +20,31 @@ import {
  * 
  *
  * @export
- * @interface TokenResponse
+ * @interface FormatUploadBody
  */
-export interface TokenResponse {
+export interface FormatUploadBody {
 
     /**
+     * Source format
+     *
      * @type {string}
-     * @memberof TokenResponse
+     * @memberof FormatUploadBody
+     * @example osm
      */
-    access_token?: string;
+    source: string;
 
     /**
-     * @type {number}
-     * @memberof TokenResponse
-     */
-    expires_in?: number;
-
-    /**
-     * @type {number}
-     * @memberof TokenResponse
-     */
-    refresh_expires_in?: number;
-
-    /**
+     * Target format
+     *
      * @type {string}
-     * @memberof TokenResponse
+     * @memberof FormatUploadBody
+     * @example osw
      */
-    refresh_token?: string;
+    target: string;
+
+    /**
+     * @type {Blob}
+     * @memberof FormatUploadBody
+     */
+    file: Blob;
 }
