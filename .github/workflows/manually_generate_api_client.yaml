@@ -41,7 +41,7 @@ jobs:
             echo "Git is not installed."
             exit 1
           fi
-          gh pr checkout 18 && git fetch origin main && git merge origin/main
+          gh pr create --base main --fill
           gh pr merge feature-generate-api-client --merge --delete-branch
 
         env:
