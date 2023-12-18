@@ -35,7 +35,8 @@ jobs:
             echo "Git is not installed."
             exit 1
           fi
-          gh pr merge feature-generate-api-client --merge --squash --delete-branch --auto
+          gh pr create --base main --fill
+          gh pr merge feature-generate-api-client --merge --delete-branch
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
