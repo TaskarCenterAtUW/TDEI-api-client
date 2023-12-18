@@ -11,32 +11,46 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+
+import {
+    
+} from ".";
+
 /**
  * Describes the status of an uploaded record
+ *
  * @export
  * @interface RecordStatus
  */
 export interface RecordStatus {
+
     /**
      * Record ID of the file generated
+     *
      * @type {string}
      * @memberof RecordStatus
      */
     tdeiRecordId: string;
+
     /**
      * Current stage of the file processing
+     *
      * @type {string}
      * @memberof RecordStatus
      */
     stage?: string;
+
     /**
      * Current status of processing. (failed, in progress or complete). If failed, shows the failure reason
+     *
      * @type {string}
      * @memberof RecordStatus
      */
     status?: string;
+
     /**
      * Whether processing is complete. (will be true if any stage fails)
+     *
      * @type {boolean}
      * @memberof RecordStatus
      */
