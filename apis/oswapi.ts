@@ -23,7 +23,9 @@ import { OSWConfidenceStatus } from '../models';
 import { OSWFormatResponse } from '../models';
 import { OSWFormatStatusResponse } from '../models';
 import { OswDownload } from '../models';
-import { OswUpload } from '../models';
+import { RecordPublishStatus } from '../models';
+import { RecordUploadStatus } from '../models';
+import { ValidationStatus } from '../models';
 import { VersionList } from '../models';
 /**
  * OSWApi - axios parameter creator
@@ -34,17 +36,17 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * Fetches the status of confidence request job.
          * @summary Get the status of confidence request
-         * @param {string} jobId jobId for confidence request
+         * @param {string} job_id job_id for confidence request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOSWConfidenceStatus: async (jobId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'jobId' is not null or undefined
-            if (jobId === null || jobId === undefined) {
-                throw new RequiredError('jobId','Required parameter jobId was null or undefined when calling getOSWConfidenceStatus.');
+        getOSWConfidenceStatus: async (job_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'job_id' is not null or undefined
+            if (job_id === null || job_id === undefined) {
+                throw new RequiredError('job_id','Required parameter job_id was null or undefined when calling getOSWConfidenceStatus.');
             }
-            const localVarPath = `/api/v1/osw/confidence/status/{jobId}`
-                .replace(`{${"jobId"}}`, encodeURIComponent(String(jobId)));
+            const localVarPath = `/api/v1/osw/confidence/status/{job_id}`
+                .replace(`{${"job_id"}}`, encodeURIComponent(String(job_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -89,10 +91,10 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * returns a specific osw file identified by the tdei_record_id
-         * @summary returns a geojson osw file by default, can request for different format using 'format' querystring
+         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * @summary downloads the OSW files as zip
          * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
-         * @param {string} [format] File format to download.
+         * @param {string} [format] File format to download. Default to osw
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -151,9 +153,183 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * This endpoint returns a list of url to gzip'd geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a polygon (bounding box), minimum confidence level and osw version. This endpoint can be used by an application developer to obtain a list of osw files in the TDEI system meeting the specified criteria.
+         * Fetches the status of an published record
+         * @summary Get the publish status
+         * @param {string} tdei_record_id tdei_record_id received during upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPublishStatus: async (tdei_record_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tdei_record_id' is not null or undefined
+            if (tdei_record_id === null || tdei_record_id === undefined) {
+                throw new RequiredError('tdei_record_id','Required parameter tdei_record_id was null or undefined when calling getPublishStatus.');
+            }
+            const localVarPath = `/api/v1/osw/publish/status/{tdei_record_id}`
+                .replace(`{${"tdei_record_id"}}`, encodeURIComponent(String(tdei_record_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKey required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("x-api-key")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+            }
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Fetches the status of an uploaded record
+         * @summary Get the upload status
+         * @param {string} tdei_record_id tdei_record_id received during upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUploadStatus: async (tdei_record_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tdei_record_id' is not null or undefined
+            if (tdei_record_id === null || tdei_record_id === undefined) {
+                throw new RequiredError('tdei_record_id','Required parameter tdei_record_id was null or undefined when calling getUploadStatus.');
+            }
+            const localVarPath = `/api/v1/osw/upload/status/{tdei_record_id}`
+                .replace(`{${"tdei_record_id"}}`, encodeURIComponent(String(tdei_record_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKey required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("x-api-key")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+            }
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Fetches the status of the validation request job.
+         * @summary Get the status of the validation request.
+         * @param {string} job_id job_id for the validation request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getValidateStatus: async (job_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'job_id' is not null or undefined
+            if (job_id === null || job_id === undefined) {
+                throw new RequiredError('job_id','Required parameter job_id was null or undefined when calling getValidateStatus.');
+            }
+            const localVarPath = `/api/v1/osw/validate/status/{job_id}`
+                .replace(`{${"job_id"}}`, encodeURIComponent(String(job_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKey required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("x-api-key")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+            }
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint returns a list of url to zipped geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and osw version.
          * @summary List osw files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+         * @param {string} [name] dataset name or title.
+         * @param {string} [version] dataset version.
+         * @param {string} [status] request for files based on status. The default setting is &#x27;published&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs. 
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
          * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
@@ -163,7 +339,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: async (bbox?: Array<number>, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listOswFiles: async (bbox?: Array<number>, name?: string, version?: string, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/osw`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -194,6 +370,18 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
 
             if (bbox) {
                 localVarQueryParameter['bbox'] = bbox;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (version !== undefined) {
+                localVarQueryParameter['version'] = version;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
             }
 
             if (osw_schema_version !== undefined) {
@@ -288,7 +476,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Initiates the confidence calculation of a tdeiRecordId as mentioned in the body
+         * Initiates the confidence calculation of a tdei_record_id as mentioned in the body
          * @summary Initiate Confidence calculation for a dataset
          * @param {OSWConfidenceRequest} body 
          * @param {*} [options] Override http request option.
@@ -348,19 +536,19 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Summary of the formatting request
-         * @summary Fetch status of format request
-         * @param {string} jobId jobId for format request
+         * Downloads the converted file from the job
+         * @summary Downloads the converted file
+         * @param {string} job_id job_id for format request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswFormatStatus: async (jobId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'jobId' is not null or undefined
-            if (jobId === null || jobId === undefined) {
-                throw new RequiredError('jobId','Required parameter jobId was null or undefined when calling oswFormatStatus.');
+        oswFormatDownload: async (job_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'job_id' is not null or undefined
+            if (job_id === null || job_id === undefined) {
+                throw new RequiredError('job_id','Required parameter job_id was null or undefined when calling oswFormatDownload.');
             }
-            const localVarPath = `/api/v1/osw/format/status/{jobId}`
-                .replace(`{${"jobId"}}`, encodeURIComponent(String(jobId)));
+            const localVarPath = `/api/v1/osw/convert/download/{job_id}`
+                .replace(`{${"job_id"}}`, encodeURIComponent(String(job_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -405,8 +593,65 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Upload a file and request for formatting on demand
-         * @summary Request osw format on demand
+         * Summary of the formatting request
+         * @summary Fetch status of format request
+         * @param {string} job_id job_id for format request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswFormatStatus: async (job_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'job_id' is not null or undefined
+            if (job_id === null || job_id === undefined) {
+                throw new RequiredError('job_id','Required parameter job_id was null or undefined when calling oswFormatStatus.');
+            }
+            const localVarPath = `/api/v1/osw/convert/status/{job_id}`
+                .replace(`{${"job_id"}}`, encodeURIComponent(String(job_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKey required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("x-api-key")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+            }
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * upload a file and request for file format conversion
+         * @summary OSW reformatting on demand
          * @param {string} source 
          * @param {string} target 
          * @param {Blob} file 
@@ -426,7 +671,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             if (file === null || file === undefined) {
                 throw new RequiredError('file','Required parameter file was null or undefined when calling oswOnDemandFormatForm.');
             }
-            const localVarPath = `/api/v1/osw/format/upload`;
+            const localVarPath = `/api/v1/osw/convert`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -487,23 +732,166 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * This path allows a user to upload or create a new osw file. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-         * @summary Path used to upload/create a new osw data file.
-         * @param {OswUpload} meta 
-         * @param {Blob} file 
+         * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.
+         * @summary Publishes the OSW dataset for the tdei_record_id
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadOswFileForm: async (meta: OswUpload, file: Blob, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'meta' is not null or undefined
-            if (meta === null || meta === undefined) {
-                throw new RequiredError('meta','Required parameter meta was null or undefined when calling uploadOswFileForm.');
+        publishOswFile: async (tdei_record_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tdei_record_id' is not null or undefined
+            if (tdei_record_id === null || tdei_record_id === undefined) {
+                throw new RequiredError('tdei_record_id','Required parameter tdei_record_id was null or undefined when calling publishOswFile.');
             }
-            // verify required parameter 'file' is not null or undefined
-            if (file === null || file === undefined) {
-                throw new RequiredError('file','Required parameter file was null or undefined when calling uploadOswFileForm.');
+            const localVarPath = `/api/v1/osw/publish/{tdei_record_id}`
+                .replace(`{${"tdei_record_id"}}`, encodeURIComponent(String(tdei_record_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
             }
-            const localVarPath = `/api/v1/osw`;
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKey required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("x-api-key")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+            }
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
+         * @summary upload a pre-release of OSW dataset.
+         * @param {Blob} dataset 
+         * @param {Blob} metadata 
+         * @param {Blob} changeset 
+         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadOswFileForm: async (dataset: Blob, metadata: Blob, changeset: Blob, tdei_project_group_id: string, tdei_service_id: string, derived_from_dataset_id?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'dataset' is not null or undefined
+            if (dataset === null || dataset === undefined) {
+                throw new RequiredError('dataset','Required parameter dataset was null or undefined when calling uploadOswFileForm.');
+            }
+            // verify required parameter 'metadata' is not null or undefined
+            if (metadata === null || metadata === undefined) {
+                throw new RequiredError('metadata','Required parameter metadata was null or undefined when calling uploadOswFileForm.');
+            }
+            // verify required parameter 'changeset' is not null or undefined
+            if (changeset === null || changeset === undefined) {
+                throw new RequiredError('changeset','Required parameter changeset was null or undefined when calling uploadOswFileForm.');
+            }
+            // verify required parameter 'tdei_project_group_id' is not null or undefined
+            if (tdei_project_group_id === null || tdei_project_group_id === undefined) {
+                throw new RequiredError('tdei_project_group_id','Required parameter tdei_project_group_id was null or undefined when calling uploadOswFileForm.');
+            }
+            // verify required parameter 'tdei_service_id' is not null or undefined
+            if (tdei_service_id === null || tdei_service_id === undefined) {
+                throw new RequiredError('tdei_service_id','Required parameter tdei_service_id was null or undefined when calling uploadOswFileForm.');
+            }
+            const localVarPath = `/api/v1/osw/upload/{tdei_project_group_id}/{tdei_service_id}`
+                .replace(`{${"tdei_project_group_id"}}`, encodeURIComponent(String(tdei_project_group_id)))
+                .replace(`{${"tdei_service_id"}}`, encodeURIComponent(String(tdei_service_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (derived_from_dataset_id !== undefined) {
+                localVarQueryParameter['derived_from_dataset_id'] = derived_from_dataset_id;
+            }
+
+
+            if (dataset !== undefined) { 
+                localVarFormParams.append('dataset', dataset as any);
+            }
+
+            if (metadata !== undefined) { 
+                localVarFormParams.append('metadata', metadata as any);
+            }
+
+            if (changeset !== undefined) { 
+                localVarFormParams.append('changeset', changeset as any);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id associated with validation job.
+         * @summary Validates the osw dataset.
+         * @param {Blob} dataset 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        validateOswFileForm: async (dataset: Blob, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'dataset' is not null or undefined
+            if (dataset === null || dataset === undefined) {
+                throw new RequiredError('dataset','Required parameter dataset was null or undefined when calling validateOswFileForm.');
+            }
+            const localVarPath = `/api/v1/osw/validate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -525,12 +913,8 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             }
 
 
-            if (meta !== undefined) { 
-                localVarFormParams.append('meta', meta as any);
-            }
-
-            if (file !== undefined) { 
-                localVarFormParams.append('file', file as any);
+            if (dataset !== undefined) { 
+                localVarFormParams.append('dataset', dataset as any);
             }
 
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
@@ -563,22 +947,22 @@ export const OSWApiFp = function(configuration?: Configuration) {
         /**
          * Fetches the status of confidence request job.
          * @summary Get the status of confidence request
-         * @param {string} jobId jobId for confidence request
+         * @param {string} job_id job_id for confidence request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOSWConfidenceStatus(jobId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<OSWConfidenceStatus>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).getOSWConfidenceStatus(jobId, options);
+        async getOSWConfidenceStatus(job_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<OSWConfidenceStatus>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).getOSWConfidenceStatus(job_id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
         /**
-         * returns a specific osw file identified by the tdei_record_id
-         * @summary returns a geojson osw file by default, can request for different format using 'format' querystring
+         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * @summary downloads the OSW files as zip
          * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
-         * @param {string} [format] File format to download.
+         * @param {string} [format] File format to download. Default to osw
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -590,9 +974,54 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * This endpoint returns a list of url to gzip'd geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a polygon (bounding box), minimum confidence level and osw version. This endpoint can be used by an application developer to obtain a list of osw files in the TDEI system meeting the specified criteria.
+         * Fetches the status of an published record
+         * @summary Get the publish status
+         * @param {string} tdei_record_id tdei_record_id received during upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPublishStatus(tdei_record_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<RecordPublishStatus>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).getPublishStatus(tdei_record_id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Fetches the status of an uploaded record
+         * @summary Get the upload status
+         * @param {string} tdei_record_id tdei_record_id received during upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUploadStatus(tdei_record_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<RecordUploadStatus>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).getUploadStatus(tdei_record_id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Fetches the status of the validation request job.
+         * @summary Get the status of the validation request.
+         * @param {string} job_id job_id for the validation request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getValidateStatus(job_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<ValidationStatus>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).getValidateStatus(job_id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This endpoint returns a list of url to zipped geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and osw version.
          * @summary List osw files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+         * @param {string} [name] dataset name or title.
+         * @param {string} [version] dataset version.
+         * @param {string} [status] request for files based on status. The default setting is &#x27;published&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs. 
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
          * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
@@ -602,8 +1031,8 @@ export const OSWApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listOswFiles(bbox?: Array<number>, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OswDownload>>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).listOswFiles(bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options);
+        async listOswFiles(bbox?: Array<number>, name?: string, version?: string, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OswDownload>>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -623,7 +1052,7 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Initiates the confidence calculation of a tdeiRecordId as mentioned in the body
+         * Initiates the confidence calculation of a tdei_record_id as mentioned in the body
          * @summary Initiate Confidence calculation for a dataset
          * @param {OSWConfidenceRequest} body 
          * @param {*} [options] Override http request option.
@@ -637,22 +1066,36 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Summary of the formatting request
-         * @summary Fetch status of format request
-         * @param {string} jobId jobId for format request
+         * Downloads the converted file from the job
+         * @summary Downloads the converted file
+         * @param {string} job_id job_id for format request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswFormatStatus(jobId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<OSWFormatStatusResponse>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswFormatStatus(jobId, options);
+        async oswFormatDownload(job_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswFormatDownload(job_id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
         /**
-         * Upload a file and request for formatting on demand
-         * @summary Request osw format on demand
+         * Summary of the formatting request
+         * @summary Fetch status of format request
+         * @param {string} job_id job_id for format request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async oswFormatStatus(job_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<OSWFormatStatusResponse>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswFormatStatus(job_id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * upload a file and request for file format conversion
+         * @summary OSW reformatting on demand
          * @param {string} source 
          * @param {string} target 
          * @param {Blob} file 
@@ -667,15 +1110,47 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * This path allows a user to upload or create a new osw file. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-         * @summary Path used to upload/create a new osw data file.
-         * @param {OswUpload} meta 
-         * @param {Blob} file 
+         * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.
+         * @summary Publishes the OSW dataset for the tdei_record_id
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadOswFileForm(meta: OswUpload, file: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).uploadOswFileForm(meta, file, options);
+        async publishOswFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).publishOswFile(tdei_record_id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
+         * @summary upload a pre-release of OSW dataset.
+         * @param {Blob} dataset 
+         * @param {Blob} metadata 
+         * @param {Blob} changeset 
+         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async uploadOswFileForm(dataset: Blob, metadata: Blob, changeset: Blob, tdei_project_group_id: string, tdei_service_id: string, derived_from_dataset_id?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id associated with validation job.
+         * @summary Validates the osw dataset.
+         * @param {Blob} dataset 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async validateOswFileForm(dataset: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).validateOswFileForm(dataset, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -693,18 +1168,18 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * Fetches the status of confidence request job.
          * @summary Get the status of confidence request
-         * @param {string} jobId jobId for confidence request
+         * @param {string} job_id job_id for confidence request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOSWConfidenceStatus(jobId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<OSWConfidenceStatus>> {
-            return OSWApiFp(configuration).getOSWConfidenceStatus(jobId, options).then((request) => request(axios, basePath));
+        async getOSWConfidenceStatus(job_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<OSWConfidenceStatus>> {
+            return OSWApiFp(configuration).getOSWConfidenceStatus(job_id, options).then((request) => request(axios, basePath));
         },
         /**
-         * returns a specific osw file identified by the tdei_record_id
-         * @summary returns a geojson osw file by default, can request for different format using 'format' querystring
+         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * @summary downloads the OSW files as zip
          * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
-         * @param {string} [format] File format to download.
+         * @param {string} [format] File format to download. Default to osw
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -712,9 +1187,42 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).getOswFile(tdei_record_id, format, options).then((request) => request(axios, basePath));
         },
         /**
-         * This endpoint returns a list of url to gzip'd geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a polygon (bounding box), minimum confidence level and osw version. This endpoint can be used by an application developer to obtain a list of osw files in the TDEI system meeting the specified criteria.
+         * Fetches the status of an published record
+         * @summary Get the publish status
+         * @param {string} tdei_record_id tdei_record_id received during upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPublishStatus(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<RecordPublishStatus>> {
+            return OSWApiFp(configuration).getPublishStatus(tdei_record_id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Fetches the status of an uploaded record
+         * @summary Get the upload status
+         * @param {string} tdei_record_id tdei_record_id received during upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUploadStatus(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<RecordUploadStatus>> {
+            return OSWApiFp(configuration).getUploadStatus(tdei_record_id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Fetches the status of the validation request job.
+         * @summary Get the status of the validation request.
+         * @param {string} job_id job_id for the validation request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getValidateStatus(job_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<ValidationStatus>> {
+            return OSWApiFp(configuration).getValidateStatus(job_id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint returns a list of url to zipped geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and osw version.
          * @summary List osw files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+         * @param {string} [name] dataset name or title.
+         * @param {string} [version] dataset version.
+         * @param {string} [status] request for files based on status. The default setting is &#x27;published&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs. 
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
          * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
@@ -724,8 +1232,8 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listOswFiles(bbox?: Array<number>, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>> {
-            return OSWApiFp(configuration).listOswFiles(bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(axios, basePath));
+        async listOswFiles(bbox?: Array<number>, name?: string, version?: string, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>> {
+            return OSWApiFp(configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(axios, basePath));
         },
         /**
          * Lists the versions of OSW data which are supported by TDEI.
@@ -737,7 +1245,7 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).listOswVersions(options).then((request) => request(axios, basePath));
         },
         /**
-         * Initiates the confidence calculation of a tdeiRecordId as mentioned in the body
+         * Initiates the confidence calculation of a tdei_record_id as mentioned in the body
          * @summary Initiate Confidence calculation for a dataset
          * @param {OSWConfidenceRequest} body 
          * @param {*} [options] Override http request option.
@@ -747,18 +1255,28 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).oswConfidenceCalculate(body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Summary of the formatting request
-         * @summary Fetch status of format request
-         * @param {string} jobId jobId for format request
+         * Downloads the converted file from the job
+         * @summary Downloads the converted file
+         * @param {string} job_id job_id for format request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswFormatStatus(jobId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<OSWFormatStatusResponse>> {
-            return OSWApiFp(configuration).oswFormatStatus(jobId, options).then((request) => request(axios, basePath));
+        async oswFormatDownload(job_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return OSWApiFp(configuration).oswFormatDownload(job_id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Upload a file and request for formatting on demand
-         * @summary Request osw format on demand
+         * Summary of the formatting request
+         * @summary Fetch status of format request
+         * @param {string} job_id job_id for format request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async oswFormatStatus(job_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<OSWFormatStatusResponse>> {
+            return OSWApiFp(configuration).oswFormatStatus(job_id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * upload a file and request for file format conversion
+         * @summary OSW reformatting on demand
          * @param {string} source 
          * @param {string} target 
          * @param {Blob} file 
@@ -769,15 +1287,39 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).oswOnDemandFormatForm(source, target, file, options).then((request) => request(axios, basePath));
         },
         /**
-         * This path allows a user to upload or create a new osw file. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-         * @summary Path used to upload/create a new osw data file.
-         * @param {OswUpload} meta 
-         * @param {Blob} file 
+         * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.
+         * @summary Publishes the OSW dataset for the tdei_record_id
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadOswFileForm(meta: OswUpload, file: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
-            return OSWApiFp(configuration).uploadOswFileForm(meta, file, options).then((request) => request(axios, basePath));
+        async publishOswFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return OSWApiFp(configuration).publishOswFile(tdei_record_id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
+         * @summary upload a pre-release of OSW dataset.
+         * @param {Blob} dataset 
+         * @param {Blob} metadata 
+         * @param {Blob} changeset 
+         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async uploadOswFileForm(dataset: Blob, metadata: Blob, changeset: Blob, tdei_project_group_id: string, tdei_service_id: string, derived_from_dataset_id?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return OSWApiFp(configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id associated with validation job.
+         * @summary Validates the osw dataset.
+         * @param {Blob} dataset 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async validateOswFileForm(dataset: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return OSWApiFp(configuration).validateOswFileForm(dataset, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -792,19 +1334,19 @@ export class OSWApi extends BaseAPI {
     /**
      * Fetches the status of confidence request job.
      * @summary Get the status of confidence request
-     * @param {string} jobId jobId for confidence request
+     * @param {string} job_id job_id for confidence request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async getOSWConfidenceStatus(jobId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<OSWConfidenceStatus>> {
-        return OSWApiFp(this.configuration).getOSWConfidenceStatus(jobId, options).then((request) => request(this.axios, this.basePath));
+    public async getOSWConfidenceStatus(job_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<OSWConfidenceStatus>> {
+        return OSWApiFp(this.configuration).getOSWConfidenceStatus(job_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * returns a specific osw file identified by the tdei_record_id
-     * @summary returns a geojson osw file by default, can request for different format using 'format' querystring
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * @summary downloads the OSW files as zip
      * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
-     * @param {string} [format] File format to download.
+     * @param {string} [format] File format to download. Default to osw
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
@@ -813,9 +1355,45 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).getOswFile(tdei_record_id, format, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * This endpoint returns a list of url to gzip'd geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a polygon (bounding box), minimum confidence level and osw version. This endpoint can be used by an application developer to obtain a list of osw files in the TDEI system meeting the specified criteria.
+     * Fetches the status of an published record
+     * @summary Get the publish status
+     * @param {string} tdei_record_id tdei_record_id received during upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    public async getPublishStatus(tdei_record_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<RecordPublishStatus>> {
+        return OSWApiFp(this.configuration).getPublishStatus(tdei_record_id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Fetches the status of an uploaded record
+     * @summary Get the upload status
+     * @param {string} tdei_record_id tdei_record_id received during upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    public async getUploadStatus(tdei_record_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<RecordUploadStatus>> {
+        return OSWApiFp(this.configuration).getUploadStatus(tdei_record_id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Fetches the status of the validation request job.
+     * @summary Get the status of the validation request.
+     * @param {string} job_id job_id for the validation request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    public async getValidateStatus(job_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<ValidationStatus>> {
+        return OSWApiFp(this.configuration).getValidateStatus(job_id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This endpoint returns a list of url to zipped geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and osw version.
      * @summary List osw files meeting criteria.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+     * @param {string} [name] dataset name or title.
+     * @param {string} [version] dataset version.
+     * @param {string} [status] request for files based on status. The default setting is &#x27;published&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs. 
      * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
      * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
@@ -826,8 +1404,8 @@ export class OSWApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async listOswFiles(bbox?: Array<number>, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<OswDownload>>> {
-        return OSWApiFp(this.configuration).listOswFiles(bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
+    public async listOswFiles(bbox?: Array<number>, name?: string, version?: string, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<OswDownload>>> {
+        return OSWApiFp(this.configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Lists the versions of OSW data which are supported by TDEI.
@@ -840,7 +1418,7 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).listOswVersions(options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Initiates the confidence calculation of a tdeiRecordId as mentioned in the body
+     * Initiates the confidence calculation of a tdei_record_id as mentioned in the body
      * @summary Initiate Confidence calculation for a dataset
      * @param {OSWConfidenceRequest} body 
      * @param {*} [options] Override http request option.
@@ -851,19 +1429,30 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).oswConfidenceCalculate(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Summary of the formatting request
-     * @summary Fetch status of format request
-     * @param {string} jobId jobId for format request
+     * Downloads the converted file from the job
+     * @summary Downloads the converted file
+     * @param {string} job_id job_id for format request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async oswFormatStatus(jobId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<OSWFormatStatusResponse>> {
-        return OSWApiFp(this.configuration).oswFormatStatus(jobId, options).then((request) => request(this.axios, this.basePath));
+    public async oswFormatDownload(job_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return OSWApiFp(this.configuration).oswFormatDownload(job_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Upload a file and request for formatting on demand
-     * @summary Request osw format on demand
+     * Summary of the formatting request
+     * @summary Fetch status of format request
+     * @param {string} job_id job_id for format request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    public async oswFormatStatus(job_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<OSWFormatStatusResponse>> {
+        return OSWApiFp(this.configuration).oswFormatStatus(job_id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * upload a file and request for file format conversion
+     * @summary OSW reformatting on demand
      * @param {string} source 
      * @param {string} target 
      * @param {Blob} file 
@@ -875,15 +1464,41 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).oswOnDemandFormatForm(source, target, file, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * This path allows a user to upload or create a new osw file. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-     * @summary Path used to upload/create a new osw data file.
-     * @param {OswUpload} meta 
-     * @param {Blob} file 
+     * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.
+     * @summary Publishes the OSW dataset for the tdei_record_id
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async uploadOswFileForm(meta: OswUpload, file: Blob, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
-        return OSWApiFp(this.configuration).uploadOswFileForm(meta, file, options).then((request) => request(this.axios, this.basePath));
+    public async publishOswFile(tdei_record_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return OSWApiFp(this.configuration).publishOswFile(tdei_record_id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
+     * @summary upload a pre-release of OSW dataset.
+     * @param {Blob} dataset 
+     * @param {Blob} metadata 
+     * @param {Blob} changeset 
+     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    public async uploadOswFileForm(dataset: Blob, metadata: Blob, changeset: Blob, tdei_project_group_id: string, tdei_service_id: string, derived_from_dataset_id?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return OSWApiFp(this.configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id associated with validation job.
+     * @summary Validates the osw dataset.
+     * @param {Blob} dataset 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    public async validateOswFileForm(dataset: Blob, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return OSWApiFp(this.configuration).validateOswFileForm(dataset, options).then((request) => request(this.axios, this.basePath));
     }
 }

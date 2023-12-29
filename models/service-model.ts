@@ -12,67 +12,59 @@
  * Do not edit the class manually.
  */
 
+import { GeoJsonObject } from './geo-json-object';
 import {
-    
+    GeoJsonObject,
 } from ".";
 
 /**
  * 
  *
  * @export
- * @interface OSWFormatStatusResponse
+ * @interface ServiceModel
  */
-export interface OSWFormatStatusResponse {
+export interface ServiceModel {
 
     /**
-     * job_id of the format request
-     *
-     * @type {string}
-     * @memberof OSWFormatStatusResponse
+     * @type {GeoJsonObject}
+     * @memberof ServiceModel
      */
-    job_id: string;
+    polygon: GeoJsonObject;
 
     /**
-     * Status of the format request
+     * name of the gtfs-flex service.
      *
      * @type {string}
-     * @memberof OSWFormatStatusResponse
+     * @memberof ServiceModel
+     * @example Hyde Shuttle
      */
-    status?: OSWFormatStatusResponseStatusEnum;
+    service_name: string;
 
     /**
-     * Any error message during failure
+     * tdei assigned service id. Necessary to ensure that service ids are unique.
      *
      * @type {string}
-     * @memberof OSWFormatStatusResponse
+     * @memberof ServiceModel
+     * @example 5e991e7a-5c16-4ebf-ad31-3a3625bcca10
      */
-    message?: string;
+    tdei_service_id: string;
 
     /**
-     * URL to download the converted file
+     * Service type
      *
      * @type {string}
-     * @memberof OSWFormatStatusResponse
+     * @memberof ServiceModel
      */
-    downloadUrl?: string;
-
-    /**
-     * type of conversion
-     *
-     * @type {string}
-     * @memberof OSWFormatStatusResponse
-     * @example osw-osm
-     */
-    conversion?: string;
+    service_type?: ServiceModelServiceTypeEnum;
 }
 
 /**
  * @export
  * @enum {string}
  */
-export enum OSWFormatStatusResponseStatusEnum {
-    Started = 'started',
-    Completed = 'completed',
-    Failed = 'failed'
+export enum ServiceModelServiceTypeEnum {
+    Flex = 'flex',
+    Pathways = 'pathways',
+    Osw = 'osw'
 }
 
