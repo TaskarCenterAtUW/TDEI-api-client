@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { Geometry } from './geometry';
+// import { Geometry } from './geometry';
 import {
     Geometry,
 } from ".";

@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { GtfsPathwaysUpload } from './gtfs-pathways-upload';
+// import { GtfsPathwaysUpload } from './gtfs-pathways-upload';
 import {
     GtfsPathwaysUpload,
 } from ".";

@@ -9,29 +9,33 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { GeoJsonObject } from './geo-json-object';
+import { GeoJsonObject } from ".";
 /**
+ *
  *
  * @export
  * @interface Station
  */
 export interface Station {
     /**
-     *
      * @type {GeoJsonObject}
      * @memberof Station
      */
     polygon: GeoJsonObject;
     /**
      * tdei assigned station id. Necessary to ensure that station ids are unique.
+     *
      * @type {string}
      * @memberof Station
+     * @example 4e991e7a-5c16-4ebf-ad31-3a3625bcca10
      */
     tdei_station_id: string;
     /**
      * typically the station_name used in GTFS files
+     *
      * @type {string}
      * @memberof Station
+     * @example Northgate
      */
     station_name: string;
 }

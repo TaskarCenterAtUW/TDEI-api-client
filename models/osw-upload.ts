@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { GeoJsonObject } from './geo-json-object';
+// import { GeoJsonObject } from './geo-json-object';
 import {
     GeoJsonObject,
 } from ".";

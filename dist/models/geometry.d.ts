@@ -11,18 +11,17 @@
  */
 /**
  *
+ *
  * @export
  * @interface Geometry
  */
 export interface Geometry {
     /**
-     *
      * @type {string}
      * @memberof Geometry
      */
     type?: string;
     /**
-     *
      * @type {Array<Array<Array<number>>>}
      * @memberof Geometry
      */

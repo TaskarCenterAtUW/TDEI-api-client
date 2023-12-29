@@ -12,8 +12,15 @@
 import { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 import { RequestArgs, BaseAPI } from '../base';
+import { OSWConfidenceRequest } from '../models';
+import { OSWConfidenceResponse } from '../models';
+import { OSWConfidenceStatus } from '../models';
+import { OSWFormatResponse } from '../models';
+import { OSWFormatStatusResponse } from '../models';
 import { OswDownload } from '../models';
-import { OswUpload } from '../models';
+import { RecordPublishStatus } from '../models';
+import { RecordUploadStatus } from '../models';
+import { ValidationStatus } from '../models';
 import { VersionList } from '../models';
 /**
  * OSWApi - axios parameter creator
@@ -21,17 +28,53 @@ import { VersionList } from '../models';
  */
 export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
-     * returns a specific osw file identified by the tdei_record_id
-     * @summary returns a geojson osw file
-     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * Fetches the status of confidence request job.
+     * @summary Get the status of confidence request
+     * @param {string} job_id job_id for confidence request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getOswFile: (tdei_record_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    getOSWConfidenceStatus: (job_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * This endpoint returns a list of url to gzip'd geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a polygon (bounding box), minimum confidence level and osw version. This endpoint can be used by an application developer to obtain a list of osw files in the TDEI system meeting the specified criteria.
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * @summary downloads the OSW files as zip
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {string} [format] File format to download. Default to osw
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getOswFile: (tdei_record_id: string, format?: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Fetches the status of an published record
+     * @summary Get the publish status
+     * @param {string} tdei_record_id tdei_record_id received during upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPublishStatus: (tdei_record_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Fetches the status of an uploaded record
+     * @summary Get the upload status
+     * @param {string} tdei_record_id tdei_record_id received during upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUploadStatus: (tdei_record_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Fetches the status of the validation request job.
+     * @summary Get the status of the validation request.
+     * @param {string} job_id job_id for the validation request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getValidateStatus: (job_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * This endpoint returns a list of url to zipped geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and osw version.
      * @summary List osw files meeting criteria.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+     * @param {string} [name] dataset name or title.
+     * @param {string} [version] dataset version.
+     * @param {string} [status] request for files based on status. The default setting is &#x27;published&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
      * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
      * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
@@ -41,7 +84,7 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOswFiles: (bbox?: Array<number>, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    listOswFiles: (bbox?: Array<number>, name?: string, version?: string, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
@@ -50,14 +93,68 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      */
     listOswVersions: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * This path allows a user to upload or create a new osw file. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-     * @summary Path used to upload/create a new osw data file.
-     * @param {OswUpload} meta
+     * Initiates the confidence calculation of a tdei_record_id as mentioned in the body
+     * @summary Initiate Confidence calculation for a dataset
+     * @param {OSWConfidenceRequest} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswConfidenceCalculate: (body: OSWConfidenceRequest, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Downloads the converted file from the job
+     * @summary Downloads the converted file
+     * @param {string} job_id job_id for format request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswFormatDownload: (job_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Summary of the formatting request
+     * @summary Fetch status of format request
+     * @param {string} job_id job_id for format request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswFormatStatus: (job_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * upload a file and request for file format conversion
+     * @summary OSW reformatting on demand
+     * @param {string} source
+     * @param {string} target
      * @param {Blob} file
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    uploadOswFileForm: (meta: OswUpload, file: Blob, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    oswOnDemandFormatForm: (source: string, target: string, file: Blob, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.
+     * @summary Publishes the OSW dataset for the tdei_record_id
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    publishOswFile: (tdei_record_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
+     * @summary upload a pre-release of OSW dataset.
+     * @param {Blob} dataset
+     * @param {Blob} metadata
+     * @param {Blob} changeset
+     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    uploadOswFileForm: (dataset: Blob, metadata: Blob, changeset: Blob, tdei_project_group_id: string, tdei_service_id: string, derived_from_dataset_id?: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id associated with validation job.
+     * @summary Validates the osw dataset.
+     * @param {Blob} dataset
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    validateOswFileForm: (dataset: Blob, options?: AxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * OSWApi - functional programming interface
@@ -65,17 +162,53 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
  */
 export declare const OSWApiFp: (configuration?: Configuration) => {
     /**
-     * returns a specific osw file identified by the tdei_record_id
-     * @summary returns a geojson osw file
-     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * Fetches the status of confidence request job.
+     * @summary Get the status of confidence request
+     * @param {string} job_id job_id for confidence request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getOswFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
+    getOSWConfidenceStatus(job_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<OSWConfidenceStatus>>>;
     /**
-     * This endpoint returns a list of url to gzip'd geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a polygon (bounding box), minimum confidence level and osw version. This endpoint can be used by an application developer to obtain a list of osw files in the TDEI system meeting the specified criteria.
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * @summary downloads the OSW files as zip
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {string} [format] File format to download. Default to osw
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getOswFile(tdei_record_id: string, format?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
+    /**
+     * Fetches the status of an published record
+     * @summary Get the publish status
+     * @param {string} tdei_record_id tdei_record_id received during upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPublishStatus(tdei_record_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<RecordPublishStatus>>>;
+    /**
+     * Fetches the status of an uploaded record
+     * @summary Get the upload status
+     * @param {string} tdei_record_id tdei_record_id received during upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUploadStatus(tdei_record_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<RecordUploadStatus>>>;
+    /**
+     * Fetches the status of the validation request job.
+     * @summary Get the status of the validation request.
+     * @param {string} job_id job_id for the validation request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getValidateStatus(job_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<ValidationStatus>>>;
+    /**
+     * This endpoint returns a list of url to zipped geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and osw version.
      * @summary List osw files meeting criteria.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+     * @param {string} [name] dataset name or title.
+     * @param {string} [version] dataset version.
+     * @param {string} [status] request for files based on status. The default setting is &#x27;published&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
      * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
      * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
@@ -85,7 +218,7 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOswFiles(bbox?: Array<number>, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OswDownload>>>>;
+    listOswFiles(bbox?: Array<number>, name?: string, version?: string, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OswDownload>>>>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
@@ -94,14 +227,68 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      */
     listOswVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<VersionList>>>;
     /**
-     * This path allows a user to upload or create a new osw file. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-     * @summary Path used to upload/create a new osw data file.
-     * @param {OswUpload} meta
+     * Initiates the confidence calculation of a tdei_record_id as mentioned in the body
+     * @summary Initiate Confidence calculation for a dataset
+     * @param {OSWConfidenceRequest} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswConfidenceCalculate(body: OSWConfidenceRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<OSWConfidenceResponse>>>;
+    /**
+     * Downloads the converted file from the job
+     * @summary Downloads the converted file
+     * @param {string} job_id job_id for format request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswFormatDownload(job_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
+    /**
+     * Summary of the formatting request
+     * @summary Fetch status of format request
+     * @param {string} job_id job_id for format request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswFormatStatus(job_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<OSWFormatStatusResponse>>>;
+    /**
+     * upload a file and request for file format conversion
+     * @summary OSW reformatting on demand
+     * @param {string} source
+     * @param {string} target
      * @param {Blob} file
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    uploadOswFileForm(meta: OswUpload, file: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    oswOnDemandFormatForm(source: string, target: string, file: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<OSWFormatResponse>>>;
+    /**
+     * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.
+     * @summary Publishes the OSW dataset for the tdei_record_id
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    publishOswFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    /**
+     * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
+     * @summary upload a pre-release of OSW dataset.
+     * @param {Blob} dataset
+     * @param {Blob} metadata
+     * @param {Blob} changeset
+     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    uploadOswFileForm(dataset: Blob, metadata: Blob, changeset: Blob, tdei_project_group_id: string, tdei_service_id: string, derived_from_dataset_id?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
+    /**
+     * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id associated with validation job.
+     * @summary Validates the osw dataset.
+     * @param {Blob} dataset
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    validateOswFileForm(dataset: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
 };
 /**
  * OSWApi - factory interface
@@ -109,17 +296,53 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
  */
 export declare const OSWApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
-     * returns a specific osw file identified by the tdei_record_id
-     * @summary returns a geojson osw file
-     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * Fetches the status of confidence request job.
+     * @summary Get the status of confidence request
+     * @param {string} job_id job_id for confidence request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getOswFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
+    getOSWConfidenceStatus(job_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<OSWConfidenceStatus>>;
     /**
-     * This endpoint returns a list of url to gzip'd geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a polygon (bounding box), minimum confidence level and osw version. This endpoint can be used by an application developer to obtain a list of osw files in the TDEI system meeting the specified criteria.
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * @summary downloads the OSW files as zip
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {string} [format] File format to download. Default to osw
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getOswFile(tdei_record_id: string, format?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
+    /**
+     * Fetches the status of an published record
+     * @summary Get the publish status
+     * @param {string} tdei_record_id tdei_record_id received during upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPublishStatus(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<RecordPublishStatus>>;
+    /**
+     * Fetches the status of an uploaded record
+     * @summary Get the upload status
+     * @param {string} tdei_record_id tdei_record_id received during upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUploadStatus(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<RecordUploadStatus>>;
+    /**
+     * Fetches the status of the validation request job.
+     * @summary Get the status of the validation request.
+     * @param {string} job_id job_id for the validation request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getValidateStatus(job_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<ValidationStatus>>;
+    /**
+     * This endpoint returns a list of url to zipped geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and osw version.
      * @summary List osw files meeting criteria.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+     * @param {string} [name] dataset name or title.
+     * @param {string} [version] dataset version.
+     * @param {string} [status] request for files based on status. The default setting is &#x27;published&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
      * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
      * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
@@ -129,7 +352,7 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOswFiles(bbox?: Array<number>, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>>;
+    listOswFiles(bbox?: Array<number>, name?: string, version?: string, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
@@ -138,14 +361,68 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      */
     listOswVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>>;
     /**
-     * This path allows a user to upload or create a new osw file. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-     * @summary Path used to upload/create a new osw data file.
-     * @param {OswUpload} meta
+     * Initiates the confidence calculation of a tdei_record_id as mentioned in the body
+     * @summary Initiate Confidence calculation for a dataset
+     * @param {OSWConfidenceRequest} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswConfidenceCalculate(body: OSWConfidenceRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<OSWConfidenceResponse>>;
+    /**
+     * Downloads the converted file from the job
+     * @summary Downloads the converted file
+     * @param {string} job_id job_id for format request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswFormatDownload(job_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
+    /**
+     * Summary of the formatting request
+     * @summary Fetch status of format request
+     * @param {string} job_id job_id for format request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswFormatStatus(job_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<OSWFormatStatusResponse>>;
+    /**
+     * upload a file and request for file format conversion
+     * @summary OSW reformatting on demand
+     * @param {string} source
+     * @param {string} target
      * @param {Blob} file
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    uploadOswFileForm(meta: OswUpload, file: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    oswOnDemandFormatForm(source: string, target: string, file: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<OSWFormatResponse>>;
+    /**
+     * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.
+     * @summary Publishes the OSW dataset for the tdei_record_id
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    publishOswFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
+     * @summary upload a pre-release of OSW dataset.
+     * @param {Blob} dataset
+     * @param {Blob} metadata
+     * @param {Blob} changeset
+     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    uploadOswFileForm(dataset: Blob, metadata: Blob, changeset: Blob, tdei_project_group_id: string, tdei_service_id: string, derived_from_dataset_id?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
+    /**
+     * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id associated with validation job.
+     * @summary Validates the osw dataset.
+     * @param {Blob} dataset
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    validateOswFileForm(dataset: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
 };
 /**
  * OSWApi - object-oriented interface
@@ -155,18 +432,58 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
  */
 export declare class OSWApi extends BaseAPI {
     /**
-     * returns a specific osw file identified by the tdei_record_id
-     * @summary returns a geojson osw file
-     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * Fetches the status of confidence request job.
+     * @summary Get the status of confidence request
+     * @param {string} job_id job_id for confidence request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    getOswFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
+    getOSWConfidenceStatus(job_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<OSWConfidenceStatus>>;
     /**
-     * This endpoint returns a list of url to gzip'd geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a polygon (bounding box), minimum confidence level and osw version. This endpoint can be used by an application developer to obtain a list of osw files in the TDEI system meeting the specified criteria.
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * @summary downloads the OSW files as zip
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {string} [format] File format to download. Default to osw
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    getOswFile(tdei_record_id: string, format?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
+    /**
+     * Fetches the status of an published record
+     * @summary Get the publish status
+     * @param {string} tdei_record_id tdei_record_id received during upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    getPublishStatus(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<RecordPublishStatus>>;
+    /**
+     * Fetches the status of an uploaded record
+     * @summary Get the upload status
+     * @param {string} tdei_record_id tdei_record_id received during upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    getUploadStatus(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<RecordUploadStatus>>;
+    /**
+     * Fetches the status of the validation request job.
+     * @summary Get the status of the validation request.
+     * @param {string} job_id job_id for the validation request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    getValidateStatus(job_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<ValidationStatus>>;
+    /**
+     * This endpoint returns a list of url to zipped geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and osw version.
      * @summary List osw files meeting criteria.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+     * @param {string} [name] dataset name or title.
+     * @param {string} [version] dataset version.
+     * @param {string} [status] request for files based on status. The default setting is &#x27;published&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
      * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
      * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
@@ -177,7 +494,7 @@ export declare class OSWApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    listOswFiles(bbox?: Array<number>, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>>;
+    listOswFiles(bbox?: Array<number>, name?: string, version?: string, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
@@ -187,13 +504,73 @@ export declare class OSWApi extends BaseAPI {
      */
     listOswVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>>;
     /**
-     * This path allows a user to upload or create a new osw file. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-     * @summary Path used to upload/create a new osw data file.
-     * @param {OswUpload} meta
+     * Initiates the confidence calculation of a tdei_record_id as mentioned in the body
+     * @summary Initiate Confidence calculation for a dataset
+     * @param {OSWConfidenceRequest} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    oswConfidenceCalculate(body: OSWConfidenceRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<OSWConfidenceResponse>>;
+    /**
+     * Downloads the converted file from the job
+     * @summary Downloads the converted file
+     * @param {string} job_id job_id for format request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    oswFormatDownload(job_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
+    /**
+     * Summary of the formatting request
+     * @summary Fetch status of format request
+     * @param {string} job_id job_id for format request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    oswFormatStatus(job_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<OSWFormatStatusResponse>>;
+    /**
+     * upload a file and request for file format conversion
+     * @summary OSW reformatting on demand
+     * @param {string} source
+     * @param {string} target
      * @param {Blob} file
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    uploadOswFileForm(meta: OswUpload, file: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    oswOnDemandFormatForm(source: string, target: string, file: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<OSWFormatResponse>>;
+    /**
+     * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.
+     * @summary Publishes the OSW dataset for the tdei_record_id
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    publishOswFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
+     * @summary upload a pre-release of OSW dataset.
+     * @param {Blob} dataset
+     * @param {Blob} metadata
+     * @param {Blob} changeset
+     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    uploadOswFileForm(dataset: Blob, metadata: Blob, changeset: Blob, tdei_project_group_id: string, tdei_service_id: string, derived_from_dataset_id?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
+    /**
+     * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id associated with validation job.
+     * @summary Validates the osw dataset.
+     * @param {Blob} dataset
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    validateOswFileForm(dataset: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
 }

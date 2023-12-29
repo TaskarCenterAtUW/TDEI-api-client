@@ -20,6 +20,7 @@ export interface ConfigurationParameters {
 export declare class Configuration {
     /**
      * parameter for apiKey security
+     *
      * @param name security name
      * @memberof Configuration
      */
@@ -40,6 +41,7 @@ export declare class Configuration {
     password?: string;
     /**
      * parameter for oauth2 security
+     *
      * @param name security name
      * @param scopes oauth2 scope
      * @memberof Configuration

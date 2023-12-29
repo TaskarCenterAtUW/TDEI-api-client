@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { VersionSpec } from './version-spec';
+// import { VersionSpec } from './version-spec';
 import {
     VersionSpec,
 } from ".";

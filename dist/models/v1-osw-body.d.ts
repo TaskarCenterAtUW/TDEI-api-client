@@ -9,21 +9,20 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { OswUpload } from './osw-upload';
+import { OswUpload } from ".";
 /**
+ *
  *
  * @export
  * @interface V1OswBody
  */
 export interface V1OswBody {
     /**
-     *
      * @type {OswUpload}
      * @memberof V1OswBody
      */
     meta: OswUpload;
     /**
-     *
      * @type {Blob}
      * @memberof V1OswBody
      */

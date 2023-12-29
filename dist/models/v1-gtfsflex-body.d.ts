@@ -9,21 +9,20 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { GtfsFlexUpload } from './gtfs-flex-upload';
+import { GtfsFlexUpload } from ".";
 /**
+ *
  *
  * @export
  * @interface V1GtfsflexBody
  */
 export interface V1GtfsflexBody {
     /**
-     *
      * @type {GtfsFlexUpload}
      * @memberof V1GtfsflexBody
      */
     meta: GtfsFlexUpload;
     /**
-     *
      * @type {Blob}
      * @memberof V1GtfsflexBody
      */

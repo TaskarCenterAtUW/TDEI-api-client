@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { OswUpload } from './osw-upload';
+// import { OswUpload } from './osw-upload';
 import {
     OswUpload,
 } from ".";

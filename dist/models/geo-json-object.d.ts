@@ -9,30 +9,29 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Feature } from './feature';
+import { Feature } from ".";
 /**
  * geo-json polygon
+ *
  * @export
  * @interface GeoJsonObject
  */
 export interface GeoJsonObject {
     /**
-     *
      * @type {string}
      * @memberof GeoJsonObject
      */
     type?: GeoJsonObjectTypeEnum;
     /**
-     *
      * @type {Array<Feature>}
      * @memberof GeoJsonObject
      */
     features?: Array<Feature>;
 }
 /**
-    * @export
-    * @enum {string}
-    */
+ * @export
+ * @enum {string}
+ */
 export declare enum GeoJsonObjectTypeEnum {
     FeatureCollection = "FeatureCollection"
 }

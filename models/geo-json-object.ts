@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { Feature } from './feature';
+// import { Feature } from './feature';
 import {
     Feature,
 } from ".";
