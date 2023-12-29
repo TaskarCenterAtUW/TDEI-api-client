@@ -25,13 +25,13 @@ import {
 export interface OSWConfidenceStatus {
 
     /**
-     * jobId of the confidence request
+     * job_id of the confidence request
      *
      * @type {number}
      * @memberof OSWConfidenceStatus
      * @example 1
      */
-    jobId?: number;
+    job_id?: number;
 
     /**
      * Confidence of the record

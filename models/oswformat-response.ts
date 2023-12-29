@@ -25,12 +25,12 @@ import {
 export interface OSWFormatResponse {
 
     /**
-     * jobId of the format request
+     * job_id of the format request
      *
      * @type {string}
      * @memberof OSWFormatResponse
      */
-    jobId?: string;
+    job_id?: string;
 
     /**
      * the url to fetch the status of the job
