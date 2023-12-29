@@ -31,14 +31,14 @@ export interface OSWConfidenceResponse {
      * @memberof OSWConfidenceResponse
      * @example 5e991e7a-5c16-4ebf-ad31-3a3625bcca10
      */
-    tdeiRecordId?: string;
+    tdei_record_id?: string;
 
     /**
-     * jobId of the confidence request
+     * job_id of the confidence request
      *
      * @type {number}
      * @memberof OSWConfidenceResponse
      * @example 1
      */
-    jobId?: number;
+    job_id?: number;
 }
