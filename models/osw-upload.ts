@@ -26,13 +26,36 @@ import {
 export interface OswUpload {
 
     /**
-     * tdei-assigned project group id. Represented as UUID. Project Group ids can be retrieved using the /api/v1/project-group path.
+     * Dataset name or Title that this data is known by
      *
      * @type {string}
      * @memberof OswUpload
-     * @example 4e991e7a-5c16-4ebf-ad31-3a3625bcca10
      */
-    tdei_project_group_id: string;
+    name: string;
+
+    /**
+     * Free text description of the data
+     *
+     * @type {string}
+     * @memberof OswUpload
+     */
+    description?: string;
+
+    /**
+     * Dataset version
+     *
+     * @type {string}
+     * @memberof OswUpload
+     */
+    version: string;
+
+    /**
+     * Custom structured JSON metadata
+     *
+     * @type {any}
+     * @memberof OswUpload
+     */
+    custom_metadata?: any;
 
     /**
      * Description of who data was collected by. See Best Practices document for information on how to format this string.
@@ -61,13 +84,22 @@ export interface OswUpload {
     collection_method: OswUploadCollectionMethodEnum;
 
     /**
-     * Date of publication of the file
+     * date from which this file is valid
      *
      * @type {string}
      * @memberof OswUpload
-     * @example 2023-03-02T04:22:42.493Z
+     * @example 2023-02-10T09:30Z
      */
-    publication_date?: string;
+    valid_from: string;
+
+    /**
+     * date until which this data is valid
+     *
+     * @type {string}
+     * @memberof OswUpload
+     * @example 2023-02-10T09:30Z
+     */
+    valid_to?: string;
 
     /**
      * Description of data source or sources from which the data was collected. See Best Practices document for information on how to format this string.
@@ -81,7 +113,7 @@ export interface OswUpload {
      * @type {GeoJsonObject}
      * @memberof OswUpload
      */
-    polygon: GeoJsonObject;
+    dataset_area: GeoJsonObject;
 
     /**
      * version of osw schema this file conforms to

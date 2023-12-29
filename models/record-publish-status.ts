@@ -17,34 +17,42 @@ import {
 } from ".";
 
 /**
- * Includes gtfs project group information and a tdei project group id.
+ * Describes the status of an publish record
  *
  * @export
- * @interface ProjectGroup
+ * @interface RecordPublishStatus
  */
-export interface ProjectGroup {
+export interface RecordPublishStatus {
 
     /**
-     * geo-json polygon.
-     *
-     * @type {any}
-     * @memberof ProjectGroup
-     */
-    polygon: any;
-
-    /**
-     * tdei-assigned project group id. Necessary to ensure that project group ids are unique. Represented as a UUID.
+     * Published record id
      *
      * @type {string}
-     * @memberof ProjectGroup
+     * @memberof RecordPublishStatus
      */
-    tdei_project_group_id?: string;
+    tdei_record_id: string;
 
     /**
-     * project_group_name name. For transit agencies, typically the agency name used in GTFS releases.
+     * Current stage of the file processing
      *
      * @type {string}
-     * @memberof ProjectGroup
+     * @memberof RecordPublishStatus
      */
-    project_group_name: string;
+    stage?: string;
+
+    /**
+     * Current status of processing. (failed, in progress or complete). If failed, shows the failure reason
+     *
+     * @type {string}
+     * @memberof RecordPublishStatus
+     */
+    status?: string;
+
+    /**
+     * True, represents record published Successfully, else False.
+     *
+     * @type {boolean}
+     * @memberof RecordPublishStatus
+     */
+    published?: boolean;
 }

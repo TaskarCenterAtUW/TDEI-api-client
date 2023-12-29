@@ -17,34 +17,50 @@ import {
 } from ".";
 
 /**
- * Includes gtfs project group information and a tdei project group id.
+ * 
  *
  * @export
- * @interface ProjectGroup
+ * @interface OswConvertBody
  */
-export interface ProjectGroup {
+export interface OswConvertBody {
 
     /**
-     * geo-json polygon.
-     *
-     * @type {any}
-     * @memberof ProjectGroup
-     */
-    polygon: any;
-
-    /**
-     * tdei-assigned project group id. Necessary to ensure that project group ids are unique. Represented as a UUID.
+     * Source format
      *
      * @type {string}
-     * @memberof ProjectGroup
+     * @memberof OswConvertBody
      */
-    tdei_project_group_id?: string;
+    source: OswConvertBodySourceEnum;
 
     /**
-     * project_group_name name. For transit agencies, typically the agency name used in GTFS releases.
+     * Target format
      *
      * @type {string}
-     * @memberof ProjectGroup
+     * @memberof OswConvertBody
      */
-    project_group_name: string;
+    target: OswConvertBodyTargetEnum;
+
+    /**
+     * @type {Blob}
+     * @memberof OswConvertBody
+     */
+    file: Blob;
 }
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum OswConvertBodySourceEnum {
+    Osm = 'osm',
+    Osw = 'osw'
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum OswConvertBodyTargetEnum {
+    Osm = 'osm',
+    Osw = 'osw'
+}
+
