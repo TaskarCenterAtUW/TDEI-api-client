@@ -3,12 +3,10 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+        while (_) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -84,7 +82,7 @@ var base_1 = require("../base");
  * OSWApi - axios parameter creator
  * @export
  */
-var OSWApiAxiosParamCreator = function (configuration) {
+exports.OSWApiAxiosParamCreator = function (configuration) {
     var _this = this;
     return {
         /**
@@ -106,7 +104,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
                                 throw new base_1.RequiredError('job_id', 'Required parameter job_id was null or undefined when calling getOSWConfidenceStatus.');
                             }
                             localVarPath = "/api/v1/osw/confidence/status/{job_id}"
-                                .replace("{".concat("job_id", "}"), encodeURIComponent(String(job_id)));
+                                .replace("{" + "job_id" + "}", encodeURIComponent(String(job_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -182,7 +180,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
                                 throw new base_1.RequiredError('tdei_record_id', 'Required parameter tdei_record_id was null or undefined when calling getOswFile.');
                             }
                             localVarPath = "/api/v1/osw/{tdei_record_id}"
-                                .replace("{".concat("tdei_record_id", "}"), encodeURIComponent(String(tdei_record_id)));
+                                .replace("{" + "tdei_record_id" + "}", encodeURIComponent(String(tdei_record_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -260,7 +258,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
                                 throw new base_1.RequiredError('tdei_record_id', 'Required parameter tdei_record_id was null or undefined when calling getPublishStatus.');
                             }
                             localVarPath = "/api/v1/osw/publish/status/{tdei_record_id}"
-                                .replace("{".concat("tdei_record_id", "}"), encodeURIComponent(String(tdei_record_id)));
+                                .replace("{" + "tdei_record_id" + "}", encodeURIComponent(String(tdei_record_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -335,7 +333,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
                                 throw new base_1.RequiredError('tdei_record_id', 'Required parameter tdei_record_id was null or undefined when calling getUploadStatus.');
                             }
                             localVarPath = "/api/v1/osw/upload/status/{tdei_record_id}"
-                                .replace("{".concat("tdei_record_id", "}"), encodeURIComponent(String(tdei_record_id)));
+                                .replace("{" + "tdei_record_id" + "}", encodeURIComponent(String(tdei_record_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -410,7 +408,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
                                 throw new base_1.RequiredError('job_id', 'Required parameter job_id was null or undefined when calling getValidateStatus.');
                             }
                             localVarPath = "/api/v1/osw/validate/status/{job_id}"
-                                .replace("{".concat("job_id", "}"), encodeURIComponent(String(job_id)));
+                                .replace("{" + "job_id" + "}", encodeURIComponent(String(job_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -740,7 +738,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
                                 throw new base_1.RequiredError('job_id', 'Required parameter job_id was null or undefined when calling oswFormatDownload.');
                             }
                             localVarPath = "/api/v1/osw/convert/download/{job_id}"
-                                .replace("{".concat("job_id", "}"), encodeURIComponent(String(job_id)));
+                                .replace("{" + "job_id" + "}", encodeURIComponent(String(job_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -815,7 +813,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
                                 throw new base_1.RequiredError('job_id', 'Required parameter job_id was null or undefined when calling oswFormatStatus.');
                             }
                             localVarPath = "/api/v1/osw/convert/status/{job_id}"
-                                .replace("{".concat("job_id", "}"), encodeURIComponent(String(job_id)));
+                                .replace("{" + "job_id" + "}", encodeURIComponent(String(job_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -986,7 +984,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
                                 throw new base_1.RequiredError('tdei_record_id', 'Required parameter tdei_record_id was null or undefined when calling publishOswFile.');
                             }
                             localVarPath = "/api/v1/osw/publish/{tdei_record_id}"
-                                .replace("{".concat("tdei_record_id", "}"), encodeURIComponent(String(tdei_record_id)));
+                                .replace("{" + "tdei_record_id" + "}", encodeURIComponent(String(tdei_record_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -1082,8 +1080,8 @@ var OSWApiAxiosParamCreator = function (configuration) {
                                 throw new base_1.RequiredError('tdei_service_id', 'Required parameter tdei_service_id was null or undefined when calling uploadOswFileForm.');
                             }
                             localVarPath = "/api/v1/osw/upload/{tdei_project_group_id}/{tdei_service_id}"
-                                .replace("{".concat("tdei_project_group_id", "}"), encodeURIComponent(String(tdei_project_group_id)))
-                                .replace("{".concat("tdei_service_id", "}"), encodeURIComponent(String(tdei_service_id)));
+                                .replace("{" + "tdei_project_group_id" + "}", encodeURIComponent(String(tdei_project_group_id)))
+                                .replace("{" + "tdei_service_id" + "}", encodeURIComponent(String(tdei_service_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -1206,12 +1204,11 @@ var OSWApiAxiosParamCreator = function (configuration) {
         },
     };
 };
-exports.OSWApiAxiosParamCreator = OSWApiAxiosParamCreator;
 /**
  * OSWApi - functional programming interface
  * @export
  */
-var OSWApiFp = function (configuration) {
+exports.OSWApiFp = function (configuration) {
     return {
         /**
          * Fetches the status of confidence request job.
@@ -1225,7 +1222,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).getOSWConfidenceStatus(job_id, options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).getOSWConfidenceStatus(job_id, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1251,7 +1248,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).getOswFile(tdei_record_id, format, options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).getOswFile(tdei_record_id, format, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1276,7 +1273,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).getPublishStatus(tdei_record_id, options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).getPublishStatus(tdei_record_id, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1301,7 +1298,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).getUploadStatus(tdei_record_id, options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).getUploadStatus(tdei_record_id, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1326,7 +1323,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).getValidateStatus(job_id, options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).getValidateStatus(job_id, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1360,7 +1357,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1384,7 +1381,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).listOswVersions(options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).listOswVersions(options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1409,7 +1406,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswConfidenceCalculate(body, options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).oswConfidenceCalculate(body, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1434,7 +1431,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswFormatDownload(job_id, options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).oswFormatDownload(job_id, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1459,7 +1456,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswFormatStatus(job_id, options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).oswFormatStatus(job_id, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1486,7 +1483,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswOnDemandFormatForm(source, target, file, options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).oswOnDemandFormatForm(source, target, file, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1511,7 +1508,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).publishOswFile(tdei_record_id, options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).publishOswFile(tdei_record_id, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1541,7 +1538,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1566,7 +1563,7 @@ var OSWApiFp = function (configuration) {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).validateOswFileForm(dataset, options)];
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).validateOswFileForm(dataset, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1581,12 +1578,11 @@ var OSWApiFp = function (configuration) {
         },
     };
 };
-exports.OSWApiFp = OSWApiFp;
 /**
  * OSWApi - factory interface
  * @export
  */
-var OSWApiFactory = function (configuration, basePath, axios) {
+exports.OSWApiFactory = function (configuration, basePath, axios) {
     return {
         /**
          * Fetches the status of confidence request job.
@@ -1598,7 +1594,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         getOSWConfidenceStatus: function (job_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).getOSWConfidenceStatus(job_id, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).getOSWConfidenceStatus(job_id, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1613,7 +1609,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         getOswFile: function (tdei_record_id, format, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).getOswFile(tdei_record_id, format, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).getOswFile(tdei_record_id, format, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1627,7 +1623,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         getPublishStatus: function (tdei_record_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).getPublishStatus(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).getPublishStatus(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1641,7 +1637,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         getUploadStatus: function (tdei_record_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).getUploadStatus(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).getUploadStatus(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1655,7 +1651,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         getValidateStatus: function (job_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).getValidateStatus(job_id, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).getValidateStatus(job_id, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1678,7 +1674,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         listOswFiles: function (bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1691,7 +1687,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         listOswVersions: function (options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).listOswVersions(options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).listOswVersions(options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1705,7 +1701,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         oswConfidenceCalculate: function (body, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswConfidenceCalculate(body, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).oswConfidenceCalculate(body, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1719,7 +1715,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         oswFormatDownload: function (job_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswFormatDownload(job_id, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).oswFormatDownload(job_id, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1733,7 +1729,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         oswFormatStatus: function (job_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswFormatStatus(job_id, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).oswFormatStatus(job_id, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1749,7 +1745,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         oswOnDemandFormatForm: function (source, target, file, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswOnDemandFormatForm(source, target, file, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).oswOnDemandFormatForm(source, target, file, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1763,7 +1759,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         publishOswFile: function (tdei_record_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).publishOswFile(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).publishOswFile(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1782,7 +1778,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         uploadOswFileForm: function (dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1796,13 +1792,12 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         validateOswFileForm: function (dataset, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).validateOswFileForm(dataset, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.OSWApiFp(configuration).validateOswFileForm(dataset, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
     };
 };
-exports.OSWApiFactory = OSWApiFactory;
 /**
  * OSWApi - object-oriented interface
  * @export
@@ -1826,7 +1821,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).getOSWConfidenceStatus(job_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).getOSWConfidenceStatus(job_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -1843,7 +1838,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).getOswFile(tdei_record_id, format, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).getOswFile(tdei_record_id, format, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -1859,7 +1854,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).getPublishStatus(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).getPublishStatus(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -1875,7 +1870,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).getUploadStatus(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).getUploadStatus(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -1891,7 +1886,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).getValidateStatus(job_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).getValidateStatus(job_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -1916,7 +1911,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -1931,7 +1926,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).listOswVersions(options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).listOswVersions(options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -1947,7 +1942,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswConfidenceCalculate(body, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).oswConfidenceCalculate(body, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -1963,7 +1958,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswFormatDownload(job_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).oswFormatDownload(job_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -1979,7 +1974,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswFormatStatus(job_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).oswFormatStatus(job_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -1997,7 +1992,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswOnDemandFormatForm(source, target, file, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).oswOnDemandFormatForm(source, target, file, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -2013,7 +2008,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).publishOswFile(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).publishOswFile(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -2034,7 +2029,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -2050,7 +2045,7 @@ var OSWApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).validateOswFileForm(dataset, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).validateOswFileForm(dataset, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
