@@ -10,7 +10,7 @@ SWAGGER_URL="https://raw.githubusercontent.com/TaskarCenterAtUW/TDEI-ExternalAPI
 OUTPUT_DIR="."
 
 # Run the Swagger Codegen command
-java -jar swagger-codegen-cli.jar generate -i "$SWAGGER_URL" -l typescript-axios --additional-properties modelPropertyNaming='original' npmName='tdei-client' npmVersion="$new_version" -o "$OUTPUT_DIR"
+java -jar swagger-codegen-cli.jar generate -i "$1" -l typescript-axios --additional-properties modelPropertyNaming='original' npmName='tdei-client' npmVersion="$new_version" -o "$OUTPUT_DIR"
 
 npm run build
 # curl --location 'https://generator3.swagger.io/api/generate' \
