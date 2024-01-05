@@ -17,34 +17,54 @@ import {
 } from ".";
 
 /**
- * Includes gtfs project group information and a tdei project group id.
+ * 
  *
  * @export
- * @interface ProjectGroup
+ * @interface ValidationStatus
  */
-export interface ProjectGroup {
+export interface ValidationStatus {
 
     /**
-     * geo-json polygon.
+     * job_id of the Validation request
      *
-     * @type {any}
-     * @memberof ProjectGroup
+     * @type {number}
+     * @memberof ValidationStatus
+     * @example 1
      */
-    polygon: any;
+    job_id?: number;
 
     /**
-     * tdei-assigned project group id. Necessary to ensure that project group ids are unique. Represented as a UUID.
-     *
-     * @type {string}
-     * @memberof ProjectGroup
-     */
-    tdei_project_group_id?: string;
-
-    /**
-     * project_group_name name. For transit agencies, typically the agency name used in GTFS releases.
+     * Validation result
      *
      * @type {string}
-     * @memberof ProjectGroup
+     * @memberof ValidationStatus
      */
-    project_group_name: string;
+    validation_result?: string;
+
+    /**
+     * Date time of the last update on status
+     *
+     * @type {string}
+     * @memberof ValidationStatus
+     * @example 2018-02-10T09:30Z
+     */
+    updated_at?: string;
+
+    /**
+     * status of the job
+     *
+     * @type {string}
+     * @memberof ValidationStatus
+     */
+    status?: ValidationStatusStatusEnum;
 }
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum ValidationStatusStatusEnum {
+    InProgress = 'in-progress',
+    Completed = 'completed'
+}
+
