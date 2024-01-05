@@ -11,27 +11,21 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
 import { GtfsPathwaysUpload } from './gtfs-pathways-upload';
-import {
-    GtfsPathwaysUpload,
-} from ".";
-
 /**
  * 
- *
  * @export
  * @interface V1GtfspathwaysBody
  */
 export interface V1GtfspathwaysBody {
-
     /**
+     * 
      * @type {GtfsPathwaysUpload}
      * @memberof V1GtfspathwaysBody
      */
     meta: GtfsPathwaysUpload;
-
     /**
+     * 
      * @type {Blob}
      * @memberof V1GtfspathwaysBody
      */

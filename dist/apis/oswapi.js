@@ -88,13 +88,89 @@ var OSWApiAxiosParamCreator = function (configuration) {
     var _this = this;
     return {
         /**
-         * returns a specific osw file identified by the tdei_record_id
-         * @summary returns a geojson osw file
-         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * Fetches the status of confidence request job.
+         * @summary Get the status of confidence request
+         * @param {string} job_id job_id for confidence request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOswFile: function (tdei_record_id, options) {
+        getOSWConfidenceStatus: function (job_id, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            // verify required parameter 'job_id' is not null or undefined
+                            if (job_id === null || job_id === undefined) {
+                                throw new base_1.RequiredError('job_id', 'Required parameter job_id was null or undefined when calling getOSWConfidenceStatus.');
+                            }
+                            localVarPath = "/api/v1/osw/confidence/status/{job_id}"
+                                .replace("{".concat("job_id", "}"), encodeURIComponent(String(job_id)));
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
+                        case 1:
+                            _a = _c.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
+                        case 3:
+                            _a = _c.sent();
+                            _c.label = 4;
+                        case 4:
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
+                        case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * @summary downloads the OSW files as zip
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {string} [format] File format to download. Default to osw
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOswFile: function (tdei_record_id, format, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
@@ -106,6 +182,84 @@ var OSWApiAxiosParamCreator = function (configuration) {
                                 throw new base_1.RequiredError('tdei_record_id', 'Required parameter tdei_record_id was null or undefined when calling getOswFile.');
                             }
                             localVarPath = "/api/v1/osw/{tdei_record_id}"
+                                .replace("{".concat("tdei_record_id", "}"), encodeURIComponent(String(tdei_record_id)));
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
+                        case 1:
+                            _a = _c.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
+                        case 3:
+                            _a = _c.sent();
+                            _c.label = 4;
+                        case 4:
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
+                        case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
+                            if (format !== undefined) {
+                                localVarQueryParameter['format'] = format;
+                            }
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Fetches the status of an published record
+         * @summary Get the publish status
+         * @param {string} tdei_record_id tdei_record_id received during upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPublishStatus: function (tdei_record_id, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            // verify required parameter 'tdei_record_id' is not null or undefined
+                            if (tdei_record_id === null || tdei_record_id === undefined) {
+                                throw new base_1.RequiredError('tdei_record_id', 'Required parameter tdei_record_id was null or undefined when calling getPublishStatus.');
+                            }
+                            localVarPath = "/api/v1/osw/publish/status/{tdei_record_id}"
                                 .replace("{".concat("tdei_record_id", "}"), encodeURIComponent(String(tdei_record_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
@@ -163,9 +317,162 @@ var OSWApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * This endpoint returns a list of url to gzip'd geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a polygon (bounding box), minimum confidence level and osw version. This endpoint can be used by an application developer to obtain a list of osw files in the TDEI system meeting the specified criteria.
+         * Fetches the status of an uploaded record
+         * @summary Get the upload status
+         * @param {string} tdei_record_id tdei_record_id received during upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUploadStatus: function (tdei_record_id, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            // verify required parameter 'tdei_record_id' is not null or undefined
+                            if (tdei_record_id === null || tdei_record_id === undefined) {
+                                throw new base_1.RequiredError('tdei_record_id', 'Required parameter tdei_record_id was null or undefined when calling getUploadStatus.');
+                            }
+                            localVarPath = "/api/v1/osw/upload/status/{tdei_record_id}"
+                                .replace("{".concat("tdei_record_id", "}"), encodeURIComponent(String(tdei_record_id)));
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
+                        case 1:
+                            _a = _c.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
+                        case 3:
+                            _a = _c.sent();
+                            _c.label = 4;
+                        case 4:
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
+                        case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Fetches the status of the validation request job.
+         * @summary Get the status of the validation request.
+         * @param {string} job_id job_id for the validation request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getValidateStatus: function (job_id, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            // verify required parameter 'job_id' is not null or undefined
+                            if (job_id === null || job_id === undefined) {
+                                throw new base_1.RequiredError('job_id', 'Required parameter job_id was null or undefined when calling getValidateStatus.');
+                            }
+                            localVarPath = "/api/v1/osw/validate/status/{job_id}"
+                                .replace("{".concat("job_id", "}"), encodeURIComponent(String(job_id)));
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
+                        case 1:
+                            _a = _c.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
+                        case 3:
+                            _a = _c.sent();
+                            _c.label = 4;
+                        case 4:
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
+                        case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * This endpoint returns a list of url to zipped geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and osw version.
          * @summary List osw files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+         * @param {string} [name] dataset name or title.
+         * @param {string} [version] dataset version.
+         * @param {string} [status] request for files based on status. The default setting is &#x27;published&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
          * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
@@ -175,7 +482,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: function (bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
+        listOswFiles: function (bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
@@ -222,6 +529,15 @@ var OSWApiAxiosParamCreator = function (configuration) {
                         case 10:
                             if (bbox) {
                                 localVarQueryParameter['bbox'] = bbox;
+                            }
+                            if (name !== undefined) {
+                                localVarQueryParameter['name'] = name;
+                            }
+                            if (version !== undefined) {
+                                localVarQueryParameter['version'] = version;
+                            }
+                            if (status !== undefined) {
+                                localVarQueryParameter['status'] = status;
                             }
                             if (osw_schema_version !== undefined) {
                                 localVarQueryParameter['osw_schema_version'] = osw_schema_version;
@@ -329,29 +645,445 @@ var OSWApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * This path allows a user to upload or create a new osw file. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-         * @summary Path used to upload/create a new osw data file.
-         * @param {OswUpload} meta
+         * Initiates the confidence calculation of a tdei_record_id as mentioned in the body
+         * @summary Initiate Confidence calculation for a dataset
+         * @param {OSWConfidenceRequest} body
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswConfidenceCalculate: function (body, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions, needsSerialization;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            // verify required parameter 'body' is not null or undefined
+                            if (body === null || body === undefined) {
+                                throw new base_1.RequiredError('body', 'Required parameter body was null or undefined when calling oswConfidenceCalculate.');
+                            }
+                            localVarPath = "/api/v1/osw/confidence/calculate";
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
+                        case 1:
+                            _a = _c.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
+                        case 3:
+                            _a = _c.sent();
+                            _c.label = 4;
+                        case 4:
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
+                        case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
+                            localVarHeaderParameter['Content-Type'] = 'application/json';
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+                            localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Downloads the converted file from the job
+         * @summary Downloads the converted file
+         * @param {string} job_id job_id for format request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswFormatDownload: function (job_id, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            // verify required parameter 'job_id' is not null or undefined
+                            if (job_id === null || job_id === undefined) {
+                                throw new base_1.RequiredError('job_id', 'Required parameter job_id was null or undefined when calling oswFormatDownload.');
+                            }
+                            localVarPath = "/api/v1/osw/convert/download/{job_id}"
+                                .replace("{".concat("job_id", "}"), encodeURIComponent(String(job_id)));
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
+                        case 1:
+                            _a = _c.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
+                        case 3:
+                            _a = _c.sent();
+                            _c.label = 4;
+                        case 4:
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
+                        case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Summary of the formatting request
+         * @summary Fetch status of format request
+         * @param {string} job_id job_id for format request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswFormatStatus: function (job_id, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            // verify required parameter 'job_id' is not null or undefined
+                            if (job_id === null || job_id === undefined) {
+                                throw new base_1.RequiredError('job_id', 'Required parameter job_id was null or undefined when calling oswFormatStatus.');
+                            }
+                            localVarPath = "/api/v1/osw/convert/status/{job_id}"
+                                .replace("{".concat("job_id", "}"), encodeURIComponent(String(job_id)));
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
+                        case 1:
+                            _a = _c.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
+                        case 3:
+                            _a = _c.sent();
+                            _c.label = 4;
+                        case 4:
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
+                        case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * upload a file and request for file format conversion
+         * @summary OSW reformatting on demand
+         * @param {string} source
+         * @param {string} target
          * @param {Blob} file
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadOswFileForm: function (meta, file, options) {
+        oswOnDemandFormatForm: function (source, target, file, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            // verify required parameter 'source' is not null or undefined
+                            if (source === null || source === undefined) {
+                                throw new base_1.RequiredError('source', 'Required parameter source was null or undefined when calling oswOnDemandFormatForm.');
+                            }
+                            // verify required parameter 'target' is not null or undefined
+                            if (target === null || target === undefined) {
+                                throw new base_1.RequiredError('target', 'Required parameter target was null or undefined when calling oswOnDemandFormatForm.');
+                            }
+                            // verify required parameter 'file' is not null or undefined
+                            if (file === null || file === undefined) {
+                                throw new base_1.RequiredError('file', 'Required parameter file was null or undefined when calling oswOnDemandFormatForm.');
+                            }
+                            localVarPath = "/api/v1/osw/convert";
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            localVarFormParams = new FormData();
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
+                        case 1:
+                            _a = _c.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
+                        case 3:
+                            _a = _c.sent();
+                            _c.label = 4;
+                        case 4:
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
+                        case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
+                            if (source !== undefined) {
+                                localVarFormParams.append('source', source);
+                            }
+                            if (target !== undefined) {
+                                localVarFormParams.append('target', target);
+                            }
+                            if (file !== undefined) {
+                                localVarFormParams.append('file', file);
+                            }
+                            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            localVarRequestOptions.data = localVarFormParams;
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.
+         * @summary Publishes the OSW dataset for the tdei_record_id
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        publishOswFile: function (tdei_record_id, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            // verify required parameter 'tdei_record_id' is not null or undefined
+                            if (tdei_record_id === null || tdei_record_id === undefined) {
+                                throw new base_1.RequiredError('tdei_record_id', 'Required parameter tdei_record_id was null or undefined when calling publishOswFile.');
+                            }
+                            localVarPath = "/api/v1/osw/publish/{tdei_record_id}"
+                                .replace("{".concat("tdei_record_id", "}"), encodeURIComponent(String(tdei_record_id)));
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
+                        case 1:
+                            _a = _c.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
+                        case 3:
+                            _a = _c.sent();
+                            _c.label = 4;
+                        case 4:
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
+                        case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
+         * @summary upload a pre-release of OSW dataset.
+         * @param {Blob} dataset
+         * @param {Blob} metadata
+         * @param {Blob} changeset
+         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadOswFileForm: function (dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, accessToken, _a, query, key, key, headersFromBaseOptions;
                 return __generator(this, function (_b) {
                     switch (_b.label) {
                         case 0:
-                            // verify required parameter 'meta' is not null or undefined
-                            if (meta === null || meta === undefined) {
-                                throw new base_1.RequiredError('meta', 'Required parameter meta was null or undefined when calling uploadOswFileForm.');
+                            // verify required parameter 'dataset' is not null or undefined
+                            if (dataset === null || dataset === undefined) {
+                                throw new base_1.RequiredError('dataset', 'Required parameter dataset was null or undefined when calling uploadOswFileForm.');
                             }
-                            // verify required parameter 'file' is not null or undefined
-                            if (file === null || file === undefined) {
-                                throw new base_1.RequiredError('file', 'Required parameter file was null or undefined when calling uploadOswFileForm.');
+                            // verify required parameter 'metadata' is not null or undefined
+                            if (metadata === null || metadata === undefined) {
+                                throw new base_1.RequiredError('metadata', 'Required parameter metadata was null or undefined when calling uploadOswFileForm.');
                             }
-                            localVarPath = "/api/v1/osw";
+                            // verify required parameter 'changeset' is not null or undefined
+                            if (changeset === null || changeset === undefined) {
+                                throw new base_1.RequiredError('changeset', 'Required parameter changeset was null or undefined when calling uploadOswFileForm.');
+                            }
+                            // verify required parameter 'tdei_project_group_id' is not null or undefined
+                            if (tdei_project_group_id === null || tdei_project_group_id === undefined) {
+                                throw new base_1.RequiredError('tdei_project_group_id', 'Required parameter tdei_project_group_id was null or undefined when calling uploadOswFileForm.');
+                            }
+                            // verify required parameter 'tdei_service_id' is not null or undefined
+                            if (tdei_service_id === null || tdei_service_id === undefined) {
+                                throw new base_1.RequiredError('tdei_service_id', 'Required parameter tdei_service_id was null or undefined when calling uploadOswFileForm.');
+                            }
+                            localVarPath = "/api/v1/osw/upload/{tdei_project_group_id}/{tdei_service_id}"
+                                .replace("{".concat("tdei_project_group_id", "}"), encodeURIComponent(String(tdei_project_group_id)))
+                                .replace("{".concat("tdei_service_id", "}"), encodeURIComponent(String(tdei_service_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -375,11 +1107,82 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
                             _b.label = 5;
                         case 5:
-                            if (meta !== undefined) {
-                                localVarFormParams.append('meta', meta);
+                            if (derived_from_dataset_id !== undefined) {
+                                localVarQueryParameter['derived_from_dataset_id'] = derived_from_dataset_id;
                             }
-                            if (file !== undefined) {
-                                localVarFormParams.append('file', file);
+                            if (dataset !== undefined) {
+                                localVarFormParams.append('dataset', dataset);
+                            }
+                            if (metadata !== undefined) {
+                                localVarFormParams.append('metadata', metadata);
+                            }
+                            if (changeset !== undefined) {
+                                localVarFormParams.append('changeset', changeset);
+                            }
+                            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            localVarRequestOptions.data = localVarFormParams;
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id associated with validation job.
+         * @summary Validates the osw dataset.
+         * @param {Blob} dataset
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        validateOswFileForm: function (dataset, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, accessToken, _a, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            // verify required parameter 'dataset' is not null or undefined
+                            if (dataset === null || dataset === undefined) {
+                                throw new base_1.RequiredError('dataset', 'Required parameter dataset was null or undefined when calling validateOswFileForm.');
+                            }
+                            localVarPath = "/api/v1/osw/validate";
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            localVarFormParams = new FormData();
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 1:
+                            _a = _b.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.accessToken];
+                        case 3:
+                            _a = _b.sent();
+                            _b.label = 4;
+                        case 4:
+                            accessToken = _a;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _b.label = 5;
+                        case 5:
+                            if (dataset !== undefined) {
+                                localVarFormParams.append('dataset', dataset);
                             }
                             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
                             query = new URLSearchParams(localVarUrlObj.search);
@@ -411,18 +1214,18 @@ exports.OSWApiAxiosParamCreator = OSWApiAxiosParamCreator;
 var OSWApiFp = function (configuration) {
     return {
         /**
-         * returns a specific osw file identified by the tdei_record_id
-         * @summary returns a geojson osw file
-         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * Fetches the status of confidence request job.
+         * @summary Get the status of confidence request
+         * @param {string} job_id job_id for confidence request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOswFile: function (tdei_record_id, options) {
+        getOSWConfidenceStatus: function (job_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).getOswFile(tdei_record_id, options)];
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).getOSWConfidenceStatus(job_id, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -436,9 +1239,113 @@ var OSWApiFp = function (configuration) {
             });
         },
         /**
-         * This endpoint returns a list of url to gzip'd geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a polygon (bounding box), minimum confidence level and osw version. This endpoint can be used by an application developer to obtain a list of osw files in the TDEI system meeting the specified criteria.
+         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * @summary downloads the OSW files as zip
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {string} [format] File format to download. Default to osw
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOswFile: function (tdei_record_id, format, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).getOswFile(tdei_record_id, format, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Fetches the status of an published record
+         * @summary Get the publish status
+         * @param {string} tdei_record_id tdei_record_id received during upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPublishStatus: function (tdei_record_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).getPublishStatus(tdei_record_id, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Fetches the status of an uploaded record
+         * @summary Get the upload status
+         * @param {string} tdei_record_id tdei_record_id received during upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUploadStatus: function (tdei_record_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).getUploadStatus(tdei_record_id, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Fetches the status of the validation request job.
+         * @summary Get the status of the validation request.
+         * @param {string} job_id job_id for the validation request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getValidateStatus: function (job_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).getValidateStatus(job_id, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * This endpoint returns a list of url to zipped geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and osw version.
          * @summary List osw files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+         * @param {string} [name] dataset name or title.
+         * @param {string} [version] dataset version.
+         * @param {string} [status] request for files based on status. The default setting is &#x27;published&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
          * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
@@ -448,12 +1355,12 @@ var OSWApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: function (bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
+        listOswFiles: function (bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).listOswFiles(bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -491,19 +1398,175 @@ var OSWApiFp = function (configuration) {
             });
         },
         /**
-         * This path allows a user to upload or create a new osw file. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-         * @summary Path used to upload/create a new osw data file.
-         * @param {OswUpload} meta
-         * @param {Blob} file
+         * Initiates the confidence calculation of a tdei_record_id as mentioned in the body
+         * @summary Initiate Confidence calculation for a dataset
+         * @param {OSWConfidenceRequest} body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadOswFileForm: function (meta, file, options) {
+        oswConfidenceCalculate: function (body, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).uploadOswFileForm(meta, file, options)];
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswConfidenceCalculate(body, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Downloads the converted file from the job
+         * @summary Downloads the converted file
+         * @param {string} job_id job_id for format request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswFormatDownload: function (job_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswFormatDownload(job_id, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Summary of the formatting request
+         * @summary Fetch status of format request
+         * @param {string} job_id job_id for format request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswFormatStatus: function (job_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswFormatStatus(job_id, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * upload a file and request for file format conversion
+         * @summary OSW reformatting on demand
+         * @param {string} source
+         * @param {string} target
+         * @param {Blob} file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswOnDemandFormatForm: function (source, target, file, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswOnDemandFormatForm(source, target, file, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.
+         * @summary Publishes the OSW dataset for the tdei_record_id
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        publishOswFile: function (tdei_record_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).publishOswFile(tdei_record_id, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
+         * @summary upload a pre-release of OSW dataset.
+         * @param {Blob} dataset
+         * @param {Blob} metadata
+         * @param {Blob} changeset
+         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadOswFileForm: function (dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id associated with validation job.
+         * @summary Validates the osw dataset.
+         * @param {Blob} dataset
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        validateOswFileForm: function (dataset, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).validateOswFileForm(dataset, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -526,23 +1589,83 @@ exports.OSWApiFp = OSWApiFp;
 var OSWApiFactory = function (configuration, basePath, axios) {
     return {
         /**
-         * returns a specific osw file identified by the tdei_record_id
-         * @summary returns a geojson osw file
-         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * Fetches the status of confidence request job.
+         * @summary Get the status of confidence request
+         * @param {string} job_id job_id for confidence request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOswFile: function (tdei_record_id, options) {
+        getOSWConfidenceStatus: function (job_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).getOswFile(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).getOSWConfidenceStatus(job_id, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
         /**
-         * This endpoint returns a list of url to gzip'd geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a polygon (bounding box), minimum confidence level and osw version. This endpoint can be used by an application developer to obtain a list of osw files in the TDEI system meeting the specified criteria.
+         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * @summary downloads the OSW files as zip
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {string} [format] File format to download. Default to osw
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOswFile: function (tdei_record_id, format, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).getOswFile(tdei_record_id, format, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         * Fetches the status of an published record
+         * @summary Get the publish status
+         * @param {string} tdei_record_id tdei_record_id received during upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPublishStatus: function (tdei_record_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).getPublishStatus(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         * Fetches the status of an uploaded record
+         * @summary Get the upload status
+         * @param {string} tdei_record_id tdei_record_id received during upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUploadStatus: function (tdei_record_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).getUploadStatus(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         * Fetches the status of the validation request job.
+         * @summary Get the status of the validation request.
+         * @param {string} job_id job_id for the validation request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getValidateStatus: function (job_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).getValidateStatus(job_id, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         * This endpoint returns a list of url to zipped geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and osw version.
          * @summary List osw files meeting criteria.
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+         * @param {string} [name] dataset name or title.
+         * @param {string} [version] dataset version.
+         * @param {string} [status] request for files based on status. The default setting is &#x27;published&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
          * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
          * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
@@ -552,10 +1675,10 @@ var OSWApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: function (bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
+        listOswFiles: function (bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).listOswFiles(bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -573,17 +1696,107 @@ var OSWApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * This path allows a user to upload or create a new osw file. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-         * @summary Path used to upload/create a new osw data file.
-         * @param {OswUpload} meta
+         * Initiates the confidence calculation of a tdei_record_id as mentioned in the body
+         * @summary Initiate Confidence calculation for a dataset
+         * @param {OSWConfidenceRequest} body
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswConfidenceCalculate: function (body, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswConfidenceCalculate(body, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         * Downloads the converted file from the job
+         * @summary Downloads the converted file
+         * @param {string} job_id job_id for format request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswFormatDownload: function (job_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswFormatDownload(job_id, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         * Summary of the formatting request
+         * @summary Fetch status of format request
+         * @param {string} job_id job_id for format request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswFormatStatus: function (job_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswFormatStatus(job_id, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         * upload a file and request for file format conversion
+         * @summary OSW reformatting on demand
+         * @param {string} source
+         * @param {string} target
          * @param {Blob} file
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadOswFileForm: function (meta, file, options) {
+        oswOnDemandFormatForm: function (source, target, file, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).uploadOswFileForm(meta, file, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswOnDemandFormatForm(source, target, file, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.
+         * @summary Publishes the OSW dataset for the tdei_record_id
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        publishOswFile: function (tdei_record_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).publishOswFile(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
+         * @summary upload a pre-release of OSW dataset.
+         * @param {Blob} dataset
+         * @param {Blob} metadata
+         * @param {Blob} changeset
+         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadOswFileForm: function (dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id associated with validation job.
+         * @summary Validates the osw dataset.
+         * @param {Blob} dataset
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        validateOswFileForm: function (dataset, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).validateOswFileForm(dataset, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -602,25 +1815,93 @@ var OSWApi = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
-     * returns a specific osw file identified by the tdei_record_id
-     * @summary returns a geojson osw file
-     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * Fetches the status of confidence request job.
+     * @summary Get the status of confidence request
+     * @param {string} job_id job_id for confidence request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    OSWApi.prototype.getOswFile = function (tdei_record_id, options) {
+    OSWApi.prototype.getOSWConfidenceStatus = function (job_id, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).getOswFile(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).getOSWConfidenceStatus(job_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
     /**
-     * This endpoint returns a list of url to gzip'd geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a polygon (bounding box), minimum confidence level and osw version. This endpoint can be used by an application developer to obtain a list of osw files in the TDEI system meeting the specified criteria.
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * @summary downloads the OSW files as zip
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {string} [format] File format to download. Default to osw
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.getOswFile = function (tdei_record_id, format, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).getOswFile(tdei_record_id, format, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * Fetches the status of an published record
+     * @summary Get the publish status
+     * @param {string} tdei_record_id tdei_record_id received during upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.getPublishStatus = function (tdei_record_id, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).getPublishStatus(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * Fetches the status of an uploaded record
+     * @summary Get the upload status
+     * @param {string} tdei_record_id tdei_record_id received during upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.getUploadStatus = function (tdei_record_id, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).getUploadStatus(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * Fetches the status of the validation request job.
+     * @summary Get the status of the validation request.
+     * @param {string} job_id job_id for the validation request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.getValidateStatus = function (job_id, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).getValidateStatus(job_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * This endpoint returns a list of url to zipped geojson files with osw data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and osw version.
      * @summary List osw files meeting criteria.
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+     * @param {string} [name] dataset name or title.
+     * @param {string} [version] dataset version.
+     * @param {string} [status] request for files based on status. The default setting is &#x27;published&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
      * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
      * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
      * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
@@ -631,11 +1912,11 @@ var OSWApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    OSWApi.prototype.listOswFiles = function (bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
+    OSWApi.prototype.listOswFiles = function (bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).listOswFiles(bbox, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
@@ -655,19 +1936,121 @@ var OSWApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * This path allows a user to upload or create a new osw file. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-     * @summary Path used to upload/create a new osw data file.
-     * @param {OswUpload} meta
+     * Initiates the confidence calculation of a tdei_record_id as mentioned in the body
+     * @summary Initiate Confidence calculation for a dataset
+     * @param {OSWConfidenceRequest} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.oswConfidenceCalculate = function (body, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswConfidenceCalculate(body, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * Downloads the converted file from the job
+     * @summary Downloads the converted file
+     * @param {string} job_id job_id for format request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.oswFormatDownload = function (job_id, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswFormatDownload(job_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * Summary of the formatting request
+     * @summary Fetch status of format request
+     * @param {string} job_id job_id for format request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.oswFormatStatus = function (job_id, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswFormatStatus(job_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * upload a file and request for file format conversion
+     * @summary OSW reformatting on demand
+     * @param {string} source
+     * @param {string} target
      * @param {Blob} file
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    OSWApi.prototype.uploadOswFileForm = function (meta, file, options) {
+    OSWApi.prototype.oswOnDemandFormatForm = function (source, target, file, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).uploadOswFileForm(meta, file, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswOnDemandFormatForm(source, target, file, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.
+     * @summary Publishes the OSW dataset for the tdei_record_id
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.publishOswFile = function (tdei_record_id, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).publishOswFile(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
+     * @summary upload a pre-release of OSW dataset.
+     * @param {Blob} dataset
+     * @param {Blob} metadata
+     * @param {Blob} changeset
+     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.uploadOswFileForm = function (dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id associated with validation job.
+     * @summary Validates the osw dataset.
+     * @param {Blob} dataset
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.validateOswFileForm = function (dataset, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).validateOswFileForm(dataset, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

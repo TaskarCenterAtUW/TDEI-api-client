@@ -11,26 +11,20 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import {
-    
-} from ".";
-
 /**
  * 
- *
  * @export
  * @interface Geometry
  */
 export interface Geometry {
-
     /**
+     * 
      * @type {string}
      * @memberof Geometry
      */
     type?: string;
-
     /**
+     * 
      * @type {Array<Array<Array<number>>>}
      * @memberof Geometry
      */

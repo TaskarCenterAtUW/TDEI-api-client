@@ -310,6 +310,91 @@ var GeneralApiAxiosParamCreator = function (configuration) {
                 });
             });
         },
+        /**
+         * Path used to retrieve the list of Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
+         * @summary List Services
+         * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
+         * @param {string} [service_type] Service type
+         * @param {number} [page_no] Integer, defaults to 1.
+         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServices: function (tdei_project_group_id, service_type, page_no, page_size, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            localVarPath = "/api/v1/services";
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
+                        case 1:
+                            _a = _c.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
+                        case 3:
+                            _a = _c.sent();
+                            _c.label = 4;
+                        case 4:
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
+                        case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
+                            if (tdei_project_group_id !== undefined) {
+                                localVarQueryParameter['tdei_project_group_id'] = tdei_project_group_id;
+                            }
+                            if (service_type !== undefined) {
+                                localVarQueryParameter['service_type'] = service_type;
+                            }
+                            if (page_no !== undefined) {
+                                localVarQueryParameter['page_no'] = page_no;
+                            }
+                            if (page_size !== undefined) {
+                                localVarQueryParameter['page_size'] = page_size;
+                            }
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
     };
 };
 exports.GeneralApiAxiosParamCreator = GeneralApiAxiosParamCreator;
@@ -394,6 +479,34 @@ var GeneralApiFp = function (configuration) {
                 });
             });
         },
+        /**
+         * Path used to retrieve the list of Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
+         * @summary List Services
+         * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
+         * @param {string} [service_type] Service type
+         * @param {number} [page_no] Integer, defaults to 1.
+         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServices: function (tdei_project_group_id, service_type, page_no, page_size, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.GeneralApiAxiosParamCreator)(configuration).listServices(tdei_project_group_id, service_type, page_no, page_size, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
     };
 };
 exports.GeneralApiFp = GeneralApiFp;
@@ -442,6 +555,23 @@ var GeneralApiFactory = function (configuration, basePath, axios) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     return [2 /*return*/, (0, exports.GeneralApiFp)(configuration).listProjectGroups(page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         * Path used to retrieve the list of Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
+         * @summary List Services
+         * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
+         * @param {string} [service_type] Service type
+         * @param {number} [page_no] Integer, defaults to 1.
+         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServices: function (tdei_project_group_id, service_type, page_no, page_size, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.GeneralApiFp)(configuration).listServices(tdei_project_group_id, service_type, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -504,6 +634,25 @@ var GeneralApi = /** @class */ (function (_super) {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).listProjectGroups(page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * Path used to retrieve the list of Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
+     * @summary List Services
+     * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
+     * @param {string} [service_type] Service type
+     * @param {number} [page_no] Integer, defaults to 1.
+     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GeneralApi
+     */
+    GeneralApi.prototype.listServices = function (tdei_project_group_id, service_type, page_no, page_size, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).listServices(tdei_project_group_id, service_type, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

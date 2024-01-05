@@ -11,38 +11,26 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import {
-    
-} from ".";
-
 /**
  * Specification for a data standards (GTFS-Flex, GTFS-Pathways, OSW) versions or TDEI API.
- *
  * @export
  * @interface VersionSpec
  */
 export interface VersionSpec {
-
     /**
      * version string
-     *
      * @type {string}
      * @memberof VersionSpec
      */
     version?: string;
-
     /**
      * link to the documentation
-     *
      * @type {string}
      * @memberof VersionSpec
      */
     documentation?: string;
-
     /**
      * link to the specification for the data standard
-     *
      * @type {string}
      * @memberof VersionSpec
      */

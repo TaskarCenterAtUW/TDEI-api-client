@@ -1,6 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OswDownloadDataSourceEnum = exports.OswDownloadCollectionMethodEnum = void 0;
+exports.OswDownloadDataSourceEnum = exports.OswDownloadCollectionMethodEnum = exports.OswDownloadStatusEnum = void 0;
+/**
+    * @export
+    * @enum {string}
+    */
+var OswDownloadStatusEnum;
+(function (OswDownloadStatusEnum) {
+    OswDownloadStatusEnum["PreRelease"] = "pre-release";
+    OswDownloadStatusEnum["Published"] = "published";
+})(OswDownloadStatusEnum = exports.OswDownloadStatusEnum || (exports.OswDownloadStatusEnum = {}));
 /**
     * @export
     * @enum {string}

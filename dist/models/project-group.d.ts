@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 /**
- * Includes gtfs agency information and a tdei agency id. Necessary as gtfs agency id may not be unique across agencies.
+ * Includes gtfs project group information and a tdei project group id.
  * @export
  * @interface ProjectGroup
  */

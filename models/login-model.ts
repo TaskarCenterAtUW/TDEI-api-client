@@ -11,26 +11,20 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import {
-    
-} from ".";
-
 /**
  * 
- *
  * @export
  * @interface LoginModel
  */
 export interface LoginModel {
-
     /**
+     * 
      * @type {string}
      * @memberof LoginModel
      */
     username?: string;
-
     /**
+     * 
      * @type {string}
      * @memberof LoginModel
      */

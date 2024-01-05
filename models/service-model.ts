@@ -11,47 +11,33 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
 import { GeoJsonObject } from './geo-json-object';
-import {
-    GeoJsonObject,
-} from ".";
-
 /**
  * 
- *
  * @export
  * @interface ServiceModel
  */
 export interface ServiceModel {
-
     /**
+     * 
      * @type {GeoJsonObject}
      * @memberof ServiceModel
      */
     polygon: GeoJsonObject;
-
     /**
      * name of the gtfs-flex service.
-     *
      * @type {string}
      * @memberof ServiceModel
-     * @example Hyde Shuttle
      */
     service_name: string;
-
     /**
      * tdei assigned service id. Necessary to ensure that service ids are unique.
-     *
      * @type {string}
      * @memberof ServiceModel
-     * @example 5e991e7a-5c16-4ebf-ad31-3a3625bcca10
      */
     tdei_service_id: string;
-
     /**
      * Service type
-     *
      * @type {string}
      * @memberof ServiceModel
      */
@@ -59,9 +45,9 @@ export interface ServiceModel {
 }
 
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export enum ServiceModelServiceTypeEnum {
     Flex = 'flex',
     Pathways = 'pathways',

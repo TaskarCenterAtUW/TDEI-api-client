@@ -264,87 +264,6 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
-         * @summary List GTFS Flex Services
-         * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listFlexServices: function (tdei_project_group_id, page_no, page_size, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
-                        case 0:
-                            localVarPath = "/api/v1/gtfs-flex/services";
-                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
-                            if (configuration) {
-                                baseOptions = configuration.baseOptions;
-                            }
-                            localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
-                            localVarHeaderParameter = {};
-                            localVarQueryParameter = {};
-                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
-                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
-                        case 1:
-                            _a = _c.sent();
-                            return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, configuration.apiKey];
-                        case 3:
-                            _a = _c.sent();
-                            _c.label = 4;
-                        case 4:
-                            localVarApiKeyValue = _a;
-                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _c.label = 5;
-                        case 5:
-                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
-                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
-                            return [4 /*yield*/, configuration.accessToken()];
-                        case 6:
-                            _b = _c.sent();
-                            return [3 /*break*/, 9];
-                        case 7: return [4 /*yield*/, configuration.accessToken];
-                        case 8:
-                            _b = _c.sent();
-                            _c.label = 9;
-                        case 9:
-                            accessToken = _b;
-                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-                            _c.label = 10;
-                        case 10:
-                            if (tdei_project_group_id !== undefined) {
-                                localVarQueryParameter['tdei_project_group_id'] = tdei_project_group_id;
-                            }
-                            if (page_no !== undefined) {
-                                localVarQueryParameter['page_no'] = page_no;
-                            }
-                            if (page_size !== undefined) {
-                                localVarQueryParameter['page_size'] = page_size;
-                            }
-                            query = new URLSearchParams(localVarUrlObj.search);
-                            for (key in localVarQueryParameter) {
-                                query.set(key, localVarQueryParameter[key]);
-                            }
-                            for (key in options.params) {
-                                query.set(key, options.params[key]);
-                            }
-                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                            return [2 /*return*/, {
-                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                                    options: localVarRequestOptions,
-                                }];
-                    }
-                });
-            });
-        },
-        /**
          * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.
          * @summary List available GTFS flex versions
          * @param {*} [options] Override http request option.
@@ -553,33 +472,6 @@ var GTFSFlexApiFp = function (configuration) {
             });
         },
         /**
-         * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
-         * @summary List GTFS Flex Services
-         * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listFlexServices: function (tdei_project_group_id, page_no, page_size, options) {
-            return __awaiter(this, void 0, void 0, function () {
-                var localVarAxiosArgs;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.GTFSFlexApiAxiosParamCreator)(configuration).listFlexServices(tdei_project_group_id, page_no, page_size, options)];
-                        case 1:
-                            localVarAxiosArgs = _a.sent();
-                            return [2 /*return*/, function (axios, basePath) {
-                                    if (axios === void 0) { axios = axios_1.default; }
-                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
-                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
-                                    return axios.request(axiosRequestArgs);
-                                }];
-                    }
-                });
-            });
-        },
-        /**
          * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.
          * @summary List available GTFS flex versions
          * @param {*} [options] Override http request option.
@@ -674,22 +566,6 @@ var GTFSFlexApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
-         * @summary List GTFS Flex Services
-         * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listFlexServices: function (tdei_project_group_id, page_no, page_size, options) {
-            return __awaiter(this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.GTFSFlexApiFp)(configuration).listFlexServices(tdei_project_group_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
-                });
-            });
-        },
-        /**
          * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.
          * @summary List available GTFS flex versions
          * @param {*} [options] Override http request option.
@@ -767,24 +643,6 @@ var GTFSFlexApi = /** @class */ (function (_super) {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2 /*return*/, (0, exports.GTFSFlexApiFp)(this.configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
-            });
-        });
-    };
-    /**
-     * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
-     * @summary List GTFS Flex Services
-     * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GTFSFlexApi
-     */
-    GTFSFlexApi.prototype.listFlexServices = function (tdei_project_group_id, page_no, page_size, options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.GTFSFlexApiFp)(this.configuration).listFlexServices(tdei_project_group_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

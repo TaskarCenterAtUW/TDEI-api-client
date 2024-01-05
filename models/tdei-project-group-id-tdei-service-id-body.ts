@@ -11,38 +11,26 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import {
-    
-} from ".";
-
 /**
  * 
- *
  * @export
  * @interface TdeiProjectGroupIdTdeiServiceIdBody
  */
 export interface TdeiProjectGroupIdTdeiServiceIdBody {
-
     /**
      * OSW file which is expected to be a zip file, internally has {nodes, edges, points}.geojson. If the extensions are present, then the zip file will have {nodes, edges, points}.extension.geojson files
-     *
      * @type {Blob}
      * @memberof TdeiProjectGroupIdTdeiServiceIdBody
      */
     dataset: Blob;
-
     /**
      * OSW dataset metadata information. see schema [OswUpload](#/components/schemas/OswUpload)
-     *
      * @type {Blob}
      * @memberof TdeiProjectGroupIdTdeiServiceIdBody
      */
     metadata: Blob;
-
     /**
      * changeset file captures changes to the sidewalk network that are captured in the OSW dataset
-     *
      * @type {Blob}
      * @memberof TdeiProjectGroupIdTdeiServiceIdBody
      */
