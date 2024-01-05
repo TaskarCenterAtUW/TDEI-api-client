@@ -14,6 +14,19 @@ java -jar swagger-codegen-cli.jar generate -i "$1" -l typescript-axios --additio
 
 npm install 
 npm run build
+
+# Specify the folder entry to remove from .gitignore
+folderEntryToRemove="dist"
+
+# Create a temporary file for the updated .gitignore
+tempGitignore=$(mktemp)
+
+# Use sed to remove the specified folder entry from .gitignore
+sed "/$folderEntryToRemove/d" .gitignore > "$tempGitignore"
+
+# Move the temporary file back to .gitignore
+mv "$tempGitignore" .gitignore
+
 # curl --location 'https://generator3.swagger.io/api/generate' \
 # --header 'Content-Type: application/json' \
 # --data '{
