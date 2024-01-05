@@ -11,39 +11,33 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
 import { Geometry } from './geometry';
-import {
-    Geometry,
-} from ".";
-
 /**
  * 
- *
  * @export
  * @interface Feature
  */
 export interface Feature {
-
     /**
+     * 
      * @type {string}
      * @memberof Feature
      */
     type?: FeatureTypeEnum;
-
     /**
+     * 
      * @type {string}
      * @memberof Feature
      */
     id?: string;
-
     /**
+     * 
      * @type {any}
      * @memberof Feature
      */
     properties?: any;
-
     /**
+     * 
      * @type {Geometry}
      * @memberof Feature
      */
@@ -51,9 +45,9 @@ export interface Feature {
 }
 
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export enum FeatureTypeEnum {
     Feature = 'Feature'
 }

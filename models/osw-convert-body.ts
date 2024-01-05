@@ -11,36 +11,26 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import {
-    
-} from ".";
-
 /**
  * 
- *
  * @export
  * @interface OswConvertBody
  */
 export interface OswConvertBody {
-
     /**
      * Source format
-     *
      * @type {string}
      * @memberof OswConvertBody
      */
     source: OswConvertBodySourceEnum;
-
     /**
      * Target format
-     *
      * @type {string}
      * @memberof OswConvertBody
      */
     target: OswConvertBodyTargetEnum;
-
     /**
+     * 
      * @type {Blob}
      * @memberof OswConvertBody
      */
@@ -48,17 +38,17 @@ export interface OswConvertBody {
 }
 
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export enum OswConvertBodySourceEnum {
     Osm = 'osm',
     Osw = 'osw'
 }
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export enum OswConvertBodyTargetEnum {
     Osm = 'osm',
     Osw = 'osw'

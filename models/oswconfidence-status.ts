@@ -11,57 +11,38 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import {
-    
-} from ".";
-
 /**
  * 
- *
  * @export
  * @interface OSWConfidenceStatus
  */
 export interface OSWConfidenceStatus {
-
     /**
      * job_id of the confidence request
-     *
      * @type {number}
      * @memberof OSWConfidenceStatus
-     * @example 1
      */
     job_id?: number;
-
     /**
      * Confidence of the record
-     *
      * @type {number}
      * @memberof OSWConfidenceStatus
-     * @example 90.23
      */
     confidenceValue?: number;
-
     /**
      * Date time of the last update on status
-     *
      * @type {string}
      * @memberof OSWConfidenceStatus
-     * @example 2018-02-10T09:30Z
      */
     updatedAt?: string;
-
     /**
      * status of the job
-     *
      * @type {string}
      * @memberof OSWConfidenceStatus
      */
     status?: OSWConfidenceStatusStatusEnum;
-
     /**
      * Error message or status information
-     *
      * @type {string}
      * @memberof OSWConfidenceStatus
      */
@@ -69,9 +50,9 @@ export interface OSWConfidenceStatus {
 }
 
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export enum OSWConfidenceStatusStatusEnum {
     Started = 'started',
     Calculated = 'calculated',

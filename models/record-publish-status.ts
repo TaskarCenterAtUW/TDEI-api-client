@@ -11,46 +11,32 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import {
-    
-} from ".";
-
 /**
  * Describes the status of an publish record
- *
  * @export
  * @interface RecordPublishStatus
  */
 export interface RecordPublishStatus {
-
     /**
      * Published record id
-     *
      * @type {string}
      * @memberof RecordPublishStatus
      */
     tdei_record_id: string;
-
     /**
      * Current stage of the file processing
-     *
      * @type {string}
      * @memberof RecordPublishStatus
      */
     stage?: string;
-
     /**
      * Current status of processing. (failed, in progress or complete). If failed, shows the failure reason
-     *
      * @type {string}
      * @memberof RecordPublishStatus
      */
     status?: string;
-
     /**
      * True, represents record published Successfully, else False.
-     *
      * @type {boolean}
      * @memberof RecordPublishStatus
      */

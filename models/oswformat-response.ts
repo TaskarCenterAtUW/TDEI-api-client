@@ -11,30 +11,20 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import {
-    
-} from ".";
-
 /**
  * 
- *
  * @export
  * @interface OSWFormatResponse
  */
 export interface OSWFormatResponse {
-
     /**
      * job_id of the format request
-     *
      * @type {string}
      * @memberof OSWFormatResponse
      */
     job_id?: string;
-
     /**
      * the url to fetch the status of the job
-     *
      * @type {string}
      * @memberof OSWFormatResponse
      */

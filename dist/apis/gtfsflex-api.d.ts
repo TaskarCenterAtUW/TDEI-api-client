@@ -13,7 +13,6 @@ import { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 import { RequestArgs, BaseAPI } from '../base';
 import { GtfsFlexDownload } from '../models';
-import { GtfsFlexServiceModel } from '../models';
 import { GtfsFlexUpload } from '../models';
 import { VersionList } from '../models';
 /**
@@ -44,16 +43,6 @@ export declare const GTFSFlexApiAxiosParamCreator: (configuration?: Configuratio
      * @throws {RequiredError}
      */
     listFlexFiles: (tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
-     * @summary List GTFS Flex Services
-     * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    listFlexServices: (tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.
      * @summary List available GTFS flex versions
@@ -100,16 +89,6 @@ export declare const GTFSFlexApiFp: (configuration?: Configuration) => {
      */
     listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GtfsFlexDownload>>>>;
     /**
-     * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
-     * @summary List GTFS Flex Services
-     * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    listFlexServices(tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GtfsFlexServiceModel>>>>;
-    /**
      * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.
      * @summary List available GTFS flex versions
      * @param {*} [options] Override http request option.
@@ -154,16 +133,6 @@ export declare const GTFSFlexApiFactory: (configuration?: Configuration, basePat
      * @throws {RequiredError}
      */
     listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexDownload>>>;
-    /**
-     * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
-     * @summary List GTFS Flex Services
-     * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    listFlexServices(tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexServiceModel>>>;
     /**
      * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.
      * @summary List available GTFS flex versions
@@ -213,17 +182,6 @@ export declare class GTFSFlexApi extends BaseAPI {
      * @memberof GTFSFlexApi
      */
     listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexDownload>>>;
-    /**
-     * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
-     * @summary List GTFS Flex Services
-     * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GTFSFlexApi
-     */
-    listFlexServices(tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexServiceModel>>>;
     /**
      * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.
      * @summary List available GTFS flex versions

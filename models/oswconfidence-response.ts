@@ -11,34 +11,22 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import {
-    
-} from ".";
-
 /**
  * 
- *
  * @export
  * @interface OSWConfidenceResponse
  */
 export interface OSWConfidenceResponse {
-
     /**
      * TDEI record ID of the dataset to calculate confidence metric
-     *
      * @type {string}
      * @memberof OSWConfidenceResponse
-     * @example 5e991e7a-5c16-4ebf-ad31-3a3625bcca10
      */
     tdei_record_id?: string;
-
     /**
      * job_id of the confidence request
-     *
      * @type {number}
      * @memberof OSWConfidenceResponse
-     * @example 1
      */
     job_id?: number;
 }

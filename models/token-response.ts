@@ -11,38 +11,32 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import {
-    
-} from ".";
-
 /**
  * 
- *
  * @export
  * @interface TokenResponse
  */
 export interface TokenResponse {
-
     /**
+     * 
      * @type {string}
      * @memberof TokenResponse
      */
     access_token?: string;
-
     /**
+     * 
      * @type {number}
      * @memberof TokenResponse
      */
     expires_in?: number;
-
     /**
+     * 
      * @type {number}
      * @memberof TokenResponse
      */
     refresh_expires_in?: number;
-
     /**
+     * 
      * @type {string}
      * @memberof TokenResponse
      */

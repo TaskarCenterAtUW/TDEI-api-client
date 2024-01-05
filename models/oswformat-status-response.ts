@@ -11,65 +11,48 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import {
-    
-} from ".";
-
 /**
  * 
- *
  * @export
  * @interface OSWFormatStatusResponse
  */
 export interface OSWFormatStatusResponse {
-
     /**
      * job_id of the format request
-     *
      * @type {string}
      * @memberof OSWFormatStatusResponse
      */
     job_id: string;
-
     /**
      * Status of the format request
-     *
      * @type {string}
      * @memberof OSWFormatStatusResponse
      */
     status?: OSWFormatStatusResponseStatusEnum;
-
     /**
      * Any error message during failure
-     *
      * @type {string}
      * @memberof OSWFormatStatusResponse
      */
     message?: string;
-
     /**
      * URL to download the converted file
-     *
      * @type {string}
      * @memberof OSWFormatStatusResponse
      */
     downloadUrl?: string;
-
     /**
      * type of conversion
-     *
      * @type {string}
      * @memberof OSWFormatStatusResponse
-     * @example osw-osm
      */
     conversion?: string;
 }
 
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export enum OSWFormatStatusResponseStatusEnum {
     Started = 'started',
     Completed = 'completed',

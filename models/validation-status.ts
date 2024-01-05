@@ -11,48 +11,32 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import {
-    
-} from ".";
-
 /**
  * 
- *
  * @export
  * @interface ValidationStatus
  */
 export interface ValidationStatus {
-
     /**
      * job_id of the Validation request
-     *
      * @type {number}
      * @memberof ValidationStatus
-     * @example 1
      */
     job_id?: number;
-
     /**
      * Validation result
-     *
      * @type {string}
      * @memberof ValidationStatus
      */
     validation_result?: string;
-
     /**
      * Date time of the last update on status
-     *
      * @type {string}
      * @memberof ValidationStatus
-     * @example 2018-02-10T09:30Z
      */
     updated_at?: string;
-
     /**
      * status of the job
-     *
      * @type {string}
      * @memberof ValidationStatus
      */
@@ -60,9 +44,9 @@ export interface ValidationStatus {
 }
 
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export enum ValidationStatusStatusEnum {
     InProgress = 'in-progress',
     Completed = 'completed'
