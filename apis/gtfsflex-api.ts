@@ -18,7 +18,6 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { GtfsFlexDownload } from '../models';
-import { GtfsFlexServiceModel } from '../models';
 import { GtfsFlexUpload } from '../models';
 import { VersionList } from '../models';
 /**
@@ -149,72 +148,6 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
 
             if (tdei_record_id !== undefined) {
                 localVarQueryParameter['tdei_record_id'] = tdei_record_id;
-            }
-
-            if (page_no !== undefined) {
-                localVarQueryParameter['page_no'] = page_no;
-            }
-
-            if (page_size !== undefined) {
-                localVarQueryParameter['page_size'] = page_size;
-            }
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.params) {
-                query.set(key, options.params[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
-         * @summary List GTFS Flex Services
-         * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listFlexServices: async (tdei_project_group_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/gtfs-flex/services`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication ApiKey required
-            if (configuration && configuration.apiKey) {
-                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
-                    ? await configuration.apiKey("x-api-key")
-                    : await configuration.apiKey;
-                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-            }
-
-            // authentication AuthorizationToken required
-            // http bearer authentication required
-            if (configuration && configuration.accessToken) {
-                const accessToken = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken()
-                    : await configuration.accessToken;
-                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-            }
-
-            if (tdei_project_group_id !== undefined) {
-                localVarQueryParameter['tdei_project_group_id'] = tdei_project_group_id;
             }
 
             if (page_no !== undefined) {
@@ -402,22 +335,6 @@ export const GTFSFlexApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
-         * @summary List GTFS Flex Services
-         * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listFlexServices(tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GtfsFlexServiceModel>>>> {
-            const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).listFlexServices(tdei_project_group_id, page_no, page_size, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
          * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.
          * @summary List available GTFS flex versions
          * @param {*} [options] Override http request option.
@@ -482,18 +399,6 @@ export const GTFSFlexApiFactory = function (configuration?: Configuration, baseP
             return GTFSFlexApiFp(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(axios, basePath));
         },
         /**
-         * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
-         * @summary List GTFS Flex Services
-         * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listFlexServices(tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexServiceModel>>> {
-            return GTFSFlexApiFp(configuration).listFlexServices(tdei_project_group_id, page_no, page_size, options).then((request) => request(axios, basePath));
-        },
-        /**
          * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.
          * @summary List available GTFS flex versions
          * @param {*} [options] Override http request option.
@@ -551,19 +456,6 @@ export class GTFSFlexApi extends BaseAPI {
      */
     public async listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<GtfsFlexDownload>>> {
         return GTFSFlexApiFp(this.configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * Path used to retrieve the list of GTFS Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
-     * @summary List GTFS Flex Services
-     * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GTFSFlexApi
-     */
-    public async listFlexServices(tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<GtfsFlexServiceModel>>> {
-        return GTFSFlexApiFp(this.configuration).listFlexServices(tdei_project_group_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.

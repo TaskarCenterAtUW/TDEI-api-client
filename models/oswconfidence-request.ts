@@ -31,5 +31,5 @@ export interface OSWConfidenceRequest {
      * @memberof OSWConfidenceRequest
      * @example 5e991e7a-5c16-4ebf-ad31-3a3625bcca10
      */
-    tdeiRecordId: string;
+    tdei_record_id: string;
 }
