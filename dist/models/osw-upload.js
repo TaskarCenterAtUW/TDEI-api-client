@@ -11,7 +11,7 @@ var OswUploadCollectionMethodEnum;
     OswUploadCollectionMethodEnum["Transform"] = "transform";
     OswUploadCollectionMethodEnum["Generated"] = "generated";
     OswUploadCollectionMethodEnum["Other"] = "other";
-})(OswUploadCollectionMethodEnum = exports.OswUploadCollectionMethodEnum || (exports.OswUploadCollectionMethodEnum = {}));
+})(OswUploadCollectionMethodEnum || (exports.OswUploadCollectionMethodEnum = OswUploadCollectionMethodEnum = {}));
 /**
     * @export
     * @enum {string}
@@ -21,4 +21,4 @@ var OswUploadDataSourceEnum;
     OswUploadDataSourceEnum["_3rdParty"] = "3rdParty";
     OswUploadDataSourceEnum["TDEITools"] = "TDEITools";
     OswUploadDataSourceEnum["InHouse"] = "InHouse";
-})(OswUploadDataSourceEnum = exports.OswUploadDataSourceEnum || (exports.OswUploadDataSourceEnum = {}));
+})(OswUploadDataSourceEnum || (exports.OswUploadDataSourceEnum = OswUploadDataSourceEnum = {}));

@@ -8,4 +8,4 @@ exports.FeatureTypeEnum = void 0;
 var FeatureTypeEnum;
 (function (FeatureTypeEnum) {
     FeatureTypeEnum["Feature"] = "Feature";
-})(FeatureTypeEnum = exports.FeatureTypeEnum || (exports.FeatureTypeEnum = {}));
+})(FeatureTypeEnum || (exports.FeatureTypeEnum = FeatureTypeEnum = {}));
