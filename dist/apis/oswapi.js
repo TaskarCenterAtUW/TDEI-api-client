@@ -86,6 +86,81 @@ exports.OSWApiAxiosParamCreator = function (configuration) {
     var _this = this;
     return {
         /**
+         * Returns boolean true if the action is successful
+         * @summary Invalidates the OSW record
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteOsw: function (tdei_record_id, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            // verify required parameter 'tdei_record_id' is not null or undefined
+                            if (tdei_record_id === null || tdei_record_id === undefined) {
+                                throw new base_1.RequiredError('tdei_record_id', 'Required parameter tdei_record_id was null or undefined when calling deleteOsw.');
+                            }
+                            localVarPath = "/api/v1/osw/{tdei_record_id}"
+                                .replace("{" + "tdei_record_id" + "}", encodeURIComponent(String(tdei_record_id)));
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'DELETE' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
+                        case 1:
+                            _a = _c.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
+                        case 3:
+                            _a = _c.sent();
+                            _c.label = 4;
+                        case 4:
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
+                        case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
          * Fetches the status of confidence request job.
          * @summary Get the status of confidence request
          * @param {string} job_id job_id for confidence request
@@ -1211,6 +1286,31 @@ exports.OSWApiAxiosParamCreator = function (configuration) {
 exports.OSWApiFp = function (configuration) {
     return {
         /**
+         * Returns boolean true if the action is successful
+         * @summary Invalidates the OSW record
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteOsw: function (tdei_record_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, exports.OSWApiAxiosParamCreator(configuration).deleteOsw(tdei_record_id, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
          * Fetches the status of confidence request job.
          * @summary Get the status of confidence request
          * @param {string} job_id job_id for confidence request
@@ -1585,6 +1685,20 @@ exports.OSWApiFp = function (configuration) {
 exports.OSWApiFactory = function (configuration, basePath, axios) {
     return {
         /**
+         * Returns boolean true if the action is successful
+         * @summary Invalidates the OSW record
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteOsw: function (tdei_record_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, exports.OSWApiFp(configuration).deleteOsw(tdei_record_id, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
          * Fetches the status of confidence request job.
          * @summary Get the status of confidence request
          * @param {string} job_id job_id for confidence request
@@ -1809,6 +1923,22 @@ var OSWApi = /** @class */ (function (_super) {
     function OSWApi() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    /**
+     * Returns boolean true if the action is successful
+     * @summary Invalidates the OSW record
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.deleteOsw = function (tdei_record_id, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, exports.OSWApiFp(this.configuration).deleteOsw(tdei_record_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
     /**
      * Fetches the status of confidence request job.
      * @summary Get the status of confidence request

@@ -33,6 +33,63 @@ import { VersionList } from '../models';
 export const OSWApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Returns boolean true if the action is successful
+         * @summary Invalidates the OSW record
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteOsw: async (tdei_record_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tdei_record_id' is not null or undefined
+            if (tdei_record_id === null || tdei_record_id === undefined) {
+                throw new RequiredError('tdei_record_id','Required parameter tdei_record_id was null or undefined when calling deleteOsw.');
+            }
+            const localVarPath = `/api/v1/osw/{tdei_record_id}`
+                .replace(`{${"tdei_record_id"}}`, encodeURIComponent(String(tdei_record_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKey required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("x-api-key")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+            }
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Fetches the status of confidence request job.
          * @summary Get the status of confidence request
          * @param {string} job_id job_id for confidence request
@@ -944,6 +1001,20 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
 export const OSWApiFp = function(configuration?: Configuration) {
     return {
         /**
+         * Returns boolean true if the action is successful
+         * @summary Invalidates the OSW record
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteOsw(tdei_record_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<boolean>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).deleteOsw(tdei_record_id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Fetches the status of confidence request job.
          * @summary Get the status of confidence request
          * @param {string} job_id job_id for confidence request
@@ -1165,6 +1236,16 @@ export const OSWApiFp = function(configuration?: Configuration) {
 export const OSWApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
+         * Returns boolean true if the action is successful
+         * @summary Invalidates the OSW record
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteOsw(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<boolean>> {
+            return OSWApiFp(configuration).deleteOsw(tdei_record_id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Fetches the status of confidence request job.
          * @summary Get the status of confidence request
          * @param {string} job_id job_id for confidence request
@@ -1330,6 +1411,17 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
  * @extends {BaseAPI}
  */
 export class OSWApi extends BaseAPI {
+    /**
+     * Returns boolean true if the action is successful
+     * @summary Invalidates the OSW record
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    public async deleteOsw(tdei_record_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<boolean>> {
+        return OSWApiFp(this.configuration).deleteOsw(tdei_record_id, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * Fetches the status of confidence request job.
      * @summary Get the status of confidence request
