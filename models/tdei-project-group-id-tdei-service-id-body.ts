@@ -24,7 +24,7 @@ export interface TdeiProjectGroupIdTdeiServiceIdBody {
      */
     dataset: Blob;
     /**
-     * OSW dataset metadata information. see schema [OswUpload](#/components/schemas/OswUpload)
+     * OSW dataset metadata information. see [metadata schema](https://raw.githubusercontent.com/TaskarCenterAtUW/TDEI-osw-datasvc-ts/dev/schema/osw-metadata.schema.json)
      * @type {Blob}
      * @memberof TdeiProjectGroupIdTdeiServiceIdBody
      */

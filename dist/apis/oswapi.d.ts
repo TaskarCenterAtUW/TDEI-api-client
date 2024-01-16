@@ -28,6 +28,14 @@ import { VersionList } from '../models';
  */
 export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
+     * Returns boolean true if the action is successful
+     * @summary Invalidates the OSW record
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteOsw: (tdei_record_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Fetches the status of confidence request job.
      * @summary Get the status of confidence request
      * @param {string} job_id job_id for confidence request
@@ -162,6 +170,14 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
  */
 export declare const OSWApiFp: (configuration?: Configuration) => {
     /**
+     * Returns boolean true if the action is successful
+     * @summary Invalidates the OSW record
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteOsw(tdei_record_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<boolean>>>;
+    /**
      * Fetches the status of confidence request job.
      * @summary Get the status of confidence request
      * @param {string} job_id job_id for confidence request
@@ -295,6 +311,14 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
  * @export
  */
 export declare const OSWApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Returns boolean true if the action is successful
+     * @summary Invalidates the OSW record
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteOsw(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<boolean>>;
     /**
      * Fetches the status of confidence request job.
      * @summary Get the status of confidence request
@@ -431,6 +455,15 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
  * @extends {BaseAPI}
  */
 export declare class OSWApi extends BaseAPI {
+    /**
+     * Returns boolean true if the action is successful
+     * @summary Invalidates the OSW record
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    deleteOsw(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<boolean>>;
     /**
      * Fetches the status of confidence request job.
      * @summary Get the status of confidence request
