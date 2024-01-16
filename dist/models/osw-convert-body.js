@@ -9,7 +9,7 @@ var OswConvertBodySourceEnum;
 (function (OswConvertBodySourceEnum) {
     OswConvertBodySourceEnum["Osm"] = "osm";
     OswConvertBodySourceEnum["Osw"] = "osw";
-})(OswConvertBodySourceEnum = exports.OswConvertBodySourceEnum || (exports.OswConvertBodySourceEnum = {}));
+})(OswConvertBodySourceEnum || (exports.OswConvertBodySourceEnum = OswConvertBodySourceEnum = {}));
 /**
     * @export
     * @enum {string}
@@ -18,4 +18,4 @@ var OswConvertBodyTargetEnum;
 (function (OswConvertBodyTargetEnum) {
     OswConvertBodyTargetEnum["Osm"] = "osm";
     OswConvertBodyTargetEnum["Osw"] = "osw";
-})(OswConvertBodyTargetEnum = exports.OswConvertBodyTargetEnum || (exports.OswConvertBodyTargetEnum = {}));
+})(OswConvertBodyTargetEnum || (exports.OswConvertBodyTargetEnum = OswConvertBodyTargetEnum = {}));

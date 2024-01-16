@@ -10,4 +10,4 @@ var OSWFormatStatusResponseStatusEnum;
     OSWFormatStatusResponseStatusEnum["Started"] = "started";
     OSWFormatStatusResponseStatusEnum["Completed"] = "completed";
     OSWFormatStatusResponseStatusEnum["Failed"] = "failed";
-})(OSWFormatStatusResponseStatusEnum = exports.OSWFormatStatusResponseStatusEnum || (exports.OSWFormatStatusResponseStatusEnum = {}));
+})(OSWFormatStatusResponseStatusEnum || (exports.OSWFormatStatusResponseStatusEnum = OSWFormatStatusResponseStatusEnum = {}));

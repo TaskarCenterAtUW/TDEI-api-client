@@ -10,4 +10,4 @@ var ServiceModelServiceTypeEnum;
     ServiceModelServiceTypeEnum["Flex"] = "flex";
     ServiceModelServiceTypeEnum["Pathways"] = "pathways";
     ServiceModelServiceTypeEnum["Osw"] = "osw";
-})(ServiceModelServiceTypeEnum = exports.ServiceModelServiceTypeEnum || (exports.ServiceModelServiceTypeEnum = {}));
+})(ServiceModelServiceTypeEnum || (exports.ServiceModelServiceTypeEnum = ServiceModelServiceTypeEnum = {}));

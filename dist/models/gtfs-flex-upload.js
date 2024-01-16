@@ -11,7 +11,7 @@ var GtfsFlexUploadCollectionMethodEnum;
     GtfsFlexUploadCollectionMethodEnum["Transform"] = "transform";
     GtfsFlexUploadCollectionMethodEnum["Generated"] = "generated";
     GtfsFlexUploadCollectionMethodEnum["Other"] = "other";
-})(GtfsFlexUploadCollectionMethodEnum = exports.GtfsFlexUploadCollectionMethodEnum || (exports.GtfsFlexUploadCollectionMethodEnum = {}));
+})(GtfsFlexUploadCollectionMethodEnum || (exports.GtfsFlexUploadCollectionMethodEnum = GtfsFlexUploadCollectionMethodEnum = {}));
 /**
     * @export
     * @enum {string}
@@ -21,4 +21,4 @@ var GtfsFlexUploadDataSourceEnum;
     GtfsFlexUploadDataSourceEnum["_3rdParty"] = "3rdParty";
     GtfsFlexUploadDataSourceEnum["TDEITools"] = "TDEITools";
     GtfsFlexUploadDataSourceEnum["InHouse"] = "InHouse";
-})(GtfsFlexUploadDataSourceEnum = exports.GtfsFlexUploadDataSourceEnum || (exports.GtfsFlexUploadDataSourceEnum = {}));
+})(GtfsFlexUploadDataSourceEnum || (exports.GtfsFlexUploadDataSourceEnum = GtfsFlexUploadDataSourceEnum = {}));

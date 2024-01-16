@@ -9,4 +9,4 @@ var ValidationStatusStatusEnum;
 (function (ValidationStatusStatusEnum) {
     ValidationStatusStatusEnum["InProgress"] = "in-progress";
     ValidationStatusStatusEnum["Completed"] = "completed";
-})(ValidationStatusStatusEnum = exports.ValidationStatusStatusEnum || (exports.ValidationStatusStatusEnum = {}));
+})(ValidationStatusStatusEnum || (exports.ValidationStatusStatusEnum = ValidationStatusStatusEnum = {}));
