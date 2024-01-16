@@ -12,6 +12,8 @@ OUTPUT_DIR="."
 # Run the Swagger Codegen command
 java -jar swagger-codegen-cli.jar generate -i "$1" -l typescript-axios --additional-properties modelPropertyNaming='original' npmName='tdei-client' npmVersion="$new_version" -o "$OUTPUT_DIR"
 
+npm install axios@1.6.5
+npm install --save-dev typescript@5.0.4
 npm install 
 npm run build
 
