@@ -9,7 +9,7 @@ var OswDownloadStatusEnum;
 (function (OswDownloadStatusEnum) {
     OswDownloadStatusEnum["PreRelease"] = "pre-release";
     OswDownloadStatusEnum["Published"] = "published";
-})(OswDownloadStatusEnum || (exports.OswDownloadStatusEnum = OswDownloadStatusEnum = {}));
+})(OswDownloadStatusEnum = exports.OswDownloadStatusEnum || (exports.OswDownloadStatusEnum = {}));
 /**
     * @export
     * @enum {string}
@@ -20,7 +20,7 @@ var OswDownloadCollectionMethodEnum;
     OswDownloadCollectionMethodEnum["Transform"] = "transform";
     OswDownloadCollectionMethodEnum["Generated"] = "generated";
     OswDownloadCollectionMethodEnum["Other"] = "other";
-})(OswDownloadCollectionMethodEnum || (exports.OswDownloadCollectionMethodEnum = OswDownloadCollectionMethodEnum = {}));
+})(OswDownloadCollectionMethodEnum = exports.OswDownloadCollectionMethodEnum || (exports.OswDownloadCollectionMethodEnum = {}));
 /**
     * @export
     * @enum {string}
@@ -30,4 +30,4 @@ var OswDownloadDataSourceEnum;
     OswDownloadDataSourceEnum["_3rdParty"] = "3rdParty";
     OswDownloadDataSourceEnum["TDEITools"] = "TDEITools";
     OswDownloadDataSourceEnum["InHouse"] = "InHouse";
-})(OswDownloadDataSourceEnum || (exports.OswDownloadDataSourceEnum = OswDownloadDataSourceEnum = {}));
+})(OswDownloadDataSourceEnum = exports.OswDownloadDataSourceEnum || (exports.OswDownloadDataSourceEnum = {}));

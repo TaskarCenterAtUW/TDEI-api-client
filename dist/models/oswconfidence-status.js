@@ -10,4 +10,4 @@ var OSWConfidenceStatusStatusEnum;
     OSWConfidenceStatusStatusEnum["Started"] = "started";
     OSWConfidenceStatusStatusEnum["Calculated"] = "calculated";
     OSWConfidenceStatusStatusEnum["Failed"] = "failed";
-})(OSWConfidenceStatusStatusEnum || (exports.OSWConfidenceStatusStatusEnum = OSWConfidenceStatusStatusEnum = {}));
+})(OSWConfidenceStatusStatusEnum = exports.OSWConfidenceStatusStatusEnum || (exports.OSWConfidenceStatusStatusEnum = {}));
