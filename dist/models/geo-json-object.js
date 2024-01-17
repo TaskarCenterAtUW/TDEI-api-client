@@ -8,4 +8,4 @@ exports.GeoJsonObjectTypeEnum = void 0;
 var GeoJsonObjectTypeEnum;
 (function (GeoJsonObjectTypeEnum) {
     GeoJsonObjectTypeEnum["FeatureCollection"] = "FeatureCollection";
-})(GeoJsonObjectTypeEnum || (exports.GeoJsonObjectTypeEnum = GeoJsonObjectTypeEnum = {}));
+})(GeoJsonObjectTypeEnum = exports.GeoJsonObjectTypeEnum || (exports.GeoJsonObjectTypeEnum = {}));

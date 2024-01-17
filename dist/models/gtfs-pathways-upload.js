@@ -11,7 +11,7 @@ var GtfsPathwaysUploadCollectionMethodEnum;
     GtfsPathwaysUploadCollectionMethodEnum["Transform"] = "transform";
     GtfsPathwaysUploadCollectionMethodEnum["Generated"] = "generated";
     GtfsPathwaysUploadCollectionMethodEnum["Other"] = "other";
-})(GtfsPathwaysUploadCollectionMethodEnum || (exports.GtfsPathwaysUploadCollectionMethodEnum = GtfsPathwaysUploadCollectionMethodEnum = {}));
+})(GtfsPathwaysUploadCollectionMethodEnum = exports.GtfsPathwaysUploadCollectionMethodEnum || (exports.GtfsPathwaysUploadCollectionMethodEnum = {}));
 /**
     * @export
     * @enum {string}
@@ -21,4 +21,4 @@ var GtfsPathwaysUploadDataSourceEnum;
     GtfsPathwaysUploadDataSourceEnum["_3rdParty"] = "3rdParty";
     GtfsPathwaysUploadDataSourceEnum["TDEITools"] = "TDEITools";
     GtfsPathwaysUploadDataSourceEnum["InHouse"] = "InHouse";
-})(GtfsPathwaysUploadDataSourceEnum || (exports.GtfsPathwaysUploadDataSourceEnum = GtfsPathwaysUploadDataSourceEnum = {}));
+})(GtfsPathwaysUploadDataSourceEnum = exports.GtfsPathwaysUploadDataSourceEnum || (exports.GtfsPathwaysUploadDataSourceEnum = {}));
