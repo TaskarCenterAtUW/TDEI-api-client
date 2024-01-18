@@ -7,8 +7,8 @@ exports.OswDownloadDataSourceEnum = exports.OswDownloadCollectionMethodEnum = ex
     */
 var OswDownloadStatusEnum;
 (function (OswDownloadStatusEnum) {
-    OswDownloadStatusEnum["PreRelease"] = "pre-release";
-    OswDownloadStatusEnum["Published"] = "published";
+    OswDownloadStatusEnum["PreRelease"] = "Pre-Release";
+    OswDownloadStatusEnum["Publish"] = "Publish";
 })(OswDownloadStatusEnum = exports.OswDownloadStatusEnum || (exports.OswDownloadStatusEnum = {}));
 /**
     * @export
