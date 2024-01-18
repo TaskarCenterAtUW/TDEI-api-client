@@ -21,10 +21,4 @@ export interface OSWFormatResponse {
      * @memberof OSWFormatResponse
      */
     job_id?: string;
-    /**
-     * the url to fetch the status of the job
-     * @type {string}
-     * @memberof OSWFormatResponse
-     */
-    statusUrl?: string;
 }
