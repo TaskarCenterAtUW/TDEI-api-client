@@ -139,8 +139,8 @@ export interface OswDownload {
     * @enum {string}
     */
 export enum OswDownloadStatusEnum {
-    PreRelease = 'pre-release',
-    Published = 'published'
+    PreRelease = 'Pre-Release',
+    Publish = 'Publish'
 }
 /**
     * @export
