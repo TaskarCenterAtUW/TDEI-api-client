@@ -548,6 +548,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
          * @param {string} [name] dataset name or title.
          * @param {string} [version] dataset version.
          * @param {string} [data_source] data source of the dataset.
+         * @param {string} [collection_method] Method by which the data was collected.
          * @param {string} [collected_by] Collection agency or person.
          * @param {string} [derived_from_dataset_id] Derived from dataset id.
          * @param {string} [collection_date] Collection date time
@@ -563,7 +564,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: function (bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options) {
+        listOswFiles: function (bbox, name, version, data_source, collection_method, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
@@ -619,6 +620,9 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             }
                             if (data_source !== undefined) {
                                 localVarQueryParameter['data_source'] = data_source;
+                            }
+                            if (collection_method !== undefined) {
+                                localVarQueryParameter['collection_method'] = collection_method;
                             }
                             if (collected_by !== undefined) {
                                 localVarQueryParameter['collected_by'] = collected_by;
@@ -1470,6 +1474,7 @@ var OSWApiFp = function (configuration) {
          * @param {string} [name] dataset name or title.
          * @param {string} [version] dataset version.
          * @param {string} [data_source] data source of the dataset.
+         * @param {string} [collection_method] Method by which the data was collected.
          * @param {string} [collected_by] Collection agency or person.
          * @param {string} [derived_from_dataset_id] Derived from dataset id.
          * @param {string} [collection_date] Collection date time
@@ -1485,12 +1490,12 @@ var OSWApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: function (bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options) {
+        listOswFiles: function (bbox, name, version, data_source, collection_method, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).listOswFiles(bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).listOswFiles(bbox, name, version, data_source, collection_method, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1810,6 +1815,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
          * @param {string} [name] dataset name or title.
          * @param {string} [version] dataset version.
          * @param {string} [data_source] data source of the dataset.
+         * @param {string} [collection_method] Method by which the data was collected.
          * @param {string} [collected_by] Collection agency or person.
          * @param {string} [derived_from_dataset_id] Derived from dataset id.
          * @param {string} [collection_date] Collection date time
@@ -1825,10 +1831,10 @@ var OSWApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: function (bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options) {
+        listOswFiles: function (bbox, name, version, data_source, collection_method, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).listOswFiles(bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).listOswFiles(bbox, name, version, data_source, collection_method, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -2068,6 +2074,7 @@ var OSWApi = /** @class */ (function (_super) {
      * @param {string} [name] dataset name or title.
      * @param {string} [version] dataset version.
      * @param {string} [data_source] data source of the dataset.
+     * @param {string} [collection_method] Method by which the data was collected.
      * @param {string} [collected_by] Collection agency or person.
      * @param {string} [derived_from_dataset_id] Derived from dataset id.
      * @param {string} [collection_date] Collection date time
@@ -2084,11 +2091,11 @@ var OSWApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    OSWApi.prototype.listOswFiles = function (bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options) {
+    OSWApi.prototype.listOswFiles = function (bbox, name, version, data_source, collection_method, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).listOswFiles(bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).listOswFiles(bbox, name, version, data_source, collection_method, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

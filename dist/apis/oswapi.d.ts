@@ -83,6 +83,7 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      * @param {string} [name] dataset name or title.
      * @param {string} [version] dataset version.
      * @param {string} [data_source] data source of the dataset.
+     * @param {string} [collection_method] Method by which the data was collected.
      * @param {string} [collected_by] Collection agency or person.
      * @param {string} [derived_from_dataset_id] Derived from dataset id.
      * @param {string} [collection_date] Collection date time
@@ -98,7 +99,7 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOswFiles: (bbox?: Array<number>, name?: string, version?: string, data_source?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    listOswFiles: (bbox?: Array<number>, name?: string, version?: string, data_source?: string, collection_method?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
@@ -231,6 +232,7 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      * @param {string} [name] dataset name or title.
      * @param {string} [version] dataset version.
      * @param {string} [data_source] data source of the dataset.
+     * @param {string} [collection_method] Method by which the data was collected.
      * @param {string} [collected_by] Collection agency or person.
      * @param {string} [derived_from_dataset_id] Derived from dataset id.
      * @param {string} [collection_date] Collection date time
@@ -246,7 +248,7 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OswDownload>>>>;
+    listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collection_method?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OswDownload>>>>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
@@ -379,6 +381,7 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @param {string} [name] dataset name or title.
      * @param {string} [version] dataset version.
      * @param {string} [data_source] data source of the dataset.
+     * @param {string} [collection_method] Method by which the data was collected.
      * @param {string} [collected_by] Collection agency or person.
      * @param {string} [derived_from_dataset_id] Derived from dataset id.
      * @param {string} [collection_date] Collection date time
@@ -394,7 +397,7 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>>;
+    listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collection_method?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
@@ -535,6 +538,7 @@ export declare class OSWApi extends BaseAPI {
      * @param {string} [name] dataset name or title.
      * @param {string} [version] dataset version.
      * @param {string} [data_source] data source of the dataset.
+     * @param {string} [collection_method] Method by which the data was collected.
      * @param {string} [collected_by] Collection agency or person.
      * @param {string} [derived_from_dataset_id] Derived from dataset id.
      * @param {string} [collection_date] Collection date time
@@ -551,7 +555,7 @@ export declare class OSWApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>>;
+    listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collection_method?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
