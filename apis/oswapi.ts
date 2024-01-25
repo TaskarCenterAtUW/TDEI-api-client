@@ -386,6 +386,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
          * @param {string} [name] dataset name or title.
          * @param {string} [version] dataset version.
          * @param {string} [data_source] data source of the dataset.
+         * @param {string} [collection_method] Method by which the data was collected.
          * @param {string} [collected_by] Collection agency or person.
          * @param {string} [derived_from_dataset_id] Derived from dataset id.
          * @param {string} [collection_date] Collection date time
@@ -401,7 +402,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: async (bbox?: Array<number>, name?: string, version?: string, data_source?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listOswFiles: async (bbox?: Array<number>, name?: string, version?: string, data_source?: string, collection_method?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/osw`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -444,6 +445,10 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
 
             if (data_source !== undefined) {
                 localVarQueryParameter['data_source'] = data_source;
+            }
+
+            if (collection_method !== undefined) {
+                localVarQueryParameter['collection_method'] = collection_method;
             }
 
             if (collected_by !== undefined) {
@@ -1122,6 +1127,7 @@ export const OSWApiFp = function(configuration?: Configuration) {
          * @param {string} [name] dataset name or title.
          * @param {string} [version] dataset version.
          * @param {string} [data_source] data source of the dataset.
+         * @param {string} [collection_method] Method by which the data was collected.
          * @param {string} [collected_by] Collection agency or person.
          * @param {string} [derived_from_dataset_id] Derived from dataset id.
          * @param {string} [collection_date] Collection date time
@@ -1137,8 +1143,8 @@ export const OSWApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OswDownload>>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).listOswFiles(bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options);
+        async listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collection_method?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OswDownload>>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).listOswFiles(bbox, name, version, data_source, collection_method, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1339,6 +1345,7 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
          * @param {string} [name] dataset name or title.
          * @param {string} [version] dataset version.
          * @param {string} [data_source] data source of the dataset.
+         * @param {string} [collection_method] Method by which the data was collected.
          * @param {string} [collected_by] Collection agency or person.
          * @param {string} [derived_from_dataset_id] Derived from dataset id.
          * @param {string} [collection_date] Collection date time
@@ -1354,8 +1361,8 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>> {
-            return OSWApiFp(configuration).listOswFiles(bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options).then((request) => request(axios, basePath));
+        async listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collection_method?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>> {
+            return OSWApiFp(configuration).listOswFiles(bbox, name, version, data_source, collection_method, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options).then((request) => request(axios, basePath));
         },
         /**
          * Lists the versions of OSW data which are supported by TDEI.
@@ -1527,6 +1534,7 @@ export class OSWApi extends BaseAPI {
      * @param {string} [name] dataset name or title.
      * @param {string} [version] dataset version.
      * @param {string} [data_source] data source of the dataset.
+     * @param {string} [collection_method] Method by which the data was collected.
      * @param {string} [collected_by] Collection agency or person.
      * @param {string} [derived_from_dataset_id] Derived from dataset id.
      * @param {string} [collection_date] Collection date time
@@ -1543,8 +1551,8 @@ export class OSWApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<OswDownload>>> {
-        return OSWApiFp(this.configuration).listOswFiles(bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
+    public async listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collection_method?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<OswDownload>>> {
+        return OSWApiFp(this.configuration).listOswFiles(bbox, name, version, data_source, collection_method, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Lists the versions of OSW data which are supported by TDEI.
