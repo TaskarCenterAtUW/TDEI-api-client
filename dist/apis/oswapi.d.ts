@@ -82,17 +82,23 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {string} [name] dataset name or title.
      * @param {string} [version] dataset version.
+     * @param {string} [data_source] data source of the dataset.
+     * @param {string} [collected_by] Collection agency or person.
+     * @param {string} [derived_from_dataset_id] Derived from dataset id.
+     * @param {string} [collection_date] Collection date time
+     * @param {number} [confidence_level] Minimum confidence level required. Data returned will be at this confidence level or higher. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
      * @param {string} [status] request for files based on status. The default setting is &#x27;Publish&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
      * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
      * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
-     * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
+     * @param {string} [valid_from] Valid from date time. date-time for which the caller is interested in obtaining files.
+     * @param {string} [valid_to] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
      * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOswFiles: (bbox?: Array<number>, name?: string, version?: string, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    listOswFiles: (bbox?: Array<number>, name?: string, version?: string, data_source?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
@@ -224,17 +230,23 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {string} [name] dataset name or title.
      * @param {string} [version] dataset version.
+     * @param {string} [data_source] data source of the dataset.
+     * @param {string} [collected_by] Collection agency or person.
+     * @param {string} [derived_from_dataset_id] Derived from dataset id.
+     * @param {string} [collection_date] Collection date time
+     * @param {number} [confidence_level] Minimum confidence level required. Data returned will be at this confidence level or higher. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
      * @param {string} [status] request for files based on status. The default setting is &#x27;Publish&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
      * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
      * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
-     * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
+     * @param {string} [valid_from] Valid from date time. date-time for which the caller is interested in obtaining files.
+     * @param {string} [valid_to] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
      * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOswFiles(bbox?: Array<number>, name?: string, version?: string, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OswDownload>>>>;
+    listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OswDownload>>>>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
@@ -366,17 +378,23 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {string} [name] dataset name or title.
      * @param {string} [version] dataset version.
+     * @param {string} [data_source] data source of the dataset.
+     * @param {string} [collected_by] Collection agency or person.
+     * @param {string} [derived_from_dataset_id] Derived from dataset id.
+     * @param {string} [collection_date] Collection date time
+     * @param {number} [confidence_level] Minimum confidence level required. Data returned will be at this confidence level or higher. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
      * @param {string} [status] request for files based on status. The default setting is &#x27;Publish&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
      * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
      * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
-     * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
+     * @param {string} [valid_from] Valid from date time. date-time for which the caller is interested in obtaining files.
+     * @param {string} [valid_to] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
      * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listOswFiles(bbox?: Array<number>, name?: string, version?: string, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>>;
+    listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
@@ -516,10 +534,16 @@ export declare class OSWApi extends BaseAPI {
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {string} [name] dataset name or title.
      * @param {string} [version] dataset version.
+     * @param {string} [data_source] data source of the dataset.
+     * @param {string} [collected_by] Collection agency or person.
+     * @param {string} [derived_from_dataset_id] Derived from dataset id.
+     * @param {string} [collection_date] Collection date time
+     * @param {number} [confidence_level] Minimum confidence level required. Data returned will be at this confidence level or higher. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
      * @param {string} [status] request for files based on status. The default setting is &#x27;Publish&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
      * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
      * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
-     * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
+     * @param {string} [valid_from] Valid from date time. date-time for which the caller is interested in obtaining files.
+     * @param {string} [valid_to] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
      * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
@@ -527,7 +551,7 @@ export declare class OSWApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    listOswFiles(bbox?: Array<number>, name?: string, version?: string, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>>;
+    listOswFiles(bbox?: Array<number>, name?: string, version?: string, data_source?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, status?: string, osw_schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OswDownload>>>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions

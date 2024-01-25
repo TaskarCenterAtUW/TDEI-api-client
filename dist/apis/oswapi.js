@@ -547,17 +547,23 @@ var OSWApiAxiosParamCreator = function (configuration) {
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [name] dataset name or title.
          * @param {string} [version] dataset version.
+         * @param {string} [data_source] data source of the dataset.
+         * @param {string} [collected_by] Collection agency or person.
+         * @param {string} [derived_from_dataset_id] Derived from dataset id.
+         * @param {string} [collection_date] Collection date time
+         * @param {number} [confidence_level] Minimum confidence level required. Data returned will be at this confidence level or higher. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
          * @param {string} [status] request for files based on status. The default setting is &#x27;Publish&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
          * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
-         * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
+         * @param {string} [valid_from] Valid from date time. date-time for which the caller is interested in obtaining files.
+         * @param {string} [valid_to] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: function (bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
+        listOswFiles: function (bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
@@ -611,6 +617,21 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             if (version !== undefined) {
                                 localVarQueryParameter['version'] = version;
                             }
+                            if (data_source !== undefined) {
+                                localVarQueryParameter['data_source'] = data_source;
+                            }
+                            if (collected_by !== undefined) {
+                                localVarQueryParameter['collected_by'] = collected_by;
+                            }
+                            if (derived_from_dataset_id !== undefined) {
+                                localVarQueryParameter['derived_from_dataset_id'] = derived_from_dataset_id;
+                            }
+                            if (collection_date !== undefined) {
+                                localVarQueryParameter['collection_date'] = collection_date;
+                            }
+                            if (confidence_level !== undefined) {
+                                localVarQueryParameter['confidence_level'] = confidence_level;
+                            }
                             if (status !== undefined) {
                                 localVarQueryParameter['status'] = status;
                             }
@@ -620,8 +641,11 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             if (tdei_project_group_id !== undefined) {
                                 localVarQueryParameter['tdei_project_group_id'] = tdei_project_group_id;
                             }
-                            if (date_time !== undefined) {
-                                localVarQueryParameter['date_time'] = date_time;
+                            if (valid_from !== undefined) {
+                                localVarQueryParameter['valid_from'] = valid_from;
+                            }
+                            if (valid_to !== undefined) {
+                                localVarQueryParameter['valid_to'] = valid_to;
                             }
                             if (tdei_record_id !== undefined) {
                                 localVarQueryParameter['tdei_record_id'] = tdei_record_id;
@@ -1445,22 +1469,28 @@ var OSWApiFp = function (configuration) {
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [name] dataset name or title.
          * @param {string} [version] dataset version.
+         * @param {string} [data_source] data source of the dataset.
+         * @param {string} [collected_by] Collection agency or person.
+         * @param {string} [derived_from_dataset_id] Derived from dataset id.
+         * @param {string} [collection_date] Collection date time
+         * @param {number} [confidence_level] Minimum confidence level required. Data returned will be at this confidence level or higher. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
          * @param {string} [status] request for files based on status. The default setting is &#x27;Publish&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
          * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
-         * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
+         * @param {string} [valid_from] Valid from date time. date-time for which the caller is interested in obtaining files.
+         * @param {string} [valid_to] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: function (bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
+        listOswFiles: function (bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).listOswFiles(bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1779,20 +1809,26 @@ var OSWApiFactory = function (configuration, basePath, axios) {
          * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {string} [name] dataset name or title.
          * @param {string} [version] dataset version.
+         * @param {string} [data_source] data source of the dataset.
+         * @param {string} [collected_by] Collection agency or person.
+         * @param {string} [derived_from_dataset_id] Derived from dataset id.
+         * @param {string} [collection_date] Collection date time
+         * @param {number} [confidence_level] Minimum confidence level required. Data returned will be at this confidence level or higher. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
          * @param {string} [status] request for files based on status. The default setting is &#x27;Publish&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
          * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
          * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
-         * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
+         * @param {string} [valid_from] Valid from date time. date-time for which the caller is interested in obtaining files.
+         * @param {string} [valid_to] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
          * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOswFiles: function (bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
+        listOswFiles: function (bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).listOswFiles(bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -2031,10 +2067,16 @@ var OSWApi = /** @class */ (function (_super) {
      * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {string} [name] dataset name or title.
      * @param {string} [version] dataset version.
+     * @param {string} [data_source] data source of the dataset.
+     * @param {string} [collected_by] Collection agency or person.
+     * @param {string} [derived_from_dataset_id] Derived from dataset id.
+     * @param {string} [collection_date] Collection date time
+     * @param {number} [confidence_level] Minimum confidence level required. Data returned will be at this confidence level or higher. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
      * @param {string} [status] request for files based on status. The default setting is &#x27;Publish&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
      * @param {string} [osw_schema_version] version name of the osw schema version that the application requests. list of versions can be found with /api/v1/osw/versions.
      * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
-     * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
+     * @param {string} [valid_from] Valid from date time. date-time for which the caller is interested in obtaining files.
+     * @param {string} [valid_to] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
      * @param {string} [tdei_record_id] tdei_record_id, unique id represents file.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
@@ -2042,11 +2084,11 @@ var OSWApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    OSWApi.prototype.listOswFiles = function (bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options) {
+    OSWApi.prototype.listOswFiles = function (bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).listOswFiles(bbox, name, version, status, osw_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).listOswFiles(bbox, name, version, data_source, collected_by, derived_from_dataset_id, collection_date, confidence_level, status, osw_schema_version, tdei_project_group_id, valid_from, valid_to, tdei_record_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
