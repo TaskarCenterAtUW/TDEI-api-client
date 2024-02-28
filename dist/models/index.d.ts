@@ -1,4 +1,6 @@
+export * from './dataset-bbox-status';
 export * from './feature';
+export * from './flattening-status';
 export * from './geo-json-object';
 export * from './geometry';
 export * from './gtfs-flex-download';
