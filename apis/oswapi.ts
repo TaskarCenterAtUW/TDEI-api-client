@@ -37,12 +37,20 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * Given a dataset tdei_record_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax).
          * @summary Given a dataset tdei_record_id returns the subgraph within a given bounding box.
-         * @param {string} [tdei_record_id] tdei_record_id for a file, represented as a uuid
-         * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        datasetBbox: async (tdei_record_id?: string, bbox?: Array<number>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        datasetBbox: async (tdei_record_id: string, bbox: Array<number>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tdei_record_id' is not null or undefined
+            if (tdei_record_id === null || tdei_record_id === undefined) {
+                throw new RequiredError('tdei_record_id','Required parameter tdei_record_id was null or undefined when calling datasetBbox.');
+            }
+            // verify required parameter 'bbox' is not null or undefined
+            if (bbox === null || bbox === undefined) {
+                throw new RequiredError('bbox','Required parameter bbox was null or undefined when calling datasetBbox.');
+            }
             const localVarPath = `/api/v1/osw/dataset-bbox`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -148,10 +156,11 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
          * Flatterns an OSW dataset for provided tdei_record_id.
          * @summary Flatterns an OSW dataset
          * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {boolean} [override] true to override if any existing data is present, false otherwise
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        datasetFlatternById: async (tdei_record_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        datasetFlatternById: async (tdei_record_id: string, override?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tdei_record_id' is not null or undefined
             if (tdei_record_id === null || tdei_record_id === undefined) {
                 throw new RequiredError('tdei_record_id','Required parameter tdei_record_id was null or undefined when calling datasetFlatternById.');
@@ -183,6 +192,10 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
                     ? await configuration.accessToken()
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (override !== undefined) {
+                localVarQueryParameter['override'] = override;
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -1321,12 +1334,12 @@ export const OSWApiFp = function(configuration?: Configuration) {
         /**
          * Given a dataset tdei_record_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax).
          * @summary Given a dataset tdei_record_id returns the subgraph within a given bounding box.
-         * @param {string} [tdei_record_id] tdei_record_id for a file, represented as a uuid
-         * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async datasetBbox(tdei_record_id?: string, bbox?: Array<number>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+        async datasetBbox(tdei_record_id: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
             const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).datasetBbox(tdei_record_id, bbox, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1351,11 +1364,12 @@ export const OSWApiFp = function(configuration?: Configuration) {
          * Flatterns an OSW dataset for provided tdei_record_id.
          * @summary Flatterns an OSW dataset
          * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {boolean} [override] true to override if any existing data is present, false otherwise
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async datasetFlatternById(tdei_record_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).datasetFlatternById(tdei_record_id, options);
+        async datasetFlatternById(tdei_record_id: string, override?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).datasetFlatternById(tdei_record_id, override, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1634,12 +1648,12 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * Given a dataset tdei_record_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax).
          * @summary Given a dataset tdei_record_id returns the subgraph within a given bounding box.
-         * @param {string} [tdei_record_id] tdei_record_id for a file, represented as a uuid
-         * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async datasetBbox(tdei_record_id?: string, bbox?: Array<number>, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+        async datasetBbox(tdei_record_id: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
             return OSWApiFp(configuration).datasetBbox(tdei_record_id, bbox, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1656,11 +1670,12 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
          * Flatterns an OSW dataset for provided tdei_record_id.
          * @summary Flatterns an OSW dataset
          * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * @param {boolean} [override] true to override if any existing data is present, false otherwise
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async datasetFlatternById(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
-            return OSWApiFp(configuration).datasetFlatternById(tdei_record_id, options).then((request) => request(axios, basePath));
+        async datasetFlatternById(tdei_record_id: string, override?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return OSWApiFp(configuration).datasetFlatternById(tdei_record_id, override, options).then((request) => request(axios, basePath));
         },
         /**
          * Summary of the dataset bounding box request
@@ -1868,13 +1883,13 @@ export class OSWApi extends BaseAPI {
     /**
      * Given a dataset tdei_record_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax).
      * @summary Given a dataset tdei_record_id returns the subgraph within a given bounding box.
-     * @param {string} [tdei_record_id] tdei_record_id for a file, represented as a uuid
-     * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async datasetBbox(tdei_record_id?: string, bbox?: Array<number>, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+    public async datasetBbox(tdei_record_id: string, bbox: Array<number>, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
         return OSWApiFp(this.configuration).datasetBbox(tdei_record_id, bbox, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -1892,12 +1907,13 @@ export class OSWApi extends BaseAPI {
      * Flatterns an OSW dataset for provided tdei_record_id.
      * @summary Flatterns an OSW dataset
      * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * @param {boolean} [override] true to override if any existing data is present, false otherwise
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async datasetFlatternById(tdei_record_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
-        return OSWApiFp(this.configuration).datasetFlatternById(tdei_record_id, options).then((request) => request(this.axios, this.basePath));
+    public async datasetFlatternById(tdei_record_id: string, override?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return OSWApiFp(this.configuration).datasetFlatternById(tdei_record_id, override, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Summary of the dataset bounding box request
