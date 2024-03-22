@@ -16,8 +16,6 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { GtfsFlexDownload } from '../models';
-import { GtfsFlexUpload } from '../models';
 import { VersionList } from '../models';
 /**
  * GTFSFlexApi - axios parameter creator
@@ -26,19 +24,19 @@ import { VersionList } from '../models';
 export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * returns a specific gtfs_flex file identified by the tdei_record_id
-         * @summary returns a gtfs_flex file
-         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * @summary downloads the GTFS Flex files as zip
+         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFlexFile: async (tdei_record_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tdei_record_id' is not null or undefined
-            if (tdei_record_id === null || tdei_record_id === undefined) {
-                throw new RequiredError('tdei_record_id','Required parameter tdei_record_id was null or undefined when calling getFlexFile.');
+        getGtfsFlexFile: async (tdei_dataset_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tdei_dataset_id' is not null or undefined
+            if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
+                throw new RequiredError('tdei_dataset_id','Required parameter tdei_dataset_id was null or undefined when calling getGtfsFlexFile.');
             }
-            const localVarPath = `/api/v1/gtfs-flex/{tdei_record_id}`
-                .replace(`{${"tdei_record_id"}}`, encodeURIComponent(String(tdei_record_id)));
+            const localVarPath = `/api/v1/gtfs-flex/{tdei_dataset_id}`
+                .replace(`{${"tdei_dataset_id"}}`, encodeURIComponent(String(tdei_dataset_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -83,103 +81,12 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * This endpoint returns a json list of all gtfs flex files stored in the TDEI system that meet the specified criteria. Criteria that can be specified include: polygon (bounding box), minimum confidence level, flex version, date time and project group id.  This endpoint can be used by an application developer to obtain a list of gtfs flex files in the TDEI system meeting the specified criteria. This endpoint returns a list of file-metadata including the uris of the file, which can be used to fetch the files themselves.
-         * @summary List flex files meeting specified criteria.
-         * @param {string} [tdei_service_id] Id of the flex service.
-         * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
-         * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-         * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
-         * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-         * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+         * Lists the versions of GTFS Flex data which are supported by TDEI.
+         * @summary List available GTFS Flex versions
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFlexFiles: async (tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/gtfs-flex`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication ApiKey required
-            if (configuration && configuration.apiKey) {
-                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
-                    ? await configuration.apiKey("x-api-key")
-                    : await configuration.apiKey;
-                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-            }
-
-            // authentication AuthorizationToken required
-            // http bearer authentication required
-            if (configuration && configuration.accessToken) {
-                const accessToken = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken()
-                    : await configuration.accessToken;
-                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-            }
-
-            if (tdei_service_id !== undefined) {
-                localVarQueryParameter['tdei_service_id'] = tdei_service_id;
-            }
-
-            if (bbox) {
-                localVarQueryParameter['bbox'] = bbox;
-            }
-
-            if (flex_schema_version !== undefined) {
-                localVarQueryParameter['flex_schema_version'] = flex_schema_version;
-            }
-
-            if (tdei_project_group_id !== undefined) {
-                localVarQueryParameter['tdei_project_group_id'] = tdei_project_group_id;
-            }
-
-            if (date_time !== undefined) {
-                localVarQueryParameter['date_time'] = date_time;
-            }
-
-            if (tdei_record_id !== undefined) {
-                localVarQueryParameter['tdei_record_id'] = tdei_record_id;
-            }
-
-            if (page_no !== undefined) {
-                localVarQueryParameter['page_no'] = page_no;
-            }
-
-            if (page_size !== undefined) {
-                localVarQueryParameter['page_size'] = page_size;
-            }
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.params) {
-                query.set(key, options.params[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.
-         * @summary List available GTFS flex versions
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listFlexVersions: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listGtfsFlexVersions: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/gtfs-flex/versions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -225,23 +132,166 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * This call allows a user to upload or create a new gtfs flex file. The caller must provide metadata about the file. Required metadata includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-         * @summary upload a new gtfs_flex file
-         * @param {GtfsFlexUpload} meta 
-         * @param {Blob} file 
+         * Publishes an GTFS Flex dataset that was previously uploaded via the [POST] /gtfs-flex endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * @summary Publishes the GTFS Flex dataset for the tdei_dataset_id
+         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadGtfsFlexFileForm: async (meta: GtfsFlexUpload, file: Blob, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'meta' is not null or undefined
-            if (meta === null || meta === undefined) {
-                throw new RequiredError('meta','Required parameter meta was null or undefined when calling uploadGtfsFlexFileForm.');
+        publishGtfsFlexFile: async (tdei_dataset_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tdei_dataset_id' is not null or undefined
+            if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
+                throw new RequiredError('tdei_dataset_id','Required parameter tdei_dataset_id was null or undefined when calling publishGtfsFlexFile.');
             }
-            // verify required parameter 'file' is not null or undefined
-            if (file === null || file === undefined) {
-                throw new RequiredError('file','Required parameter file was null or undefined when calling uploadGtfsFlexFileForm.');
+            const localVarPath = `/api/v1/gtfs-flex/publish/{tdei_dataset_id}`
+                .replace(`{${"tdei_dataset_id"}}`, encodeURIComponent(String(tdei_dataset_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
             }
-            const localVarPath = `/api/v1/gtfs-flex`;
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKey required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("x-api-key")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+            }
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This path allows a user to upload pre-release GTFS Flex dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * @summary upload a pre-release of GTFS Flex dataset.
+         * @param {Blob} dataset 
+         * @param {Blob} metadata 
+         * @param {Blob} changeset 
+         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadGtfsFlexFileForm: async (dataset: Blob, metadata: Blob, changeset: Blob, tdei_project_group_id: string, tdei_service_id: string, derived_from_dataset_id?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'dataset' is not null or undefined
+            if (dataset === null || dataset === undefined) {
+                throw new RequiredError('dataset','Required parameter dataset was null or undefined when calling uploadGtfsFlexFileForm.');
+            }
+            // verify required parameter 'metadata' is not null or undefined
+            if (metadata === null || metadata === undefined) {
+                throw new RequiredError('metadata','Required parameter metadata was null or undefined when calling uploadGtfsFlexFileForm.');
+            }
+            // verify required parameter 'changeset' is not null or undefined
+            if (changeset === null || changeset === undefined) {
+                throw new RequiredError('changeset','Required parameter changeset was null or undefined when calling uploadGtfsFlexFileForm.');
+            }
+            // verify required parameter 'tdei_project_group_id' is not null or undefined
+            if (tdei_project_group_id === null || tdei_project_group_id === undefined) {
+                throw new RequiredError('tdei_project_group_id','Required parameter tdei_project_group_id was null or undefined when calling uploadGtfsFlexFileForm.');
+            }
+            // verify required parameter 'tdei_service_id' is not null or undefined
+            if (tdei_service_id === null || tdei_service_id === undefined) {
+                throw new RequiredError('tdei_service_id','Required parameter tdei_service_id was null or undefined when calling uploadGtfsFlexFileForm.');
+            }
+            const localVarPath = `/api/v1/gtfs-flex/upload/{tdei_project_group_id}/{tdei_service_id}`
+                .replace(`{${"tdei_project_group_id"}}`, encodeURIComponent(String(tdei_project_group_id)))
+                .replace(`{${"tdei_service_id"}}`, encodeURIComponent(String(tdei_service_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (derived_from_dataset_id !== undefined) {
+                localVarQueryParameter['derived_from_dataset_id'] = derived_from_dataset_id;
+            }
+
+
+            if (dataset !== undefined) { 
+                localVarFormParams.append('dataset', dataset as any);
+            }
+
+            if (metadata !== undefined) { 
+                localVarFormParams.append('metadata', metadata as any);
+            }
+
+            if (changeset !== undefined) { 
+                localVarFormParams.append('changeset', changeset as any);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Allows a user to validate GTFS Flex dataset to check the correctness of data. Returns the job_id for validation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * @summary Validates the GTFS Flex dataset.
+         * @param {Blob} dataset 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        validateGtfsFlexFileForm: async (dataset: Blob, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'dataset' is not null or undefined
+            if (dataset === null || dataset === undefined) {
+                throw new RequiredError('dataset','Required parameter dataset was null or undefined when calling validateGtfsFlexFileForm.');
+            }
+            const localVarPath = `/api/v1/gtfs-flex/validate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -263,12 +313,8 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
             }
 
 
-            if (meta !== undefined) { 
-                localVarFormParams.append('meta', meta as any);
-            }
-
-            if (file !== undefined) { 
-                localVarFormParams.append('file', file as any);
+            if (dataset !== undefined) { 
+                localVarFormParams.append('dataset', dataset as any);
             }
 
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
@@ -299,63 +345,74 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
 export const GTFSFlexApiFp = function(configuration?: Configuration) {
     return {
         /**
-         * returns a specific gtfs_flex file identified by the tdei_record_id
-         * @summary returns a gtfs_flex file
-         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * @summary downloads the GTFS Flex files as zip
+         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFlexFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).getFlexFile(tdei_record_id, options);
+        async getGtfsFlexFile(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).getGtfsFlexFile(tdei_dataset_id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
         /**
-         * This endpoint returns a json list of all gtfs flex files stored in the TDEI system that meet the specified criteria. Criteria that can be specified include: polygon (bounding box), minimum confidence level, flex version, date time and project group id.  This endpoint can be used by an application developer to obtain a list of gtfs flex files in the TDEI system meeting the specified criteria. This endpoint returns a list of file-metadata including the uris of the file, which can be used to fetch the files themselves.
-         * @summary List flex files meeting specified criteria.
-         * @param {string} [tdei_service_id] Id of the flex service.
-         * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
-         * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-         * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
-         * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-         * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+         * Lists the versions of GTFS Flex data which are supported by TDEI.
+         * @summary List available GTFS Flex versions
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GtfsFlexDownload>>>> {
-            const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options);
+        async listGtfsFlexVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<VersionList>>> {
+            const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).listGtfsFlexVersions(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
         /**
-         * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.
-         * @summary List available GTFS flex versions
+         * Publishes an GTFS Flex dataset that was previously uploaded via the [POST] /gtfs-flex endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * @summary Publishes the GTFS Flex dataset for the tdei_dataset_id
+         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listFlexVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<VersionList>>> {
-            const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).listFlexVersions(options);
+        async publishGtfsFlexFile(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).publishGtfsFlexFile(tdei_dataset_id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
         /**
-         * This call allows a user to upload or create a new gtfs flex file. The caller must provide metadata about the file. Required metadata includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-         * @summary upload a new gtfs_flex file
-         * @param {GtfsFlexUpload} meta 
-         * @param {Blob} file 
+         * This path allows a user to upload pre-release GTFS Flex dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * @summary upload a pre-release of GTFS Flex dataset.
+         * @param {Blob} dataset 
+         * @param {Blob} metadata 
+         * @param {Blob} changeset 
+         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadGtfsFlexFileForm(meta: GtfsFlexUpload, file: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
-            const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).uploadGtfsFlexFileForm(meta, file, options);
+        async uploadGtfsFlexFileForm(dataset: Blob, metadata: Blob, changeset: Blob, tdei_project_group_id: string, tdei_service_id: string, derived_from_dataset_id?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).uploadGtfsFlexFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Allows a user to validate GTFS Flex dataset to check the correctness of data. Returns the job_id for validation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * @summary Validates the GTFS Flex dataset.
+         * @param {Blob} dataset 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async validateGtfsFlexFileForm(dataset: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await GTFSFlexApiAxiosParamCreator(configuration).validateGtfsFlexFileForm(dataset, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -371,51 +428,58 @@ export const GTFSFlexApiFp = function(configuration?: Configuration) {
 export const GTFSFlexApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
-         * returns a specific gtfs_flex file identified by the tdei_record_id
-         * @summary returns a gtfs_flex file
-         * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+         * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * @summary downloads the GTFS Flex files as zip
+         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFlexFile(tdei_record_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return GTFSFlexApiFp(configuration).getFlexFile(tdei_record_id, options).then((request) => request(axios, basePath));
+        async getGtfsFlexFile(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return GTFSFlexApiFp(configuration).getGtfsFlexFile(tdei_dataset_id, options).then((request) => request(axios, basePath));
         },
         /**
-         * This endpoint returns a json list of all gtfs flex files stored in the TDEI system that meet the specified criteria. Criteria that can be specified include: polygon (bounding box), minimum confidence level, flex version, date time and project group id.  This endpoint can be used by an application developer to obtain a list of gtfs flex files in the TDEI system meeting the specified criteria. This endpoint returns a list of file-metadata including the uris of the file, which can be used to fetch the files themselves.
-         * @summary List flex files meeting specified criteria.
-         * @param {string} [tdei_service_id] Id of the flex service.
-         * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
-         * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-         * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
-         * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-         * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
-         * @param {number} [page_no] Integer, defaults to 1.
-         * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+         * Lists the versions of GTFS Flex data which are supported by TDEI.
+         * @summary List available GTFS Flex versions
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GtfsFlexDownload>>> {
-            return GTFSFlexApiFp(configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(axios, basePath));
+        async listGtfsFlexVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>> {
+            return GTFSFlexApiFp(configuration).listGtfsFlexVersions(options).then((request) => request(axios, basePath));
         },
         /**
-         * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.
-         * @summary List available GTFS flex versions
+         * Publishes an GTFS Flex dataset that was previously uploaded via the [POST] /gtfs-flex endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * @summary Publishes the GTFS Flex dataset for the tdei_dataset_id
+         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listFlexVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>> {
-            return GTFSFlexApiFp(configuration).listFlexVersions(options).then((request) => request(axios, basePath));
+        async publishGtfsFlexFile(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return GTFSFlexApiFp(configuration).publishGtfsFlexFile(tdei_dataset_id, options).then((request) => request(axios, basePath));
         },
         /**
-         * This call allows a user to upload or create a new gtfs flex file. The caller must provide metadata about the file. Required metadata includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-         * @summary upload a new gtfs_flex file
-         * @param {GtfsFlexUpload} meta 
-         * @param {Blob} file 
+         * This path allows a user to upload pre-release GTFS Flex dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * @summary upload a pre-release of GTFS Flex dataset.
+         * @param {Blob} dataset 
+         * @param {Blob} metadata 
+         * @param {Blob} changeset 
+         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadGtfsFlexFileForm(meta: GtfsFlexUpload, file: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
-            return GTFSFlexApiFp(configuration).uploadGtfsFlexFileForm(meta, file, options).then((request) => request(axios, basePath));
+        async uploadGtfsFlexFileForm(dataset: Blob, metadata: Blob, changeset: Blob, tdei_project_group_id: string, tdei_service_id: string, derived_from_dataset_id?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return GTFSFlexApiFp(configuration).uploadGtfsFlexFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Allows a user to validate GTFS Flex dataset to check the correctness of data. Returns the job_id for validation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * @summary Validates the GTFS Flex dataset.
+         * @param {Blob} dataset 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async validateGtfsFlexFileForm(dataset: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return GTFSFlexApiFp(configuration).validateGtfsFlexFileForm(dataset, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -428,54 +492,62 @@ export const GTFSFlexApiFactory = function (configuration?: Configuration, baseP
  */
 export class GTFSFlexApi extends BaseAPI {
     /**
-     * returns a specific gtfs_flex file identified by the tdei_record_id
-     * @summary returns a gtfs_flex file
-     * @param {string} tdei_record_id tdei_record_id for a file, represented as a uuid
+     * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * @summary downloads the GTFS Flex files as zip
+     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
      */
-    public async getFlexFile(tdei_record_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return GTFSFlexApiFp(this.configuration).getFlexFile(tdei_record_id, options).then((request) => request(this.axios, this.basePath));
+    public async getGtfsFlexFile(tdei_dataset_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return GTFSFlexApiFp(this.configuration).getGtfsFlexFile(tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * This endpoint returns a json list of all gtfs flex files stored in the TDEI system that meet the specified criteria. Criteria that can be specified include: polygon (bounding box), minimum confidence level, flex version, date time and project group id.  This endpoint can be used by an application developer to obtain a list of gtfs flex files in the TDEI system meeting the specified criteria. This endpoint returns a list of file-metadata including the uris of the file, which can be used to fetch the files themselves.
-     * @summary List flex files meeting specified criteria.
-     * @param {string} [tdei_service_id] Id of the flex service.
-     * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
-     * @param {string} [flex_schema_version] version name of the flex schema version that the application requests. list of versions can be found with /api/v1/gtfs-flex/versions.
-     * @param {string} [tdei_project_group_id] tdei-assigned project group id. Represented as a UUID.
-     * @param {string} [date_time] date-time for which the caller is interested in obtaining files. all files that are valid at the specified date-time and meet the other criteria will be returned.
-     * @param {string} [tdei_record_id] if included, returns the metadata for the specified file, all other parameters will be ignored.
-     * @param {number} [page_no] Integer, defaults to 1.
-     * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
+     * Lists the versions of GTFS Flex data which are supported by TDEI.
+     * @summary List available GTFS Flex versions
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
      */
-    public async listFlexFiles(tdei_service_id?: string, bbox?: Array<number>, flex_schema_version?: string, tdei_project_group_id?: string, date_time?: string, tdei_record_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<GtfsFlexDownload>>> {
-        return GTFSFlexApiFp(this.configuration).listFlexFiles(tdei_service_id, bbox, flex_schema_version, tdei_project_group_id, date_time, tdei_record_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
+    public async listGtfsFlexVersions(options?: AxiosRequestConfig) : Promise<AxiosResponse<VersionList>> {
+        return GTFSFlexApiFp(this.configuration).listGtfsFlexVersions(options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * List GTFS flex versions supported by TDEI.  Returns a json list of the GTFS flex versions supported by TDEI.
-     * @summary List available GTFS flex versions
+     * Publishes an GTFS Flex dataset that was previously uploaded via the [POST] /gtfs-flex endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * @summary Publishes the GTFS Flex dataset for the tdei_dataset_id
+     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
      */
-    public async listFlexVersions(options?: AxiosRequestConfig) : Promise<AxiosResponse<VersionList>> {
-        return GTFSFlexApiFp(this.configuration).listFlexVersions(options).then((request) => request(this.axios, this.basePath));
+    public async publishGtfsFlexFile(tdei_dataset_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return GTFSFlexApiFp(this.configuration).publishGtfsFlexFile(tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * This call allows a user to upload or create a new gtfs flex file. The caller must provide metadata about the file. Required metadata includes information about how and when the data was collected and valid dates of the file. Returns the tdei_record_id of the uploaded file.
-     * @summary upload a new gtfs_flex file
-     * @param {GtfsFlexUpload} meta 
-     * @param {Blob} file 
+     * This path allows a user to upload pre-release GTFS Flex dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * @summary upload a pre-release of GTFS Flex dataset.
+     * @param {Blob} dataset 
+     * @param {Blob} metadata 
+     * @param {Blob} changeset 
+     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
      */
-    public async uploadGtfsFlexFileForm(meta: GtfsFlexUpload, file: Blob, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
-        return GTFSFlexApiFp(this.configuration).uploadGtfsFlexFileForm(meta, file, options).then((request) => request(this.axios, this.basePath));
+    public async uploadGtfsFlexFileForm(dataset: Blob, metadata: Blob, changeset: Blob, tdei_project_group_id: string, tdei_service_id: string, derived_from_dataset_id?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return GTFSFlexApiFp(this.configuration).uploadGtfsFlexFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Allows a user to validate GTFS Flex dataset to check the correctness of data. Returns the job_id for validation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * @summary Validates the GTFS Flex dataset.
+     * @param {Blob} dataset 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GTFSFlexApi
+     */
+    public async validateGtfsFlexFileForm(dataset: Blob, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return GTFSFlexApiFp(this.configuration).validateGtfsFlexFileForm(dataset, options).then((request) => request(this.axios, this.basePath));
     }
 }
