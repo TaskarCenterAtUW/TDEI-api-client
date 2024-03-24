@@ -67,6 +67,12 @@ export interface DatasetItem {
      */
     tdei_project_group_id: string;
     /**
+     * Service id. Represented as UUID. Project Group ids can be retrieved using the /api/v1/services path.
+     * @type {string}
+     * @memberof DatasetItem
+     */
+    tdei_service_id?: string;
+    /**
      * Description of who data was collected by. See Best Practices document for information on how to format this string.
      * @type {string}
      * @memberof DatasetItem
