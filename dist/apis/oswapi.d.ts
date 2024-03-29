@@ -22,20 +22,12 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      * Given a dataset tdei_dataset_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax). Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Given a dataset tdei_dataset_id returns the subgraph within a given bounding box.
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {string} file_type Output file type for a file
      * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    datasetBbox: (tdei_dataset_id: string, bbox: Array<number>, options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     * flattens an OSW dataset for provided tdei_dataset_id.
-     * @summary flattens an OSW dataset
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-     * @param {boolean} [override] true to override if any existing data is present, false otherwise
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    datasetflattenById: (tdei_dataset_id: string, override?: boolean, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    datasetBbox: (tdei_dataset_id: string, file_type: string, bbox: Array<number>, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
      * @summary downloads the OSW files as zip
@@ -109,20 +101,12 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      * Given a dataset tdei_dataset_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax). Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Given a dataset tdei_dataset_id returns the subgraph within a given bounding box.
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {string} file_type Output file type for a file
      * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    datasetBbox(tdei_dataset_id: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
-    /**
-     * flattens an OSW dataset for provided tdei_dataset_id.
-     * @summary flattens an OSW dataset
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-     * @param {boolean} [override] true to override if any existing data is present, false otherwise
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    datasetflattenById(tdei_dataset_id: string, override?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    datasetBbox(tdei_dataset_id: string, file_type: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
     /**
      * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
      * @summary downloads the OSW files as zip
@@ -196,20 +180,12 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * Given a dataset tdei_dataset_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax). Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Given a dataset tdei_dataset_id returns the subgraph within a given bounding box.
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {string} file_type Output file type for a file
      * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    datasetBbox(tdei_dataset_id: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
-    /**
-     * flattens an OSW dataset for provided tdei_dataset_id.
-     * @summary flattens an OSW dataset
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-     * @param {boolean} [override] true to override if any existing data is present, false otherwise
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    datasetflattenById(tdei_dataset_id: string, override?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    datasetBbox(tdei_dataset_id: string, file_type: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
      * @summary downloads the OSW files as zip
@@ -285,22 +261,13 @@ export declare class OSWApi extends BaseAPI {
      * Given a dataset tdei_dataset_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax). Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Given a dataset tdei_dataset_id returns the subgraph within a given bounding box.
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {string} file_type Output file type for a file
      * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    datasetBbox(tdei_dataset_id: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
-    /**
-     * flattens an OSW dataset for provided tdei_dataset_id.
-     * @summary flattens an OSW dataset
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-     * @param {boolean} [override] true to override if any existing data is present, false otherwise
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OSWApi
-     */
-    datasetflattenById(tdei_dataset_id: string, override?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    datasetBbox(tdei_dataset_id: string, file_type: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
      * @summary downloads the OSW files as zip

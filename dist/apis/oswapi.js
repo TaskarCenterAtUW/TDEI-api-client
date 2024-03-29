@@ -91,11 +91,12 @@ var OSWApiAxiosParamCreator = function (configuration) {
          * Given a dataset tdei_dataset_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax). Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Given a dataset tdei_dataset_id returns the subgraph within a given bounding box.
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {string} file_type Output file type for a file
          * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        datasetBbox: function (tdei_dataset_id, bbox, options) {
+        datasetBbox: function (tdei_dataset_id, file_type, bbox, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
@@ -105,6 +106,10 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             // verify required parameter 'tdei_dataset_id' is not null or undefined
                             if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
                                 throw new base_1.RequiredError('tdei_dataset_id', 'Required parameter tdei_dataset_id was null or undefined when calling datasetBbox.');
+                            }
+                            // verify required parameter 'file_type' is not null or undefined
+                            if (file_type === null || file_type === undefined) {
+                                throw new base_1.RequiredError('file_type', 'Required parameter file_type was null or undefined when calling datasetBbox.');
                             }
                             // verify required parameter 'bbox' is not null or undefined
                             if (bbox === null || bbox === undefined) {
@@ -151,87 +156,11 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             if (tdei_dataset_id !== undefined) {
                                 localVarQueryParameter['tdei_dataset_id'] = tdei_dataset_id;
                             }
+                            if (file_type !== undefined) {
+                                localVarQueryParameter['file_type'] = file_type;
+                            }
                             if (bbox) {
                                 localVarQueryParameter['bbox'] = bbox;
-                            }
-                            query = new URLSearchParams(localVarUrlObj.search);
-                            for (key in localVarQueryParameter) {
-                                query.set(key, localVarQueryParameter[key]);
-                            }
-                            for (key in options.params) {
-                                query.set(key, options.params[key]);
-                            }
-                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                            return [2 /*return*/, {
-                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                                    options: localVarRequestOptions,
-                                }];
-                    }
-                });
-            });
-        },
-        /**
-         * flattens an OSW dataset for provided tdei_dataset_id.
-         * @summary flattens an OSW dataset
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {boolean} [override] true to override if any existing data is present, false otherwise
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        datasetflattenById: function (tdei_dataset_id, override, options) {
-            if (options === void 0) { options = {}; }
-            return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
-                        case 0:
-                            // verify required parameter 'tdei_dataset_id' is not null or undefined
-                            if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
-                                throw new base_1.RequiredError('tdei_dataset_id', 'Required parameter tdei_dataset_id was null or undefined when calling datasetflattenById.');
-                            }
-                            localVarPath = "/api/v1/osw/dataset-flatten/{tdei_dataset_id}"
-                                .replace("{".concat("tdei_dataset_id", "}"), encodeURIComponent(String(tdei_dataset_id)));
-                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
-                            if (configuration) {
-                                baseOptions = configuration.baseOptions;
-                            }
-                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
-                            localVarHeaderParameter = {};
-                            localVarQueryParameter = {};
-                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
-                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
-                        case 1:
-                            _a = _c.sent();
-                            return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, configuration.apiKey];
-                        case 3:
-                            _a = _c.sent();
-                            _c.label = 4;
-                        case 4:
-                            localVarApiKeyValue = _a;
-                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _c.label = 5;
-                        case 5:
-                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
-                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
-                            return [4 /*yield*/, configuration.accessToken()];
-                        case 6:
-                            _b = _c.sent();
-                            return [3 /*break*/, 9];
-                        case 7: return [4 /*yield*/, configuration.accessToken];
-                        case 8:
-                            _b = _c.sent();
-                            _c.label = 9;
-                        case 9:
-                            accessToken = _b;
-                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-                            _c.label = 10;
-                        case 10:
-                            if (override !== undefined) {
-                                localVarQueryParameter['override'] = override;
                             }
                             query = new URLSearchParams(localVarUrlObj.search);
                             for (key in localVarQueryParameter) {
@@ -417,7 +346,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
                                 throw new base_1.RequiredError('tdei_dataset_id', 'Required parameter tdei_dataset_id was null or undefined when calling oswConfidenceCalculate.');
                             }
-                            localVarPath = "/api/v1/osw/confidence/calculate/{tdei_dataset_id}"
+                            localVarPath = "/api/v1/osw/confidence/{tdei_dataset_id}"
                                 .replace("{".concat("tdei_dataset_id", "}"), encodeURIComponent(String(tdei_dataset_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
@@ -820,42 +749,17 @@ var OSWApiFp = function (configuration) {
          * Given a dataset tdei_dataset_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax). Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Given a dataset tdei_dataset_id returns the subgraph within a given bounding box.
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {string} file_type Output file type for a file
          * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        datasetBbox: function (tdei_dataset_id, bbox, options) {
+        datasetBbox: function (tdei_dataset_id, file_type, bbox, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).datasetBbox(tdei_dataset_id, bbox, options)];
-                        case 1:
-                            localVarAxiosArgs = _a.sent();
-                            return [2 /*return*/, function (axios, basePath) {
-                                    if (axios === void 0) { axios = axios_1.default; }
-                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
-                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
-                                    return axios.request(axiosRequestArgs);
-                                }];
-                    }
-                });
-            });
-        },
-        /**
-         * flattens an OSW dataset for provided tdei_dataset_id.
-         * @summary flattens an OSW dataset
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {boolean} [override] true to override if any existing data is present, false otherwise
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        datasetflattenById: function (tdei_dataset_id, override, options) {
-            return __awaiter(this, void 0, void 0, function () {
-                var localVarAxiosArgs;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).datasetflattenById(tdei_dataset_id, override, options)];
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).datasetBbox(tdei_dataset_id, file_type, bbox, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1063,29 +967,15 @@ var OSWApiFactory = function (configuration, basePath, axios) {
          * Given a dataset tdei_dataset_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax). Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Given a dataset tdei_dataset_id returns the subgraph within a given bounding box.
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {string} file_type Output file type for a file
          * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        datasetBbox: function (tdei_dataset_id, bbox, options) {
+        datasetBbox: function (tdei_dataset_id, file_type, bbox, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).datasetBbox(tdei_dataset_id, bbox, options).then(function (request) { return request(axios, basePath); })];
-                });
-            });
-        },
-        /**
-         * flattens an OSW dataset for provided tdei_dataset_id.
-         * @summary flattens an OSW dataset
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {boolean} [override] true to override if any existing data is present, false otherwise
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        datasetflattenById: function (tdei_dataset_id, override, options) {
-            return __awaiter(this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).datasetflattenById(tdei_dataset_id, override, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).datasetBbox(tdei_dataset_id, file_type, bbox, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1212,33 +1102,17 @@ var OSWApi = /** @class */ (function (_super) {
      * Given a dataset tdei_dataset_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax). Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Given a dataset tdei_dataset_id returns the subgraph within a given bounding box.
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {string} file_type Output file type for a file
      * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    OSWApi.prototype.datasetBbox = function (tdei_dataset_id, bbox, options) {
+    OSWApi.prototype.datasetBbox = function (tdei_dataset_id, file_type, bbox, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).datasetBbox(tdei_dataset_id, bbox, options).then(function (request) { return request(_this.axios, _this.basePath); })];
-            });
-        });
-    };
-    /**
-     * flattens an OSW dataset for provided tdei_dataset_id.
-     * @summary flattens an OSW dataset
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-     * @param {boolean} [override] true to override if any existing data is present, false otherwise
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OSWApi
-     */
-    OSWApi.prototype.datasetflattenById = function (tdei_dataset_id, override, options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).datasetflattenById(tdei_dataset_id, override, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).datasetBbox(tdei_dataset_id, file_type, bbox, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

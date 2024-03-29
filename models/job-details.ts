@@ -77,6 +77,24 @@ export interface JobDetails {
      * @memberof JobDetails
      */
     response_props?: any;
+    /**
+     * date-time that job was created
+     * @type {string}
+     * @memberof JobDetails
+     */
+    created_at?: string;
+    /**
+     * date-time that job was last updated
+     * @type {string}
+     * @memberof JobDetails
+     */
+    updated_at?: string;
+    /**
+     * data type of the job request
+     * @type {string}
+     * @memberof JobDetails
+     */
+    data_type?: string;
 }
 
 /**
