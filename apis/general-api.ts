@@ -409,12 +409,14 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
          * @summary List project groups
+         * @param {string} [tdei_project_group_id] Search by project group Id.
+         * @param {string} [searchText] Search by project group name.
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listProjectGroups: async (page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listProjectGroups: async (tdei_project_group_id?: string, searchText?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/project-groups`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -441,6 +443,14 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
                     ? await configuration.accessToken()
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (tdei_project_group_id !== undefined) {
+                localVarQueryParameter['tdei_project_group_id'] = tdei_project_group_id;
+            }
+
+            if (searchText !== undefined) {
+                localVarQueryParameter['searchText'] = searchText;
             }
 
             if (page_no !== undefined) {
@@ -470,6 +480,8 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Path used to retrieve the list of Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
          * @summary List Services
+         * @param {string} [tdei_service_id] Search by service Id.
+         * @param {string} [searchText] Search by service name.
          * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
          * @param {string} [service_type] Service type
          * @param {number} [page_no] Integer, defaults to 1.
@@ -477,7 +489,7 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServices: async (tdei_project_group_id?: string, service_type?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listServices: async (tdei_service_id?: string, searchText?: string, tdei_project_group_id?: string, service_type?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/services`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -504,6 +516,14 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
                     ? await configuration.accessToken()
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (tdei_service_id !== undefined) {
+                localVarQueryParameter['tdei_service_id'] = tdei_service_id;
+            }
+
+            if (searchText !== undefined) {
+                localVarQueryParameter['searchText'] = searchText;
             }
 
             if (tdei_project_group_id !== undefined) {
@@ -641,13 +661,15 @@ export const GeneralApiFp = function(configuration?: Configuration) {
         /**
          * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
          * @summary List project groups
+         * @param {string} [tdei_project_group_id] Search by project group Id.
+         * @param {string} [searchText] Search by project group name.
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listProjectGroups(page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<ProjectGroup>>>> {
-            const localVarAxiosArgs = await GeneralApiAxiosParamCreator(configuration).listProjectGroups(page_no, page_size, options);
+        async listProjectGroups(tdei_project_group_id?: string, searchText?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<ProjectGroup>>>> {
+            const localVarAxiosArgs = await GeneralApiAxiosParamCreator(configuration).listProjectGroups(tdei_project_group_id, searchText, page_no, page_size, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -656,6 +678,8 @@ export const GeneralApiFp = function(configuration?: Configuration) {
         /**
          * Path used to retrieve the list of Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
          * @summary List Services
+         * @param {string} [tdei_service_id] Search by service Id.
+         * @param {string} [searchText] Search by service name.
          * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
          * @param {string} [service_type] Service type
          * @param {number} [page_no] Integer, defaults to 1.
@@ -663,8 +687,8 @@ export const GeneralApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listServices(tdei_project_group_id?: string, service_type?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<ServiceModel>>>> {
-            const localVarAxiosArgs = await GeneralApiAxiosParamCreator(configuration).listServices(tdei_project_group_id, service_type, page_no, page_size, options);
+        async listServices(tdei_service_id?: string, searchText?: string, tdei_project_group_id?: string, service_type?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<ServiceModel>>>> {
+            const localVarAxiosArgs = await GeneralApiAxiosParamCreator(configuration).listServices(tdei_service_id, searchText, tdei_project_group_id, service_type, page_no, page_size, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -753,17 +777,21 @@ export const GeneralApiFactory = function (configuration?: Configuration, basePa
         /**
          * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
          * @summary List project groups
+         * @param {string} [tdei_project_group_id] Search by project group Id.
+         * @param {string} [searchText] Search by project group name.
          * @param {number} [page_no] Integer, defaults to 1.
          * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listProjectGroups(page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<ProjectGroup>>> {
-            return GeneralApiFp(configuration).listProjectGroups(page_no, page_size, options).then((request) => request(axios, basePath));
+        async listProjectGroups(tdei_project_group_id?: string, searchText?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<ProjectGroup>>> {
+            return GeneralApiFp(configuration).listProjectGroups(tdei_project_group_id, searchText, page_no, page_size, options).then((request) => request(axios, basePath));
         },
         /**
          * Path used to retrieve the list of Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
          * @summary List Services
+         * @param {string} [tdei_service_id] Search by service Id.
+         * @param {string} [searchText] Search by service name.
          * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
          * @param {string} [service_type] Service type
          * @param {number} [page_no] Integer, defaults to 1.
@@ -771,8 +799,8 @@ export const GeneralApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listServices(tdei_project_group_id?: string, service_type?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<ServiceModel>>> {
-            return GeneralApiFp(configuration).listServices(tdei_project_group_id, service_type, page_no, page_size, options).then((request) => request(axios, basePath));
+        async listServices(tdei_service_id?: string, searchText?: string, tdei_project_group_id?: string, service_type?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<ServiceModel>>> {
+            return GeneralApiFp(configuration).listServices(tdei_service_id, searchText, tdei_project_group_id, service_type, page_no, page_size, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -863,18 +891,22 @@ export class GeneralApi extends BaseAPI {
     /**
      * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
      * @summary List project groups
+     * @param {string} [tdei_project_group_id] Search by project group Id.
+     * @param {string} [searchText] Search by project group name.
      * @param {number} [page_no] Integer, defaults to 1.
      * @param {number} [page_size] page size. integer, between 1 to 50, defaults to 10.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GeneralApi
      */
-    public async listProjectGroups(page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<ProjectGroup>>> {
-        return GeneralApiFp(this.configuration).listProjectGroups(page_no, page_size, options).then((request) => request(this.axios, this.basePath));
+    public async listProjectGroups(tdei_project_group_id?: string, searchText?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<ProjectGroup>>> {
+        return GeneralApiFp(this.configuration).listProjectGroups(tdei_project_group_id, searchText, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Path used to retrieve the list of Services in the TDEI system. Allows callers to get the tdei_service_id id for a service.  Returns the tdei_service_id and service name for all services in the TDEI system.   If tdei_project_group_id param is used, will return services for that project group.
      * @summary List Services
+     * @param {string} [tdei_service_id] Search by service Id.
+     * @param {string} [searchText] Search by service name.
      * @param {string} [tdei_project_group_id] A tdei-assigned id for an project group. project_group_ids can be retrieved using the path /api/v1/project-group.
      * @param {string} [service_type] Service type
      * @param {number} [page_no] Integer, defaults to 1.
@@ -883,7 +915,7 @@ export class GeneralApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GeneralApi
      */
-    public async listServices(tdei_project_group_id?: string, service_type?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<ServiceModel>>> {
-        return GeneralApiFp(this.configuration).listServices(tdei_project_group_id, service_type, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
+    public async listServices(tdei_service_id?: string, searchText?: string, tdei_project_group_id?: string, service_type?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<ServiceModel>>> {
+        return GeneralApiFp(this.configuration).listServices(tdei_service_id, searchText, tdei_project_group_id, service_type, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
     }
 }
