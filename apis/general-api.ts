@@ -209,7 +209,7 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         listDatasetFiles: async (data_type?: string, status?: string, name?: string, version?: string, data_source?: string, collection_method?: string, collected_by?: string, derived_from_dataset_id?: string, collection_date?: string, confidence_level?: number, schema_version?: string, tdei_project_group_id?: string, valid_from?: string, valid_to?: string, tdei_dataset_id?: string, bbox?: Array<number>, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/dataset`;
+            const localVarPath = `/api/v1/datasets`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -338,7 +338,7 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         listJobs: async (job_id?: string, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/job`;
+            const localVarPath = `/api/v1/jobs`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -415,7 +415,7 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         listProjectGroups: async (page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/project-group`;
+            const localVarPath = `/api/v1/project-groups`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;

@@ -322,7 +322,7 @@ var GeneralApiAxiosParamCreator = function (configuration) {
                 return __generator(this, function (_c) {
                     switch (_c.label) {
                         case 0:
-                            localVarPath = "/api/v1/dataset";
+                            localVarPath = "/api/v1/datasets";
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -451,7 +451,7 @@ var GeneralApiAxiosParamCreator = function (configuration) {
                 return __generator(this, function (_c) {
                     switch (_c.label) {
                         case 0:
-                            localVarPath = "/api/v1/job";
+                            localVarPath = "/api/v1/jobs";
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -540,7 +540,7 @@ var GeneralApiAxiosParamCreator = function (configuration) {
                 return __generator(this, function (_c) {
                     switch (_c.label) {
                         case 0:
-                            localVarPath = "/api/v1/project-group";
+                            localVarPath = "/api/v1/project-groups";
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
