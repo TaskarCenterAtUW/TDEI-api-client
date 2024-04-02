@@ -181,14 +181,100 @@ var OSWApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
+         * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
+         * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+         * @param {string} source_dataset_id Dataset from which the road network to be retrieved
+         * @param {string} target_dataset_id Dataset for which the road network is to be tagged
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        datasetTagRoad: function (source_dataset_id, target_dataset_id, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            // verify required parameter 'source_dataset_id' is not null or undefined
+                            if (source_dataset_id === null || source_dataset_id === undefined) {
+                                throw new base_1.RequiredError('source_dataset_id', 'Required parameter source_dataset_id was null or undefined when calling datasetTagRoad.');
+                            }
+                            // verify required parameter 'target_dataset_id' is not null or undefined
+                            if (target_dataset_id === null || target_dataset_id === undefined) {
+                                throw new base_1.RequiredError('target_dataset_id', 'Required parameter target_dataset_id was null or undefined when calling datasetTagRoad.');
+                            }
+                            localVarPath = "/api/v1/osw/dataset-tag-road";
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
+                        case 1:
+                            _a = _c.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
+                        case 3:
+                            _a = _c.sent();
+                            _c.label = 4;
+                        case 4:
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
+                        case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
+                            if (source_dataset_id !== undefined) {
+                                localVarQueryParameter['source_dataset_id'] = source_dataset_id;
+                            }
+                            if (target_dataset_id !== undefined) {
+                                localVarQueryParameter['target_dataset_id'] = target_dataset_id;
+                            }
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
          * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
          * @summary downloads the OSW files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {string} [format] File format to download. Default to osw
+         * @param {string} [file_version] File format to download. Default to osw
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOswFile: function (tdei_dataset_id, format, options) {
+        getOswFile: function (tdei_dataset_id, format, file_version, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
@@ -240,6 +326,9 @@ var OSWApiAxiosParamCreator = function (configuration) {
                         case 10:
                             if (format !== undefined) {
                                 localVarQueryParameter['format'] = format;
+                            }
+                            if (file_version !== undefined) {
+                                localVarQueryParameter['file_version'] = file_version;
                             }
                             query = new URLSearchParams(localVarUrlObj.search);
                             for (key in localVarQueryParameter) {
@@ -773,19 +862,46 @@ var OSWApiFp = function (configuration) {
             });
         },
         /**
-         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
-         * @summary downloads the OSW files as zip
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {string} [format] File format to download. Default to osw
+         * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
+         * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+         * @param {string} source_dataset_id Dataset from which the road network to be retrieved
+         * @param {string} target_dataset_id Dataset for which the road network is to be tagged
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOswFile: function (tdei_dataset_id, format, options) {
+        datasetTagRoad: function (source_dataset_id, target_dataset_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).getOswFile(tdei_dataset_id, format, options)];
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).datasetTagRoad(source_dataset_id, target_dataset_id, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * @summary downloads the OSW files as zip
+         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {string} [format] File format to download. Default to osw
+         * @param {string} [file_version] File format to download. Default to osw
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOswFile: function (tdei_dataset_id, format, file_version, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).getOswFile(tdei_dataset_id, format, file_version, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -980,17 +1096,33 @@ var OSWApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
+         * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
+         * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+         * @param {string} source_dataset_id Dataset from which the road network to be retrieved
+         * @param {string} target_dataset_id Dataset for which the road network is to be tagged
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        datasetTagRoad: function (source_dataset_id, target_dataset_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).datasetTagRoad(source_dataset_id, target_dataset_id, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
          * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
          * @summary downloads the OSW files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {string} [format] File format to download. Default to osw
+         * @param {string} [file_version] File format to download. Default to osw
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOswFile: function (tdei_dataset_id, format, options) {
+        getOswFile: function (tdei_dataset_id, format, file_version, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).getOswFile(tdei_dataset_id, format, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).getOswFile(tdei_dataset_id, format, file_version, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1117,19 +1249,37 @@ var OSWApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
-     * @summary downloads the OSW files as zip
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-     * @param {string} [format] File format to download. Default to osw
+     * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
+     * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+     * @param {string} source_dataset_id Dataset from which the road network to be retrieved
+     * @param {string} target_dataset_id Dataset for which the road network is to be tagged
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    OSWApi.prototype.getOswFile = function (tdei_dataset_id, format, options) {
+    OSWApi.prototype.datasetTagRoad = function (source_dataset_id, target_dataset_id, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).getOswFile(tdei_dataset_id, format, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).datasetTagRoad(source_dataset_id, target_dataset_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * @summary downloads the OSW files as zip
+     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {string} [format] File format to download. Default to osw
+     * @param {string} [file_version] File format to download. Default to osw
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.getOswFile = function (tdei_dataset_id, format, file_version, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).getOswFile(tdei_dataset_id, format, file_version, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
