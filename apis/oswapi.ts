@@ -102,14 +102,84 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
+         * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
+         * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+         * @param {string} source_dataset_id Dataset from which the road network to be retrieved
+         * @param {string} target_dataset_id Dataset for which the road network is to be tagged
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        datasetTagRoad: async (source_dataset_id: string, target_dataset_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'source_dataset_id' is not null or undefined
+            if (source_dataset_id === null || source_dataset_id === undefined) {
+                throw new RequiredError('source_dataset_id','Required parameter source_dataset_id was null or undefined when calling datasetTagRoad.');
+            }
+            // verify required parameter 'target_dataset_id' is not null or undefined
+            if (target_dataset_id === null || target_dataset_id === undefined) {
+                throw new RequiredError('target_dataset_id','Required parameter target_dataset_id was null or undefined when calling datasetTagRoad.');
+            }
+            const localVarPath = `/api/v1/osw/dataset-tag-road`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKey required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("x-api-key")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+            }
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (source_dataset_id !== undefined) {
+                localVarQueryParameter['source_dataset_id'] = source_dataset_id;
+            }
+
+            if (target_dataset_id !== undefined) {
+                localVarQueryParameter['target_dataset_id'] = target_dataset_id;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
          * @summary downloads the OSW files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {string} [format] File format to download. Default to osw
+         * @param {string} [file_version] File format to download. Default to osw
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOswFile: async (tdei_dataset_id: string, format?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getOswFile: async (tdei_dataset_id: string, format?: string, file_version?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tdei_dataset_id' is not null or undefined
             if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
                 throw new RequiredError('tdei_dataset_id','Required parameter tdei_dataset_id was null or undefined when calling getOswFile.');
@@ -145,6 +215,10 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
 
             if (format !== undefined) {
                 localVarQueryParameter['format'] = format;
+            }
+
+            if (file_version !== undefined) {
+                localVarQueryParameter['file_version'] = file_version;
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -583,15 +657,31 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
+         * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+         * @param {string} source_dataset_id Dataset from which the road network to be retrieved
+         * @param {string} target_dataset_id Dataset for which the road network is to be tagged
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async datasetTagRoad(source_dataset_id: string, target_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).datasetTagRoad(source_dataset_id, target_dataset_id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
          * @summary downloads the OSW files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {string} [format] File format to download. Default to osw
+         * @param {string} [file_version] File format to download. Default to osw
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOswFile(tdei_dataset_id: string, format?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).getOswFile(tdei_dataset_id, format, options);
+        async getOswFile(tdei_dataset_id: string, format?: string, file_version?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).getOswFile(tdei_dataset_id, format, file_version, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -709,15 +799,27 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).datasetBbox(tdei_dataset_id, file_type, bbox, options).then((request) => request(axios, basePath));
         },
         /**
+         * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
+         * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+         * @param {string} source_dataset_id Dataset from which the road network to be retrieved
+         * @param {string} target_dataset_id Dataset for which the road network is to be tagged
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async datasetTagRoad(source_dataset_id: string, target_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return OSWApiFp(configuration).datasetTagRoad(source_dataset_id, target_dataset_id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
          * @summary downloads the OSW files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {string} [format] File format to download. Default to osw
+         * @param {string} [file_version] File format to download. Default to osw
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOswFile(tdei_dataset_id: string, format?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return OSWApiFp(configuration).getOswFile(tdei_dataset_id, format, options).then((request) => request(axios, basePath));
+        async getOswFile(tdei_dataset_id: string, format?: string, file_version?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return OSWApiFp(configuration).getOswFile(tdei_dataset_id, format, file_version, options).then((request) => request(axios, basePath));
         },
         /**
          * Lists the versions of OSW data which are supported by TDEI.
@@ -809,16 +911,29 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).datasetBbox(tdei_dataset_id, file_type, bbox, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
-     * @summary downloads the OSW files as zip
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-     * @param {string} [format] File format to download. Default to osw
+     * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
+     * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+     * @param {string} source_dataset_id Dataset from which the road network to be retrieved
+     * @param {string} target_dataset_id Dataset for which the road network is to be tagged
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async getOswFile(tdei_dataset_id: string, format?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return OSWApiFp(this.configuration).getOswFile(tdei_dataset_id, format, options).then((request) => request(this.axios, this.basePath));
+    public async datasetTagRoad(source_dataset_id: string, target_dataset_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return OSWApiFp(this.configuration).datasetTagRoad(source_dataset_id, target_dataset_id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * @summary downloads the OSW files as zip
+     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {string} [format] File format to download. Default to osw
+     * @param {string} [file_version] File format to download. Default to osw
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    public async getOswFile(tdei_dataset_id: string, format?: string, file_version?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return OSWApiFp(this.configuration).getOswFile(tdei_dataset_id, format, file_version, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Lists the versions of OSW data which are supported by TDEI.

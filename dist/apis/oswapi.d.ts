@@ -29,14 +29,24 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      */
     datasetBbox: (tdei_dataset_id: string, file_type: string, bbox: Array<number>, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
+     * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+     * @param {string} source_dataset_id Dataset from which the road network to be retrieved
+     * @param {string} target_dataset_id Dataset for which the road network is to be tagged
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    datasetTagRoad: (source_dataset_id: string, target_dataset_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
      * @summary downloads the OSW files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {string} [format] File format to download. Default to osw
+     * @param {string} [file_version] File format to download. Default to osw
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getOswFile: (tdei_dataset_id: string, format?: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    getOswFile: (tdei_dataset_id: string, format?: string, file_version?: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
@@ -108,14 +118,24 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      */
     datasetBbox(tdei_dataset_id: string, file_type: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
     /**
+     * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
+     * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+     * @param {string} source_dataset_id Dataset from which the road network to be retrieved
+     * @param {string} target_dataset_id Dataset for which the road network is to be tagged
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    datasetTagRoad(source_dataset_id: string, target_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    /**
      * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
      * @summary downloads the OSW files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {string} [format] File format to download. Default to osw
+     * @param {string} [file_version] File format to download. Default to osw
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getOswFile(tdei_dataset_id: string, format?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
+    getOswFile(tdei_dataset_id: string, format?: string, file_version?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
@@ -187,14 +207,24 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      */
     datasetBbox(tdei_dataset_id: string, file_type: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
+     * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
+     * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+     * @param {string} source_dataset_id Dataset from which the road network to be retrieved
+     * @param {string} target_dataset_id Dataset for which the road network is to be tagged
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    datasetTagRoad(source_dataset_id: string, target_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
      * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
      * @summary downloads the OSW files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {string} [format] File format to download. Default to osw
+     * @param {string} [file_version] File format to download. Default to osw
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getOswFile(tdei_dataset_id: string, format?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
+    getOswFile(tdei_dataset_id: string, format?: string, file_version?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
@@ -269,15 +299,26 @@ export declare class OSWApi extends BaseAPI {
      */
     datasetBbox(tdei_dataset_id: string, file_type: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
-     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
-     * @summary downloads the OSW files as zip
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-     * @param {string} [format] File format to download. Default to osw
+     * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
+     * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+     * @param {string} source_dataset_id Dataset from which the road network to be retrieved
+     * @param {string} target_dataset_id Dataset for which the road network is to be tagged
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    getOswFile(tdei_dataset_id: string, format?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
+    datasetTagRoad(source_dataset_id: string, target_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * @summary downloads the OSW files as zip
+     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {string} [format] File format to download. Default to osw
+     * @param {string} [file_version] File format to download. Default to osw
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    getOswFile(tdei_dataset_id: string, format?: string, file_version?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
     /**
      * Lists the versions of OSW data which are supported by TDEI.
      * @summary List available OSW versions
