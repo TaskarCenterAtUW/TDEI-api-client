@@ -175,7 +175,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
          * @summary downloads the OSW files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {string} [format] File format to download. Default to osw
-         * @param {string} [file_version] File format to download. Default to osw
+         * @param {string} [file_version] File version to download. Default to latest
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -676,7 +676,7 @@ export const OSWApiFp = function(configuration?: Configuration) {
          * @summary downloads the OSW files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {string} [format] File format to download. Default to osw
-         * @param {string} [file_version] File format to download. Default to osw
+         * @param {string} [file_version] File version to download. Default to latest
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -814,7 +814,7 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
          * @summary downloads the OSW files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {string} [format] File format to download. Default to osw
-         * @param {string} [file_version] File format to download. Default to osw
+         * @param {string} [file_version] File version to download. Default to latest
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -927,7 +927,7 @@ export class OSWApi extends BaseAPI {
      * @summary downloads the OSW files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {string} [format] File format to download. Default to osw
-     * @param {string} [file_version] File format to download. Default to osw
+     * @param {string} [file_version] File version to download. Default to latest
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
