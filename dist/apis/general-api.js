@@ -295,7 +295,7 @@ var GeneralApiAxiosParamCreator = function (configuration) {
          * This endpoint returns a list of url to zipped geojson files with Dataset data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and Dataset version.
          * @summary List Dataset files meeting criteria.
          * @param {string} [data_type] Data type of the dataset.
-         * @param {string} [status] request for files based on status. The default setting is &#x27;Publish&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
+         * @param {string} [status] request for files based on status. The default setting is &#x27;All&#x27;, lists all datasets. When set to &#x27;Pre-Release&#x27; | &#x27;Publish&#x27;, it includes Pre-Release | Publish datasets for the project groups user belongs.
          * @param {string} [name] dataset name or title.
          * @param {string} [version] dataset version.
          * @param {string} [data_source] data source of the dataset.
@@ -790,7 +790,7 @@ var GeneralApiFp = function (configuration) {
          * This endpoint returns a list of url to zipped geojson files with Dataset data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and Dataset version.
          * @summary List Dataset files meeting criteria.
          * @param {string} [data_type] Data type of the dataset.
-         * @param {string} [status] request for files based on status. The default setting is &#x27;Publish&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
+         * @param {string} [status] request for files based on status. The default setting is &#x27;All&#x27;, lists all datasets. When set to &#x27;Pre-Release&#x27; | &#x27;Publish&#x27;, it includes Pre-Release | Publish datasets for the project groups user belongs.
          * @param {string} [name] dataset name or title.
          * @param {string} [version] dataset version.
          * @param {string} [data_source] data source of the dataset.
@@ -970,7 +970,7 @@ var GeneralApiFactory = function (configuration, basePath, axios) {
          * This endpoint returns a list of url to zipped geojson files with Dataset data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and Dataset version.
          * @summary List Dataset files meeting criteria.
          * @param {string} [data_type] Data type of the dataset.
-         * @param {string} [status] request for files based on status. The default setting is &#x27;Publish&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
+         * @param {string} [status] request for files based on status. The default setting is &#x27;All&#x27;, lists all datasets. When set to &#x27;Pre-Release&#x27; | &#x27;Publish&#x27;, it includes Pre-Release | Publish datasets for the project groups user belongs.
          * @param {string} [name] dataset name or title.
          * @param {string} [version] dataset version.
          * @param {string} [data_source] data source of the dataset.
@@ -1117,7 +1117,7 @@ var GeneralApi = /** @class */ (function (_super) {
      * This endpoint returns a list of url to zipped geojson files with Dataset data that meet the specified criteria. Criteria that can be specified include: a dataset area (polygon), minimum confidence level and Dataset version.
      * @summary List Dataset files meeting criteria.
      * @param {string} [data_type] Data type of the dataset.
-     * @param {string} [status] request for files based on status. The default setting is &#x27;Publish&#x27;, limiting the list to published files only. When set to &#x27;pre-release&#x27;, it includes pre-release files for the project groups user belongs.
+     * @param {string} [status] request for files based on status. The default setting is &#x27;All&#x27;, lists all datasets. When set to &#x27;Pre-Release&#x27; | &#x27;Publish&#x27;, it includes Pre-Release | Publish datasets for the project groups user belongs.
      * @param {string} [name] dataset name or title.
      * @param {string} [version] dataset version.
      * @param {string} [data_source] data source of the dataset.
