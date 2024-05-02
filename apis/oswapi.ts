@@ -289,16 +289,17 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Initiates the confidence calculation for requested tdei_dataset_id. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Initiate Confidence calculation for a dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {Blob} [file] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswConfidenceCalculate: async (tdei_dataset_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        oswConfidenceCalculateForm: async (tdei_dataset_id: string, file?: Blob, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tdei_dataset_id' is not null or undefined
             if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
-                throw new RequiredError('tdei_dataset_id','Required parameter tdei_dataset_id was null or undefined when calling oswConfidenceCalculate.');
+                throw new RequiredError('tdei_dataset_id','Required parameter tdei_dataset_id was null or undefined when calling oswConfidenceCalculateForm.');
             }
             const localVarPath = `/api/v1/osw/confidence/{tdei_dataset_id}`
                 .replace(`{${"tdei_dataset_id"}}`, encodeURIComponent(String(tdei_dataset_id)));
@@ -311,6 +312,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
 
             // authentication ApiKey required
             if (configuration && configuration.apiKey) {
@@ -329,6 +331,12 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
                 localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
             }
 
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -339,6 +347,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -701,14 +710,15 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Initiates the confidence calculation for requested tdei_dataset_id. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Initiate Confidence calculation for a dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {Blob} [file] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswConfidenceCalculate(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswConfidenceCalculate(tdei_dataset_id, options);
+        async oswConfidenceCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswConfidenceCalculateForm(tdei_dataset_id, file, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -831,14 +841,15 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).listOswVersions(options).then((request) => request(axios, basePath));
         },
         /**
-         * Initiates the confidence calculation for requested tdei_dataset_id. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Initiate Confidence calculation for a dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {Blob} [file] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswConfidenceCalculate(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
-            return OSWApiFp(configuration).oswConfidenceCalculate(tdei_dataset_id, options).then((request) => request(axios, basePath));
+        async oswConfidenceCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return OSWApiFp(configuration).oswConfidenceCalculateForm(tdei_dataset_id, file, options).then((request) => request(axios, basePath));
         },
         /**
          * upload a file and request for file format conversion. Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
@@ -946,15 +957,16 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).listOswVersions(options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Initiates the confidence calculation for requested tdei_dataset_id. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Initiate Confidence calculation for a dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {Blob} [file] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async oswConfidenceCalculate(tdei_dataset_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
-        return OSWApiFp(this.configuration).oswConfidenceCalculate(tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
+    public async oswConfidenceCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return OSWApiFp(this.configuration).oswConfidenceCalculateForm(tdei_dataset_id, file, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * upload a file and request for file format conversion. Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.

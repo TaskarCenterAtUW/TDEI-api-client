@@ -1,3 +1,4 @@
+export * from './confidence-tdei-dataset-id-body';
 export * from './dataset-item';
 export * from './feature';
 export * from './geo-json-object';

@@ -55,13 +55,14 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      */
     listOswVersions: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Initiates the confidence calculation for requested tdei_dataset_id. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Initiate Confidence calculation for a dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {Blob} [file]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswConfidenceCalculate: (tdei_dataset_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    oswConfidenceCalculateForm: (tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * upload a file and request for file format conversion. Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary OSW reformatting on demand
@@ -144,13 +145,14 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      */
     listOswVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<VersionList>>>;
     /**
-     * Initiates the confidence calculation for requested tdei_dataset_id. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Initiate Confidence calculation for a dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {Blob} [file]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswConfidenceCalculate(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    oswConfidenceCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
     /**
      * upload a file and request for file format conversion. Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary OSW reformatting on demand
@@ -233,13 +235,14 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      */
     listOswVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>>;
     /**
-     * Initiates the confidence calculation for requested tdei_dataset_id. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Initiate Confidence calculation for a dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {Blob} [file]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswConfidenceCalculate(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    oswConfidenceCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * upload a file and request for file format conversion. Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary OSW reformatting on demand
@@ -328,14 +331,15 @@ export declare class OSWApi extends BaseAPI {
      */
     listOswVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionList>>;
     /**
-     * Initiates the confidence calculation for requested tdei_dataset_id. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Initiate Confidence calculation for a dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {Blob} [file]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    oswConfidenceCalculate(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    oswConfidenceCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * upload a file and request for file format conversion. Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary OSW reformatting on demand

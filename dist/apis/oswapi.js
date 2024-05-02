@@ -418,22 +418,23 @@ var OSWApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * Initiates the confidence calculation for requested tdei_dataset_id. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Initiate Confidence calculation for a dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {Blob} [file]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswConfidenceCalculate: function (tdei_dataset_id, options) {
+        oswConfidenceCalculateForm: function (tdei_dataset_id, file, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
                 return __generator(this, function (_c) {
                     switch (_c.label) {
                         case 0:
                             // verify required parameter 'tdei_dataset_id' is not null or undefined
                             if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
-                                throw new base_1.RequiredError('tdei_dataset_id', 'Required parameter tdei_dataset_id was null or undefined when calling oswConfidenceCalculate.');
+                                throw new base_1.RequiredError('tdei_dataset_id', 'Required parameter tdei_dataset_id was null or undefined when calling oswConfidenceCalculateForm.');
                             }
                             localVarPath = "/api/v1/osw/confidence/{tdei_dataset_id}"
                                 .replace("{".concat("tdei_dataset_id", "}"), encodeURIComponent(String(tdei_dataset_id)));
@@ -444,6 +445,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
                             localVarHeaderParameter = {};
                             localVarQueryParameter = {};
+                            localVarFormParams = new FormData();
                             if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
                             if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.apiKey("x-api-key")];
@@ -474,6 +476,10 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
                             _c.label = 10;
                         case 10:
+                            if (file !== undefined) {
+                                localVarFormParams.append('file', file);
+                            }
+                            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
                             query = new URLSearchParams(localVarUrlObj.search);
                             for (key in localVarQueryParameter) {
                                 query.set(key, localVarQueryParameter[key]);
@@ -484,6 +490,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             localVarUrlObj.search = (new URLSearchParams(query)).toString();
                             headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
                             localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            localVarRequestOptions.data = localVarFormParams;
                             return [2 /*return*/, {
                                     url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
                                     options: localVarRequestOptions,
@@ -939,18 +946,19 @@ var OSWApiFp = function (configuration) {
             });
         },
         /**
-         * Initiates the confidence calculation for requested tdei_dataset_id. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Initiate Confidence calculation for a dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {Blob} [file]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswConfidenceCalculate: function (tdei_dataset_id, options) {
+        oswConfidenceCalculateForm: function (tdei_dataset_id, file, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswConfidenceCalculate(tdei_dataset_id, options)];
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswConfidenceCalculateForm(tdei_dataset_id, file, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1140,16 +1148,17 @@ var OSWApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * Initiates the confidence calculation for requested tdei_dataset_id. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Initiate Confidence calculation for a dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {Blob} [file]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswConfidenceCalculate: function (tdei_dataset_id, options) {
+        oswConfidenceCalculateForm: function (tdei_dataset_id, file, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswConfidenceCalculate(tdei_dataset_id, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswConfidenceCalculateForm(tdei_dataset_id, file, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1299,18 +1308,19 @@ var OSWApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * Initiates the confidence calculation for requested tdei_dataset_id. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Initiate Confidence calculation for a dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {Blob} [file]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    OSWApi.prototype.oswConfidenceCalculate = function (tdei_dataset_id, options) {
+    OSWApi.prototype.oswConfidenceCalculateForm = function (tdei_dataset_id, file, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswConfidenceCalculate(tdei_dataset_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswConfidenceCalculateForm(tdei_dataset_id, file, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
