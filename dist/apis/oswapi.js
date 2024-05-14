@@ -266,7 +266,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
          * @summary downloads the OSW files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {string} [format] File format to download. Default to osw
@@ -895,7 +895,7 @@ var OSWApiFp = function (configuration) {
             });
         },
         /**
-         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
          * @summary downloads the OSW files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {string} [format] File format to download. Default to osw
@@ -1119,7 +1119,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
          * @summary downloads the OSW files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {string} [format] File format to download. Default to osw
@@ -1275,7 +1275,7 @@ var OSWApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
      * @summary downloads the OSW files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {string} [format] File format to download. Default to osw

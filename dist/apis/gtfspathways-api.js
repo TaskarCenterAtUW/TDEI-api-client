@@ -88,7 +88,7 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
     var _this = this;
     return {
         /**
-         * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
          * @summary downloads the GTFS Pathways files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
@@ -478,7 +478,7 @@ exports.GTFSPathwaysApiAxiosParamCreator = GTFSPathwaysApiAxiosParamCreator;
 var GTFSPathwaysApiFp = function (configuration) {
     return {
         /**
-         * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
          * @summary downloads the GTFS Pathways files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
@@ -616,7 +616,7 @@ exports.GTFSPathwaysApiFp = GTFSPathwaysApiFp;
 var GTFSPathwaysApiFactory = function (configuration, basePath, axios) {
     return {
         /**
-         * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
          * @summary downloads the GTFS Pathways files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
@@ -704,7 +704,7 @@ var GTFSPathwaysApi = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
-     * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
      * @summary downloads the GTFS Pathways files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {*} [options] Override http request option.

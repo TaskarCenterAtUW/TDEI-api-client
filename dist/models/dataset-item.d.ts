@@ -9,6 +9,8 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { DatasetItemProjectGroup } from './dataset-item-project-group';
+import { DatasetItemService } from './dataset-item-service';
 import { GeoJsonObject } from './geo-json-object';
 /**
  * represents a osw data file.
@@ -59,17 +61,17 @@ export interface DatasetItem {
      */
     uploaded_timestamp: string;
     /**
-     * tdei-assigned project group id. Represented as UUID. Project Group ids can be retrieved using the /api/v1/project-group path.
-     * @type {string}
+     *
+     * @type {DatasetItemProjectGroup}
      * @memberof DatasetItem
      */
-    tdei_project_group_id: string;
+    project_group: DatasetItemProjectGroup;
     /**
-     * Service id. Represented as UUID. Project Group ids can be retrieved using the /api/v1/services path.
-     * @type {string}
+     *
+     * @type {DatasetItemService}
      * @memberof DatasetItem
      */
-    tdei_service_id?: string;
+    service: DatasetItemService;
     /**
      * Description of who data was collected by. See Best Practices document for information on how to format this string.
      * @type {string}
@@ -123,7 +125,7 @@ export interface DatasetItem {
      * @type {string}
      * @memberof DatasetItem
      */
-    tdei_dataset_id?: string;
+    tdei_dataset_id: string;
     /**
      * version of osw schema this file conforms to
      * @type {string}
