@@ -1,5 +1,7 @@
 export * from './confidence-tdei-dataset-id-body';
 export * from './dataset-item';
+export * from './dataset-item-project-group';
+export * from './dataset-item-service';
 export * from './feature';
 export * from './geo-json-object';
 export * from './geometry';

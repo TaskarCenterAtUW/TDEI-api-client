@@ -16,6 +16,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./confidence-tdei-dataset-id-body"), exports);
 __exportStar(require("./dataset-item"), exports);
+__exportStar(require("./dataset-item-project-group"), exports);
+__exportStar(require("./dataset-item-service"), exports);
 __exportStar(require("./feature"), exports);
 __exportStar(require("./geo-json-object"), exports);
 __exportStar(require("./geometry"), exports);

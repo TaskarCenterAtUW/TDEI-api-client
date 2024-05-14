@@ -19,7 +19,7 @@ import { VersionList } from '../models';
  */
 export declare const GTFSPathwaysApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
-     * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
      * @summary downloads the GTFS Pathways files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {*} [options] Override http request option.
@@ -69,7 +69,7 @@ export declare const GTFSPathwaysApiAxiosParamCreator: (configuration?: Configur
  */
 export declare const GTFSPathwaysApiFp: (configuration?: Configuration) => {
     /**
-     * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
      * @summary downloads the GTFS Pathways files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {*} [options] Override http request option.
@@ -119,7 +119,7 @@ export declare const GTFSPathwaysApiFp: (configuration?: Configuration) => {
  */
 export declare const GTFSPathwaysApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
-     * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
      * @summary downloads the GTFS Pathways files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {*} [options] Override http request option.
@@ -171,7 +171,7 @@ export declare const GTFSPathwaysApiFactory: (configuration?: Configuration, bas
  */
 export declare class GTFSPathwaysApi extends BaseAPI {
     /**
-     * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * returns a specific GTFS Pathways file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
      * @summary downloads the GTFS Pathways files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {*} [options] Override http request option.

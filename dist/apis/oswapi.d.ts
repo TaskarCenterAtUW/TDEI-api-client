@@ -38,7 +38,7 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      */
     datasetTagRoad: (source_dataset_id: string, target_dataset_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
      * @summary downloads the OSW files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {string} [format] File format to download. Default to osw
@@ -128,7 +128,7 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      */
     datasetTagRoad(source_dataset_id: string, target_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
     /**
-     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
      * @summary downloads the OSW files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {string} [format] File format to download. Default to osw
@@ -218,7 +218,7 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      */
     datasetTagRoad(source_dataset_id: string, target_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
-     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
      * @summary downloads the OSW files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {string} [format] File format to download. Default to osw
@@ -312,7 +312,7 @@ export declare class OSWApi extends BaseAPI {
      */
     datasetTagRoad(source_dataset_id: string, target_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
-     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
      * @summary downloads the OSW files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {string} [format] File format to download. Default to osw

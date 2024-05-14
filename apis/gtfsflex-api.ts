@@ -24,7 +24,7 @@ import { VersionList } from '../models';
 export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
          * @summary downloads the GTFS Flex files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
@@ -345,7 +345,7 @@ export const GTFSFlexApiAxiosParamCreator = function (configuration?: Configurat
 export const GTFSFlexApiFp = function(configuration?: Configuration) {
     return {
         /**
-         * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
          * @summary downloads the GTFS Flex files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
@@ -428,7 +428,7 @@ export const GTFSFlexApiFp = function(configuration?: Configuration) {
 export const GTFSFlexApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
-         * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+         * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
          * @summary downloads the GTFS Flex files as zip
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
          * @param {*} [options] Override http request option.
@@ -492,7 +492,7 @@ export const GTFSFlexApiFactory = function (configuration?: Configuration, baseP
  */
 export class GTFSFlexApi extends BaseAPI {
     /**
-     * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_record_id
+     * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
      * @summary downloads the GTFS Flex files as zip
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {*} [options] Override http request option.
