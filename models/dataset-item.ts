@@ -13,7 +13,7 @@
  */
 import { DatasetItemProjectGroup } from './dataset-item-project-group';
 import { DatasetItemService } from './dataset-item-service';
-import { GeoJsonObject } from './geo-json-object';
+import { MetadataModel } from './metadata-model';
 /**
  * represents a osw data file.
  * @export
@@ -27,35 +27,11 @@ export interface DatasetItem {
      */
     status: DatasetItemStatusEnum;
     /**
-     * Dataset name or Title that this data is known by
-     * @type {string}
-     * @memberof DatasetItem
-     */
-    name: string;
-    /**
-     * Free text description of the data
-     * @type {string}
-     * @memberof DatasetItem
-     */
-    description?: string;
-    /**
-     * Dataset version
-     * @type {string}
-     * @memberof DatasetItem
-     */
-    version: string;
-    /**
      * Dataset id from which this dataset was derived
      * @type {string}
      * @memberof DatasetItem
      */
     derived_from_dataset_id?: string;
-    /**
-     * Custom structured JSON metadata
-     * @type {any}
-     * @memberof DatasetItem
-     */
-    custom_metadata?: any;
     /**
      * Uploaded timestamp of the dataset
      * @type {string}
@@ -75,53 +51,11 @@ export interface DatasetItem {
      */
     service: DatasetItemService;
     /**
-     * Description of who data was collected by. See Best Practices document for information on how to format this string.
-     * @type {string}
-     * @memberof DatasetItem
-     */
-    collected_by: string;
-    /**
-     * date-time that data was collected
-     * @type {string}
-     * @memberof DatasetItem
-     */
-    collection_date: string;
-    /**
-     * Method by which the data was collected. See Best Practices document for information on how to format this string.
-     * @type {string}
-     * @memberof DatasetItem
-     */
-    collection_method: DatasetItemCollectionMethodEnum;
-    /**
-     * date from which this file is valid
-     * @type {string}
-     * @memberof DatasetItem
-     */
-    valid_from: string;
-    /**
-     * date until which this data is valid
-     * @type {string}
-     * @memberof DatasetItem
-     */
-    valid_to?: string;
-    /**
      * tdei-generated confidence level. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
      * @type {number}
      * @memberof DatasetItem
      */
     confidence_level: number;
-    /**
-     * Description of data source or sources from which the data was collected. See Best Practices document for information on how to format this string.
-     * @type {string}
-     * @memberof DatasetItem
-     */
-    data_source: DatasetItemDataSourceEnum;
-    /**
-     * 
-     * @type {GeoJsonObject}
-     * @memberof DatasetItem
-     */
-    dataset_area: GeoJsonObject;
     /**
      * unique id identifying the file in the tdei system, can be used to retrieve the file itself.
      * @type {string}
@@ -129,17 +63,17 @@ export interface DatasetItem {
      */
     tdei_dataset_id: string;
     /**
-     * version of osw schema this file conforms to
-     * @type {string}
-     * @memberof DatasetItem
-     */
-    schema_version?: string;
-    /**
      * The url from which this file can be downloaded.
      * @type {string}
      * @memberof DatasetItem
      */
     download_url: string;
+    /**
+     * 
+     * @type {MetadataModel}
+     * @memberof DatasetItem
+     */
+    metadata: MetadataModel;
 }
 
 /**
@@ -149,24 +83,5 @@ export interface DatasetItem {
 export enum DatasetItemStatusEnum {
     PreRelease = 'Pre-Release',
     Publish = 'Publish'
-}
-/**
-    * @export
-    * @enum {string}
-    */
-export enum DatasetItemCollectionMethodEnum {
-    Manual = 'manual',
-    Transform = 'transform',
-    Generated = 'generated',
-    Other = 'other'
-}
-/**
-    * @export
-    * @enum {string}
-    */
-export enum DatasetItemDataSourceEnum {
-    _3rdParty = '3rdParty',
-    TDEITools = 'TDEITools',
-    InHouse = 'InHouse'
 }
 
