@@ -18,21 +18,9 @@
  */
 export interface TdeiProjectGroupIdTdeiServiceIdBody {
     /**
-     * OSW file which is expected to be a zip file, internally has {nodes, edges, points}.geojson. If the extensions are present, then the zip file will have {nodes, edges, points}.extension.geojson files
+     * Metadata file. see [metadata schema](https://raw.githubusercontent.com/TaskarCenterAtUW/TDEI-osw-datasvc-ts/dev/schema/metadata.schema.json)
      * @type {Blob}
      * @memberof TdeiProjectGroupIdTdeiServiceIdBody
      */
-    dataset: Blob;
-    /**
-     * OSW dataset metadata information. see [metadata schema](https://raw.githubusercontent.com/TaskarCenterAtUW/TDEI-osw-datasvc-ts/dev/schema/metadata.schema.json)
-     * @type {Blob}
-     * @memberof TdeiProjectGroupIdTdeiServiceIdBody
-     */
-    metadata: Blob;
-    /**
-     * changeset file captures changes to the sidewalk network that are captured in the OSW dataset
-     * @type {Blob}
-     * @memberof TdeiProjectGroupIdTdeiServiceIdBody
-     */
-    changeset?: Blob;
+    file: Blob;
 }

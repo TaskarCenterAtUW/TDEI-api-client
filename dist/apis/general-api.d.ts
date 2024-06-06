@@ -23,6 +23,17 @@ import { VersionList } from '../models';
  */
 export declare const GeneralApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
+     * Clone the dataset `tdei_dataset_id` to the designated project group `tdei_project_group_id` and service `tdei_service_id`. Returns cloned dataset id if the action is successful.
+     * @summary Clones the provided dataset to the designated project group and service.
+     * @param {Blob} file
+     * @param {string} tdei_dataset_id tdei dataset id to be cloned
+     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    cloneDatasetForm: (file: Blob, tdei_dataset_id: string, tdei_project_group_id: string, tdei_service_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Returns boolean true if the action is successful.
      * @summary Invalidates the Dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
@@ -158,6 +169,17 @@ export declare const GeneralApiAxiosParamCreator: (configuration?: Configuration
  */
 export declare const GeneralApiFp: (configuration?: Configuration) => {
     /**
+     * Clone the dataset `tdei_dataset_id` to the designated project group `tdei_project_group_id` and service `tdei_service_id`. Returns cloned dataset id if the action is successful.
+     * @summary Clones the provided dataset to the designated project group and service.
+     * @param {Blob} file
+     * @param {string} tdei_dataset_id tdei dataset id to be cloned
+     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    cloneDatasetForm(file: Blob, tdei_dataset_id: string, tdei_project_group_id: string, tdei_service_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    /**
      * Returns boolean true if the action is successful.
      * @summary Invalidates the Dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
@@ -292,6 +314,17 @@ export declare const GeneralApiFp: (configuration?: Configuration) => {
  * @export
  */
 export declare const GeneralApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Clone the dataset `tdei_dataset_id` to the designated project group `tdei_project_group_id` and service `tdei_service_id`. Returns cloned dataset id if the action is successful.
+     * @summary Clones the provided dataset to the designated project group and service.
+     * @param {Blob} file
+     * @param {string} tdei_dataset_id tdei dataset id to be cloned
+     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    cloneDatasetForm(file: Blob, tdei_dataset_id: string, tdei_project_group_id: string, tdei_service_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Returns boolean true if the action is successful.
      * @summary Invalidates the Dataset
@@ -429,6 +462,18 @@ export declare const GeneralApiFactory: (configuration?: Configuration, basePath
  * @extends {BaseAPI}
  */
 export declare class GeneralApi extends BaseAPI {
+    /**
+     * Clone the dataset `tdei_dataset_id` to the designated project group `tdei_project_group_id` and service `tdei_service_id`. Returns cloned dataset id if the action is successful.
+     * @summary Clones the provided dataset to the designated project group and service.
+     * @param {Blob} file
+     * @param {string} tdei_dataset_id tdei dataset id to be cloned
+     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GeneralApi
+     */
+    cloneDatasetForm(file: Blob, tdei_dataset_id: string, tdei_project_group_id: string, tdei_service_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Returns boolean true if the action is successful.
      * @summary Invalidates the Dataset
