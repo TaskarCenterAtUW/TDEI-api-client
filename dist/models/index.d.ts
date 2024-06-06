@@ -23,6 +23,7 @@ export * from './service-model';
 export * from './tdei-project-group-id-tdei-service-id-body';
 export * from './tdei-project-group-id-tdei-service-id-body1';
 export * from './tdei-project-group-id-tdei-service-id-body2';
+export * from './tdei-project-group-id-tdei-service-id-body3';
 export * from './token-response';
 export * from './version-list';
 export * from './version-spec';

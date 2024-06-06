@@ -16,19 +16,19 @@
  */
 export interface TdeiProjectGroupIdTdeiServiceIdBody1 {
     /**
-     * GTFS Flex file which is expected to be a zip file, internally has {nodes, edges, points}.geojson. If the extensions are present, then the zip file will have {nodes, edges, points}.extension.geojson files
+     * OSW file which is expected to be a zip file, internally has {nodes, edges, points}.geojson. If the extensions are present, then the zip file will have {nodes, edges, points}.extension.geojson files
      * @type {Blob}
      * @memberof TdeiProjectGroupIdTdeiServiceIdBody1
      */
     dataset: Blob;
     /**
-     * GTFS Flex dataset metadata information. see [metadata schema](https://raw.githubusercontent.com/TaskarCenterAtUW/TDEI-osw-datasvc-ts/dev/schema/metadata.schema.json)
+     * OSW dataset metadata information. see [metadata schema](https://raw.githubusercontent.com/TaskarCenterAtUW/TDEI-osw-datasvc-ts/dev/schema/metadata.schema.json)
      * @type {Blob}
      * @memberof TdeiProjectGroupIdTdeiServiceIdBody1
      */
     metadata: Blob;
     /**
-     * changeset file captures changes to the sidewalk network that are captured in the GTFS Flex dataset
+     * changeset file captures changes to the sidewalk network that are captured in the OSW dataset
      * @type {Blob}
      * @memberof TdeiProjectGroupIdTdeiServiceIdBody1
      */

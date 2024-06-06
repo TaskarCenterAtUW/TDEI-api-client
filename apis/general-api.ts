@@ -28,6 +28,80 @@ import { VersionList } from '../models';
 export const GeneralApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Clone the dataset `tdei_dataset_id` to the designated project group `tdei_project_group_id` and service `tdei_service_id`. Returns cloned dataset id if the action is successful.
+         * @summary Clones the provided dataset to the designated project group and service.
+         * @param {Blob} file 
+         * @param {string} tdei_dataset_id tdei dataset id to be cloned
+         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        cloneDatasetForm: async (file: Blob, tdei_dataset_id: string, tdei_project_group_id: string, tdei_service_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            if (file === null || file === undefined) {
+                throw new RequiredError('file','Required parameter file was null or undefined when calling cloneDatasetForm.');
+            }
+            // verify required parameter 'tdei_dataset_id' is not null or undefined
+            if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
+                throw new RequiredError('tdei_dataset_id','Required parameter tdei_dataset_id was null or undefined when calling cloneDatasetForm.');
+            }
+            // verify required parameter 'tdei_project_group_id' is not null or undefined
+            if (tdei_project_group_id === null || tdei_project_group_id === undefined) {
+                throw new RequiredError('tdei_project_group_id','Required parameter tdei_project_group_id was null or undefined when calling cloneDatasetForm.');
+            }
+            // verify required parameter 'tdei_service_id' is not null or undefined
+            if (tdei_service_id === null || tdei_service_id === undefined) {
+                throw new RequiredError('tdei_service_id','Required parameter tdei_service_id was null or undefined when calling cloneDatasetForm.');
+            }
+            const localVarPath = `/api/v1/dataset/clone/{tdei_dataset_id}/{tdei_project_group_id}/{tdei_service_id}`
+                .replace(`{${"tdei_dataset_id"}}`, encodeURIComponent(String(tdei_dataset_id)))
+                .replace(`{${"tdei_project_group_id"}}`, encodeURIComponent(String(tdei_project_group_id)))
+                .replace(`{${"tdei_service_id"}}`, encodeURIComponent(String(tdei_service_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns boolean true if the action is successful.
          * @summary Invalidates the Dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
@@ -805,6 +879,23 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
 export const GeneralApiFp = function(configuration?: Configuration) {
     return {
         /**
+         * Clone the dataset `tdei_dataset_id` to the designated project group `tdei_project_group_id` and service `tdei_service_id`. Returns cloned dataset id if the action is successful.
+         * @summary Clones the provided dataset to the designated project group and service.
+         * @param {Blob} file 
+         * @param {string} tdei_dataset_id tdei dataset id to be cloned
+         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async cloneDatasetForm(file: Blob, tdei_dataset_id: string, tdei_project_group_id: string, tdei_service_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await GeneralApiAxiosParamCreator(configuration).cloneDatasetForm(file, tdei_dataset_id, tdei_project_group_id, tdei_service_id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Returns boolean true if the action is successful.
          * @summary Invalidates the Dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
@@ -991,6 +1082,19 @@ export const GeneralApiFp = function(configuration?: Configuration) {
 export const GeneralApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
+         * Clone the dataset `tdei_dataset_id` to the designated project group `tdei_project_group_id` and service `tdei_service_id`. Returns cloned dataset id if the action is successful.
+         * @summary Clones the provided dataset to the designated project group and service.
+         * @param {Blob} file 
+         * @param {string} tdei_dataset_id tdei dataset id to be cloned
+         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async cloneDatasetForm(file: Blob, tdei_dataset_id: string, tdei_project_group_id: string, tdei_service_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return GeneralApiFp(configuration).cloneDatasetForm(file, tdei_dataset_id, tdei_project_group_id, tdei_service_id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns boolean true if the action is successful.
          * @summary Invalidates the Dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
@@ -1145,6 +1249,20 @@ export const GeneralApiFactory = function (configuration?: Configuration, basePa
  * @extends {BaseAPI}
  */
 export class GeneralApi extends BaseAPI {
+    /**
+     * Clone the dataset `tdei_dataset_id` to the designated project group `tdei_project_group_id` and service `tdei_service_id`. Returns cloned dataset id if the action is successful.
+     * @summary Clones the provided dataset to the designated project group and service.
+     * @param {Blob} file 
+     * @param {string} tdei_dataset_id tdei dataset id to be cloned
+     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
+     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GeneralApi
+     */
+    public async cloneDatasetForm(file: Blob, tdei_dataset_id: string, tdei_project_group_id: string, tdei_service_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return GeneralApiFp(this.configuration).cloneDatasetForm(file, tdei_dataset_id, tdei_project_group_id, tdei_service_id, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * Returns boolean true if the action is successful.
      * @summary Invalidates the Dataset
