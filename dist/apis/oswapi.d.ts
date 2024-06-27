@@ -12,6 +12,8 @@
 import { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 import { RequestArgs, BaseAPI } from '../base';
+import { OswSpatialjoinBody } from '../models';
+import { QualityMetricRequest } from '../models';
 import { VersionList } from '../models';
 /**
  * OSWApi - axios parameter creator
@@ -73,6 +75,23 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      * @throws {RequiredError}
      */
     oswOnDemandFormatForm: (source: string, target: string, file: Blob, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * @summary Initiate Quality metric calculation for a dataset
+     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {QualityMetricRequest} [body]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswQualityCalculate: (tdei_dataset_id: string, body?: QualityMetricRequest, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
+     * @summary Performs the spatial join operation on the OSW dataset.
+     * @param {OswSpatialjoinBody} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswSpatialJoin: (body: OswSpatialjoinBody, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Publishes the OSW dataset for the tdei_dataset_id
@@ -164,6 +183,23 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      */
     oswOnDemandFormatForm(source: string, target: string, file: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
     /**
+     * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * @summary Initiate Quality metric calculation for a dataset
+     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {QualityMetricRequest} [body]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswQualityCalculate(tdei_dataset_id: string, body?: QualityMetricRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    /**
+     * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
+     * @summary Performs the spatial join operation on the OSW dataset.
+     * @param {OswSpatialjoinBody} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswSpatialJoin(body: OswSpatialjoinBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    /**
      * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Publishes the OSW dataset for the tdei_dataset_id
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
@@ -253,6 +289,23 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @throws {RequiredError}
      */
     oswOnDemandFormatForm(source: string, target: string, file: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * @summary Initiate Quality metric calculation for a dataset
+     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {QualityMetricRequest} [body]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswQualityCalculate(tdei_dataset_id: string, body?: QualityMetricRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
+     * @summary Performs the spatial join operation on the OSW dataset.
+     * @param {OswSpatialjoinBody} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswSpatialJoin(body: OswSpatialjoinBody, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Publishes the OSW dataset for the tdei_dataset_id
@@ -351,6 +404,25 @@ export declare class OSWApi extends BaseAPI {
      * @memberof OSWApi
      */
     oswOnDemandFormatForm(source: string, target: string, file: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * @summary Initiate Quality metric calculation for a dataset
+     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {QualityMetricRequest} [body]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    oswQualityCalculate(tdei_dataset_id: string, body?: QualityMetricRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
+     * @summary Performs the spatial join operation on the OSW dataset.
+     * @param {OswSpatialjoinBody} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    oswSpatialJoin(body: OswSpatialjoinBody, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Publishes the OSW dataset for the tdei_dataset_id
