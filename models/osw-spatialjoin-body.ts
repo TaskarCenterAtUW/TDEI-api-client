@@ -46,7 +46,7 @@ export interface OswSpatialjoinBody {
      * @type {string}
      * @memberof OswSpatialjoinBody
      */
-    join_condition: OswSpatialjoinBodyJoinConditionEnum;
+    join_condition: string;
     /**
      * Transformation on the target geometry (geometry_target)
      * @type {string}
@@ -73,10 +73,10 @@ export interface OswSpatialjoinBody {
     filter_source?: string;
     /**
      * Agrregate function for attribute.all attribute_name/alias will be prefixed with 'ext:'
-     * @type {string}
+     * @type {Array<string>}
      * @memberof OswSpatialjoinBody
      */
-    aggregate?: string;
+    aggregate?: Array<string>;
     /**
      * List of attributes from source, all attributes/alias will be prefixed with 'ext:'
      * @type {Array<string>}
@@ -105,16 +105,5 @@ export enum OswSpatialjoinBodySourceDimensionEnum {
     Point = 'point',
     Line = 'line',
     Polygon = 'polygon'
-}
-/**
-    * @export
-    * @enum {string}
-    */
-export enum OswSpatialjoinBodyJoinConditionEnum {
-    ContainsGeometryTargetGeometrySource = 'ST_Contains(geometry_target, geometry_source)',
-    DWithinGeometryTargetGeometrySourceRadius = 'ST_DWithin(geometry_target, geometry_source, radius)',
-    IntersectsGeometryTargetGeometrySource = 'ST_Intersects(geometry_target, geometry_source)',
-    TouchesGeometryTargetGeometrySource = 'ST_Touches(geometry_target, geometry_source)',
-    WithinGeometryTargetGeometrySource = 'ST_Within(geometry_target, geometry_source)'
 }
 
