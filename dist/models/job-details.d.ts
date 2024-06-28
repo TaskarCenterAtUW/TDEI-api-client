@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { JobProgress } from './job-progress';
 /**
  *
  * @export
@@ -94,18 +93,6 @@ export interface JobDetails {
      * @memberof JobDetails
      */
     data_type?: string;
-    /**
-     * current stage of the job request
-     * @type {string}
-     * @memberof JobDetails
-     */
-    current_stage?: string;
-    /**
-     *
-     * @type {JobProgress}
-     * @memberof JobDetails
-     */
-    progress?: JobProgress;
 }
 /**
     * @export
