@@ -48,41 +48,23 @@ export interface OswSpatialjoinBody {
      */
     join_condition: string;
     /**
-     * Transformation on the target geometry (geometry_target)
-     * @type {string}
-     * @memberof OswSpatialjoinBody
-     */
-    transform_target?: string | null;
-    /**
-     * Transformation on the source geometry (geometry_source)
-     * @type {string}
-     * @memberof OswSpatialjoinBody
-     */
-    transform_source?: string | null;
-    /**
      * Target attribute filters
      * @type {string}
      * @memberof OswSpatialjoinBody
      */
-    filter_target?: string;
+    join_filter_target?: string;
     /**
      * Source attribute filters
      * @type {string}
      * @memberof OswSpatialjoinBody
      */
-    filter_source?: string;
+    join_filter_source?: string;
     /**
      * Agrregate function for attribute.all attribute_name/alias will be prefixed with 'ext:'
      * @type {Array<string>}
      * @memberof OswSpatialjoinBody
      */
     aggregate?: Array<string>;
-    /**
-     * List of attributes from source, all attributes/alias will be prefixed with 'ext:'
-     * @type {Array<string>}
-     * @memberof OswSpatialjoinBody
-     */
-    attributes?: Array<string>;
 }
 
 /**
