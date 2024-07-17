@@ -730,6 +730,7 @@ var GeneralApiAxiosParamCreator = function (configuration) {
          * This endpoint returns a list of jobs with status and request details.
          * @summary List job details.
          * @param {string} [job_id] job_id uniquely identifies the job request.
+         * @param {boolean} [show_group_jobs] Show all the jobs within the project group.
          * @param {string} [job_type] job_type of the job.
          * @param {string} [status] Status of the job.
          * @param {string} [tdei_project_group_id] project group id. Represented as a UUID.
@@ -738,7 +739,7 @@ var GeneralApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listJobs: function (job_id, job_type, status, tdei_project_group_id, page_no, page_size, options) {
+        listJobs: function (job_id, show_group_jobs, job_type, status, tdei_project_group_id, page_no, page_size, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
@@ -785,6 +786,9 @@ var GeneralApiAxiosParamCreator = function (configuration) {
                         case 10:
                             if (job_id !== undefined) {
                                 localVarQueryParameter['job_id'] = job_id;
+                            }
+                            if (show_group_jobs !== undefined) {
+                                localVarQueryParameter['show_group_jobs'] = show_group_jobs;
                             }
                             if (job_type !== undefined) {
                                 localVarQueryParameter['job_type'] = job_type;
@@ -1215,6 +1219,7 @@ var GeneralApiFp = function (configuration) {
          * This endpoint returns a list of jobs with status and request details.
          * @summary List job details.
          * @param {string} [job_id] job_id uniquely identifies the job request.
+         * @param {boolean} [show_group_jobs] Show all the jobs within the project group.
          * @param {string} [job_type] job_type of the job.
          * @param {string} [status] Status of the job.
          * @param {string} [tdei_project_group_id] project group id. Represented as a UUID.
@@ -1223,12 +1228,12 @@ var GeneralApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listJobs: function (job_id, job_type, status, tdei_project_group_id, page_no, page_size, options) {
+        listJobs: function (job_id, show_group_jobs, job_type, status, tdei_project_group_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.GeneralApiAxiosParamCreator)(configuration).listJobs(job_id, job_type, status, tdei_project_group_id, page_no, page_size, options)];
+                        case 0: return [4 /*yield*/, (0, exports.GeneralApiAxiosParamCreator)(configuration).listJobs(job_id, show_group_jobs, job_type, status, tdei_project_group_id, page_no, page_size, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1451,6 +1456,7 @@ var GeneralApiFactory = function (configuration, basePath, axios) {
          * This endpoint returns a list of jobs with status and request details.
          * @summary List job details.
          * @param {string} [job_id] job_id uniquely identifies the job request.
+         * @param {boolean} [show_group_jobs] Show all the jobs within the project group.
          * @param {string} [job_type] job_type of the job.
          * @param {string} [status] Status of the job.
          * @param {string} [tdei_project_group_id] project group id. Represented as a UUID.
@@ -1459,10 +1465,10 @@ var GeneralApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listJobs: function (job_id, job_type, status, tdei_project_group_id, page_no, page_size, options) {
+        listJobs: function (job_id, show_group_jobs, job_type, status, tdei_project_group_id, page_no, page_size, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.GeneralApiFp)(configuration).listJobs(job_id, job_type, status, tdei_project_group_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.GeneralApiFp)(configuration).listJobs(job_id, show_group_jobs, job_type, status, tdei_project_group_id, page_no, page_size, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1671,6 +1677,7 @@ var GeneralApi = /** @class */ (function (_super) {
      * This endpoint returns a list of jobs with status and request details.
      * @summary List job details.
      * @param {string} [job_id] job_id uniquely identifies the job request.
+     * @param {boolean} [show_group_jobs] Show all the jobs within the project group.
      * @param {string} [job_type] job_type of the job.
      * @param {string} [status] Status of the job.
      * @param {string} [tdei_project_group_id] project group id. Represented as a UUID.
@@ -1680,11 +1687,11 @@ var GeneralApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof GeneralApi
      */
-    GeneralApi.prototype.listJobs = function (job_id, job_type, status, tdei_project_group_id, page_no, page_size, options) {
+    GeneralApi.prototype.listJobs = function (job_id, show_group_jobs, job_type, status, tdei_project_group_id, page_no, page_size, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).listJobs(job_id, job_type, status, tdei_project_group_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.GeneralApiFp)(this.configuration).listJobs(job_id, show_group_jobs, job_type, status, tdei_project_group_id, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

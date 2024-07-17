@@ -640,6 +640,7 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
          * This endpoint returns a list of jobs with status and request details.
          * @summary List job details.
          * @param {string} [job_id] job_id uniquely identifies the job request.
+         * @param {boolean} [show_group_jobs] Show all the jobs within the project group.
          * @param {string} [job_type] job_type of the job.
          * @param {string} [status] Status of the job.
          * @param {string} [tdei_project_group_id] project group id. Represented as a UUID.
@@ -648,7 +649,7 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listJobs: async (job_id?: string, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listJobs: async (job_id?: string, show_group_jobs?: boolean, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/jobs`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -679,6 +680,10 @@ export const GeneralApiAxiosParamCreator = function (configuration?: Configurati
 
             if (job_id !== undefined) {
                 localVarQueryParameter['job_id'] = job_id;
+            }
+
+            if (show_group_jobs !== undefined) {
+                localVarQueryParameter['show_group_jobs'] = show_group_jobs;
             }
 
             if (job_type !== undefined) {
@@ -1021,6 +1026,7 @@ export const GeneralApiFp = function(configuration?: Configuration) {
          * This endpoint returns a list of jobs with status and request details.
          * @summary List job details.
          * @param {string} [job_id] job_id uniquely identifies the job request.
+         * @param {boolean} [show_group_jobs] Show all the jobs within the project group.
          * @param {string} [job_type] job_type of the job.
          * @param {string} [status] Status of the job.
          * @param {string} [tdei_project_group_id] project group id. Represented as a UUID.
@@ -1029,8 +1035,8 @@ export const GeneralApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listJobs(job_id?: string, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<JobDetails>>>> {
-            const localVarAxiosArgs = await GeneralApiAxiosParamCreator(configuration).listJobs(job_id, job_type, status, tdei_project_group_id, page_no, page_size, options);
+        async listJobs(job_id?: string, show_group_jobs?: boolean, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<JobDetails>>>> {
+            const localVarAxiosArgs = await GeneralApiAxiosParamCreator(configuration).listJobs(job_id, show_group_jobs, job_type, status, tdei_project_group_id, page_no, page_size, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1200,6 +1206,7 @@ export const GeneralApiFactory = function (configuration?: Configuration, basePa
          * This endpoint returns a list of jobs with status and request details.
          * @summary List job details.
          * @param {string} [job_id] job_id uniquely identifies the job request.
+         * @param {boolean} [show_group_jobs] Show all the jobs within the project group.
          * @param {string} [job_type] job_type of the job.
          * @param {string} [status] Status of the job.
          * @param {string} [tdei_project_group_id] project group id. Represented as a UUID.
@@ -1208,8 +1215,8 @@ export const GeneralApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listJobs(job_id?: string, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<JobDetails>>> {
-            return GeneralApiFp(configuration).listJobs(job_id, job_type, status, tdei_project_group_id, page_no, page_size, options).then((request) => request(axios, basePath));
+        async listJobs(job_id?: string, show_group_jobs?: boolean, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<JobDetails>>> {
+            return GeneralApiFp(configuration).listJobs(job_id, show_group_jobs, job_type, status, tdei_project_group_id, page_no, page_size, options).then((request) => request(axios, basePath));
         },
         /**
          * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
@@ -1374,6 +1381,7 @@ export class GeneralApi extends BaseAPI {
      * This endpoint returns a list of jobs with status and request details.
      * @summary List job details.
      * @param {string} [job_id] job_id uniquely identifies the job request.
+     * @param {boolean} [show_group_jobs] Show all the jobs within the project group.
      * @param {string} [job_type] job_type of the job.
      * @param {string} [status] Status of the job.
      * @param {string} [tdei_project_group_id] project group id. Represented as a UUID.
@@ -1383,8 +1391,8 @@ export class GeneralApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GeneralApi
      */
-    public async listJobs(job_id?: string, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<JobDetails>>> {
-        return GeneralApiFp(this.configuration).listJobs(job_id, job_type, status, tdei_project_group_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
+    public async listJobs(job_id?: string, show_group_jobs?: boolean, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<JobDetails>>> {
+        return GeneralApiFp(this.configuration).listJobs(job_id, show_group_jobs, job_type, status, tdei_project_group_id, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.

@@ -129,6 +129,7 @@ export declare const GeneralApiAxiosParamCreator: (configuration?: Configuration
      * This endpoint returns a list of jobs with status and request details.
      * @summary List job details.
      * @param {string} [job_id] job_id uniquely identifies the job request.
+     * @param {boolean} [show_group_jobs] Show all the jobs within the project group.
      * @param {string} [job_type] job_type of the job.
      * @param {string} [status] Status of the job.
      * @param {string} [tdei_project_group_id] project group id. Represented as a UUID.
@@ -137,7 +138,7 @@ export declare const GeneralApiAxiosParamCreator: (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listJobs: (job_id?: string, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    listJobs: (job_id?: string, show_group_jobs?: boolean, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
      * @summary List project groups
@@ -275,6 +276,7 @@ export declare const GeneralApiFp: (configuration?: Configuration) => {
      * This endpoint returns a list of jobs with status and request details.
      * @summary List job details.
      * @param {string} [job_id] job_id uniquely identifies the job request.
+     * @param {boolean} [show_group_jobs] Show all the jobs within the project group.
      * @param {string} [job_type] job_type of the job.
      * @param {string} [status] Status of the job.
      * @param {string} [tdei_project_group_id] project group id. Represented as a UUID.
@@ -283,7 +285,7 @@ export declare const GeneralApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listJobs(job_id?: string, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<JobDetails>>>>;
+    listJobs(job_id?: string, show_group_jobs?: boolean, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<JobDetails>>>>;
     /**
      * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
      * @summary List project groups
@@ -421,6 +423,7 @@ export declare const GeneralApiFactory: (configuration?: Configuration, basePath
      * This endpoint returns a list of jobs with status and request details.
      * @summary List job details.
      * @param {string} [job_id] job_id uniquely identifies the job request.
+     * @param {boolean} [show_group_jobs] Show all the jobs within the project group.
      * @param {string} [job_type] job_type of the job.
      * @param {string} [status] Status of the job.
      * @param {string} [tdei_project_group_id] project group id. Represented as a UUID.
@@ -429,7 +432,7 @@ export declare const GeneralApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    listJobs(job_id?: string, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<JobDetails>>>;
+    listJobs(job_id?: string, show_group_jobs?: boolean, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<JobDetails>>>;
     /**
      * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
      * @summary List project groups
@@ -575,6 +578,7 @@ export declare class GeneralApi extends BaseAPI {
      * This endpoint returns a list of jobs with status and request details.
      * @summary List job details.
      * @param {string} [job_id] job_id uniquely identifies the job request.
+     * @param {boolean} [show_group_jobs] Show all the jobs within the project group.
      * @param {string} [job_type] job_type of the job.
      * @param {string} [status] Status of the job.
      * @param {string} [tdei_project_group_id] project group id. Represented as a UUID.
@@ -584,7 +588,7 @@ export declare class GeneralApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GeneralApi
      */
-    listJobs(job_id?: string, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<JobDetails>>>;
+    listJobs(job_id?: string, show_group_jobs?: boolean, job_type?: string, status?: string, tdei_project_group_id?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<JobDetails>>>;
     /**
      * Path used to retrieve the list of project groups with data in the TDEI system. Allows callers to get the tdei_project_group_id id for an project group.  Returns the tdei_project_group_id and project group information for all project groups with data in the TDEI system.
      * @summary List project groups

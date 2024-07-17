@@ -101,6 +101,15 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      */
     publishOswFile: (tdei_dataset_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Calculates the quality metric on a dataset element tags for requested tdei_dataset_id. Returns the tag quality metric for the dataset element tags.
+     * @summary Calculates the quality metric on a dataset element tags
+     * @param {Blob} file
+     * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    qualityMetricTagForm: (file: Blob, tdei_dataset_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary upload a pre-release of OSW dataset.
      * @param {Blob} dataset
@@ -208,6 +217,15 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      */
     publishOswFile(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
     /**
+     * Calculates the quality metric on a dataset element tags for requested tdei_dataset_id. Returns the tag quality metric for the dataset element tags.
+     * @summary Calculates the quality metric on a dataset element tags
+     * @param {Blob} file
+     * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    qualityMetricTagForm(file: Blob, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>>;
+    /**
      * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary upload a pre-release of OSW dataset.
      * @param {Blob} dataset
@@ -314,6 +332,15 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @throws {RequiredError}
      */
     publishOswFile(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Calculates the quality metric on a dataset element tags for requested tdei_dataset_id. Returns the tag quality metric for the dataset element tags.
+     * @summary Calculates the quality metric on a dataset element tags
+     * @param {Blob} file
+     * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    qualityMetricTagForm(file: Blob, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<any>>;
     /**
      * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary upload a pre-release of OSW dataset.
@@ -432,6 +459,16 @@ export declare class OSWApi extends BaseAPI {
      * @memberof OSWApi
      */
     publishOswFile(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Calculates the quality metric on a dataset element tags for requested tdei_dataset_id. Returns the tag quality metric for the dataset element tags.
+     * @summary Calculates the quality metric on a dataset element tags
+     * @param {Blob} file
+     * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    qualityMetricTagForm(file: Blob, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<any>>;
     /**
      * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary upload a pre-release of OSW dataset.
