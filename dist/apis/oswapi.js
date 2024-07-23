@@ -191,9 +191,9 @@ var OSWApiAxiosParamCreator = function (configuration) {
         datasetTagRoad: function (source_dataset_id, target_dataset_id, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, accessToken, _a, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
                         case 0:
                             // verify required parameter 'source_dataset_id' is not null or undefined
                             if (source_dataset_id === null || source_dataset_id === undefined) {
@@ -211,36 +211,21 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
                             localVarHeaderParameter = {};
                             localVarQueryParameter = {};
-                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
-                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
-                        case 1:
-                            _a = _c.sent();
-                            return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, configuration.apiKey];
-                        case 3:
-                            _a = _c.sent();
-                            _c.label = 4;
-                        case 4:
-                            localVarApiKeyValue = _a;
-                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _c.label = 5;
-                        case 5:
-                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
-                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.accessToken()];
-                        case 6:
-                            _b = _c.sent();
-                            return [3 /*break*/, 9];
-                        case 7: return [4 /*yield*/, configuration.accessToken];
-                        case 8:
-                            _b = _c.sent();
-                            _c.label = 9;
-                        case 9:
-                            accessToken = _b;
+                        case 1:
+                            _a = _b.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.accessToken];
+                        case 3:
+                            _a = _b.sent();
+                            _b.label = 4;
+                        case 4:
+                            accessToken = _a;
                             localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-                            _c.label = 10;
-                        case 10:
+                            _b.label = 5;
+                        case 5:
                             if (source_dataset_id !== undefined) {
                                 localVarQueryParameter['source_dataset_id'] = source_dataset_id;
                             }
@@ -684,9 +669,9 @@ var OSWApiAxiosParamCreator = function (configuration) {
         oswSpatialJoin: function (body, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, accessToken, _a, query, key, key, headersFromBaseOptions, needsSerialization;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions, needsSerialization;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             // verify required parameter 'body' is not null or undefined
                             if (body === null || body === undefined) {
@@ -700,21 +685,36 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
                             localVarHeaderParameter = {};
                             localVarQueryParameter = {};
-                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 5];
-                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, configuration.accessToken()];
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
                         case 1:
-                            _a = _b.sent();
+                            _a = _c.sent();
                             return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, configuration.accessToken];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
                         case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
+                            _a = _c.sent();
+                            _c.label = 4;
                         case 4:
-                            accessToken = _a;
-                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-                            _b.label = 5;
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
                         case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
                             localVarHeaderParameter['Content-Type'] = 'application/json';
                             query = new URLSearchParams(localVarUrlObj.search);
                             for (key in localVarQueryParameter) {
@@ -822,9 +822,9 @@ var OSWApiAxiosParamCreator = function (configuration) {
         qualityMetricTagForm: function (file, tdei_dataset_id, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, accessToken, _a, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
                         case 0:
                             // verify required parameter 'file' is not null or undefined
                             if (file === null || file === undefined) {
@@ -844,21 +844,36 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             localVarHeaderParameter = {};
                             localVarQueryParameter = {};
                             localVarFormParams = new FormData();
-                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 5];
-                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, configuration.accessToken()];
+                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
                         case 1:
-                            _a = _b.sent();
+                            _a = _c.sent();
                             return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, configuration.accessToken];
+                        case 2: return [4 /*yield*/, configuration.apiKey];
                         case 3:
-                            _a = _b.sent();
-                            _b.label = 4;
+                            _a = _c.sent();
+                            _c.label = 4;
                         case 4:
-                            accessToken = _a;
-                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-                            _b.label = 5;
+                            localVarApiKeyValue = _a;
+                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+                            _c.label = 5;
                         case 5:
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 6:
+                            _b = _c.sent();
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, configuration.accessToken];
+                        case 8:
+                            _b = _c.sent();
+                            _c.label = 9;
+                        case 9:
+                            accessToken = _b;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _c.label = 10;
+                        case 10:
                             if (file !== undefined) {
                                 localVarFormParams.append('file', file);
                             }
