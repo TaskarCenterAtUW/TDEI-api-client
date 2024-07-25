@@ -22,6 +22,5 @@ var JobDetailsJobTypeEnum;
     JobDetailsJobTypeEnum["DatasetUpload"] = "Dataset-Upload";
     JobDetailsJobTypeEnum["DatasetPublish"] = "Dataset-Publish";
     JobDetailsJobTypeEnum["DatasetValidate"] = "Dataset-Validate";
-    JobDetailsJobTypeEnum["DatasetFlatten"] = "Dataset-Flatten";
     JobDetailsJobTypeEnum["DatasetQueries"] = "Dataset-Queries";
 })(JobDetailsJobTypeEnum = exports.JobDetailsJobTypeEnum || (exports.JobDetailsJobTypeEnum = {}));

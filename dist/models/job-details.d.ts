@@ -126,6 +126,5 @@ export declare enum JobDetailsJobTypeEnum {
     DatasetUpload = "Dataset-Upload",
     DatasetPublish = "Dataset-Publish",
     DatasetValidate = "Dataset-Validate",
-    DatasetFlatten = "Dataset-Flatten",
     DatasetQueries = "Dataset-Queries"
 }
