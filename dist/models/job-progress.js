@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.JobProgressCurrentStatusEnum = void 0;
+exports.JobProgressCurrentStateEnum = void 0;
 /**
     * @export
     * @enum {string}
     */
-var JobProgressCurrentStatusEnum;
-(function (JobProgressCurrentStatusEnum) {
-    JobProgressCurrentStatusEnum["COMPLETED"] = "COMPLETED";
-    JobProgressCurrentStatusEnum["FAILED"] = "FAILED";
-    JobProgressCurrentStatusEnum["INPROGRESS"] = "IN-PROGRESS";
-})(JobProgressCurrentStatusEnum = exports.JobProgressCurrentStatusEnum || (exports.JobProgressCurrentStatusEnum = {}));
+var JobProgressCurrentStateEnum;
+(function (JobProgressCurrentStateEnum) {
+    JobProgressCurrentStateEnum["COMPLETED"] = "COMPLETED";
+    JobProgressCurrentStateEnum["FAILED"] = "FAILED";
+    JobProgressCurrentStateEnum["INPROGRESS"] = "IN-PROGRESS";
+})(JobProgressCurrentStateEnum = exports.JobProgressCurrentStateEnum || (exports.JobProgressCurrentStateEnum = {}));

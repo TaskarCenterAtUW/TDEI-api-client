@@ -34,17 +34,17 @@ export interface JobProgress {
      */
     completed_stages?: number;
     /**
-     * status of the job in current stage
+     * status of the job in current state
      * @type {string}
      * @memberof JobProgress
      */
-    current_status?: JobProgressCurrentStatusEnum;
+    current_state?: JobProgressCurrentStateEnum;
     /**
      * percentage of the current stage completed
      * @type {number}
      * @memberof JobProgress
      */
-    current_stage_percentage?: number;
+    current_stage_percent_done?: number;
     /**
      * date-time that job was last updated
      * @type {string}
@@ -56,7 +56,7 @@ export interface JobProgress {
     * @export
     * @enum {string}
     */
-export declare enum JobProgressCurrentStatusEnum {
+export declare enum JobProgressCurrentStateEnum {
     COMPLETED = "COMPLETED",
     FAILED = "FAILED",
     INPROGRESS = "IN-PROGRESS"
