@@ -584,20 +584,21 @@ var OSWApiAxiosParamCreator = function (configuration) {
          * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Initiate Quality metric calculation for a dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {QualityMetricRequest} [body]
+         * @param {Blob} [file]
+         * @param {string} [algorithm]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswQualityCalculate: function (tdei_dataset_id, body, options) {
+        oswQualityCalculateForm: function (tdei_dataset_id, file, algorithm, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions, needsSerialization;
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
                 return __generator(this, function (_c) {
                     switch (_c.label) {
                         case 0:
                             // verify required parameter 'tdei_dataset_id' is not null or undefined
                             if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
-                                throw new base_1.RequiredError('tdei_dataset_id', 'Required parameter tdei_dataset_id was null or undefined when calling oswQualityCalculate.');
+                                throw new base_1.RequiredError('tdei_dataset_id', 'Required parameter tdei_dataset_id was null or undefined when calling oswQualityCalculateForm.');
                             }
                             localVarPath = "/api/v1/osw/quality-metric/{tdei_dataset_id}"
                                 .replace("{".concat("tdei_dataset_id", "}"), encodeURIComponent(String(tdei_dataset_id)));
@@ -608,6 +609,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
                             localVarHeaderParameter = {};
                             localVarQueryParameter = {};
+                            localVarFormParams = new FormData();
                             if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
                             if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.apiKey("x-api-key")];
@@ -638,7 +640,13 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
                             _c.label = 10;
                         case 10:
-                            localVarHeaderParameter['Content-Type'] = 'application/json';
+                            if (file !== undefined) {
+                                localVarFormParams.append('file', file);
+                            }
+                            if (algorithm !== undefined) {
+                                localVarFormParams.append('algorithm', algorithm);
+                            }
+                            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
                             query = new URLSearchParams(localVarUrlObj.search);
                             for (key in localVarQueryParameter) {
                                 query.set(key, localVarQueryParameter[key]);
@@ -649,8 +657,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
                             localVarUrlObj.search = (new URLSearchParams(query)).toString();
                             headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
                             localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                            needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-                            localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+                            localVarRequestOptions.data = localVarFormParams;
                             return [2 /*return*/, {
                                     url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
                                     options: localVarRequestOptions,
@@ -1229,16 +1236,17 @@ var OSWApiFp = function (configuration) {
          * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Initiate Quality metric calculation for a dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {QualityMetricRequest} [body]
+         * @param {Blob} [file]
+         * @param {string} [algorithm]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswQualityCalculate: function (tdei_dataset_id, body, options) {
+        oswQualityCalculateForm: function (tdei_dataset_id, file, algorithm, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswQualityCalculate(tdei_dataset_id, body, options)];
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswQualityCalculateForm(tdei_dataset_id, file, algorithm, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1486,14 +1494,15 @@ var OSWApiFactory = function (configuration, basePath, axios) {
          * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Initiate Quality metric calculation for a dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {QualityMetricRequest} [body]
+         * @param {Blob} [file]
+         * @param {string} [algorithm]
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswQualityCalculate: function (tdei_dataset_id, body, options) {
+        oswQualityCalculateForm: function (tdei_dataset_id, file, algorithm, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswQualityCalculate(tdei_dataset_id, body, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswQualityCalculateForm(tdei_dataset_id, file, algorithm, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1694,16 +1703,17 @@ var OSWApi = /** @class */ (function (_super) {
      * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Initiate Quality metric calculation for a dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-     * @param {QualityMetricRequest} [body]
+     * @param {Blob} [file]
+     * @param {string} [algorithm]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    OSWApi.prototype.oswQualityCalculate = function (tdei_dataset_id, body, options) {
+    OSWApi.prototype.oswQualityCalculateForm = function (tdei_dataset_id, file, algorithm, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswQualityCalculate(tdei_dataset_id, body, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswQualityCalculateForm(tdei_dataset_id, file, algorithm, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

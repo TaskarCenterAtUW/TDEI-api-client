@@ -39,6 +39,7 @@ __exportStar(require("./osw-validate-body"), exports);
 __exportStar(require("./project-group"), exports);
 __exportStar(require("./quality-metric-request"), exports);
 __exportStar(require("./quality-metric-tag-response"), exports);
+__exportStar(require("./qualitymetric-tdei-dataset-id-body"), exports);
 __exportStar(require("./service-model"), exports);
 __exportStar(require("./tag-tdei-dataset-id-body"), exports);
 __exportStar(require("./tdei-project-group-id-tdei-service-id-body"), exports);
