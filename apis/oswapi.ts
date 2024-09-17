@@ -17,7 +17,6 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { OswSpatialjoinBody } from '../models';
-import { QualityMetricRequest } from '../models';
 import { QualityMetricTagResponse } from '../models';
 import { VersionList } from '../models';
 /**
@@ -435,14 +434,15 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
          * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Initiate Quality metric calculation for a dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {QualityMetricRequest} [body] 
+         * @param {Blob} [file] 
+         * @param {string} [algorithm] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswQualityCalculate: async (tdei_dataset_id: string, body?: QualityMetricRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        oswQualityCalculateForm: async (tdei_dataset_id: string, file?: Blob, algorithm?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tdei_dataset_id' is not null or undefined
             if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
-                throw new RequiredError('tdei_dataset_id','Required parameter tdei_dataset_id was null or undefined when calling oswQualityCalculate.');
+                throw new RequiredError('tdei_dataset_id','Required parameter tdei_dataset_id was null or undefined when calling oswQualityCalculateForm.');
             }
             const localVarPath = `/api/v1/osw/quality-metric/{tdei_dataset_id}`
                 .replace(`{${"tdei_dataset_id"}}`, encodeURIComponent(String(tdei_dataset_id)));
@@ -455,6 +455,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
 
             // authentication ApiKey required
             if (configuration && configuration.apiKey) {
@@ -473,8 +474,16 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
                 localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
             }
 
-            localVarHeaderParameter['Content-Type'] = 'application/json';
 
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+
+            if (algorithm !== undefined) { 
+                localVarFormParams.append('algorithm', algorithm as any);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -485,8 +494,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -931,12 +939,13 @@ export const OSWApiFp = function(configuration?: Configuration) {
          * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Initiate Quality metric calculation for a dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {QualityMetricRequest} [body] 
+         * @param {Blob} [file] 
+         * @param {string} [algorithm] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswQualityCalculate(tdei_dataset_id: string, body?: QualityMetricRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswQualityCalculate(tdei_dataset_id, body, options);
+        async oswQualityCalculateForm(tdei_dataset_id: string, file?: Blob, algorithm?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswQualityCalculateForm(tdei_dataset_id, file, algorithm, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1098,12 +1107,13 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
          * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Initiate Quality metric calculation for a dataset
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {QualityMetricRequest} [body] 
+         * @param {Blob} [file] 
+         * @param {string} [algorithm] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswQualityCalculate(tdei_dataset_id: string, body?: QualityMetricRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
-            return OSWApiFp(configuration).oswQualityCalculate(tdei_dataset_id, body, options).then((request) => request(axios, basePath));
+        async oswQualityCalculateForm(tdei_dataset_id: string, file?: Blob, algorithm?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return OSWApiFp(configuration).oswQualityCalculateForm(tdei_dataset_id, file, algorithm, options).then((request) => request(axios, basePath));
         },
         /**
          * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
@@ -1248,13 +1258,14 @@ export class OSWApi extends BaseAPI {
      * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Initiate Quality metric calculation for a dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-     * @param {QualityMetricRequest} [body] 
+     * @param {Blob} [file] 
+     * @param {string} [algorithm] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async oswQualityCalculate(tdei_dataset_id: string, body?: QualityMetricRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
-        return OSWApiFp(this.configuration).oswQualityCalculate(tdei_dataset_id, body, options).then((request) => request(this.axios, this.basePath));
+    public async oswQualityCalculateForm(tdei_dataset_id: string, file?: Blob, algorithm?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return OSWApiFp(this.configuration).oswQualityCalculateForm(tdei_dataset_id, file, algorithm, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.

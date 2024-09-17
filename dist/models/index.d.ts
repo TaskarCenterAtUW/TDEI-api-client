@@ -23,6 +23,7 @@ export * from './osw-validate-body';
 export * from './project-group';
 export * from './quality-metric-request';
 export * from './quality-metric-tag-response';
+export * from './qualitymetric-tdei-dataset-id-body';
 export * from './service-model';
 export * from './tag-tdei-dataset-id-body';
 export * from './tdei-project-group-id-tdei-service-id-body';
