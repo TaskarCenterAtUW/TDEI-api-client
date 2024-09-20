@@ -12,4 +12,5 @@
 export * from './apis/gtfsflex-api';
 export * from './apis/gtfspathways-api';
 export * from './apis/general-api';
+export * from './apis/metrics-api';
 export * from './apis/oswapi';

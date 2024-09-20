@@ -30,4 +30,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./apis/gtfsflex-api"), exports);
 __exportStar(require("./apis/gtfspathways-api"), exports);
 __exportStar(require("./apis/general-api"), exports);
+__exportStar(require("./apis/metrics-api"), exports);
 __exportStar(require("./apis/oswapi"), exports);
