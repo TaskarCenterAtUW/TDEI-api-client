@@ -85,7 +85,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Request for password recovery, sends an email with a link to reset the password.
+         * Request for password recovery, sends an email with a link to reset the password for given email.
          * @summary Request for password recovery
          * @param {string} body 
          * @param {*} [options] Override http request option.
@@ -204,6 +204,66 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Request for email verification link, sends an email verification link for given email
+         * @summary Request for email verification link
+         * @param {string} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        verifyEmail: async (body: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling verifyEmail.');
+            }
+            const localVarPath = `/api/v1/verify-email`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKey required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("x-api-key")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+            }
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'text/plain';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -228,7 +288,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Request for password recovery, sends an email with a link to reset the password.
+         * Request for password recovery, sends an email with a link to reset the password for given email.
          * @summary Request for password recovery
          * @param {string} body 
          * @param {*} [options] Override http request option.
@@ -255,6 +315,20 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
+        /**
+         * Request for email verification link, sends an email verification link for given email
+         * @summary Request for email verification link
+         * @param {string} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async verifyEmail(body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await AuthenticationApiAxiosParamCreator(configuration).verifyEmail(body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
     }
 };
 
@@ -275,7 +349,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return AuthenticationApiFp(configuration).authenticate(body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Request for password recovery, sends an email with a link to reset the password.
+         * Request for password recovery, sends an email with a link to reset the password for given email.
          * @summary Request for password recovery
          * @param {string} body 
          * @param {*} [options] Override http request option.
@@ -293,6 +367,16 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          */
         async refreshToken(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>> {
             return AuthenticationApiFp(configuration).refreshToken(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Request for email verification link, sends an email verification link for given email
+         * @summary Request for email verification link
+         * @param {string} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async verifyEmail(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return AuthenticationApiFp(configuration).verifyEmail(body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -316,7 +400,7 @@ export class AuthenticationApi extends BaseAPI {
         return AuthenticationApiFp(this.configuration).authenticate(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Request for password recovery, sends an email with a link to reset the password.
+     * Request for password recovery, sends an email with a link to reset the password for given email.
      * @summary Request for password recovery
      * @param {string} body 
      * @param {*} [options] Override http request option.
@@ -336,5 +420,16 @@ export class AuthenticationApi extends BaseAPI {
      */
     public async refreshToken(body: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<TokenResponse>> {
         return AuthenticationApiFp(this.configuration).refreshToken(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Request for email verification link, sends an email verification link for given email
+     * @summary Request for email verification link
+     * @param {string} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    public async verifyEmail(body: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return AuthenticationApiFp(this.configuration).verifyEmail(body, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -28,7 +28,7 @@ export declare const AuthenticationApiAxiosParamCreator: (configuration?: Config
      */
     authenticate: (body: LoginModel, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Request for password recovery, sends an email with a link to reset the password.
+     * Request for password recovery, sends an email with a link to reset the password for given email.
      * @summary Request for password recovery
      * @param {string} body
      * @param {*} [options] Override http request option.
@@ -43,6 +43,14 @@ export declare const AuthenticationApiAxiosParamCreator: (configuration?: Config
      * @throws {RequiredError}
      */
     refreshToken: (body: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Request for email verification link, sends an email verification link for given email
+     * @summary Request for email verification link
+     * @param {string} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    verifyEmail: (body: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * AuthenticationApi - functional programming interface
@@ -58,7 +66,7 @@ export declare const AuthenticationApiFp: (configuration?: Configuration) => {
      */
     authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenResponse>>>;
     /**
-     * Request for password recovery, sends an email with a link to reset the password.
+     * Request for password recovery, sends an email with a link to reset the password for given email.
      * @summary Request for password recovery
      * @param {string} body
      * @param {*} [options] Override http request option.
@@ -73,6 +81,14 @@ export declare const AuthenticationApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     refreshToken(body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenResponse>>>;
+    /**
+     * Request for email verification link, sends an email verification link for given email
+     * @summary Request for email verification link
+     * @param {string} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    verifyEmail(body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
 };
 /**
  * AuthenticationApi - factory interface
@@ -88,7 +104,7 @@ export declare const AuthenticationApiFactory: (configuration?: Configuration, b
      */
     authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
     /**
-     * Request for password recovery, sends an email with a link to reset the password.
+     * Request for password recovery, sends an email with a link to reset the password for given email.
      * @summary Request for password recovery
      * @param {string} body
      * @param {*} [options] Override http request option.
@@ -103,6 +119,14 @@ export declare const AuthenticationApiFactory: (configuration?: Configuration, b
      * @throws {RequiredError}
      */
     refreshToken(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
+    /**
+     * Request for email verification link, sends an email verification link for given email
+     * @summary Request for email verification link
+     * @param {string} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    verifyEmail(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
 };
 /**
  * AuthenticationApi - object-oriented interface
@@ -121,7 +145,7 @@ export declare class AuthenticationApi extends BaseAPI {
      */
     authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
     /**
-     * Request for password recovery, sends an email with a link to reset the password.
+     * Request for password recovery, sends an email with a link to reset the password for given email.
      * @summary Request for password recovery
      * @param {string} body
      * @param {*} [options] Override http request option.
@@ -138,4 +162,13 @@ export declare class AuthenticationApi extends BaseAPI {
      * @memberof AuthenticationApi
      */
     refreshToken(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
+    /**
+     * Request for email verification link, sends an email verification link for given email
+     * @summary Request for email verification link
+     * @param {string} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    verifyEmail(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
 }
