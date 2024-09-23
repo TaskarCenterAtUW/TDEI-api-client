@@ -28,6 +28,14 @@ export declare const AuthenticationApiAxiosParamCreator: (configuration?: Config
      */
     authenticate: (body: LoginModel, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Request for password recovery, sends an email with a link to reset the password.
+     * @summary Request for password recovery
+     * @param {string} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    recoverPassword: (body: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Re-issues access token provided the valid refresh token
      * @summary Re-issue access token
      * @param {string} body
@@ -50,6 +58,14 @@ export declare const AuthenticationApiFp: (configuration?: Configuration) => {
      */
     authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenResponse>>>;
     /**
+     * Request for password recovery, sends an email with a link to reset the password.
+     * @summary Request for password recovery
+     * @param {string} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    recoverPassword(body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
+    /**
      * Re-issues access token provided the valid refresh token
      * @summary Re-issue access token
      * @param {string} body
@@ -71,6 +87,14 @@ export declare const AuthenticationApiFactory: (configuration?: Configuration, b
      * @throws {RequiredError}
      */
     authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
+    /**
+     * Request for password recovery, sends an email with a link to reset the password.
+     * @summary Request for password recovery
+     * @param {string} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    recoverPassword(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
     /**
      * Re-issues access token provided the valid refresh token
      * @summary Re-issue access token
@@ -96,6 +120,15 @@ export declare class AuthenticationApi extends BaseAPI {
      * @memberof AuthenticationApi
      */
     authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
+    /**
+     * Request for password recovery, sends an email with a link to reset the password.
+     * @summary Request for password recovery
+     * @param {string} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    recoverPassword(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
     /**
      * Re-issues access token provided the valid refresh token
      * @summary Re-issue access token
