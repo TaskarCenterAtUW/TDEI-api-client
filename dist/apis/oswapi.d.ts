@@ -75,15 +75,14 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      */
     oswOnDemandFormatForm: (source: string, target: string, file: Blob, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-     * @summary Initiate Quality metric calculation for a dataset
+     * Initiates the Intersection Quality calculation for requested tdei_dataset_id with optional intersection polygon file. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * @summary Initiate Intersection Quality metric calculation for a dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {Blob} [file]
-     * @param {string} [algorithm]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswQualityCalculateForm: (tdei_dataset_id: string, file?: Blob, algorithm?: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    oswQualityCalculateForm: (tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
      * @summary Performs the spatial join operation on the OSW dataset.
@@ -192,15 +191,14 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      */
     oswOnDemandFormatForm(source: string, target: string, file: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
     /**
-     * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-     * @summary Initiate Quality metric calculation for a dataset
+     * Initiates the Intersection Quality calculation for requested tdei_dataset_id with optional intersection polygon file. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * @summary Initiate Intersection Quality metric calculation for a dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {Blob} [file]
-     * @param {string} [algorithm]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswQualityCalculateForm(tdei_dataset_id: string, file?: Blob, algorithm?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    oswQualityCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
     /**
      * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
      * @summary Performs the spatial join operation on the OSW dataset.
@@ -309,15 +307,14 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      */
     oswOnDemandFormatForm(source: string, target: string, file: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
-     * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-     * @summary Initiate Quality metric calculation for a dataset
+     * Initiates the Intersection Quality calculation for requested tdei_dataset_id with optional intersection polygon file. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * @summary Initiate Intersection Quality metric calculation for a dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {Blob} [file]
-     * @param {string} [algorithm]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswQualityCalculateForm(tdei_dataset_id: string, file?: Blob, algorithm?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    oswQualityCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
      * @summary Performs the spatial join operation on the OSW dataset.
@@ -434,16 +431,15 @@ export declare class OSWApi extends BaseAPI {
      */
     oswOnDemandFormatForm(source: string, target: string, file: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
-     * Initiates the Quality calculation for requested tdei_dataset_id with list of algorithms and optional persistence. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-     * @summary Initiate Quality metric calculation for a dataset
+     * Initiates the Intersection Quality calculation for requested tdei_dataset_id with optional intersection polygon file. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * @summary Initiate Intersection Quality metric calculation for a dataset
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
      * @param {Blob} [file]
-     * @param {string} [algorithm]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    oswQualityCalculateForm(tdei_dataset_id: string, file?: Blob, algorithm?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    oswQualityCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
      * @summary Performs the spatial join operation on the OSW dataset.
