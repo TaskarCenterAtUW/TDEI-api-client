@@ -30,6 +30,14 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      */
     datasetBbox: (tdei_dataset_id: string, file_type: string, bbox: Array<number>, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Adds the \"incline\" tag to a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter, processes the dataset to calculate the incline information, and updates the dataset with the incline tag. Returns the job_id for the incline calculation request.
+     * @summary Adds the incline tag to the dataset
+     * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    datasetTagIncline: (tdei_dataset_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
      * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
      * @param {string} source_dataset_id Dataset from which the road network to be retrieved
@@ -146,6 +154,14 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      */
     datasetBbox(tdei_dataset_id: string, file_type: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
     /**
+     * Adds the \"incline\" tag to a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter, processes the dataset to calculate the incline information, and updates the dataset with the incline tag. Returns the job_id for the incline calculation request.
+     * @summary Adds the incline tag to the dataset
+     * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    datasetTagIncline(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    /**
      * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
      * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
      * @param {string} source_dataset_id Dataset from which the road network to be retrieved
@@ -261,6 +277,14 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @throws {RequiredError}
      */
     datasetBbox(tdei_dataset_id: string, file_type: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Adds the \"incline\" tag to a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter, processes the dataset to calculate the incline information, and updates the dataset with the incline tag. Returns the job_id for the incline calculation request.
+     * @summary Adds the incline tag to the dataset
+     * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    datasetTagIncline(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
      * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
@@ -380,6 +404,15 @@ export declare class OSWApi extends BaseAPI {
      * @memberof OSWApi
      */
     datasetBbox(tdei_dataset_id: string, file_type: string, bbox: Array<number>, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Adds the \"incline\" tag to a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter, processes the dataset to calculate the incline information, and updates the dataset with the incline tag. Returns the job_id for the incline calculation request.
+     * @summary Adds the incline tag to the dataset
+     * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    datasetTagIncline(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
      * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
