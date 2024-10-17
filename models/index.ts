@@ -26,6 +26,7 @@ export * from './metadata-model-methodology';
 export * from './metadata-tdei-dataset-id-body';
 export * from './osw-convert-body';
 export * from './osw-spatialjoin-body';
+export * from './osw-union-body';
 export * from './osw-validate-body';
 export * from './project-group';
 export * from './quality-metric-request';

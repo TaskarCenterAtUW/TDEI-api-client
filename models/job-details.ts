@@ -124,11 +124,18 @@ export enum JobDetailsStatusEnum {
     * @enum {string}
     */
 export enum JobDetailsJobTypeEnum {
+    CloneDataset = 'Clone-Dataset',
     ConfidenceCalculate = 'Confidence-Calculate',
-    DatasetReformat = 'Dataset-Reformat',
-    DatasetUpload = 'Dataset-Upload',
+    DatasetBBox = 'Dataset-BBox',
+    DatasetInclineTag = 'Dataset-Incline-Tag',
     DatasetPublish = 'Dataset-Publish',
+    DatasetReformat = 'Dataset-Reformat',
+    DatasetRoadTag = 'Dataset-Road-Tag',
+    DatasetSpatialJoin = 'Dataset-Spatial-Join',
+    DatasetUnion = 'Dataset-Union',
+    DatasetUpload = 'Dataset-Upload',
     DatasetValidate = 'Dataset-Validate',
-    DatasetQueries = 'Dataset-Queries'
+    EditMetadata = 'Edit-Metadata',
+    QualityMetric = 'Quality-Metric'
 }
 
