@@ -17,10 +17,17 @@ var JobDetailsStatusEnum;
     */
 var JobDetailsJobTypeEnum;
 (function (JobDetailsJobTypeEnum) {
+    JobDetailsJobTypeEnum["CloneDataset"] = "Clone-Dataset";
     JobDetailsJobTypeEnum["ConfidenceCalculate"] = "Confidence-Calculate";
-    JobDetailsJobTypeEnum["DatasetReformat"] = "Dataset-Reformat";
-    JobDetailsJobTypeEnum["DatasetUpload"] = "Dataset-Upload";
+    JobDetailsJobTypeEnum["DatasetBBox"] = "Dataset-BBox";
+    JobDetailsJobTypeEnum["DatasetInclineTag"] = "Dataset-Incline-Tag";
     JobDetailsJobTypeEnum["DatasetPublish"] = "Dataset-Publish";
+    JobDetailsJobTypeEnum["DatasetReformat"] = "Dataset-Reformat";
+    JobDetailsJobTypeEnum["DatasetRoadTag"] = "Dataset-Road-Tag";
+    JobDetailsJobTypeEnum["DatasetSpatialJoin"] = "Dataset-Spatial-Join";
+    JobDetailsJobTypeEnum["DatasetUnion"] = "Dataset-Union";
+    JobDetailsJobTypeEnum["DatasetUpload"] = "Dataset-Upload";
     JobDetailsJobTypeEnum["DatasetValidate"] = "Dataset-Validate";
-    JobDetailsJobTypeEnum["DatasetQueries"] = "Dataset-Queries";
+    JobDetailsJobTypeEnum["EditMetadata"] = "Edit-Metadata";
+    JobDetailsJobTypeEnum["QualityMetric"] = "Quality-Metric";
 })(JobDetailsJobTypeEnum = exports.JobDetailsJobTypeEnum || (exports.JobDetailsJobTypeEnum = {}));

@@ -17,6 +17,7 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { OswSpatialjoinBody } from '../models';
+import { OswUnionBody } from '../models';
 import { QualityMetricTagResponse } from '../models';
 import { VersionList } from '../models';
 /**
@@ -606,6 +607,66 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
+         * Performs union of the two input OSW dataset. Returns the job_id for the union request. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
+         * @summary Performs union of the two input OSW dataset.
+         * @param {OswUnionBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswUnion: async (body: OswUnionBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling oswUnion.');
+            }
+            const localVarPath = `/api/v1/osw/union`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKey required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("x-api-key")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+            }
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Publishes the OSW dataset for the tdei_dataset_id
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
@@ -1023,6 +1084,20 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Performs union of the two input OSW dataset. Returns the job_id for the union request. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
+         * @summary Performs union of the two input OSW dataset.
+         * @param {OswUnionBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async oswUnion(body: OswUnionBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswUnion(body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Publishes the OSW dataset for the tdei_dataset_id
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
@@ -1192,6 +1267,16 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).oswSpatialJoin(body, options).then((request) => request(axios, basePath));
         },
         /**
+         * Performs union of the two input OSW dataset. Returns the job_id for the union request. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
+         * @summary Performs union of the two input OSW dataset.
+         * @param {OswUnionBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async oswUnion(body: OswUnionBody, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return OSWApiFp(configuration).oswUnion(body, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
          * @summary Publishes the OSW dataset for the tdei_dataset_id
          * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
@@ -1353,6 +1438,17 @@ export class OSWApi extends BaseAPI {
      */
     public async oswSpatialJoin(body: OswSpatialjoinBody, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
         return OSWApiFp(this.configuration).oswSpatialJoin(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Performs union of the two input OSW dataset. Returns the job_id for the union request. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
+     * @summary Performs union of the two input OSW dataset.
+     * @param {OswUnionBody} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    public async oswUnion(body: OswUnionBody, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return OSWApiFp(this.configuration).oswUnion(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.

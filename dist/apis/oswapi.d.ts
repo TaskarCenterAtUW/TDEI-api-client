@@ -13,6 +13,7 @@ import { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 import { RequestArgs, BaseAPI } from '../base';
 import { OswSpatialjoinBody } from '../models';
+import { OswUnionBody } from '../models';
 import { VersionList } from '../models';
 /**
  * OSWApi - axios parameter creator
@@ -99,6 +100,14 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      * @throws {RequiredError}
      */
     oswSpatialJoin: (body: OswSpatialjoinBody, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Performs union of the two input OSW dataset. Returns the job_id for the union request. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
+     * @summary Performs union of the two input OSW dataset.
+     * @param {OswUnionBody} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswUnion: (body: OswUnionBody, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Publishes the OSW dataset for the tdei_dataset_id
@@ -224,6 +233,14 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      */
     oswSpatialJoin(body: OswSpatialjoinBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
     /**
+     * Performs union of the two input OSW dataset. Returns the job_id for the union request. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
+     * @summary Performs union of the two input OSW dataset.
+     * @param {OswUnionBody} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswUnion(body: OswUnionBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    /**
      * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Publishes the OSW dataset for the tdei_dataset_id
      * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
@@ -347,6 +364,14 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @throws {RequiredError}
      */
     oswSpatialJoin(body: OswSpatialjoinBody, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Performs union of the two input OSW dataset. Returns the job_id for the union request. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
+     * @summary Performs union of the two input OSW dataset.
+     * @param {OswUnionBody} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswUnion(body: OswUnionBody, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Publishes the OSW dataset for the tdei_dataset_id
@@ -482,6 +507,15 @@ export declare class OSWApi extends BaseAPI {
      * @memberof OSWApi
      */
     oswSpatialJoin(body: OswSpatialjoinBody, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Performs union of the two input OSW dataset. Returns the job_id for the union request. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
+     * @summary Performs union of the two input OSW dataset.
+     * @param {OswUnionBody} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    oswUnion(body: OswUnionBody, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
      * @summary Publishes the OSW dataset for the tdei_dataset_id
