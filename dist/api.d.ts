@@ -1,6 +1,6 @@
 /**
  * TDEI Gateway Dev API
- * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) data system. It is intended for applications producing data to and consuming data from the TDEI system. It currently supports GTFS-Pathways, GTFS-Flex v2 and OpenSidewalks v0.2 data schemas.
+ * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) system. It is intended for applications submitting data to and consuming data from the TDEI system. We currently support GTFS-Pathways, GTFS-Flex and OpenSidewalks (OSW) data schemas.
  *
  * OpenAPI spec version: v0.1
  * Contact: tdei@uw.edu
@@ -9,8 +9,8 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */ export * from './apis/authentication-api';
+export * from './apis/common-apis-api';
 export * from './apis/gtfsflex-api';
 export * from './apis/gtfspathways-api';
-export * from './apis/general-api';
 export * from './apis/metrics-api';
 export * from './apis/oswapi';

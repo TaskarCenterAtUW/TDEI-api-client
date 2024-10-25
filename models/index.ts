@@ -1,3 +1,5 @@
+export * from './apiversion-list';
+export * from './apiversion-spec';
 export * from './confidence-tdei-dataset-id-body';
 export * from './data-metrics';
 export * from './data-metrics-data-metrics';

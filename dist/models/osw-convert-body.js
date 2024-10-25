@@ -1,21 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OswConvertBodyTargetEnum = exports.OswConvertBodySourceEnum = void 0;
+exports.OswConvertBodyTargetFormatEnum = exports.OswConvertBodySourceFormatEnum = void 0;
 /**
     * @export
     * @enum {string}
     */
-var OswConvertBodySourceEnum;
-(function (OswConvertBodySourceEnum) {
-    OswConvertBodySourceEnum["Osm"] = "osm";
-    OswConvertBodySourceEnum["Osw"] = "osw";
-})(OswConvertBodySourceEnum = exports.OswConvertBodySourceEnum || (exports.OswConvertBodySourceEnum = {}));
+var OswConvertBodySourceFormatEnum;
+(function (OswConvertBodySourceFormatEnum) {
+    OswConvertBodySourceFormatEnum["Osm"] = "osm";
+    OswConvertBodySourceFormatEnum["Osw"] = "osw";
+})(OswConvertBodySourceFormatEnum = exports.OswConvertBodySourceFormatEnum || (exports.OswConvertBodySourceFormatEnum = {}));
 /**
     * @export
     * @enum {string}
     */
-var OswConvertBodyTargetEnum;
-(function (OswConvertBodyTargetEnum) {
-    OswConvertBodyTargetEnum["Osm"] = "osm";
-    OswConvertBodyTargetEnum["Osw"] = "osw";
-})(OswConvertBodyTargetEnum = exports.OswConvertBodyTargetEnum || (exports.OswConvertBodyTargetEnum = {}));
+var OswConvertBodyTargetFormatEnum;
+(function (OswConvertBodyTargetFormatEnum) {
+    OswConvertBodyTargetFormatEnum["Osm"] = "osm";
+    OswConvertBodyTargetFormatEnum["Osw"] = "osw";
+})(OswConvertBodyTargetFormatEnum = exports.OswConvertBodyTargetFormatEnum || (exports.OswConvertBodyTargetFormatEnum = {}));

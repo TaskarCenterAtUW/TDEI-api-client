@@ -1,6 +1,6 @@
 /**
  * TDEI Gateway Dev API
- * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) data system. It is intended for applications producing data to and consuming data from the TDEI system. It currently supports GTFS-Pathways, GTFS-Flex v2 and OpenSidewalks v0.2 data schemas.
+ * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) system. It is intended for applications submitting data to and consuming data from the TDEI system. We currently support GTFS-Pathways, GTFS-Flex and OpenSidewalks (OSW) data schemas.
  *
  * OpenAPI spec version: v0.1
  * Contact: tdei@uw.edu
@@ -10,25 +10,25 @@
  * Do not edit the class manually.
  */
 /**
- * Specification for a data standards (GTFS-Flex, GTFS-Pathways, OSW) versions or TDEI API.
+ * Response model for data standard versions
  * @export
  * @interface VersionSpec
  */
 export interface VersionSpec {
     /**
-     * version string
+     * Version of data standard
      * @type {string}
      * @memberof VersionSpec
      */
     version?: string;
     /**
-     * link to the documentation
+     * Link to the data standard documentation.
      * @type {string}
      * @memberof VersionSpec
      */
     documentation?: string;
     /**
-     * link to the specification for the data standard
+     * Link to the data specification.
      * @type {string}
      * @memberof VersionSpec
      */

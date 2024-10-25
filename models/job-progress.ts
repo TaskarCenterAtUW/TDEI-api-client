@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * TDEI Gateway Dev API
- * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) data system. It is intended for applications producing data to and consuming data from the TDEI system. It currently supports GTFS-Pathways, GTFS-Flex v2 and OpenSidewalks v0.2 data schemas.
+ * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) system. It is intended for applications submitting data to and consuming data from the TDEI system. We currently support GTFS-Pathways, GTFS-Flex and OpenSidewalks (OSW) data schemas.
  *
  * OpenAPI spec version: v0.1
  * Contact: tdei@uw.edu
@@ -24,7 +24,7 @@ export interface JobProgress {
      */
     total_stages?: number;
     /**
-     * description of the current stage of the job
+     * description of the current processing stage of the job
      * @type {string}
      * @memberof JobProgress
      */
@@ -48,7 +48,7 @@ export interface JobProgress {
      */
     current_stage_percent_done?: number;
     /**
-     * date-time that job was last updated
+     * date-time when the job was last updated
      * @type {string}
      * @memberof JobProgress
      */

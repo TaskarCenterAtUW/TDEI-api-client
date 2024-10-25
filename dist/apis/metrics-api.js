@@ -67,7 +67,7 @@ exports.MetricsApi = exports.MetricsApiFactory = exports.MetricsApiFp = exports.
 /* eslint-disable */
 /**
  * TDEI Gateway Dev API
- * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) data system. It is intended for applications producing data to and consuming data from the TDEI system. It currently supports GTFS-Pathways, GTFS-Flex v2 and OpenSidewalks v0.2 data schemas.
+ * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) system. It is intended for applications submitting data to and consuming data from the TDEI system. We currently support GTFS-Pathways, GTFS-Flex and OpenSidewalks (OSW) data schemas.
  *
  * OpenAPI spec version: v0.1
  * Contact: tdei@uw.edu
@@ -88,7 +88,7 @@ var MetricsApiAxiosParamCreator = function (configuration) {
     var _this = this;
     return {
         /**
-         * Gets the data metrics
+         * This endpoint provides detailed metrics about datasets categorized by type within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways. For the osw type, additional aggregated statistics like the number of crossings, length of sidewalks in kilometers, number of edges and nodes, and the area covered by the concave hull in square kilometers are also provided.
          * @summary Gets the data metrics
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -157,7 +157,7 @@ var MetricsApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * Gets the system metrics
+         * Retrieves metrics related to the system and datasets within the TDEI platform. This endpoint provides an overview of usage statistics including the total number of users, services, and project groups, as well as a breakdown of services by type. Additionally, it gives details on dataset uploads, such as the total number of uploads and their cumulative size in megabytes.
          * @summary Gets the system metrics
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -235,7 +235,7 @@ exports.MetricsApiAxiosParamCreator = MetricsApiAxiosParamCreator;
 var MetricsApiFp = function (configuration) {
     return {
         /**
-         * Gets the data metrics
+         * This endpoint provides detailed metrics about datasets categorized by type within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways. For the osw type, additional aggregated statistics like the number of crossings, length of sidewalks in kilometers, number of edges and nodes, and the area covered by the concave hull in square kilometers are also provided.
          * @summary Gets the data metrics
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -259,7 +259,7 @@ var MetricsApiFp = function (configuration) {
             });
         },
         /**
-         * Gets the system metrics
+         * Retrieves metrics related to the system and datasets within the TDEI platform. This endpoint provides an overview of usage statistics including the total number of users, services, and project groups, as well as a breakdown of services by type. Additionally, it gives details on dataset uploads, such as the total number of uploads and their cumulative size in megabytes.
          * @summary Gets the system metrics
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -292,7 +292,7 @@ exports.MetricsApiFp = MetricsApiFp;
 var MetricsApiFactory = function (configuration, basePath, axios) {
     return {
         /**
-         * Gets the data metrics
+         * This endpoint provides detailed metrics about datasets categorized by type within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways. For the osw type, additional aggregated statistics like the number of crossings, length of sidewalks in kilometers, number of edges and nodes, and the area covered by the concave hull in square kilometers are also provided.
          * @summary Gets the data metrics
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -305,7 +305,7 @@ var MetricsApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * Gets the system metrics
+         * Retrieves metrics related to the system and datasets within the TDEI platform. This endpoint provides an overview of usage statistics including the total number of users, services, and project groups, as well as a breakdown of services by type. Additionally, it gives details on dataset uploads, such as the total number of uploads and their cumulative size in megabytes.
          * @summary Gets the system metrics
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -332,7 +332,7 @@ var MetricsApi = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
-     * Gets the data metrics
+     * This endpoint provides detailed metrics about datasets categorized by type within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways. For the osw type, additional aggregated statistics like the number of crossings, length of sidewalks in kilometers, number of edges and nodes, and the area covered by the concave hull in square kilometers are also provided.
      * @summary Gets the data metrics
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -347,7 +347,7 @@ var MetricsApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * Gets the system metrics
+     * Retrieves metrics related to the system and datasets within the TDEI platform. This endpoint provides an overview of usage statistics including the total number of users, services, and project groups, as well as a breakdown of services by type. Additionally, it gives details on dataset uploads, such as the total number of uploads and their cumulative size in megabytes.
      * @summary Gets the system metrics
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
