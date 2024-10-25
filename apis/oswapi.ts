@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * TDEI Gateway Dev API
- * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) data system. It is intended for applications producing data to and consuming data from the TDEI system. It currently supports GTFS-Pathways, GTFS-Flex v2 and OpenSidewalks v0.2 data schemas.
+ * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) system. It is intended for applications submitting data to and consuming data from the TDEI system. We currently support GTFS-Pathways, GTFS-Flex and OpenSidewalks (OSW) data schemas.
  *
  * OpenAPI spec version: v0.1
  * Contact: tdei@uw.edu
@@ -27,11 +27,11 @@ import { VersionList } from '../models';
 export const OSWApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Given a dataset tdei_dataset_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax). Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary Given a dataset tdei_dataset_id returns the subgraph within a given bounding box.
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {string} file_type Output file type for a file
-         * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+         * When provided with a tdei_dataset_id, this request returns a subgraph dataset that falls within a specified bounding box defined by the coordinates (xmin, ymin, ymax, xmax). The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Returns a subgraph dataset that falls within a specified bounding box
+         * @param {string} tdei_dataset_id Dataset ID to which the bounding box will be applied.
+         * @param {string} file_type Dataset output file type.
+         * @param {Array<number>} bbox A bounding box defines the search area by specifying the latitude and longitude coordinates of its corners. These coordinates should be provided as a string in the order: west (longitude), south (latitude), east (longitude), north (latitude). This format outlines the geographical area to be searched within the defined perimeter.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -105,9 +105,9 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Adds the \"incline\" tag to a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter, processes the dataset to calculate the incline information, and updates the dataset with the incline tag. Returns the job_id for the incline calculation request.
+         * Adds the **incline** tag to a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter, processes the dataset to calculate the incline information, and updates the dataset with the incline tag.The original data of the dataset will be modified in this request.If the original data already has incline tag, it will be replaced. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Adds the incline tag to the dataset
-         * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset ID for calculating the dataset inclination.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -154,8 +154,8 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
-         * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+         * This process involves associating sidewalks from a target dataset with the road network from a source dataset based on proximity. Specifically, any part of the road network that is within a 5-meter buffer zone around the sidewalks in the target dataset gets tagged accordingly. This method ensures that sidewalks are accurately mapped in relation to nearby roads, facilitating better data integration and analysis between different geographic datasets.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Tags the sidewalks with the road network within proximity.
          * @param {string} source_dataset_id Dataset from which the road network to be retrieved
          * @param {string} target_dataset_id Dataset for which the road network is to be tagged
          * @param {*} [options] Override http request option.
@@ -215,11 +215,11 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
-         * @summary downloads the OSW files as zip
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {string} [format] File format to download. Default to osw
-         * @param {string} [file_version] File version to download. Default to latest
+         * Downloads a specific OSW dataset as a zip file, which includes `{nodes, edges, points}.geojson` files. If file extensions are specified, the zip will contain `{nodes, edges, points}.extension.geojson` files, as well as metadata and a changeset file, if available.
+         * @summary Downloads the OSW dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
+         * @param {string} [format] The system maintains two formats for the OSW dataset: OSW and OSM. By default, the OSW format is downloaded.
+         * @param {string} [file_version] The system supports two versions for the OSW dataset: Latest and Original.The Latest version includes any recent modifications, while the Original version is the one initially uploaded when creating the dataset. By default, the latest version is downloaded.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -282,7 +282,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Lists the versions of OSW data which are supported by TDEI.
+         * List of OSW data standard versions supported by TDEI. The response includes a link to the OSW data standard and specification.
          * @summary List available OSW versions
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -333,9 +333,9 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary Initiate Confidence calculation for a dataset
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions.Sub-regions file is a GeoJSON file containing one or more polygons.If the sub-region file is given as an input, the confidence score of each polygon inside the sub-region file will be calculated.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Initiate confidence calculation for a dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset for which confidence is to be calculated.
          * @param {Blob} [file] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -399,26 +399,26 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * upload a file and request for file format conversion. Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary OSW reformatting on demand
-         * @param {string} source 
-         * @param {string} target 
+         * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary OSW dataset conversion on demand
          * @param {Blob} file 
+         * @param {string} source_format 
+         * @param {string} target_format 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswOnDemandFormatForm: async (source: string, target: string, file: Blob, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'source' is not null or undefined
-            if (source === null || source === undefined) {
-                throw new RequiredError('source','Required parameter source was null or undefined when calling oswOnDemandFormatForm.');
-            }
-            // verify required parameter 'target' is not null or undefined
-            if (target === null || target === undefined) {
-                throw new RequiredError('target','Required parameter target was null or undefined when calling oswOnDemandFormatForm.');
-            }
+        oswOnDemandFormatForm: async (file: Blob, source_format: string, target_format: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'file' is not null or undefined
             if (file === null || file === undefined) {
                 throw new RequiredError('file','Required parameter file was null or undefined when calling oswOnDemandFormatForm.');
+            }
+            // verify required parameter 'source_format' is not null or undefined
+            if (source_format === null || source_format === undefined) {
+                throw new RequiredError('source_format','Required parameter source_format was null or undefined when calling oswOnDemandFormatForm.');
+            }
+            // verify required parameter 'target_format' is not null or undefined
+            if (target_format === null || target_format === undefined) {
+                throw new RequiredError('target_format','Required parameter target_format was null or undefined when calling oswOnDemandFormatForm.');
             }
             const localVarPath = `/api/v1/osw/convert`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -450,16 +450,16 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             }
 
 
-            if (source !== undefined) { 
-                localVarFormParams.append('source', source as any);
-            }
-
-            if (target !== undefined) { 
-                localVarFormParams.append('target', target as any);
-            }
-
             if (file !== undefined) { 
                 localVarFormParams.append('file', file as any);
+            }
+
+            if (source_format !== undefined) { 
+                localVarFormParams.append('source_format', source_format as any);
+            }
+
+            if (target_format !== undefined) { 
+                localVarFormParams.append('target_format', target_format as any);
             }
 
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
@@ -481,9 +481,9 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Initiates the Intersection Quality calculation for requested tdei_dataset_id with optional intersection polygon file. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Initiates the Intersection Quality calculation for requested `tdei_dataset_id` with optional intersection polygon file.Intersection polygon file can be a GeoJSON file containing one or more polygons.If intersection polygon file is not given the system creates vornoi polygons based on the dataset area.It is recommended to add intersection polygon file for better performance. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Initiate Intersection Quality metric calculation for a dataset
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset id of the dataset for which Intersection Quality metric is to be calculated.
          * @param {Blob} [file] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -547,8 +547,8 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
-         * @summary Performs the spatial join operation on the OSW dataset.
+         * Performs a spatial join operation between two datasets within the TDEI system. It involves two datasets, target and source, specifying the spatial dimension entities of each to be joined, such as edges, nodes, zones, points, lines, or polygons. The join operation is guided by specified conditions that define how the geometries of the two datasets interact, typically involving spatial functions like intersections. Additionally, filters can be applied to both datasets to refine the data involved in the join. Aggregate functions are also defined to associate the attributes from source to target dataset entity.The geometry column for data elements is specified as `geometry_target` and `geometry_source`.Eg: Find all light poles in source dataset within 5 m of an edge in target dataset, and associate the attribute highway from source dataset with each edge in target dataset. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Performs a spatial join operation between two datasets within the TDEI system.
          * @param {OswSpatialjoinBody} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -607,8 +607,8 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Performs union of the two input OSW dataset. Returns the job_id for the union request. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
-         * @summary Performs union of the two input OSW dataset.
+         * This operation performs a union of two specified OSW datasets, effectively merging their data into a single dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Performs a union of the two input OSW datasets.
          * @param {OswUnionBody} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -667,9 +667,9 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Publishes the OSW dataset for the tdei_dataset_id
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset id of the dataset to be published. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -724,10 +724,10 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Calculates the quality metric on a dataset element tags for requested tdei_dataset_id. Returns the tag quality metric for the dataset element tags.
+         * Calculates the quality metric on a dataset element tags for requested tdei_dataset_id. Tags are the specific attributes or characteristics relevant to the OSW data entity. For example entities like Footway, Crossing, and Sidewalk have tags such as surface, width, incline, and length, indicating attributes like the material, size, slope, and distance. Returns the tag quality metric for the dataset element tags.
          * @summary Calculates the quality metric on a dataset element tags
          * @param {Blob} file 
-         * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset ID for calculating the quality metrics of element tags.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -794,14 +794,14 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary upload a pre-release of OSW dataset.
+         * This endpoint enables users to upload an OSW dataset. The request must include the required parameters to complete the upload. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. By default, the dataset's status will be set to 'pre-release.' The dataset can be published using the `/publish` endpoint.
+         * @summary Upload a OSW dataset.
          * @param {Blob} dataset 
          * @param {Blob} metadata 
          * @param {Blob} changeset 
-         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
-         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
-         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+         * @param {string} tdei_project_group_id Project group id to which the dataset would be uploaded
+         * @param {string} tdei_service_id TDEI service id associated with the above project group id.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -885,7 +885,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id for validation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Allows a user to validate osw dataset to check the correctness of data. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Validates the osw dataset.
          * @param {Blob} dataset 
          * @param {*} [options] Override http request option.
@@ -950,11 +950,11 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
 export const OSWApiFp = function(configuration?: Configuration) {
     return {
         /**
-         * Given a dataset tdei_dataset_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax). Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary Given a dataset tdei_dataset_id returns the subgraph within a given bounding box.
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {string} file_type Output file type for a file
-         * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+         * When provided with a tdei_dataset_id, this request returns a subgraph dataset that falls within a specified bounding box defined by the coordinates (xmin, ymin, ymax, xmax). The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Returns a subgraph dataset that falls within a specified bounding box
+         * @param {string} tdei_dataset_id Dataset ID to which the bounding box will be applied.
+         * @param {string} file_type Dataset output file type.
+         * @param {Array<number>} bbox A bounding box defines the search area by specifying the latitude and longitude coordinates of its corners. These coordinates should be provided as a string in the order: west (longitude), south (latitude), east (longitude), north (latitude). This format outlines the geographical area to be searched within the defined perimeter.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -966,9 +966,9 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Adds the \"incline\" tag to a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter, processes the dataset to calculate the incline information, and updates the dataset with the incline tag. Returns the job_id for the incline calculation request.
+         * Adds the **incline** tag to a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter, processes the dataset to calculate the incline information, and updates the dataset with the incline tag.The original data of the dataset will be modified in this request.If the original data already has incline tag, it will be replaced. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Adds the incline tag to the dataset
-         * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset ID for calculating the dataset inclination.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -980,8 +980,8 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
-         * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+         * This process involves associating sidewalks from a target dataset with the road network from a source dataset based on proximity. Specifically, any part of the road network that is within a 5-meter buffer zone around the sidewalks in the target dataset gets tagged accordingly. This method ensures that sidewalks are accurately mapped in relation to nearby roads, facilitating better data integration and analysis between different geographic datasets.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Tags the sidewalks with the road network within proximity.
          * @param {string} source_dataset_id Dataset from which the road network to be retrieved
          * @param {string} target_dataset_id Dataset for which the road network is to be tagged
          * @param {*} [options] Override http request option.
@@ -995,11 +995,11 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
-         * @summary downloads the OSW files as zip
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {string} [format] File format to download. Default to osw
-         * @param {string} [file_version] File version to download. Default to latest
+         * Downloads a specific OSW dataset as a zip file, which includes `{nodes, edges, points}.geojson` files. If file extensions are specified, the zip will contain `{nodes, edges, points}.extension.geojson` files, as well as metadata and a changeset file, if available.
+         * @summary Downloads the OSW dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
+         * @param {string} [format] The system maintains two formats for the OSW dataset: OSW and OSM. By default, the OSW format is downloaded.
+         * @param {string} [file_version] The system supports two versions for the OSW dataset: Latest and Original.The Latest version includes any recent modifications, while the Original version is the one initially uploaded when creating the dataset. By default, the latest version is downloaded.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1011,7 +1011,7 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Lists the versions of OSW data which are supported by TDEI.
+         * List of OSW data standard versions supported by TDEI. The response includes a link to the OSW data standard and specification.
          * @summary List available OSW versions
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1024,9 +1024,9 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary Initiate Confidence calculation for a dataset
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions.Sub-regions file is a GeoJSON file containing one or more polygons.If the sub-region file is given as an input, the confidence score of each polygon inside the sub-region file will be calculated.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Initiate confidence calculation for a dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset for which confidence is to be calculated.
          * @param {Blob} [file] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1039,25 +1039,25 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * upload a file and request for file format conversion. Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary OSW reformatting on demand
-         * @param {string} source 
-         * @param {string} target 
+         * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary OSW dataset conversion on demand
          * @param {Blob} file 
+         * @param {string} source_format 
+         * @param {string} target_format 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswOnDemandFormatForm(source: string, target: string, file: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswOnDemandFormatForm(source, target, file, options);
+        async oswOnDemandFormatForm(file: Blob, source_format: string, target_format: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswOnDemandFormatForm(file, source_format, target_format, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
         },
         /**
-         * Initiates the Intersection Quality calculation for requested tdei_dataset_id with optional intersection polygon file. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Initiates the Intersection Quality calculation for requested `tdei_dataset_id` with optional intersection polygon file.Intersection polygon file can be a GeoJSON file containing one or more polygons.If intersection polygon file is not given the system creates vornoi polygons based on the dataset area.It is recommended to add intersection polygon file for better performance. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Initiate Intersection Quality metric calculation for a dataset
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset id of the dataset for which Intersection Quality metric is to be calculated.
          * @param {Blob} [file] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1070,8 +1070,8 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
-         * @summary Performs the spatial join operation on the OSW dataset.
+         * Performs a spatial join operation between two datasets within the TDEI system. It involves two datasets, target and source, specifying the spatial dimension entities of each to be joined, such as edges, nodes, zones, points, lines, or polygons. The join operation is guided by specified conditions that define how the geometries of the two datasets interact, typically involving spatial functions like intersections. Additionally, filters can be applied to both datasets to refine the data involved in the join. Aggregate functions are also defined to associate the attributes from source to target dataset entity.The geometry column for data elements is specified as `geometry_target` and `geometry_source`.Eg: Find all light poles in source dataset within 5 m of an edge in target dataset, and associate the attribute highway from source dataset with each edge in target dataset. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Performs a spatial join operation between two datasets within the TDEI system.
          * @param {OswSpatialjoinBody} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1084,8 +1084,8 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Performs union of the two input OSW dataset. Returns the job_id for the union request. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
-         * @summary Performs union of the two input OSW dataset.
+         * This operation performs a union of two specified OSW datasets, effectively merging their data into a single dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Performs a union of the two input OSW datasets.
          * @param {OswUnionBody} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1098,9 +1098,9 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Publishes the OSW dataset for the tdei_dataset_id
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset id of the dataset to be published. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1112,10 +1112,10 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Calculates the quality metric on a dataset element tags for requested tdei_dataset_id. Returns the tag quality metric for the dataset element tags.
+         * Calculates the quality metric on a dataset element tags for requested tdei_dataset_id. Tags are the specific attributes or characteristics relevant to the OSW data entity. For example entities like Footway, Crossing, and Sidewalk have tags such as surface, width, incline, and length, indicating attributes like the material, size, slope, and distance. Returns the tag quality metric for the dataset element tags.
          * @summary Calculates the quality metric on a dataset element tags
          * @param {Blob} file 
-         * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset ID for calculating the quality metrics of element tags.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1127,14 +1127,14 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary upload a pre-release of OSW dataset.
+         * This endpoint enables users to upload an OSW dataset. The request must include the required parameters to complete the upload. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. By default, the dataset's status will be set to 'pre-release.' The dataset can be published using the `/publish` endpoint.
+         * @summary Upload a OSW dataset.
          * @param {Blob} dataset 
          * @param {Blob} metadata 
          * @param {Blob} changeset 
-         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
-         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
-         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+         * @param {string} tdei_project_group_id Project group id to which the dataset would be uploaded
+         * @param {string} tdei_service_id TDEI service id associated with the above project group id.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1146,7 +1146,7 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id for validation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Allows a user to validate osw dataset to check the correctness of data. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Validates the osw dataset.
          * @param {Blob} dataset 
          * @param {*} [options] Override http request option.
@@ -1169,11 +1169,11 @@ export const OSWApiFp = function(configuration?: Configuration) {
 export const OSWApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
-         * Given a dataset tdei_dataset_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax). Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary Given a dataset tdei_dataset_id returns the subgraph within a given bounding box.
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {string} file_type Output file type for a file
-         * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+         * When provided with a tdei_dataset_id, this request returns a subgraph dataset that falls within a specified bounding box defined by the coordinates (xmin, ymin, ymax, xmax). The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Returns a subgraph dataset that falls within a specified bounding box
+         * @param {string} tdei_dataset_id Dataset ID to which the bounding box will be applied.
+         * @param {string} file_type Dataset output file type.
+         * @param {Array<number>} bbox A bounding box defines the search area by specifying the latitude and longitude coordinates of its corners. These coordinates should be provided as a string in the order: west (longitude), south (latitude), east (longitude), north (latitude). This format outlines the geographical area to be searched within the defined perimeter.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1181,9 +1181,9 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).datasetBbox(tdei_dataset_id, file_type, bbox, options).then((request) => request(axios, basePath));
         },
         /**
-         * Adds the \"incline\" tag to a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter, processes the dataset to calculate the incline information, and updates the dataset with the incline tag. Returns the job_id for the incline calculation request.
+         * Adds the **incline** tag to a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter, processes the dataset to calculate the incline information, and updates the dataset with the incline tag.The original data of the dataset will be modified in this request.If the original data already has incline tag, it will be replaced. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Adds the incline tag to the dataset
-         * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset ID for calculating the dataset inclination.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1191,8 +1191,8 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).datasetTagIncline(tdei_dataset_id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
-         * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+         * This process involves associating sidewalks from a target dataset with the road network from a source dataset based on proximity. Specifically, any part of the road network that is within a 5-meter buffer zone around the sidewalks in the target dataset gets tagged accordingly. This method ensures that sidewalks are accurately mapped in relation to nearby roads, facilitating better data integration and analysis between different geographic datasets.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Tags the sidewalks with the road network within proximity.
          * @param {string} source_dataset_id Dataset from which the road network to be retrieved
          * @param {string} target_dataset_id Dataset for which the road network is to be tagged
          * @param {*} [options] Override http request option.
@@ -1202,11 +1202,11 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).datasetTagRoad(source_dataset_id, target_dataset_id, options).then((request) => request(axios, basePath));
         },
         /**
-         * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
-         * @summary downloads the OSW files as zip
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-         * @param {string} [format] File format to download. Default to osw
-         * @param {string} [file_version] File version to download. Default to latest
+         * Downloads a specific OSW dataset as a zip file, which includes `{nodes, edges, points}.geojson` files. If file extensions are specified, the zip will contain `{nodes, edges, points}.extension.geojson` files, as well as metadata and a changeset file, if available.
+         * @summary Downloads the OSW dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
+         * @param {string} [format] The system maintains two formats for the OSW dataset: OSW and OSM. By default, the OSW format is downloaded.
+         * @param {string} [file_version] The system supports two versions for the OSW dataset: Latest and Original.The Latest version includes any recent modifications, while the Original version is the one initially uploaded when creating the dataset. By default, the latest version is downloaded.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1214,7 +1214,7 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).getOswFile(tdei_dataset_id, format, file_version, options).then((request) => request(axios, basePath));
         },
         /**
-         * Lists the versions of OSW data which are supported by TDEI.
+         * List of OSW data standard versions supported by TDEI. The response includes a link to the OSW data standard and specification.
          * @summary List available OSW versions
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1223,9 +1223,9 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).listOswVersions(options).then((request) => request(axios, basePath));
         },
         /**
-         * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary Initiate Confidence calculation for a dataset
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions.Sub-regions file is a GeoJSON file containing one or more polygons.If the sub-region file is given as an input, the confidence score of each polygon inside the sub-region file will be calculated.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Initiate confidence calculation for a dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset for which confidence is to be calculated.
          * @param {Blob} [file] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1234,21 +1234,21 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).oswConfidenceCalculateForm(tdei_dataset_id, file, options).then((request) => request(axios, basePath));
         },
         /**
-         * upload a file and request for file format conversion. Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary OSW reformatting on demand
-         * @param {string} source 
-         * @param {string} target 
+         * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary OSW dataset conversion on demand
          * @param {Blob} file 
+         * @param {string} source_format 
+         * @param {string} target_format 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswOnDemandFormatForm(source: string, target: string, file: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
-            return OSWApiFp(configuration).oswOnDemandFormatForm(source, target, file, options).then((request) => request(axios, basePath));
+        async oswOnDemandFormatForm(file: Blob, source_format: string, target_format: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return OSWApiFp(configuration).oswOnDemandFormatForm(file, source_format, target_format, options).then((request) => request(axios, basePath));
         },
         /**
-         * Initiates the Intersection Quality calculation for requested tdei_dataset_id with optional intersection polygon file. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Initiates the Intersection Quality calculation for requested `tdei_dataset_id` with optional intersection polygon file.Intersection polygon file can be a GeoJSON file containing one or more polygons.If intersection polygon file is not given the system creates vornoi polygons based on the dataset area.It is recommended to add intersection polygon file for better performance. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Initiate Intersection Quality metric calculation for a dataset
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset id of the dataset for which Intersection Quality metric is to be calculated.
          * @param {Blob} [file] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1257,8 +1257,8 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).oswQualityCalculateForm(tdei_dataset_id, file, options).then((request) => request(axios, basePath));
         },
         /**
-         * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
-         * @summary Performs the spatial join operation on the OSW dataset.
+         * Performs a spatial join operation between two datasets within the TDEI system. It involves two datasets, target and source, specifying the spatial dimension entities of each to be joined, such as edges, nodes, zones, points, lines, or polygons. The join operation is guided by specified conditions that define how the geometries of the two datasets interact, typically involving spatial functions like intersections. Additionally, filters can be applied to both datasets to refine the data involved in the join. Aggregate functions are also defined to associate the attributes from source to target dataset entity.The geometry column for data elements is specified as `geometry_target` and `geometry_source`.Eg: Find all light poles in source dataset within 5 m of an edge in target dataset, and associate the attribute highway from source dataset with each edge in target dataset. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Performs a spatial join operation between two datasets within the TDEI system.
          * @param {OswSpatialjoinBody} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1267,8 +1267,8 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).oswSpatialJoin(body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Performs union of the two input OSW dataset. Returns the job_id for the union request. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
-         * @summary Performs union of the two input OSW dataset.
+         * This operation performs a union of two specified OSW datasets, effectively merging their data into a single dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Performs a union of the two input OSW datasets.
          * @param {OswUnionBody} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1277,9 +1277,9 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).oswUnion(body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Publishes the OSW dataset for the tdei_dataset_id
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset id of the dataset to be published. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1287,10 +1287,10 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).publishOswFile(tdei_dataset_id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Calculates the quality metric on a dataset element tags for requested tdei_dataset_id. Returns the tag quality metric for the dataset element tags.
+         * Calculates the quality metric on a dataset element tags for requested tdei_dataset_id. Tags are the specific attributes or characteristics relevant to the OSW data entity. For example entities like Footway, Crossing, and Sidewalk have tags such as surface, width, incline, and length, indicating attributes like the material, size, slope, and distance. Returns the tag quality metric for the dataset element tags.
          * @summary Calculates the quality metric on a dataset element tags
          * @param {Blob} file 
-         * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset ID for calculating the quality metrics of element tags.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1298,14 +1298,14 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).qualityMetricTagForm(file, tdei_dataset_id, options).then((request) => request(axios, basePath));
         },
         /**
-         * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary upload a pre-release of OSW dataset.
+         * This endpoint enables users to upload an OSW dataset. The request must include the required parameters to complete the upload. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. By default, the dataset's status will be set to 'pre-release.' The dataset can be published using the `/publish` endpoint.
+         * @summary Upload a OSW dataset.
          * @param {Blob} dataset 
          * @param {Blob} metadata 
          * @param {Blob} changeset 
-         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
-         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
-         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+         * @param {string} tdei_project_group_id Project group id to which the dataset would be uploaded
+         * @param {string} tdei_service_id TDEI service id associated with the above project group id.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1313,7 +1313,7 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id for validation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Allows a user to validate osw dataset to check the correctness of data. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Validates the osw dataset.
          * @param {Blob} dataset 
          * @param {*} [options] Override http request option.
@@ -1333,11 +1333,11 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
  */
 export class OSWApi extends BaseAPI {
     /**
-     * Given a dataset tdei_dataset_id returns the subgraph within a given bounding box (xmin, ymin, ymax, xmax). Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-     * @summary Given a dataset tdei_dataset_id returns the subgraph within a given bounding box.
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-     * @param {string} file_type Output file type for a file
-     * @param {Array<number>} bbox A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
+     * When provided with a tdei_dataset_id, this request returns a subgraph dataset that falls within a specified bounding box defined by the coordinates (xmin, ymin, ymax, xmax). The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Returns a subgraph dataset that falls within a specified bounding box
+     * @param {string} tdei_dataset_id Dataset ID to which the bounding box will be applied.
+     * @param {string} file_type Dataset output file type.
+     * @param {Array<number>} bbox A bounding box defines the search area by specifying the latitude and longitude coordinates of its corners. These coordinates should be provided as a string in the order: west (longitude), south (latitude), east (longitude), north (latitude). This format outlines the geographical area to be searched within the defined perimeter.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
@@ -1346,9 +1346,9 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).datasetBbox(tdei_dataset_id, file_type, bbox, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Adds the \"incline\" tag to a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter, processes the dataset to calculate the incline information, and updates the dataset with the incline tag. Returns the job_id for the incline calculation request.
+     * Adds the **incline** tag to a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter, processes the dataset to calculate the incline information, and updates the dataset with the incline tag.The original data of the dataset will be modified in this request.If the original data already has incline tag, it will be replaced. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Adds the incline tag to the dataset
-     * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+     * @param {string} tdei_dataset_id Dataset ID for calculating the dataset inclination.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
@@ -1357,8 +1357,8 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).datasetTagIncline(tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Given a target dataset, tags the sidewalks with the road network from source dataset which is within the buffer of 5 meters from the sidewalk.
-     * @summary Given a target dataset, tags the sidewalks with the road network from source dataset.
+     * This process involves associating sidewalks from a target dataset with the road network from a source dataset based on proximity. Specifically, any part of the road network that is within a 5-meter buffer zone around the sidewalks in the target dataset gets tagged accordingly. This method ensures that sidewalks are accurately mapped in relation to nearby roads, facilitating better data integration and analysis between different geographic datasets.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Tags the sidewalks with the road network within proximity.
      * @param {string} source_dataset_id Dataset from which the road network to be retrieved
      * @param {string} target_dataset_id Dataset for which the road network is to be tagged
      * @param {*} [options] Override http request option.
@@ -1369,11 +1369,11 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).datasetTagRoad(source_dataset_id, target_dataset_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * returns a specific osw file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
-     * @summary downloads the OSW files as zip
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
-     * @param {string} [format] File format to download. Default to osw
-     * @param {string} [file_version] File version to download. Default to latest
+     * Downloads a specific OSW dataset as a zip file, which includes `{nodes, edges, points}.geojson` files. If file extensions are specified, the zip will contain `{nodes, edges, points}.extension.geojson` files, as well as metadata and a changeset file, if available.
+     * @summary Downloads the OSW dataset
+     * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
+     * @param {string} [format] The system maintains two formats for the OSW dataset: OSW and OSM. By default, the OSW format is downloaded.
+     * @param {string} [file_version] The system supports two versions for the OSW dataset: Latest and Original.The Latest version includes any recent modifications, while the Original version is the one initially uploaded when creating the dataset. By default, the latest version is downloaded.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
@@ -1382,7 +1382,7 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).getOswFile(tdei_dataset_id, format, file_version, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Lists the versions of OSW data which are supported by TDEI.
+     * List of OSW data standard versions supported by TDEI. The response includes a link to the OSW data standard and specification.
      * @summary List available OSW versions
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1392,9 +1392,9 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).listOswVersions(options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions. Returns the job_id for confidence calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-     * @summary Initiate Confidence calculation for a dataset
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * Initiates the confidence calculation for requested tdei_dataset_id with optional sub-regions.Sub-regions file is a GeoJSON file containing one or more polygons.If the sub-region file is given as an input, the confidence score of each polygon inside the sub-region file will be calculated.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Initiate confidence calculation for a dataset
+     * @param {string} tdei_dataset_id Dataset id of the dataset for which confidence is to be calculated.
      * @param {Blob} [file] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1404,22 +1404,22 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).oswConfidenceCalculateForm(tdei_dataset_id, file, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * upload a file and request for file format conversion. Returns the job_id for convert request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
-     * @summary OSW reformatting on demand
-     * @param {string} source 
-     * @param {string} target 
+     * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary OSW dataset conversion on demand
      * @param {Blob} file 
+     * @param {string} source_format 
+     * @param {string} target_format 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async oswOnDemandFormatForm(source: string, target: string, file: Blob, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
-        return OSWApiFp(this.configuration).oswOnDemandFormatForm(source, target, file, options).then((request) => request(this.axios, this.basePath));
+    public async oswOnDemandFormatForm(file: Blob, source_format: string, target_format: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return OSWApiFp(this.configuration).oswOnDemandFormatForm(file, source_format, target_format, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Initiates the Intersection Quality calculation for requested tdei_dataset_id with optional intersection polygon file. Returns the job_id for quality metric calculation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * Initiates the Intersection Quality calculation for requested `tdei_dataset_id` with optional intersection polygon file.Intersection polygon file can be a GeoJSON file containing one or more polygons.If intersection polygon file is not given the system creates vornoi polygons based on the dataset area.It is recommended to add intersection polygon file for better performance. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Initiate Intersection Quality metric calculation for a dataset
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {string} tdei_dataset_id Dataset id of the dataset for which Intersection Quality metric is to be calculated.
      * @param {Blob} [file] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1429,8 +1429,8 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).oswQualityCalculateForm(tdei_dataset_id, file, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Executes a spatial join operation on the OSW dataset. Based on the provided spatial join input parameters, the system runs the query and generates a downloadable dataset. Returns the job_id for the spatial join request. The geometry column for data elements is specified as `geometry_target` and `geometry_source`. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
-     * @summary Performs the spatial join operation on the OSW dataset.
+     * Performs a spatial join operation between two datasets within the TDEI system. It involves two datasets, target and source, specifying the spatial dimension entities of each to be joined, such as edges, nodes, zones, points, lines, or polygons. The join operation is guided by specified conditions that define how the geometries of the two datasets interact, typically involving spatial functions like intersections. Additionally, filters can be applied to both datasets to refine the data involved in the join. Aggregate functions are also defined to associate the attributes from source to target dataset entity.The geometry column for data elements is specified as `geometry_target` and `geometry_source`.Eg: Find all light poles in source dataset within 5 m of an edge in target dataset, and associate the attribute highway from source dataset with each edge in target dataset. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Performs a spatial join operation between two datasets within the TDEI system.
      * @param {OswSpatialjoinBody} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1440,8 +1440,8 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).oswSpatialJoin(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Performs union of the two input OSW dataset. Returns the job_id for the union request. To check the status, refer to the Location header in the response, which includes the URL for the status API endpoint.
-     * @summary Performs union of the two input OSW dataset.
+     * This operation performs a union of two specified OSW datasets, effectively merging their data into a single dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Performs a union of the two input OSW datasets.
      * @param {OswUnionBody} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1451,9 +1451,9 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).oswUnion(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * Publishes an OSW dataset that was previously uploaded via the [POST] /osw endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Publishes the OSW dataset for the tdei_dataset_id
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {string} tdei_dataset_id Dataset id of the dataset to be published. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
@@ -1462,10 +1462,10 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).publishOswFile(tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Calculates the quality metric on a dataset element tags for requested tdei_dataset_id. Returns the tag quality metric for the dataset element tags.
+     * Calculates the quality metric on a dataset element tags for requested tdei_dataset_id. Tags are the specific attributes or characteristics relevant to the OSW data entity. For example entities like Footway, Crossing, and Sidewalk have tags such as surface, width, incline, and length, indicating attributes like the material, size, slope, and distance. Returns the tag quality metric for the dataset element tags.
      * @summary Calculates the quality metric on a dataset element tags
      * @param {Blob} file 
-     * @param {string} tdei_dataset_id tdei_dataset_id for a dataset, represented as a uuid
+     * @param {string} tdei_dataset_id Dataset ID for calculating the quality metrics of element tags.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
@@ -1474,14 +1474,14 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).qualityMetricTagForm(file, tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * This path allows a user to upload pre-release osw dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
-     * @summary upload a pre-release of OSW dataset.
+     * This endpoint enables users to upload an OSW dataset. The request must include the required parameters to complete the upload. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. By default, the dataset's status will be set to 'pre-release.' The dataset can be published using the `/publish` endpoint.
+     * @summary Upload a OSW dataset.
      * @param {Blob} dataset 
      * @param {Blob} metadata 
      * @param {Blob} changeset 
-     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
-     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
-     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+     * @param {string} tdei_project_group_id Project group id to which the dataset would be uploaded
+     * @param {string} tdei_service_id TDEI service id associated with the above project group id.
+     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
@@ -1490,7 +1490,7 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).uploadOswFileForm(dataset, metadata, changeset, tdei_project_group_id, tdei_service_id, derived_from_dataset_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Allows a user to validate osw dataset to check the correctness of data. Returns the job_id for validation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * Allows a user to validate osw dataset to check the correctness of data. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Validates the osw dataset.
      * @param {Blob} dataset 
      * @param {*} [options] Override http request option.

@@ -67,7 +67,7 @@ exports.GTFSFlexApi = exports.GTFSFlexApiFactory = exports.GTFSFlexApiFp = expor
 /* eslint-disable */
 /**
  * TDEI Gateway Dev API
- * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) data system. It is intended for applications producing data to and consuming data from the TDEI system. It currently supports GTFS-Pathways, GTFS-Flex v2 and OpenSidewalks v0.2 data schemas.
+ * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) system. It is intended for applications submitting data to and consuming data from the TDEI system. We currently support GTFS-Pathways, GTFS-Flex and OpenSidewalks (OSW) data schemas.
  *
  * OpenAPI spec version: v0.1
  * Contact: tdei@uw.edu
@@ -88,9 +88,9 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
     var _this = this;
     return {
         /**
-         * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
-         * @summary downloads the GTFS Flex files as zip
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * Downloads a specific GTFS Flex dataset as zip containing .txt files that define details such as service areas and stops for flexible transit routes.
+         * @summary Downloads the GTFS Flex dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -163,7 +163,7 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * Lists the versions of GTFS Flex data which are supported by TDEI.
+         * List of GTFS Flex data standard versions supported by TDEI. The response includes a link to the GTFS Flex data standard and specification.
          * @summary List available GTFS Flex versions
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -232,9 +232,9 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * Publishes an GTFS Flex dataset that was previously uploaded via the [POST] /gtfs-flex endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Publishes a GTFS Flex dataset that was previously uploaded via the [POST] /gtfs-flex endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Publishes the GTFS Flex dataset for the tdei_dataset_id
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset id of the dataset to be published
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -307,14 +307,14 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * This path allows a user to upload pre-release GTFS Flex dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary upload a pre-release of GTFS Flex dataset.
+         * This endpoint enables users to upload a GTFS-Flex dataset. The request must include the required parameters to complete the upload. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. By default, the dataset's status will be set to 'pre-release.' The dataset can be published using the /publish endpoint.
+         * @summary Upload a GTFS Flex dataset.
          * @param {Blob} dataset
          * @param {Blob} metadata
          * @param {Blob} changeset
-         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
-         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
-         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+         * @param {string} tdei_project_group_id Project group id to which the dataset would be uploaded
+         * @param {string} tdei_service_id TDEI service id associated with the above project group id.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -404,7 +404,7 @@ var GTFSFlexApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * Allows a user to validate GTFS Flex dataset to check the correctness of data. Returns the job_id for validation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Allows a user to validate GTFS Flex dataset to check the correctness of data. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Validates the GTFS Flex dataset.
          * @param {Blob} dataset
          * @param {*} [options] Override http request option.
@@ -478,9 +478,9 @@ exports.GTFSFlexApiAxiosParamCreator = GTFSFlexApiAxiosParamCreator;
 var GTFSFlexApiFp = function (configuration) {
     return {
         /**
-         * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
-         * @summary downloads the GTFS Flex files as zip
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * Downloads a specific GTFS Flex dataset as zip containing .txt files that define details such as service areas and stops for flexible transit routes.
+         * @summary Downloads the GTFS Flex dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -503,7 +503,7 @@ var GTFSFlexApiFp = function (configuration) {
             });
         },
         /**
-         * Lists the versions of GTFS Flex data which are supported by TDEI.
+         * List of GTFS Flex data standard versions supported by TDEI. The response includes a link to the GTFS Flex data standard and specification.
          * @summary List available GTFS Flex versions
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -527,9 +527,9 @@ var GTFSFlexApiFp = function (configuration) {
             });
         },
         /**
-         * Publishes an GTFS Flex dataset that was previously uploaded via the [POST] /gtfs-flex endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Publishes a GTFS Flex dataset that was previously uploaded via the [POST] /gtfs-flex endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Publishes the GTFS Flex dataset for the tdei_dataset_id
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset id of the dataset to be published
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -552,14 +552,14 @@ var GTFSFlexApiFp = function (configuration) {
             });
         },
         /**
-         * This path allows a user to upload pre-release GTFS Flex dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary upload a pre-release of GTFS Flex dataset.
+         * This endpoint enables users to upload a GTFS-Flex dataset. The request must include the required parameters to complete the upload. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. By default, the dataset's status will be set to 'pre-release.' The dataset can be published using the /publish endpoint.
+         * @summary Upload a GTFS Flex dataset.
          * @param {Blob} dataset
          * @param {Blob} metadata
          * @param {Blob} changeset
-         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
-         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
-         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+         * @param {string} tdei_project_group_id Project group id to which the dataset would be uploaded
+         * @param {string} tdei_service_id TDEI service id associated with the above project group id.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -582,7 +582,7 @@ var GTFSFlexApiFp = function (configuration) {
             });
         },
         /**
-         * Allows a user to validate GTFS Flex dataset to check the correctness of data. Returns the job_id for validation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Allows a user to validate GTFS Flex dataset to check the correctness of data. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Validates the GTFS Flex dataset.
          * @param {Blob} dataset
          * @param {*} [options] Override http request option.
@@ -616,9 +616,9 @@ exports.GTFSFlexApiFp = GTFSFlexApiFp;
 var GTFSFlexApiFactory = function (configuration, basePath, axios) {
     return {
         /**
-         * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
-         * @summary downloads the GTFS Flex files as zip
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * Downloads a specific GTFS Flex dataset as zip containing .txt files that define details such as service areas and stops for flexible transit routes.
+         * @summary Downloads the GTFS Flex dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -630,7 +630,7 @@ var GTFSFlexApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * Lists the versions of GTFS Flex data which are supported by TDEI.
+         * List of GTFS Flex data standard versions supported by TDEI. The response includes a link to the GTFS Flex data standard and specification.
          * @summary List available GTFS Flex versions
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -643,9 +643,9 @@ var GTFSFlexApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * Publishes an GTFS Flex dataset that was previously uploaded via the [POST] /gtfs-flex endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Publishes a GTFS Flex dataset that was previously uploaded via the [POST] /gtfs-flex endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Publishes the GTFS Flex dataset for the tdei_dataset_id
-         * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+         * @param {string} tdei_dataset_id Dataset id of the dataset to be published
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -657,14 +657,14 @@ var GTFSFlexApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * This path allows a user to upload pre-release GTFS Flex dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
-         * @summary upload a pre-release of GTFS Flex dataset.
+         * This endpoint enables users to upload a GTFS-Flex dataset. The request must include the required parameters to complete the upload. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. By default, the dataset's status will be set to 'pre-release.' The dataset can be published using the /publish endpoint.
+         * @summary Upload a GTFS Flex dataset.
          * @param {Blob} dataset
          * @param {Blob} metadata
          * @param {Blob} changeset
-         * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
-         * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
-         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+         * @param {string} tdei_project_group_id Project group id to which the dataset would be uploaded
+         * @param {string} tdei_service_id TDEI service id associated with the above project group id.
+         * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -676,7 +676,7 @@ var GTFSFlexApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * Allows a user to validate GTFS Flex dataset to check the correctness of data. Returns the job_id for validation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+         * Allows a user to validate GTFS Flex dataset to check the correctness of data. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Validates the GTFS Flex dataset.
          * @param {Blob} dataset
          * @param {*} [options] Override http request option.
@@ -704,9 +704,9 @@ var GTFSFlexApi = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
-     * returns a specific GTFS Flex file as zip containing metadata, dataset, and changeset identified by the tdei_dataset_id
-     * @summary downloads the GTFS Flex files as zip
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * Downloads a specific GTFS Flex dataset as zip containing .txt files that define details such as service areas and stops for flexible transit routes.
+     * @summary Downloads the GTFS Flex dataset
+     * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
@@ -720,7 +720,7 @@ var GTFSFlexApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * Lists the versions of GTFS Flex data which are supported by TDEI.
+     * List of GTFS Flex data standard versions supported by TDEI. The response includes a link to the GTFS Flex data standard and specification.
      * @summary List available GTFS Flex versions
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -735,9 +735,9 @@ var GTFSFlexApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * Publishes an GTFS Flex dataset that was previously uploaded via the [POST] /gtfs-flex endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * Publishes a GTFS Flex dataset that was previously uploaded via the [POST] /gtfs-flex endpoint, marking it as an official release for the mobility service. This official release status ensures visibility to all TDEI data consumers. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Publishes the GTFS Flex dataset for the tdei_dataset_id
-     * @param {string} tdei_dataset_id tdei_dataset_id for a file, represented as a uuid
+     * @param {string} tdei_dataset_id Dataset id of the dataset to be published
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
@@ -751,14 +751,14 @@ var GTFSFlexApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * This path allows a user to upload pre-release GTFS Flex dataset. The caller must provide metadata about the file - includes information about how and when the data was collected and valid dates of the file. Returns the job_id of the uploaded file. For checking the status of the upload, refer to the Location header in the response, which contains the URL for the status API endpoint.
-     * @summary upload a pre-release of GTFS Flex dataset.
+     * This endpoint enables users to upload a GTFS-Flex dataset. The request must include the required parameters to complete the upload. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. By default, the dataset's status will be set to 'pre-release.' The dataset can be published using the /publish endpoint.
+     * @summary Upload a GTFS Flex dataset.
      * @param {Blob} dataset
      * @param {Blob} metadata
      * @param {Blob} changeset
-     * @param {string} tdei_project_group_id tdei project group id. Represented as UUID.
-     * @param {string} tdei_service_id tdei service id associated with project group id. Represented as UUID.
-     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived
+     * @param {string} tdei_project_group_id Project group id to which the dataset would be uploaded
+     * @param {string} tdei_service_id TDEI service id associated with the above project group id.
+     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GTFSFlexApi
@@ -772,7 +772,7 @@ var GTFSFlexApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * Allows a user to validate GTFS Flex dataset to check the correctness of data. Returns the job_id for validation request. For checking the status, refer to the Location header in the response, which contains the URL for the status API endpoint.
+     * Allows a user to validate GTFS Flex dataset to check the correctness of data. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Validates the GTFS Flex dataset.
      * @param {Blob} dataset
      * @param {*} [options] Override http request option.

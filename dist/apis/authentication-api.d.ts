@@ -1,6 +1,6 @@
 /**
  * TDEI Gateway Dev API
- * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) data system. It is intended for applications producing data to and consuming data from the TDEI system. It currently supports GTFS-Pathways, GTFS-Flex v2 and OpenSidewalks v0.2 data schemas.
+ * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) system. It is intended for applications submitting data to and consuming data from the TDEI system. We currently support GTFS-Pathways, GTFS-Flex and OpenSidewalks (OSW) data schemas.
  *
  * OpenAPI spec version: v0.1
  * Contact: tdei@uw.edu
@@ -20,15 +20,15 @@ import { TokenResponse } from '../models';
  */
 export declare const AuthenticationApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
-     * Authenticates the user to the TDEI system. Returns access token.
-     * @summary Authenticates the user to the TDEI system.
+     * Authenticates the user with the TDEI system. Returns an access token, if successfully authenticated.
+     * @summary Authenticates the user with the TDEI system.
      * @param {LoginModel} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     authenticate: (body: LoginModel, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Request for password recovery, sends an email with a link to reset the password for given email.
+     * This request initiates a password recovery process for the specified email address. Upon submission, the system sends an email containing a link that the user can follow to reset their password. This allows users to securely update their password if they have forgotten it or wish to change it for security reasons.
      * @summary Request for password recovery
      * @param {string} body
      * @param {*} [options] Override http request option.
@@ -36,15 +36,15 @@ export declare const AuthenticationApiAxiosParamCreator: (configuration?: Config
      */
     recoverPassword: (body: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Re-issues access token provided the valid refresh token
-     * @summary Re-issue access token
+     * Re-issues an access token, if a valid refresh token is sent to the server
+     * @summary Re-issue an access token
      * @param {string} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     refreshToken: (body: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Request for email verification link, sends an email verification link for given email
+     * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
      * @summary Request for email verification link
      * @param {string} body
      * @param {*} [options] Override http request option.
@@ -58,15 +58,15 @@ export declare const AuthenticationApiAxiosParamCreator: (configuration?: Config
  */
 export declare const AuthenticationApiFp: (configuration?: Configuration) => {
     /**
-     * Authenticates the user to the TDEI system. Returns access token.
-     * @summary Authenticates the user to the TDEI system.
+     * Authenticates the user with the TDEI system. Returns an access token, if successfully authenticated.
+     * @summary Authenticates the user with the TDEI system.
      * @param {LoginModel} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenResponse>>>;
     /**
-     * Request for password recovery, sends an email with a link to reset the password for given email.
+     * This request initiates a password recovery process for the specified email address. Upon submission, the system sends an email containing a link that the user can follow to reset their password. This allows users to securely update their password if they have forgotten it or wish to change it for security reasons.
      * @summary Request for password recovery
      * @param {string} body
      * @param {*} [options] Override http request option.
@@ -74,15 +74,15 @@ export declare const AuthenticationApiFp: (configuration?: Configuration) => {
      */
     recoverPassword(body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
     /**
-     * Re-issues access token provided the valid refresh token
-     * @summary Re-issue access token
+     * Re-issues an access token, if a valid refresh token is sent to the server
+     * @summary Re-issue an access token
      * @param {string} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     refreshToken(body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenResponse>>>;
     /**
-     * Request for email verification link, sends an email verification link for given email
+     * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
      * @summary Request for email verification link
      * @param {string} body
      * @param {*} [options] Override http request option.
@@ -96,15 +96,15 @@ export declare const AuthenticationApiFp: (configuration?: Configuration) => {
  */
 export declare const AuthenticationApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
-     * Authenticates the user to the TDEI system. Returns access token.
-     * @summary Authenticates the user to the TDEI system.
+     * Authenticates the user with the TDEI system. Returns an access token, if successfully authenticated.
+     * @summary Authenticates the user with the TDEI system.
      * @param {LoginModel} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
     /**
-     * Request for password recovery, sends an email with a link to reset the password for given email.
+     * This request initiates a password recovery process for the specified email address. Upon submission, the system sends an email containing a link that the user can follow to reset their password. This allows users to securely update their password if they have forgotten it or wish to change it for security reasons.
      * @summary Request for password recovery
      * @param {string} body
      * @param {*} [options] Override http request option.
@@ -112,15 +112,15 @@ export declare const AuthenticationApiFactory: (configuration?: Configuration, b
      */
     recoverPassword(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
     /**
-     * Re-issues access token provided the valid refresh token
-     * @summary Re-issue access token
+     * Re-issues an access token, if a valid refresh token is sent to the server
+     * @summary Re-issue an access token
      * @param {string} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     refreshToken(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
     /**
-     * Request for email verification link, sends an email verification link for given email
+     * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
      * @summary Request for email verification link
      * @param {string} body
      * @param {*} [options] Override http request option.
@@ -136,8 +136,8 @@ export declare const AuthenticationApiFactory: (configuration?: Configuration, b
  */
 export declare class AuthenticationApi extends BaseAPI {
     /**
-     * Authenticates the user to the TDEI system. Returns access token.
-     * @summary Authenticates the user to the TDEI system.
+     * Authenticates the user with the TDEI system. Returns an access token, if successfully authenticated.
+     * @summary Authenticates the user with the TDEI system.
      * @param {LoginModel} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -145,7 +145,7 @@ export declare class AuthenticationApi extends BaseAPI {
      */
     authenticate(body: LoginModel, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
     /**
-     * Request for password recovery, sends an email with a link to reset the password for given email.
+     * This request initiates a password recovery process for the specified email address. Upon submission, the system sends an email containing a link that the user can follow to reset their password. This allows users to securely update their password if they have forgotten it or wish to change it for security reasons.
      * @summary Request for password recovery
      * @param {string} body
      * @param {*} [options] Override http request option.
@@ -154,8 +154,8 @@ export declare class AuthenticationApi extends BaseAPI {
      */
     recoverPassword(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
     /**
-     * Re-issues access token provided the valid refresh token
-     * @summary Re-issue access token
+     * Re-issues an access token, if a valid refresh token is sent to the server
+     * @summary Re-issue an access token
      * @param {string} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -163,7 +163,7 @@ export declare class AuthenticationApi extends BaseAPI {
      */
     refreshToken(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
     /**
-     * Request for email verification link, sends an email verification link for given email
+     * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
      * @summary Request for email verification link
      * @param {string} body
      * @param {*} [options] Override http request option.
