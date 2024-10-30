@@ -315,7 +315,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
          * @summary Downloads the OSW dataset
          * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
          * @param {string} [format] The system maintains two formats for the OSW dataset: OSW and OSM. By default, the OSW format is downloaded.
-         * @param {string} [file_version] The system supports two versions for the OSW dataset: Latest and Original.The Latest version includes any recent modifications, while the Original version is the one initially uploaded when creating the dataset. By default, the latest version is downloaded.
+         * @param {string} [file_version] The Latest version includes any recent modifications.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1291,7 +1291,7 @@ var OSWApiFp = function (configuration) {
          * @summary Downloads the OSW dataset
          * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
          * @param {string} [format] The system maintains two formats for the OSW dataset: OSW and OSM. By default, the OSW format is downloaded.
-         * @param {string} [file_version] The system supports two versions for the OSW dataset: Latest and Original.The Latest version includes any recent modifications, while the Original version is the one initially uploaded when creating the dataset. By default, the latest version is downloaded.
+         * @param {string} [file_version] The Latest version includes any recent modifications.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1631,7 +1631,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
          * @summary Downloads the OSW dataset
          * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
          * @param {string} [format] The system maintains two formats for the OSW dataset: OSW and OSM. By default, the OSW format is downloaded.
-         * @param {string} [file_version] The system supports two versions for the OSW dataset: Latest and Original.The Latest version includes any recent modifications, while the Original version is the one initially uploaded when creating the dataset. By default, the latest version is downloaded.
+         * @param {string} [file_version] The Latest version includes any recent modifications.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1861,7 +1861,7 @@ var OSWApi = /** @class */ (function (_super) {
      * @summary Downloads the OSW dataset
      * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
      * @param {string} [format] The system maintains two formats for the OSW dataset: OSW and OSM. By default, the OSW format is downloaded.
-     * @param {string} [file_version] The system supports two versions for the OSW dataset: Latest and Original.The Latest version includes any recent modifications, while the Original version is the one initially uploaded when creating the dataset. By default, the latest version is downloaded.
+     * @param {string} [file_version] The Latest version includes any recent modifications.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
