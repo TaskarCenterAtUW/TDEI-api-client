@@ -50,7 +50,13 @@ export interface MetadataModelDatasetSummary {
      * @type {string}
      * @memberof MetadataModelDatasetSummary
      */
-    key_limitations_of_the_dataset?: string;
+    key_limitations?: string;
+    /**
+     * Release notes
+     * @type {string}
+     * @memberof MetadataModelDatasetSummary
+     */
+    release_notes?: string;
     /**
      * Challenges faced in collecting the data
      * @type {string}
