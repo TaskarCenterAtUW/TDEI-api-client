@@ -24,7 +24,7 @@ export interface OswSpatialjoinBody {
      */
     target_dataset_id: string;
     /**
-     * 
+     * Valid opensidewalks core entity on which the join operation is to be performed
      * @type {string}
      * @memberof OswSpatialjoinBody
      */
@@ -36,7 +36,7 @@ export interface OswSpatialjoinBody {
      */
     source_dataset_id: string;
     /**
-     * 
+     * Valid opensidewalks core entity on which the join operation is to be performed
      * @type {string}
      * @memberof OswSpatialjoinBody
      */
@@ -48,19 +48,19 @@ export interface OswSpatialjoinBody {
      */
     join_condition: string;
     /**
-     * Target attribute filters
+     * Target attribute filters. These can be any valid attributes defined in the OpenSidewalks schema for the entity.
      * @type {string}
      * @memberof OswSpatialjoinBody
      */
     join_filter_target?: string;
     /**
-     * Source attribute filters
+     * Source attribute filters, These can be any valid attributes defined in the OpenSidewalks schema for the entity
      * @type {string}
      * @memberof OswSpatialjoinBody
      */
     join_filter_source?: string;
     /**
-     * Agrregate function for attribute.all attribute_name/alias will be prefixed with 'ext:'
+     * Agrregate function for attribute. Attribute information to be pulled along from source and attach to target dataset entity. All attribute_name/alias will be prefixed with 'ext:'
      * @type {Array<string>}
      * @memberof OswSpatialjoinBody
      */
