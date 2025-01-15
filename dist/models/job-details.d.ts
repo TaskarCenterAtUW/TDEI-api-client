@@ -114,7 +114,8 @@ export interface JobDetails {
 export declare enum JobDetailsStatusEnum {
     COMPLETED = "COMPLETED",
     FAILED = "FAILED",
-    INPROGRESS = "IN-PROGRESS"
+    INPROGRESS = "IN-PROGRESS",
+    ABANDONED = "ABANDONED"
 }
 /**
     * @export

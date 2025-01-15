@@ -10,6 +10,7 @@ var JobDetailsStatusEnum;
     JobDetailsStatusEnum["COMPLETED"] = "COMPLETED";
     JobDetailsStatusEnum["FAILED"] = "FAILED";
     JobDetailsStatusEnum["INPROGRESS"] = "IN-PROGRESS";
+    JobDetailsStatusEnum["ABANDONED"] = "ABANDONED";
 })(JobDetailsStatusEnum = exports.JobDetailsStatusEnum || (exports.JobDetailsStatusEnum = {}));
 /**
     * @export
