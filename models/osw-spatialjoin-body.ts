@@ -86,6 +86,7 @@ export enum OswSpatialjoinBodySourceDimensionEnum {
     Zone = 'zone',
     Point = 'point',
     Line = 'line',
-    Polygon = 'polygon'
+    Polygon = 'polygon',
+    Extension = 'extension'
 }
 
