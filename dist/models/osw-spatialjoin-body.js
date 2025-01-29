@@ -23,4 +23,5 @@ var OswSpatialjoinBodySourceDimensionEnum;
     OswSpatialjoinBodySourceDimensionEnum["Point"] = "point";
     OswSpatialjoinBodySourceDimensionEnum["Line"] = "line";
     OswSpatialjoinBodySourceDimensionEnum["Polygon"] = "polygon";
+    OswSpatialjoinBodySourceDimensionEnum["Extension"] = "extension";
 })(OswSpatialjoinBodySourceDimensionEnum = exports.OswSpatialjoinBodySourceDimensionEnum || (exports.OswSpatialjoinBodySourceDimensionEnum = {}));
