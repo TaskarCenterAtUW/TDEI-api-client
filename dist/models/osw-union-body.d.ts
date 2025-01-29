@@ -27,4 +27,10 @@ export interface OswUnionBody {
      * @memberof OswUnionBody
      */
     tdei_dataset_id_two: string;
+    /**
+     * Proximity value to identify equivalent nodes in meters. Default value is 0.5 meters.
+     * @type {number}
+     * @memberof OswUnionBody
+     */
+    proximity?: number;
 }
