@@ -159,17 +159,23 @@ var MetricsApiAxiosParamCreator = function (configuration) {
         /**
          * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
          * @summary Gets the Service metrics
+         * @param {string} tdei_project_group_id Project Group id of the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        serviceMetrics: function (options) {
+        serviceMetrics: function (tdei_project_group_id, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
                 return __generator(this, function (_c) {
                     switch (_c.label) {
                         case 0:
-                            localVarPath = "/api/v1/service-metrics/{tdei_project_group_id}";
+                            // verify required parameter 'tdei_project_group_id' is not null or undefined
+                            if (tdei_project_group_id === null || tdei_project_group_id === undefined) {
+                                throw new base_1.RequiredError('tdei_project_group_id', 'Required parameter tdei_project_group_id was null or undefined when calling serviceMetrics.');
+                            }
+                            localVarPath = "/api/v1/service-metrics/{tdei_project_group_id}"
+                                .replace("{".concat("tdei_project_group_id", "}"), encodeURIComponent(String(tdei_project_group_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -330,15 +336,16 @@ var MetricsApiFp = function (configuration) {
         /**
          * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
          * @summary Gets the Service metrics
+         * @param {string} tdei_project_group_id Project Group id of the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        serviceMetrics: function (options) {
+        serviceMetrics: function (tdei_project_group_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.MetricsApiAxiosParamCreator)(configuration).serviceMetrics(options)];
+                        case 0: return [4 /*yield*/, (0, exports.MetricsApiAxiosParamCreator)(configuration).serviceMetrics(tdei_project_group_id, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -400,13 +407,14 @@ var MetricsApiFactory = function (configuration, basePath, axios) {
         /**
          * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
          * @summary Gets the Service metrics
+         * @param {string} tdei_project_group_id Project Group id of the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        serviceMetrics: function (options) {
+        serviceMetrics: function (tdei_project_group_id, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.MetricsApiFp)(configuration).serviceMetrics(options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.MetricsApiFp)(configuration).serviceMetrics(tdei_project_group_id, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -455,15 +463,16 @@ var MetricsApi = /** @class */ (function (_super) {
     /**
      * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
      * @summary Gets the Service metrics
+     * @param {string} tdei_project_group_id Project Group id of the dataset.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MetricsApi
      */
-    MetricsApi.prototype.serviceMetrics = function (options) {
+    MetricsApi.prototype.serviceMetrics = function (tdei_project_group_id, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.MetricsApiFp)(this.configuration).serviceMetrics(options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.MetricsApiFp)(this.configuration).serviceMetrics(tdei_project_group_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
