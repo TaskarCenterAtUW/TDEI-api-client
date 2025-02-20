@@ -79,11 +79,17 @@ export const MetricsApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
          * @summary Gets the Service metrics
+         * @param {string} tdei_project_group_id Project Group id of the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        serviceMetrics: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/service-metrics/{tdei_project_group_id}`;
+        serviceMetrics: async (tdei_project_group_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tdei_project_group_id' is not null or undefined
+            if (tdei_project_group_id === null || tdei_project_group_id === undefined) {
+                throw new RequiredError('tdei_project_group_id','Required parameter tdei_project_group_id was null or undefined when calling serviceMetrics.');
+            }
+            const localVarPath = `/api/v1/service-metrics/{tdei_project_group_id}`
+                .replace(`{${"tdei_project_group_id"}}`, encodeURIComponent(String(tdei_project_group_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -203,11 +209,12 @@ export const MetricsApiFp = function(configuration?: Configuration) {
         /**
          * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
          * @summary Gets the Service metrics
+         * @param {string} tdei_project_group_id Project Group id of the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async serviceMetrics(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
-            const localVarAxiosArgs = await MetricsApiAxiosParamCreator(configuration).serviceMetrics(options);
+        async serviceMetrics(tdei_project_group_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
+            const localVarAxiosArgs = await MetricsApiAxiosParamCreator(configuration).serviceMetrics(tdei_project_group_id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -247,11 +254,12 @@ export const MetricsApiFactory = function (configuration?: Configuration, basePa
         /**
          * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
          * @summary Gets the Service metrics
+         * @param {string} tdei_project_group_id Project Group id of the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async serviceMetrics(options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
-            return MetricsApiFp(configuration).serviceMetrics(options).then((request) => request(axios, basePath));
+        async serviceMetrics(tdei_project_group_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
+            return MetricsApiFp(configuration).serviceMetrics(tdei_project_group_id, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves metrics related to the system and datasets within the TDEI platform. This endpoint provides an overview of usage statistics including the total number of users, services, and project groups, as well as a breakdown of services by type. Additionally, it gives details on dataset uploads, such as the total number of uploads and their cumulative size in megabytes.
@@ -285,12 +293,13 @@ export class MetricsApi extends BaseAPI {
     /**
      * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
      * @summary Gets the Service metrics
+     * @param {string} tdei_project_group_id Project Group id of the dataset.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MetricsApi
      */
-    public async serviceMetrics(options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
-        return MetricsApiFp(this.configuration).serviceMetrics(options).then((request) => request(this.axios, this.basePath));
+    public async serviceMetrics(tdei_project_group_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
+        return MetricsApiFp(this.configuration).serviceMetrics(tdei_project_group_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Retrieves metrics related to the system and datasets within the TDEI platform. This endpoint provides an overview of usage statistics including the total number of users, services, and project groups, as well as a breakdown of services by type. Additionally, it gives details on dataset uploads, such as the total number of uploads and their cumulative size in megabytes.
