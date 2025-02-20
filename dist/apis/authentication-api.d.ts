@@ -44,6 +44,13 @@ export declare const AuthenticationApiAxiosParamCreator: (configuration?: Config
      */
     refreshToken: (body: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
+     * @summary Regenerates the API key for the user.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    regenerateApiKey: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
      * @summary Request for email verification link
      * @param {string} body
@@ -82,6 +89,13 @@ export declare const AuthenticationApiFp: (configuration?: Configuration) => {
      */
     refreshToken(body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenResponse>>>;
     /**
+     * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
+     * @summary Regenerates the API key for the user.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    regenerateApiKey(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
+    /**
      * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
      * @summary Request for email verification link
      * @param {string} body
@@ -119,6 +133,13 @@ export declare const AuthenticationApiFactory: (configuration?: Configuration, b
      * @throws {RequiredError}
      */
     refreshToken(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
+    /**
+     * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
+     * @summary Regenerates the API key for the user.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    regenerateApiKey(options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
     /**
      * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
      * @summary Request for email verification link
@@ -162,6 +183,14 @@ export declare class AuthenticationApi extends BaseAPI {
      * @memberof AuthenticationApi
      */
     refreshToken(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
+    /**
+     * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
+     * @summary Regenerates the API key for the user.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    regenerateApiKey(options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
     /**
      * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
      * @summary Request for email verification link

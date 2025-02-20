@@ -319,6 +319,60 @@ var AuthenticationApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
+         * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
+         * @summary Regenerates the API key for the user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        regenerateApiKey: function (options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, accessToken, _a, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            localVarPath = "/api/v1/regenerate-api-key";
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 1:
+                            _a = _b.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.accessToken];
+                        case 3:
+                            _a = _b.sent();
+                            _b.label = 4;
+                        case 4:
+                            accessToken = _a;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _b.label = 5;
+                        case 5:
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
          * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
          * @summary Request for email verification link
          * @param {string} body
@@ -480,6 +534,30 @@ var AuthenticationApiFp = function (configuration) {
             });
         },
         /**
+         * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
+         * @summary Regenerates the API key for the user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        regenerateApiKey: function (options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.AuthenticationApiAxiosParamCreator)(configuration).regenerateApiKey(options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
          * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
          * @summary Request for email verification link
          * @param {string} body
@@ -556,6 +634,19 @@ var AuthenticationApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
+         * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
+         * @summary Regenerates the API key for the user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        regenerateApiKey: function (options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.AuthenticationApiFp)(configuration).regenerateApiKey(options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
          * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
          * @summary Request for email verification link
          * @param {string} body
@@ -628,6 +719,21 @@ var AuthenticationApi = /** @class */ (function (_super) {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2 /*return*/, (0, exports.AuthenticationApiFp)(this.configuration).refreshToken(body, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
+     * @summary Regenerates the API key for the user.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    AuthenticationApi.prototype.regenerateApiKey = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.AuthenticationApiFp)(this.configuration).regenerateApiKey(options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
