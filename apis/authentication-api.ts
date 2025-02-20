@@ -205,6 +205,49 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
+         * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
+         * @summary Regenerates the API key for the user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        regenerateApiKey: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/regenerate-api-key`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
          * @summary Request for email verification link
          * @param {string} body 
@@ -316,6 +359,19 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
+         * @summary Regenerates the API key for the user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async regenerateApiKey(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await AuthenticationApiAxiosParamCreator(configuration).regenerateApiKey(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
          * @summary Request for email verification link
          * @param {string} body 
@@ -369,6 +425,15 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return AuthenticationApiFp(configuration).refreshToken(body, options).then((request) => request(axios, basePath));
         },
         /**
+         * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
+         * @summary Regenerates the API key for the user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async regenerateApiKey(options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return AuthenticationApiFp(configuration).regenerateApiKey(options).then((request) => request(axios, basePath));
+        },
+        /**
          * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
          * @summary Request for email verification link
          * @param {string} body 
@@ -420,6 +485,16 @@ export class AuthenticationApi extends BaseAPI {
      */
     public async refreshToken(body: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<TokenResponse>> {
         return AuthenticationApiFp(this.configuration).refreshToken(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
+     * @summary Regenerates the API key for the user.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    public async regenerateApiKey(options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return AuthenticationApiFp(this.configuration).regenerateApiKey(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.

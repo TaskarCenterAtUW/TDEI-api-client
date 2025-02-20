@@ -11,31 +11,34 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SystemMetricsApiCalls } from './system-metrics-api-calls';
-import { SystemMetricsDatasetMetrics } from './system-metrics-dataset-metrics';
-import { SystemMetricsSystemMetrics } from './system-metrics-system-metrics';
 /**
  * 
  * @export
- * @interface SystemMetrics
+ * @interface ServiceMetricsServices
  */
-export interface SystemMetrics {
+export interface ServiceMetricsServices {
     /**
      * 
-     * @type {SystemMetricsSystemMetrics}
-     * @memberof SystemMetrics
+     * @type {string}
+     * @memberof ServiceMetricsServices
      */
-    systemMetrics?: SystemMetricsSystemMetrics;
+    service_id: string;
     /**
      * 
-     * @type {SystemMetricsDatasetMetrics}
-     * @memberof SystemMetrics
+     * @type {string}
+     * @memberof ServiceMetricsServices
      */
-    datasetMetrics?: SystemMetricsDatasetMetrics;
+    service_name: string;
     /**
      * 
-     * @type {SystemMetricsApiCalls}
-     * @memberof SystemMetrics
+     * @type {number}
+     * @memberof ServiceMetricsServices
      */
-    apiCalls?: SystemMetricsApiCalls;
+    dataset_count: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ServiceMetricsServices
+     */
+    total_unzipped_size_mb: number;
 }

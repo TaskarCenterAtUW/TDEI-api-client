@@ -17,6 +17,7 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { DataMetrics } from '../models';
+import { ServiceMetrics } from '../models';
 import { SystemMetrics } from '../models';
 /**
  * MetricsApi - axios parameter creator
@@ -32,6 +33,57 @@ export const MetricsApiAxiosParamCreator = function (configuration?: Configurati
          */
         dataMetrics: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/data-metrics`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKey required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("x-api-key")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+            }
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
+         * @summary Gets the Service metrics
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        serviceMetrics: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/service-metrics/{tdei_project_group_id}`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -149,6 +201,19 @@ export const MetricsApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
+         * @summary Gets the Service metrics
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async serviceMetrics(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
+            const localVarAxiosArgs = await MetricsApiAxiosParamCreator(configuration).serviceMetrics(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Retrieves metrics related to the system and datasets within the TDEI platform. This endpoint provides an overview of usage statistics including the total number of users, services, and project groups, as well as a breakdown of services by type. Additionally, it gives details on dataset uploads, such as the total number of uploads and their cumulative size in megabytes.
          * @summary Gets the system metrics
          * @param {*} [options] Override http request option.
@@ -180,6 +245,15 @@ export const MetricsApiFactory = function (configuration?: Configuration, basePa
             return MetricsApiFp(configuration).dataMetrics(options).then((request) => request(axios, basePath));
         },
         /**
+         * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
+         * @summary Gets the Service metrics
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async serviceMetrics(options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
+            return MetricsApiFp(configuration).serviceMetrics(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Retrieves metrics related to the system and datasets within the TDEI platform. This endpoint provides an overview of usage statistics including the total number of users, services, and project groups, as well as a breakdown of services by type. Additionally, it gives details on dataset uploads, such as the total number of uploads and their cumulative size in megabytes.
          * @summary Gets the system metrics
          * @param {*} [options] Override http request option.
@@ -207,6 +281,16 @@ export class MetricsApi extends BaseAPI {
      */
     public async dataMetrics(options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
         return MetricsApiFp(this.configuration).dataMetrics(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
+     * @summary Gets the Service metrics
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetricsApi
+     */
+    public async serviceMetrics(options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
+        return MetricsApiFp(this.configuration).serviceMetrics(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Retrieves metrics related to the system and datasets within the TDEI platform. This endpoint provides an overview of usage statistics including the total number of users, services, and project groups, as well as a breakdown of services by type. Additionally, it gives details on dataset uploads, such as the total number of uploads and their cumulative size in megabytes.

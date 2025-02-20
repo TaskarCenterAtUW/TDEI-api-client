@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SystemMetricsApiCalls } from './system-metrics-api-calls';
 import { SystemMetricsDatasetMetrics } from './system-metrics-dataset-metrics';
 import { SystemMetricsSystemMetrics } from './system-metrics-system-metrics';
 /**
@@ -29,4 +30,10 @@ export interface SystemMetrics {
      * @memberof SystemMetrics
      */
     datasetMetrics?: SystemMetricsDatasetMetrics;
+    /**
+     *
+     * @type {SystemMetricsApiCalls}
+     * @memberof SystemMetrics
+     */
+    apiCalls?: SystemMetricsApiCalls;
 }
