@@ -9,24 +9,22 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ServiceMetricsProjectGroup } from './service-metrics-project-group';
-import { ServiceMetricsServices } from './service-metrics-services';
 /**
  *
  * @export
- * @interface ServiceMetrics
+ * @interface ServiceMetricsProjectGroup
  */
-export interface ServiceMetrics {
+export interface ServiceMetricsProjectGroup {
     /**
      *
-     * @type {ServiceMetricsProjectGroup}
-     * @memberof ServiceMetrics
+     * @type {string}
+     * @memberof ServiceMetricsProjectGroup
      */
-    project_group: ServiceMetricsProjectGroup;
+    id: string;
     /**
      *
-     * @type {Array<ServiceMetricsServices>}
-     * @memberof ServiceMetrics
+     * @type {string}
+     * @memberof ServiceMetricsProjectGroup
      */
-    services: Array<ServiceMetricsServices>;
+    name: string;
 }

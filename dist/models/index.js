@@ -50,6 +50,7 @@ __exportStar(require("./project-group"), exports);
 __exportStar(require("./quality-metric-request"), exports);
 __exportStar(require("./quality-metric-tag-response"), exports);
 __exportStar(require("./service-metrics"), exports);
+__exportStar(require("./service-metrics-project-group"), exports);
 __exportStar(require("./service-metrics-services"), exports);
 __exportStar(require("./service-model"), exports);
 __exportStar(require("./system-metrics"), exports);

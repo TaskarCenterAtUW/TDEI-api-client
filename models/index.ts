@@ -34,6 +34,7 @@ export * from './project-group';
 export * from './quality-metric-request';
 export * from './quality-metric-tag-response';
 export * from './service-metrics';
+export * from './service-metrics-project-group';
 export * from './service-metrics-services';
 export * from './service-model';
 export * from './system-metrics';

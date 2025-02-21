@@ -157,7 +157,7 @@ var MetricsApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
+         * This endpoint provides detailed metrics about dataset categorized by Service within the chosen Project Group. It includes the total number of datasets and their cumulative size in megabytes.
          * @summary Gets the Service metrics
          * @param {string} tdei_project_group_id Project Group id of the dataset.
          * @param {*} [options] Override http request option.
@@ -334,7 +334,7 @@ var MetricsApiFp = function (configuration) {
             });
         },
         /**
-         * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
+         * This endpoint provides detailed metrics about dataset categorized by Service within the chosen Project Group. It includes the total number of datasets and their cumulative size in megabytes.
          * @summary Gets the Service metrics
          * @param {string} tdei_project_group_id Project Group id of the dataset.
          * @param {*} [options] Override http request option.
@@ -405,7 +405,7 @@ var MetricsApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
+         * This endpoint provides detailed metrics about dataset categorized by Service within the chosen Project Group. It includes the total number of datasets and their cumulative size in megabytes.
          * @summary Gets the Service metrics
          * @param {string} tdei_project_group_id Project Group id of the dataset.
          * @param {*} [options] Override http request option.
@@ -461,7 +461,7 @@ var MetricsApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * This endpoint provides detailed metrics about datasets categorized by Project Group ID within the TDEI platform. It includes the total number of datasets and their cumulative size in megabytes for each type, such as osw, flex, and pathways.
+     * This endpoint provides detailed metrics about dataset categorized by Service within the chosen Project Group. It includes the total number of datasets and their cumulative size in megabytes.
      * @summary Gets the Service metrics
      * @param {string} tdei_project_group_id Project Group id of the dataset.
      * @param {*} [options] Override http request option.
