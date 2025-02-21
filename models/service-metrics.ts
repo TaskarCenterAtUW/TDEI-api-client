@@ -11,6 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ServiceMetricsProjectGroup } from './service-metrics-project-group';
 import { ServiceMetricsServices } from './service-metrics-services';
 /**
  * 
@@ -18,6 +19,12 @@ import { ServiceMetricsServices } from './service-metrics-services';
  * @interface ServiceMetrics
  */
 export interface ServiceMetrics {
+    /**
+     * 
+     * @type {ServiceMetricsProjectGroup}
+     * @memberof ServiceMetrics
+     */
+    project_group: ServiceMetricsProjectGroup;
     /**
      * 
      * @type {Array<ServiceMetricsServices>}

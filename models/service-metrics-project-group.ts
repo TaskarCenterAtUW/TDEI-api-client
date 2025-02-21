@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  * TDEI Gateway Dev API
  * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) system. It is intended for applications submitting data to and consuming data from the TDEI system. We currently support GTFS-Pathways, GTFS-Flex and OpenSidewalks (OSW) data schemas.
@@ -9,24 +11,22 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ServiceMetricsProjectGroup } from './service-metrics-project-group';
-import { ServiceMetricsServices } from './service-metrics-services';
 /**
- *
+ * 
  * @export
- * @interface ServiceMetrics
+ * @interface ServiceMetricsProjectGroup
  */
-export interface ServiceMetrics {
+export interface ServiceMetricsProjectGroup {
     /**
-     *
-     * @type {ServiceMetricsProjectGroup}
-     * @memberof ServiceMetrics
+     * 
+     * @type {string}
+     * @memberof ServiceMetricsProjectGroup
      */
-    project_group: ServiceMetricsProjectGroup;
+    id: string;
     /**
-     *
-     * @type {Array<ServiceMetricsServices>}
-     * @memberof ServiceMetrics
+     * 
+     * @type {string}
+     * @memberof ServiceMetricsProjectGroup
      */
-    services: Array<ServiceMetricsServices>;
+    name: string;
 }
