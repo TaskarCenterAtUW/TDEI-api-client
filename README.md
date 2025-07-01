@@ -1,58 +1,45 @@
-## tdei-client@1.1.83
-This repository is a **GitHub Workflow-triggered OpenAPI client generator**. Using the **Swagger Generate Tool**, it creates **TypeScript/JavaScript client stubs** based on the OpenAPI specification. The generated client utilizes [Axios](https://github.com/axios/axios) for making HTTP requests.  
+## tdei-client@1.1.84
 
-This client simplifies API interactions by generating structured Axios-based requests, making it easy to integrate with TDEI services.
+This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
-The generated Node module can be packaged as an **npm library** or used directly by clients to write API test cases and interact with TDEI services.  
+Environment
+* Node.js
+* Webpack
+* Browserify
 
-## **Supported Environments**  
+Language level
+* ES5 - you must have a Promises/A+ library installed
+* ES6
 
-- **Runtime:**  
-  - Node.js  
-  - Webpack  
-  - Browserify  
+Module system
+* CommonJS
+* ES6 module system
 
-- **Language Compatibility:**  
-  - ES5 (requires Promises/A+ library)  
-  - ES6  
+It can be used in both TypeScript and JavaScript. In TypeScript, the definition should be automatically resolved via `package.json`. ([Reference](http://www.typescriptlang.org/docs/handbook/typings-for-npm-packages.html))
 
-- **Module Systems:**  
-  - CommonJS  
-  - ES6 module system  
+### Building
 
-The client is compatible with both **TypeScript and JavaScript**. In TypeScript, type definitions are automatically resolved via `package.json`. ([Reference](http://www.typescriptlang.org/docs/handbook/typings-for-npm-packages.html))  
-
-## **Building**  
-
-To install dependencies and compile TypeScript to JavaScript, run:  
-
-```sh
+To build and compile the typescript sources to javascript use:
+```
 npm install
 npm run build
 ```
 
-## **Publishing**  
+### Publishing
 
-After building the package, publish it to npm using:  
+First build the package then run ```npm publish```
 
-```sh
-npm publish
+### Consuming
+
+navigate to the folder of your consuming project and run one of the following commands.
+
+_published:_
+
+```
+npm install tdei-client@1.1.84 --save
 ```
 
-## **Consuming the Package**  
+_unPublished (not recommended):_
 
-To use the package in a project, install it using one of the following methods:  
-
-- **From npm (recommended):**  
-
-  ```sh
-  npm install tdei-client@1.1.83 --save
-  ```  
-
-- **From a local build (not recommended):**  
-
-  ```sh
-  npm install PATH_TO_GENERATED_PACKAGE --save
-  ```  
-
-
+```
+npm install PATH_TO_GENERATED_PACKAGE --save

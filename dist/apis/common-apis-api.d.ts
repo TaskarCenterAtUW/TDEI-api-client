@@ -66,65 +66,65 @@ export declare const CommonAPIsApiAxiosParamCreator: (configuration?: Configurat
      */
     listApiVersions: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * This API lists all TDEI datasets, allowing users to efficiently search with sorting and filtering features. Each dataset entry is uniquely identified by `tdei_dataset_id` and also provide detailed information including metadata, associated project group, service details, download URL, and status. Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'. Filtering options are provided for enhanced discoverability of the datasets.By default all released datasets are visible to all user. Pre-release datasets are only visible to user affiliated with the project groups.
+     * <p>This API returns filtered and sorted lists of TDEI datasets. The matching behavior of filter parameters may vary depending on the attribute type.</p> <p>By default results will include all datasets in released status AND all dataset in pre-release status within the requesting user's project group. This behavior can be controlled by the status parameter.  In no situation can a user see pre-release datasets from a project group the user is not part of.</p>    <b>Primary use cases include</b>: <ul> <li><b>name search</b>: Given a search string X, return all datasets with a name that contains the search string X </li> <li><b>dataset id lookup</b>: Given a tdei_dataset_id, return the dataset with the matching id </li> <li> <b>bounding box</b>: Given xmin, xmax, ymin, ymax, return datasets with dataset_area overlapping the bounding box </li> </ul>    <b>Sorting</b>:<br> <p>Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'.</p>
      * @summary Lists the TDEI datasets in the system.
-     * @param {string} [data_type] Type of the dataset.
-     * @param {string} [status] This filter allows users to request datasets based on their status. When set to &#x27;All&#x27;, the filter displays all available datasets by default. If specified as &#x27;Pre-Release&#x27; or &#x27;Publish&#x27;, it shows only the datasets that are in the Pre-Release or Publish stages, respectively, for the project groups the user is affiliated with.
-     * @param {string} [name] Dataset name or title
-     * @param {string} [version] Dataset version.
-     * @param {string} [data_source] Data source of the dataset.
-     * @param {string} [collection_method] Method by which the data was collected.
-     * @param {string} [collected_by] Collection agency or person.
-     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived.
-     * @param {string} [collection_date] Collection date time
-     * @param {number} [confidence_level] Minimum confidence level required. Data returned will be at this confidence level or higher. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
-     * @param {string} [schema_version] Version name of the data type schema version that the application requests. list of versions can be found with /api/v1/{data_type}/versions.
-     * @param {string} [tdei_project_group_id] TDEI project group id of the datasets to be retrieved.
-     * @param {string} [tdei_service_id] TDEI service id of the datasets to be retrieved.
-     * @param {string} [valid_from] Valid from date time. Date-time for which datasets to be retrieved.
-     * @param {string} [valid_to] Valid to date time. Date-time for which datasets to be retrieved.
-     * @param {string} [tdei_dataset_id] tdei_dataset_id of the dataset to be retrieved.
-     * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
-     * @param {string} [other_published_locations] Other published locations
-     * @param {number} [dataset_update_frequency_months] Dataset update frequency in months
-     * @param {string} [schema_validation_run_description] Schema validation run description
-     * @param {string} [full_dataset_name] Full dataset name
-     * @param {string} [collection_name] Name of the collection
-     * @param {string} [department_name] Name of the department
-     * @param {string} [city] Name of the city
-     * @param {string} [region] Name of the region
-     * @param {string} [county] Name of the county
-     * @param {string} [key_limitations] Key limitations of the dataset
-     * @param {string} [release_notes] Release notes
-     * @param {string} [challenges] Challenges faced in collecting the data
-     * @param {Array<string>} [official_maintainer] Official maintainer of the dataset
-     * @param {string} [last_updated] Date when the dataset was last updated
-     * @param {string} [update_frequency] Frequency of updates
-     * @param {string} [authorization_chain] Authorization chain
-     * @param {boolean} [maintenance_funded] Is maintenance funded
-     * @param {string} [funding_details] Funding details
-     * @param {string} [point_data_collection_device] Point data collection device
-     * @param {string} [node_locations_and_attributes_editing_software] Node locations and attributes editing software
-     * @param {boolean} [data_collected_by_people] Is data collected by people
-     * @param {string} [data_collectors] Data collectors
-     * @param {boolean} [data_captured_automatically] Is data captured automatically
-     * @param {string} [automated_collection] Automated collection
-     * @param {string} [data_collectors_organization] Data collectors organization
-     * @param {string} [data_collector_compensation] Data collector compensation
-     * @param {string} [preprocessing_location] Preprocessing location
-     * @param {string} [preprocessing_by] Preprocessing by
-     * @param {string} [preprocessing_steps] Preprocessing steps
-     * @param {boolean} [data_collection_preprocessing_documentation] Is data collection preprocessing documentation available
-     * @param {string} [documentation_uri] Documentation URI
-     * @param {boolean} [validation_process_exists] Is validation process exists
-     * @param {string} [validation_process_description] Validation process description
-     * @param {string} [validation_conducted_by] Validation conducted by
-     * @param {string} [excluded_data] Excluded data
-     * @param {string} [excluded_data_reason] Excluded data reason
-     * @param {number} [page_no] Integer, defaults to 1. Retrieves the results in pages.
-     * @param {number} [page_size] Page size. integer, between 1 to 50, defaults to 10.Specifies total records per page.
-     * @param {string} [sort_field] Sort field. By default, it is by uploaded timestamp.
-     * @param {string} [sort_order] Sort order. By default, it is in descending order.
+     * @param {string} [data_type] &lt;strong&gt;Type of the dataset&lt;/strong&gt;. Filters datasets by matching the exact value from the supported enumeration.
+     * @param {string} [status] &lt;p&gt;&lt;strong&gt;Status of the dataset:&lt;/strong&gt; Filters datasets by status — &lt;code&gt;All&lt;/code&gt; (default) returns released datasets and pre-release datasets from the user&#x27;s project groups; &lt;code&gt;Pre-Release&lt;/code&gt; and &lt;code&gt;Publish&lt;/code&gt; return only datasets in that status from affiliated project groups.&lt;/p&gt;
+     * @param {string} [name] &lt;p&gt;&lt;strong&gt;Dataset name or title:&lt;/strong&gt; Filters datasets where the name or title contains the specified search text.&lt;/p&gt;
+     * @param {string} [version] &lt;p&gt;&lt;strong&gt;Dataset version:&lt;/strong&gt; Filters datasets using an exact match on the version value.&lt;/p&gt;
+     * @param {string} [data_source] &lt;p&gt;&lt;strong&gt;Data source:&lt;/strong&gt; Filters datasets by matching the exact value from the supported enumeration.&lt;/p&gt;
+     * @param {string} [collection_method] &lt;p&gt;&lt;strong&gt;Collection method:&lt;/strong&gt; Filters datasets by matching the exact value from the supported enumeration.&lt;/p&gt;
+     * @param {string} [collected_by] &lt;p&gt;&lt;strong&gt;Collected by:&lt;/strong&gt; Filters datasets using an exact match on the collection agency or person&#x27;s name.&lt;/p&gt;
+     * @param {string} [derived_from_dataset_id] &lt;strong&gt;derived_from_dataset_id:&lt;/strong&gt; Filters datasets that are derived from the specified dataset ID. Exact match.
+     * @param {string} [collection_date] &lt;strong&gt;collection_date:&lt;/strong&gt; Filters datasets collected after the specified date and time.
+     * @param {number} [confidence_level] &lt;strong&gt;Confidence level:&lt;/strong&gt; Minimum confidence level required. Returns datasets with confidence level greater than the specified value. Range: 0 (very low) to 100 (very high).
+     * @param {string} [schema_version] &lt;strong&gt;Schema version:&lt;/strong&gt; Filters datasets that match the requested data type schema version. The list of supported versions can be found at &lt;code&gt;/api/v1/{data_type}/versions&lt;/code&gt;.
+     * @param {string} [tdei_project_group_id] &lt;strong&gt;TDEI project group ID:&lt;/strong&gt; Filters datasets that belong to the specified project group. Exact match.
+     * @param {string} [tdei_service_id] &lt;strong&gt;TDEI service ID:&lt;/strong&gt; Filters datasets that belong to the specified TDEI service. Exact match.
+     * @param {string} [valid_from] &lt;strong&gt;Valid from:&lt;/strong&gt; Filters datasets with a valid-from date later than the specified date-time.
+     * @param {string} [valid_to] &lt;strong&gt;Valid to:&lt;/strong&gt; Filters datasets with a valid-to date earlier than the specified date-time.
+     * @param {string} [tdei_dataset_id] &lt;strong&gt;TDEI dataset ID:&lt;/strong&gt; Filters datasets by the specified TDEI dataset ID.
+     * @param {Array<number>} [bbox] &lt;strong&gt;Bounding box:&lt;/strong&gt; Specifies the geographic area to search within, using a bounding box defined by four coordinates in the order: west, south, east, north. Accepts an array of four numeric values.
+     * @param {string} [other_published_locations] &lt;strong&gt;Other published locations:&lt;/strong&gt; Lists additional places where the dataset has been published. Supports contains match.
+     * @param {number} [dataset_update_frequency_months] &lt;strong&gt;Dataset update frequency in months:&lt;/strong&gt; Filters datasets based on how frequently they are updated. Uses a greater than or equal to match to include datasets updated at this frequency or more often.
+     * @param {string} [schema_validation_run_description] &lt;strong&gt;Schema validation run description:&lt;/strong&gt; Filters datasets based on the description of the schema validation run. Accepts a string value and uses contains match.
+     * @param {string} [full_dataset_name] &lt;strong&gt;Full dataset name:&lt;/strong&gt; Filters datasets based on their full name. Supports contains match.
+     * @param {string} [collection_name] &lt;strong&gt;Collection name:&lt;/strong&gt; Filters datasets based on their collection name. Supports contains match.
+     * @param {string} [department_name] &lt;strong&gt;Department name:&lt;/strong&gt; Filters datasets based on their department name. Supports contains match.
+     * @param {string} [city] &lt;strong&gt;Name of City:&lt;/strong&gt; Filters datasets based on the city name. Supports contains match.
+     * @param {string} [region] &lt;strong&gt;Region:&lt;/strong&gt; Filters datasets based on the region name. Supports contains match.
+     * @param {string} [county] &lt;strong&gt;County:&lt;/strong&gt; Filters datasets based on the county name. Supports contains match.
+     * @param {string} [key_limitations] &lt;strong&gt;Key limitations:&lt;/strong&gt; Filters datasets based on their key limitations. Supports contains match.
+     * @param {string} [release_notes] &lt;strong&gt;Release notes:&lt;/strong&gt; Filters datasets based on their release notes. Supports contains match.
+     * @param {string} [challenges] &lt;strong&gt;Challenges:&lt;/strong&gt; Filters datasets based on the challenges faced in collecting the data. Supports contains match.
+     * @param {Array<string>} [official_maintainer] &lt;strong&gt;Official maintainer:&lt;/strong&gt; Filters datasets based on the official maintainer. Supports contains match.
+     * @param {string} [last_updated] &lt;strong&gt;Last updated:&lt;/strong&gt; Filters datasets based on the last updated date. Accepts a date-time string match.
+     * @param {string} [update_frequency] &lt;strong&gt;Update frequency:&lt;/strong&gt; Filters datasets based on their update frequency. Supports contains match.
+     * @param {string} [authorization_chain] &lt;strong&gt;Authorization chain:&lt;/strong&gt; Filters datasets based on their authorization chain. Supports contains match.
+     * @param {boolean} [maintenance_funded] &lt;strong&gt;Maintenance funded:&lt;/strong&gt; Filters datasets based on whether they are funded for maintenance. Uses a boolean value.
+     * @param {string} [funding_details] &lt;strong&gt;Funding details:&lt;/strong&gt; Filters datasets based on their funding details. Supports contains match.
+     * @param {string} [point_data_collection_device] &lt;strong&gt;Point data collection device:&lt;/strong&gt; Filters datasets based on the device used for point data collection. Supports contains match.
+     * @param {string} [node_locations_and_attributes_editing_software] &lt;strong&gt;Node locations and attributes editing software:&lt;/strong&gt; Filters datasets based on the software used for editing node locations and attributes. Supports contains match.
+     * @param {boolean} [data_collected_by_people] &lt;strong&gt;Data collected by people:&lt;/strong&gt; Filters datasets based on whether the data was collected by people. Uses a boolean value.
+     * @param {string} [data_collectors] &lt;strong&gt;Data collectors:&lt;/strong&gt; Filters datasets based on the individuals or organizations that collected the data. Supports contains match.
+     * @param {boolean} [data_captured_automatically] &lt;strong&gt;Data captured automatically:&lt;/strong&gt; Filters datasets based on whether the data was captured automatically. Uses a boolean value.
+     * @param {string} [automated_collection] &lt;strong&gt;Automated collection:&lt;/strong&gt; Filters datasets based on whether the data was collected automatically. Supports contains match.
+     * @param {string} [data_collectors_organization] &lt;strong&gt;Data collectors organization:&lt;/strong&gt; Filters datasets based on the organization of the data collectors. Supports contains match.
+     * @param {string} [data_collector_compensation] &lt;strong&gt;Data collector compensation:&lt;/strong&gt; Filters datasets based on whether the data collectors were compensated. Supports contains match.
+     * @param {string} [preprocessing_location] &lt;strong&gt;Preprocessing location:&lt;/strong&gt; Filters datasets based on their preprocessing location. Supports contains match.
+     * @param {string} [preprocessing_by] &lt;strong&gt;Preprocessing by:&lt;/strong&gt; Filters datasets based on who performed the preprocessing. Supports contains match.
+     * @param {string} [preprocessing_steps] &lt;strong&gt;Preprocessing steps:&lt;/strong&gt; Filters datasets based on their preprocessing steps. Supports contains match.
+     * @param {boolean} [data_collection_preprocessing_documentation] &lt;strong&gt;Data collection preprocessing documentation:&lt;/strong&gt; Filters datasets based on the availability of data collection preprocessing documentation. Uses a boolean value.
+     * @param {string} [documentation_uri] &lt;strong&gt;Documentation URI:&lt;/strong&gt; Filters datasets based on their documentation URI. Supports contains match.
+     * @param {boolean} [validation_process_exists] &lt;strong&gt;Validation process exists:&lt;/strong&gt; Filters datasets based on whether a validation process exists. Uses a boolean value.
+     * @param {string} [validation_process_description] &lt;strong&gt;Validation process description:&lt;/strong&gt; Filters datasets based on the description of the validation process. Supports contains match.
+     * @param {string} [validation_conducted_by] &lt;strong&gt;Validation conducted by:&lt;/strong&gt; Filters datasets based on who conducted the validation. Supports contains match.
+     * @param {string} [excluded_data] &lt;strong&gt;Excluded data:&lt;/strong&gt; Filters datasets based on whether they contain excluded data. Supports contains match.
+     * @param {string} [excluded_data_reason] &lt;strong&gt;Excluded data reason:&lt;/strong&gt; Filters datasets based on the reason for excluding data. Supports contains match.
+     * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters datasets by retrieving results in pages.
+     * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+     * @param {string} [sort_field] &lt;strong&gt;Sort field:&lt;/strong&gt; The field by which to sort the results. By default, it is by uploaded timestamp. Matches the exact value from the supported enumeration.
+     * @param {string} [sort_order] &lt;strong&gt;Sort order:&lt;/strong&gt; By default, it is in descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -217,65 +217,65 @@ export declare const CommonAPIsApiFp: (configuration?: Configuration) => {
      */
     listApiVersions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<APIVersionList>>>;
     /**
-     * This API lists all TDEI datasets, allowing users to efficiently search with sorting and filtering features. Each dataset entry is uniquely identified by `tdei_dataset_id` and also provide detailed information including metadata, associated project group, service details, download URL, and status. Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'. Filtering options are provided for enhanced discoverability of the datasets.By default all released datasets are visible to all user. Pre-release datasets are only visible to user affiliated with the project groups.
+     * <p>This API returns filtered and sorted lists of TDEI datasets. The matching behavior of filter parameters may vary depending on the attribute type.</p> <p>By default results will include all datasets in released status AND all dataset in pre-release status within the requesting user's project group. This behavior can be controlled by the status parameter.  In no situation can a user see pre-release datasets from a project group the user is not part of.</p>    <b>Primary use cases include</b>: <ul> <li><b>name search</b>: Given a search string X, return all datasets with a name that contains the search string X </li> <li><b>dataset id lookup</b>: Given a tdei_dataset_id, return the dataset with the matching id </li> <li> <b>bounding box</b>: Given xmin, xmax, ymin, ymax, return datasets with dataset_area overlapping the bounding box </li> </ul>    <b>Sorting</b>:<br> <p>Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'.</p>
      * @summary Lists the TDEI datasets in the system.
-     * @param {string} [data_type] Type of the dataset.
-     * @param {string} [status] This filter allows users to request datasets based on their status. When set to &#x27;All&#x27;, the filter displays all available datasets by default. If specified as &#x27;Pre-Release&#x27; or &#x27;Publish&#x27;, it shows only the datasets that are in the Pre-Release or Publish stages, respectively, for the project groups the user is affiliated with.
-     * @param {string} [name] Dataset name or title
-     * @param {string} [version] Dataset version.
-     * @param {string} [data_source] Data source of the dataset.
-     * @param {string} [collection_method] Method by which the data was collected.
-     * @param {string} [collected_by] Collection agency or person.
-     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived.
-     * @param {string} [collection_date] Collection date time
-     * @param {number} [confidence_level] Minimum confidence level required. Data returned will be at this confidence level or higher. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
-     * @param {string} [schema_version] Version name of the data type schema version that the application requests. list of versions can be found with /api/v1/{data_type}/versions.
-     * @param {string} [tdei_project_group_id] TDEI project group id of the datasets to be retrieved.
-     * @param {string} [tdei_service_id] TDEI service id of the datasets to be retrieved.
-     * @param {string} [valid_from] Valid from date time. Date-time for which datasets to be retrieved.
-     * @param {string} [valid_to] Valid to date time. Date-time for which datasets to be retrieved.
-     * @param {string} [tdei_dataset_id] tdei_dataset_id of the dataset to be retrieved.
-     * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
-     * @param {string} [other_published_locations] Other published locations
-     * @param {number} [dataset_update_frequency_months] Dataset update frequency in months
-     * @param {string} [schema_validation_run_description] Schema validation run description
-     * @param {string} [full_dataset_name] Full dataset name
-     * @param {string} [collection_name] Name of the collection
-     * @param {string} [department_name] Name of the department
-     * @param {string} [city] Name of the city
-     * @param {string} [region] Name of the region
-     * @param {string} [county] Name of the county
-     * @param {string} [key_limitations] Key limitations of the dataset
-     * @param {string} [release_notes] Release notes
-     * @param {string} [challenges] Challenges faced in collecting the data
-     * @param {Array<string>} [official_maintainer] Official maintainer of the dataset
-     * @param {string} [last_updated] Date when the dataset was last updated
-     * @param {string} [update_frequency] Frequency of updates
-     * @param {string} [authorization_chain] Authorization chain
-     * @param {boolean} [maintenance_funded] Is maintenance funded
-     * @param {string} [funding_details] Funding details
-     * @param {string} [point_data_collection_device] Point data collection device
-     * @param {string} [node_locations_and_attributes_editing_software] Node locations and attributes editing software
-     * @param {boolean} [data_collected_by_people] Is data collected by people
-     * @param {string} [data_collectors] Data collectors
-     * @param {boolean} [data_captured_automatically] Is data captured automatically
-     * @param {string} [automated_collection] Automated collection
-     * @param {string} [data_collectors_organization] Data collectors organization
-     * @param {string} [data_collector_compensation] Data collector compensation
-     * @param {string} [preprocessing_location] Preprocessing location
-     * @param {string} [preprocessing_by] Preprocessing by
-     * @param {string} [preprocessing_steps] Preprocessing steps
-     * @param {boolean} [data_collection_preprocessing_documentation] Is data collection preprocessing documentation available
-     * @param {string} [documentation_uri] Documentation URI
-     * @param {boolean} [validation_process_exists] Is validation process exists
-     * @param {string} [validation_process_description] Validation process description
-     * @param {string} [validation_conducted_by] Validation conducted by
-     * @param {string} [excluded_data] Excluded data
-     * @param {string} [excluded_data_reason] Excluded data reason
-     * @param {number} [page_no] Integer, defaults to 1. Retrieves the results in pages.
-     * @param {number} [page_size] Page size. integer, between 1 to 50, defaults to 10.Specifies total records per page.
-     * @param {string} [sort_field] Sort field. By default, it is by uploaded timestamp.
-     * @param {string} [sort_order] Sort order. By default, it is in descending order.
+     * @param {string} [data_type] &lt;strong&gt;Type of the dataset&lt;/strong&gt;. Filters datasets by matching the exact value from the supported enumeration.
+     * @param {string} [status] &lt;p&gt;&lt;strong&gt;Status of the dataset:&lt;/strong&gt; Filters datasets by status — &lt;code&gt;All&lt;/code&gt; (default) returns released datasets and pre-release datasets from the user&#x27;s project groups; &lt;code&gt;Pre-Release&lt;/code&gt; and &lt;code&gt;Publish&lt;/code&gt; return only datasets in that status from affiliated project groups.&lt;/p&gt;
+     * @param {string} [name] &lt;p&gt;&lt;strong&gt;Dataset name or title:&lt;/strong&gt; Filters datasets where the name or title contains the specified search text.&lt;/p&gt;
+     * @param {string} [version] &lt;p&gt;&lt;strong&gt;Dataset version:&lt;/strong&gt; Filters datasets using an exact match on the version value.&lt;/p&gt;
+     * @param {string} [data_source] &lt;p&gt;&lt;strong&gt;Data source:&lt;/strong&gt; Filters datasets by matching the exact value from the supported enumeration.&lt;/p&gt;
+     * @param {string} [collection_method] &lt;p&gt;&lt;strong&gt;Collection method:&lt;/strong&gt; Filters datasets by matching the exact value from the supported enumeration.&lt;/p&gt;
+     * @param {string} [collected_by] &lt;p&gt;&lt;strong&gt;Collected by:&lt;/strong&gt; Filters datasets using an exact match on the collection agency or person&#x27;s name.&lt;/p&gt;
+     * @param {string} [derived_from_dataset_id] &lt;strong&gt;derived_from_dataset_id:&lt;/strong&gt; Filters datasets that are derived from the specified dataset ID. Exact match.
+     * @param {string} [collection_date] &lt;strong&gt;collection_date:&lt;/strong&gt; Filters datasets collected after the specified date and time.
+     * @param {number} [confidence_level] &lt;strong&gt;Confidence level:&lt;/strong&gt; Minimum confidence level required. Returns datasets with confidence level greater than the specified value. Range: 0 (very low) to 100 (very high).
+     * @param {string} [schema_version] &lt;strong&gt;Schema version:&lt;/strong&gt; Filters datasets that match the requested data type schema version. The list of supported versions can be found at &lt;code&gt;/api/v1/{data_type}/versions&lt;/code&gt;.
+     * @param {string} [tdei_project_group_id] &lt;strong&gt;TDEI project group ID:&lt;/strong&gt; Filters datasets that belong to the specified project group. Exact match.
+     * @param {string} [tdei_service_id] &lt;strong&gt;TDEI service ID:&lt;/strong&gt; Filters datasets that belong to the specified TDEI service. Exact match.
+     * @param {string} [valid_from] &lt;strong&gt;Valid from:&lt;/strong&gt; Filters datasets with a valid-from date later than the specified date-time.
+     * @param {string} [valid_to] &lt;strong&gt;Valid to:&lt;/strong&gt; Filters datasets with a valid-to date earlier than the specified date-time.
+     * @param {string} [tdei_dataset_id] &lt;strong&gt;TDEI dataset ID:&lt;/strong&gt; Filters datasets by the specified TDEI dataset ID.
+     * @param {Array<number>} [bbox] &lt;strong&gt;Bounding box:&lt;/strong&gt; Specifies the geographic area to search within, using a bounding box defined by four coordinates in the order: west, south, east, north. Accepts an array of four numeric values.
+     * @param {string} [other_published_locations] &lt;strong&gt;Other published locations:&lt;/strong&gt; Lists additional places where the dataset has been published. Supports contains match.
+     * @param {number} [dataset_update_frequency_months] &lt;strong&gt;Dataset update frequency in months:&lt;/strong&gt; Filters datasets based on how frequently they are updated. Uses a greater than or equal to match to include datasets updated at this frequency or more often.
+     * @param {string} [schema_validation_run_description] &lt;strong&gt;Schema validation run description:&lt;/strong&gt; Filters datasets based on the description of the schema validation run. Accepts a string value and uses contains match.
+     * @param {string} [full_dataset_name] &lt;strong&gt;Full dataset name:&lt;/strong&gt; Filters datasets based on their full name. Supports contains match.
+     * @param {string} [collection_name] &lt;strong&gt;Collection name:&lt;/strong&gt; Filters datasets based on their collection name. Supports contains match.
+     * @param {string} [department_name] &lt;strong&gt;Department name:&lt;/strong&gt; Filters datasets based on their department name. Supports contains match.
+     * @param {string} [city] &lt;strong&gt;Name of City:&lt;/strong&gt; Filters datasets based on the city name. Supports contains match.
+     * @param {string} [region] &lt;strong&gt;Region:&lt;/strong&gt; Filters datasets based on the region name. Supports contains match.
+     * @param {string} [county] &lt;strong&gt;County:&lt;/strong&gt; Filters datasets based on the county name. Supports contains match.
+     * @param {string} [key_limitations] &lt;strong&gt;Key limitations:&lt;/strong&gt; Filters datasets based on their key limitations. Supports contains match.
+     * @param {string} [release_notes] &lt;strong&gt;Release notes:&lt;/strong&gt; Filters datasets based on their release notes. Supports contains match.
+     * @param {string} [challenges] &lt;strong&gt;Challenges:&lt;/strong&gt; Filters datasets based on the challenges faced in collecting the data. Supports contains match.
+     * @param {Array<string>} [official_maintainer] &lt;strong&gt;Official maintainer:&lt;/strong&gt; Filters datasets based on the official maintainer. Supports contains match.
+     * @param {string} [last_updated] &lt;strong&gt;Last updated:&lt;/strong&gt; Filters datasets based on the last updated date. Accepts a date-time string match.
+     * @param {string} [update_frequency] &lt;strong&gt;Update frequency:&lt;/strong&gt; Filters datasets based on their update frequency. Supports contains match.
+     * @param {string} [authorization_chain] &lt;strong&gt;Authorization chain:&lt;/strong&gt; Filters datasets based on their authorization chain. Supports contains match.
+     * @param {boolean} [maintenance_funded] &lt;strong&gt;Maintenance funded:&lt;/strong&gt; Filters datasets based on whether they are funded for maintenance. Uses a boolean value.
+     * @param {string} [funding_details] &lt;strong&gt;Funding details:&lt;/strong&gt; Filters datasets based on their funding details. Supports contains match.
+     * @param {string} [point_data_collection_device] &lt;strong&gt;Point data collection device:&lt;/strong&gt; Filters datasets based on the device used for point data collection. Supports contains match.
+     * @param {string} [node_locations_and_attributes_editing_software] &lt;strong&gt;Node locations and attributes editing software:&lt;/strong&gt; Filters datasets based on the software used for editing node locations and attributes. Supports contains match.
+     * @param {boolean} [data_collected_by_people] &lt;strong&gt;Data collected by people:&lt;/strong&gt; Filters datasets based on whether the data was collected by people. Uses a boolean value.
+     * @param {string} [data_collectors] &lt;strong&gt;Data collectors:&lt;/strong&gt; Filters datasets based on the individuals or organizations that collected the data. Supports contains match.
+     * @param {boolean} [data_captured_automatically] &lt;strong&gt;Data captured automatically:&lt;/strong&gt; Filters datasets based on whether the data was captured automatically. Uses a boolean value.
+     * @param {string} [automated_collection] &lt;strong&gt;Automated collection:&lt;/strong&gt; Filters datasets based on whether the data was collected automatically. Supports contains match.
+     * @param {string} [data_collectors_organization] &lt;strong&gt;Data collectors organization:&lt;/strong&gt; Filters datasets based on the organization of the data collectors. Supports contains match.
+     * @param {string} [data_collector_compensation] &lt;strong&gt;Data collector compensation:&lt;/strong&gt; Filters datasets based on whether the data collectors were compensated. Supports contains match.
+     * @param {string} [preprocessing_location] &lt;strong&gt;Preprocessing location:&lt;/strong&gt; Filters datasets based on their preprocessing location. Supports contains match.
+     * @param {string} [preprocessing_by] &lt;strong&gt;Preprocessing by:&lt;/strong&gt; Filters datasets based on who performed the preprocessing. Supports contains match.
+     * @param {string} [preprocessing_steps] &lt;strong&gt;Preprocessing steps:&lt;/strong&gt; Filters datasets based on their preprocessing steps. Supports contains match.
+     * @param {boolean} [data_collection_preprocessing_documentation] &lt;strong&gt;Data collection preprocessing documentation:&lt;/strong&gt; Filters datasets based on the availability of data collection preprocessing documentation. Uses a boolean value.
+     * @param {string} [documentation_uri] &lt;strong&gt;Documentation URI:&lt;/strong&gt; Filters datasets based on their documentation URI. Supports contains match.
+     * @param {boolean} [validation_process_exists] &lt;strong&gt;Validation process exists:&lt;/strong&gt; Filters datasets based on whether a validation process exists. Uses a boolean value.
+     * @param {string} [validation_process_description] &lt;strong&gt;Validation process description:&lt;/strong&gt; Filters datasets based on the description of the validation process. Supports contains match.
+     * @param {string} [validation_conducted_by] &lt;strong&gt;Validation conducted by:&lt;/strong&gt; Filters datasets based on who conducted the validation. Supports contains match.
+     * @param {string} [excluded_data] &lt;strong&gt;Excluded data:&lt;/strong&gt; Filters datasets based on whether they contain excluded data. Supports contains match.
+     * @param {string} [excluded_data_reason] &lt;strong&gt;Excluded data reason:&lt;/strong&gt; Filters datasets based on the reason for excluding data. Supports contains match.
+     * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters datasets by retrieving results in pages.
+     * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+     * @param {string} [sort_field] &lt;strong&gt;Sort field:&lt;/strong&gt; The field by which to sort the results. By default, it is by uploaded timestamp. Matches the exact value from the supported enumeration.
+     * @param {string} [sort_order] &lt;strong&gt;Sort order:&lt;/strong&gt; By default, it is in descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -368,65 +368,65 @@ export declare const CommonAPIsApiFactory: (configuration?: Configuration, baseP
      */
     listApiVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<APIVersionList>>;
     /**
-     * This API lists all TDEI datasets, allowing users to efficiently search with sorting and filtering features. Each dataset entry is uniquely identified by `tdei_dataset_id` and also provide detailed information including metadata, associated project group, service details, download URL, and status. Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'. Filtering options are provided for enhanced discoverability of the datasets.By default all released datasets are visible to all user. Pre-release datasets are only visible to user affiliated with the project groups.
+     * <p>This API returns filtered and sorted lists of TDEI datasets. The matching behavior of filter parameters may vary depending on the attribute type.</p> <p>By default results will include all datasets in released status AND all dataset in pre-release status within the requesting user's project group. This behavior can be controlled by the status parameter.  In no situation can a user see pre-release datasets from a project group the user is not part of.</p>    <b>Primary use cases include</b>: <ul> <li><b>name search</b>: Given a search string X, return all datasets with a name that contains the search string X </li> <li><b>dataset id lookup</b>: Given a tdei_dataset_id, return the dataset with the matching id </li> <li> <b>bounding box</b>: Given xmin, xmax, ymin, ymax, return datasets with dataset_area overlapping the bounding box </li> </ul>    <b>Sorting</b>:<br> <p>Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'.</p>
      * @summary Lists the TDEI datasets in the system.
-     * @param {string} [data_type] Type of the dataset.
-     * @param {string} [status] This filter allows users to request datasets based on their status. When set to &#x27;All&#x27;, the filter displays all available datasets by default. If specified as &#x27;Pre-Release&#x27; or &#x27;Publish&#x27;, it shows only the datasets that are in the Pre-Release or Publish stages, respectively, for the project groups the user is affiliated with.
-     * @param {string} [name] Dataset name or title
-     * @param {string} [version] Dataset version.
-     * @param {string} [data_source] Data source of the dataset.
-     * @param {string} [collection_method] Method by which the data was collected.
-     * @param {string} [collected_by] Collection agency or person.
-     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived.
-     * @param {string} [collection_date] Collection date time
-     * @param {number} [confidence_level] Minimum confidence level required. Data returned will be at this confidence level or higher. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
-     * @param {string} [schema_version] Version name of the data type schema version that the application requests. list of versions can be found with /api/v1/{data_type}/versions.
-     * @param {string} [tdei_project_group_id] TDEI project group id of the datasets to be retrieved.
-     * @param {string} [tdei_service_id] TDEI service id of the datasets to be retrieved.
-     * @param {string} [valid_from] Valid from date time. Date-time for which datasets to be retrieved.
-     * @param {string} [valid_to] Valid to date time. Date-time for which datasets to be retrieved.
-     * @param {string} [tdei_dataset_id] tdei_dataset_id of the dataset to be retrieved.
-     * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
-     * @param {string} [other_published_locations] Other published locations
-     * @param {number} [dataset_update_frequency_months] Dataset update frequency in months
-     * @param {string} [schema_validation_run_description] Schema validation run description
-     * @param {string} [full_dataset_name] Full dataset name
-     * @param {string} [collection_name] Name of the collection
-     * @param {string} [department_name] Name of the department
-     * @param {string} [city] Name of the city
-     * @param {string} [region] Name of the region
-     * @param {string} [county] Name of the county
-     * @param {string} [key_limitations] Key limitations of the dataset
-     * @param {string} [release_notes] Release notes
-     * @param {string} [challenges] Challenges faced in collecting the data
-     * @param {Array<string>} [official_maintainer] Official maintainer of the dataset
-     * @param {string} [last_updated] Date when the dataset was last updated
-     * @param {string} [update_frequency] Frequency of updates
-     * @param {string} [authorization_chain] Authorization chain
-     * @param {boolean} [maintenance_funded] Is maintenance funded
-     * @param {string} [funding_details] Funding details
-     * @param {string} [point_data_collection_device] Point data collection device
-     * @param {string} [node_locations_and_attributes_editing_software] Node locations and attributes editing software
-     * @param {boolean} [data_collected_by_people] Is data collected by people
-     * @param {string} [data_collectors] Data collectors
-     * @param {boolean} [data_captured_automatically] Is data captured automatically
-     * @param {string} [automated_collection] Automated collection
-     * @param {string} [data_collectors_organization] Data collectors organization
-     * @param {string} [data_collector_compensation] Data collector compensation
-     * @param {string} [preprocessing_location] Preprocessing location
-     * @param {string} [preprocessing_by] Preprocessing by
-     * @param {string} [preprocessing_steps] Preprocessing steps
-     * @param {boolean} [data_collection_preprocessing_documentation] Is data collection preprocessing documentation available
-     * @param {string} [documentation_uri] Documentation URI
-     * @param {boolean} [validation_process_exists] Is validation process exists
-     * @param {string} [validation_process_description] Validation process description
-     * @param {string} [validation_conducted_by] Validation conducted by
-     * @param {string} [excluded_data] Excluded data
-     * @param {string} [excluded_data_reason] Excluded data reason
-     * @param {number} [page_no] Integer, defaults to 1. Retrieves the results in pages.
-     * @param {number} [page_size] Page size. integer, between 1 to 50, defaults to 10.Specifies total records per page.
-     * @param {string} [sort_field] Sort field. By default, it is by uploaded timestamp.
-     * @param {string} [sort_order] Sort order. By default, it is in descending order.
+     * @param {string} [data_type] &lt;strong&gt;Type of the dataset&lt;/strong&gt;. Filters datasets by matching the exact value from the supported enumeration.
+     * @param {string} [status] &lt;p&gt;&lt;strong&gt;Status of the dataset:&lt;/strong&gt; Filters datasets by status — &lt;code&gt;All&lt;/code&gt; (default) returns released datasets and pre-release datasets from the user&#x27;s project groups; &lt;code&gt;Pre-Release&lt;/code&gt; and &lt;code&gt;Publish&lt;/code&gt; return only datasets in that status from affiliated project groups.&lt;/p&gt;
+     * @param {string} [name] &lt;p&gt;&lt;strong&gt;Dataset name or title:&lt;/strong&gt; Filters datasets where the name or title contains the specified search text.&lt;/p&gt;
+     * @param {string} [version] &lt;p&gt;&lt;strong&gt;Dataset version:&lt;/strong&gt; Filters datasets using an exact match on the version value.&lt;/p&gt;
+     * @param {string} [data_source] &lt;p&gt;&lt;strong&gt;Data source:&lt;/strong&gt; Filters datasets by matching the exact value from the supported enumeration.&lt;/p&gt;
+     * @param {string} [collection_method] &lt;p&gt;&lt;strong&gt;Collection method:&lt;/strong&gt; Filters datasets by matching the exact value from the supported enumeration.&lt;/p&gt;
+     * @param {string} [collected_by] &lt;p&gt;&lt;strong&gt;Collected by:&lt;/strong&gt; Filters datasets using an exact match on the collection agency or person&#x27;s name.&lt;/p&gt;
+     * @param {string} [derived_from_dataset_id] &lt;strong&gt;derived_from_dataset_id:&lt;/strong&gt; Filters datasets that are derived from the specified dataset ID. Exact match.
+     * @param {string} [collection_date] &lt;strong&gt;collection_date:&lt;/strong&gt; Filters datasets collected after the specified date and time.
+     * @param {number} [confidence_level] &lt;strong&gt;Confidence level:&lt;/strong&gt; Minimum confidence level required. Returns datasets with confidence level greater than the specified value. Range: 0 (very low) to 100 (very high).
+     * @param {string} [schema_version] &lt;strong&gt;Schema version:&lt;/strong&gt; Filters datasets that match the requested data type schema version. The list of supported versions can be found at &lt;code&gt;/api/v1/{data_type}/versions&lt;/code&gt;.
+     * @param {string} [tdei_project_group_id] &lt;strong&gt;TDEI project group ID:&lt;/strong&gt; Filters datasets that belong to the specified project group. Exact match.
+     * @param {string} [tdei_service_id] &lt;strong&gt;TDEI service ID:&lt;/strong&gt; Filters datasets that belong to the specified TDEI service. Exact match.
+     * @param {string} [valid_from] &lt;strong&gt;Valid from:&lt;/strong&gt; Filters datasets with a valid-from date later than the specified date-time.
+     * @param {string} [valid_to] &lt;strong&gt;Valid to:&lt;/strong&gt; Filters datasets with a valid-to date earlier than the specified date-time.
+     * @param {string} [tdei_dataset_id] &lt;strong&gt;TDEI dataset ID:&lt;/strong&gt; Filters datasets by the specified TDEI dataset ID.
+     * @param {Array<number>} [bbox] &lt;strong&gt;Bounding box:&lt;/strong&gt; Specifies the geographic area to search within, using a bounding box defined by four coordinates in the order: west, south, east, north. Accepts an array of four numeric values.
+     * @param {string} [other_published_locations] &lt;strong&gt;Other published locations:&lt;/strong&gt; Lists additional places where the dataset has been published. Supports contains match.
+     * @param {number} [dataset_update_frequency_months] &lt;strong&gt;Dataset update frequency in months:&lt;/strong&gt; Filters datasets based on how frequently they are updated. Uses a greater than or equal to match to include datasets updated at this frequency or more often.
+     * @param {string} [schema_validation_run_description] &lt;strong&gt;Schema validation run description:&lt;/strong&gt; Filters datasets based on the description of the schema validation run. Accepts a string value and uses contains match.
+     * @param {string} [full_dataset_name] &lt;strong&gt;Full dataset name:&lt;/strong&gt; Filters datasets based on their full name. Supports contains match.
+     * @param {string} [collection_name] &lt;strong&gt;Collection name:&lt;/strong&gt; Filters datasets based on their collection name. Supports contains match.
+     * @param {string} [department_name] &lt;strong&gt;Department name:&lt;/strong&gt; Filters datasets based on their department name. Supports contains match.
+     * @param {string} [city] &lt;strong&gt;Name of City:&lt;/strong&gt; Filters datasets based on the city name. Supports contains match.
+     * @param {string} [region] &lt;strong&gt;Region:&lt;/strong&gt; Filters datasets based on the region name. Supports contains match.
+     * @param {string} [county] &lt;strong&gt;County:&lt;/strong&gt; Filters datasets based on the county name. Supports contains match.
+     * @param {string} [key_limitations] &lt;strong&gt;Key limitations:&lt;/strong&gt; Filters datasets based on their key limitations. Supports contains match.
+     * @param {string} [release_notes] &lt;strong&gt;Release notes:&lt;/strong&gt; Filters datasets based on their release notes. Supports contains match.
+     * @param {string} [challenges] &lt;strong&gt;Challenges:&lt;/strong&gt; Filters datasets based on the challenges faced in collecting the data. Supports contains match.
+     * @param {Array<string>} [official_maintainer] &lt;strong&gt;Official maintainer:&lt;/strong&gt; Filters datasets based on the official maintainer. Supports contains match.
+     * @param {string} [last_updated] &lt;strong&gt;Last updated:&lt;/strong&gt; Filters datasets based on the last updated date. Accepts a date-time string match.
+     * @param {string} [update_frequency] &lt;strong&gt;Update frequency:&lt;/strong&gt; Filters datasets based on their update frequency. Supports contains match.
+     * @param {string} [authorization_chain] &lt;strong&gt;Authorization chain:&lt;/strong&gt; Filters datasets based on their authorization chain. Supports contains match.
+     * @param {boolean} [maintenance_funded] &lt;strong&gt;Maintenance funded:&lt;/strong&gt; Filters datasets based on whether they are funded for maintenance. Uses a boolean value.
+     * @param {string} [funding_details] &lt;strong&gt;Funding details:&lt;/strong&gt; Filters datasets based on their funding details. Supports contains match.
+     * @param {string} [point_data_collection_device] &lt;strong&gt;Point data collection device:&lt;/strong&gt; Filters datasets based on the device used for point data collection. Supports contains match.
+     * @param {string} [node_locations_and_attributes_editing_software] &lt;strong&gt;Node locations and attributes editing software:&lt;/strong&gt; Filters datasets based on the software used for editing node locations and attributes. Supports contains match.
+     * @param {boolean} [data_collected_by_people] &lt;strong&gt;Data collected by people:&lt;/strong&gt; Filters datasets based on whether the data was collected by people. Uses a boolean value.
+     * @param {string} [data_collectors] &lt;strong&gt;Data collectors:&lt;/strong&gt; Filters datasets based on the individuals or organizations that collected the data. Supports contains match.
+     * @param {boolean} [data_captured_automatically] &lt;strong&gt;Data captured automatically:&lt;/strong&gt; Filters datasets based on whether the data was captured automatically. Uses a boolean value.
+     * @param {string} [automated_collection] &lt;strong&gt;Automated collection:&lt;/strong&gt; Filters datasets based on whether the data was collected automatically. Supports contains match.
+     * @param {string} [data_collectors_organization] &lt;strong&gt;Data collectors organization:&lt;/strong&gt; Filters datasets based on the organization of the data collectors. Supports contains match.
+     * @param {string} [data_collector_compensation] &lt;strong&gt;Data collector compensation:&lt;/strong&gt; Filters datasets based on whether the data collectors were compensated. Supports contains match.
+     * @param {string} [preprocessing_location] &lt;strong&gt;Preprocessing location:&lt;/strong&gt; Filters datasets based on their preprocessing location. Supports contains match.
+     * @param {string} [preprocessing_by] &lt;strong&gt;Preprocessing by:&lt;/strong&gt; Filters datasets based on who performed the preprocessing. Supports contains match.
+     * @param {string} [preprocessing_steps] &lt;strong&gt;Preprocessing steps:&lt;/strong&gt; Filters datasets based on their preprocessing steps. Supports contains match.
+     * @param {boolean} [data_collection_preprocessing_documentation] &lt;strong&gt;Data collection preprocessing documentation:&lt;/strong&gt; Filters datasets based on the availability of data collection preprocessing documentation. Uses a boolean value.
+     * @param {string} [documentation_uri] &lt;strong&gt;Documentation URI:&lt;/strong&gt; Filters datasets based on their documentation URI. Supports contains match.
+     * @param {boolean} [validation_process_exists] &lt;strong&gt;Validation process exists:&lt;/strong&gt; Filters datasets based on whether a validation process exists. Uses a boolean value.
+     * @param {string} [validation_process_description] &lt;strong&gt;Validation process description:&lt;/strong&gt; Filters datasets based on the description of the validation process. Supports contains match.
+     * @param {string} [validation_conducted_by] &lt;strong&gt;Validation conducted by:&lt;/strong&gt; Filters datasets based on who conducted the validation. Supports contains match.
+     * @param {string} [excluded_data] &lt;strong&gt;Excluded data:&lt;/strong&gt; Filters datasets based on whether they contain excluded data. Supports contains match.
+     * @param {string} [excluded_data_reason] &lt;strong&gt;Excluded data reason:&lt;/strong&gt; Filters datasets based on the reason for excluding data. Supports contains match.
+     * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters datasets by retrieving results in pages.
+     * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+     * @param {string} [sort_field] &lt;strong&gt;Sort field:&lt;/strong&gt; The field by which to sort the results. By default, it is by uploaded timestamp. Matches the exact value from the supported enumeration.
+     * @param {string} [sort_order] &lt;strong&gt;Sort order:&lt;/strong&gt; By default, it is in descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -526,65 +526,65 @@ export declare class CommonAPIsApi extends BaseAPI {
      */
     listApiVersions(options?: AxiosRequestConfig): Promise<AxiosResponse<APIVersionList>>;
     /**
-     * This API lists all TDEI datasets, allowing users to efficiently search with sorting and filtering features. Each dataset entry is uniquely identified by `tdei_dataset_id` and also provide detailed information including metadata, associated project group, service details, download URL, and status. Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'. Filtering options are provided for enhanced discoverability of the datasets.By default all released datasets are visible to all user. Pre-release datasets are only visible to user affiliated with the project groups.
+     * <p>This API returns filtered and sorted lists of TDEI datasets. The matching behavior of filter parameters may vary depending on the attribute type.</p> <p>By default results will include all datasets in released status AND all dataset in pre-release status within the requesting user's project group. This behavior can be controlled by the status parameter.  In no situation can a user see pre-release datasets from a project group the user is not part of.</p>    <b>Primary use cases include</b>: <ul> <li><b>name search</b>: Given a search string X, return all datasets with a name that contains the search string X </li> <li><b>dataset id lookup</b>: Given a tdei_dataset_id, return the dataset with the matching id </li> <li> <b>bounding box</b>: Given xmin, xmax, ymin, ymax, return datasets with dataset_area overlapping the bounding box </li> </ul>    <b>Sorting</b>:<br> <p>Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'.</p>
      * @summary Lists the TDEI datasets in the system.
-     * @param {string} [data_type] Type of the dataset.
-     * @param {string} [status] This filter allows users to request datasets based on their status. When set to &#x27;All&#x27;, the filter displays all available datasets by default. If specified as &#x27;Pre-Release&#x27; or &#x27;Publish&#x27;, it shows only the datasets that are in the Pre-Release or Publish stages, respectively, for the project groups the user is affiliated with.
-     * @param {string} [name] Dataset name or title
-     * @param {string} [version] Dataset version.
-     * @param {string} [data_source] Data source of the dataset.
-     * @param {string} [collection_method] Method by which the data was collected.
-     * @param {string} [collected_by] Collection agency or person.
-     * @param {string} [derived_from_dataset_id] Dataset id from which this dataset was derived.
-     * @param {string} [collection_date] Collection date time
-     * @param {number} [confidence_level] Minimum confidence level required. Data returned will be at this confidence level or higher. Confidence level range is: 0 (very low confidence) to 100 (very high confidence).
-     * @param {string} [schema_version] Version name of the data type schema version that the application requests. list of versions can be found with /api/v1/{data_type}/versions.
-     * @param {string} [tdei_project_group_id] TDEI project group id of the datasets to be retrieved.
-     * @param {string} [tdei_service_id] TDEI service id of the datasets to be retrieved.
-     * @param {string} [valid_from] Valid from date time. Date-time for which datasets to be retrieved.
-     * @param {string} [valid_to] Valid to date time. Date-time for which datasets to be retrieved.
-     * @param {string} [tdei_dataset_id] tdei_dataset_id of the dataset to be retrieved.
-     * @param {Array<number>} [bbox] A bounding box which specifies the area to be searched. A bounding box is specified by a string providing the lat/lon coordinates of the corners of the bounding box. Coordinate should be specified as west, south, east, north.
-     * @param {string} [other_published_locations] Other published locations
-     * @param {number} [dataset_update_frequency_months] Dataset update frequency in months
-     * @param {string} [schema_validation_run_description] Schema validation run description
-     * @param {string} [full_dataset_name] Full dataset name
-     * @param {string} [collection_name] Name of the collection
-     * @param {string} [department_name] Name of the department
-     * @param {string} [city] Name of the city
-     * @param {string} [region] Name of the region
-     * @param {string} [county] Name of the county
-     * @param {string} [key_limitations] Key limitations of the dataset
-     * @param {string} [release_notes] Release notes
-     * @param {string} [challenges] Challenges faced in collecting the data
-     * @param {Array<string>} [official_maintainer] Official maintainer of the dataset
-     * @param {string} [last_updated] Date when the dataset was last updated
-     * @param {string} [update_frequency] Frequency of updates
-     * @param {string} [authorization_chain] Authorization chain
-     * @param {boolean} [maintenance_funded] Is maintenance funded
-     * @param {string} [funding_details] Funding details
-     * @param {string} [point_data_collection_device] Point data collection device
-     * @param {string} [node_locations_and_attributes_editing_software] Node locations and attributes editing software
-     * @param {boolean} [data_collected_by_people] Is data collected by people
-     * @param {string} [data_collectors] Data collectors
-     * @param {boolean} [data_captured_automatically] Is data captured automatically
-     * @param {string} [automated_collection] Automated collection
-     * @param {string} [data_collectors_organization] Data collectors organization
-     * @param {string} [data_collector_compensation] Data collector compensation
-     * @param {string} [preprocessing_location] Preprocessing location
-     * @param {string} [preprocessing_by] Preprocessing by
-     * @param {string} [preprocessing_steps] Preprocessing steps
-     * @param {boolean} [data_collection_preprocessing_documentation] Is data collection preprocessing documentation available
-     * @param {string} [documentation_uri] Documentation URI
-     * @param {boolean} [validation_process_exists] Is validation process exists
-     * @param {string} [validation_process_description] Validation process description
-     * @param {string} [validation_conducted_by] Validation conducted by
-     * @param {string} [excluded_data] Excluded data
-     * @param {string} [excluded_data_reason] Excluded data reason
-     * @param {number} [page_no] Integer, defaults to 1. Retrieves the results in pages.
-     * @param {number} [page_size] Page size. integer, between 1 to 50, defaults to 10.Specifies total records per page.
-     * @param {string} [sort_field] Sort field. By default, it is by uploaded timestamp.
-     * @param {string} [sort_order] Sort order. By default, it is in descending order.
+     * @param {string} [data_type] &lt;strong&gt;Type of the dataset&lt;/strong&gt;. Filters datasets by matching the exact value from the supported enumeration.
+     * @param {string} [status] &lt;p&gt;&lt;strong&gt;Status of the dataset:&lt;/strong&gt; Filters datasets by status — &lt;code&gt;All&lt;/code&gt; (default) returns released datasets and pre-release datasets from the user&#x27;s project groups; &lt;code&gt;Pre-Release&lt;/code&gt; and &lt;code&gt;Publish&lt;/code&gt; return only datasets in that status from affiliated project groups.&lt;/p&gt;
+     * @param {string} [name] &lt;p&gt;&lt;strong&gt;Dataset name or title:&lt;/strong&gt; Filters datasets where the name or title contains the specified search text.&lt;/p&gt;
+     * @param {string} [version] &lt;p&gt;&lt;strong&gt;Dataset version:&lt;/strong&gt; Filters datasets using an exact match on the version value.&lt;/p&gt;
+     * @param {string} [data_source] &lt;p&gt;&lt;strong&gt;Data source:&lt;/strong&gt; Filters datasets by matching the exact value from the supported enumeration.&lt;/p&gt;
+     * @param {string} [collection_method] &lt;p&gt;&lt;strong&gt;Collection method:&lt;/strong&gt; Filters datasets by matching the exact value from the supported enumeration.&lt;/p&gt;
+     * @param {string} [collected_by] &lt;p&gt;&lt;strong&gt;Collected by:&lt;/strong&gt; Filters datasets using an exact match on the collection agency or person&#x27;s name.&lt;/p&gt;
+     * @param {string} [derived_from_dataset_id] &lt;strong&gt;derived_from_dataset_id:&lt;/strong&gt; Filters datasets that are derived from the specified dataset ID. Exact match.
+     * @param {string} [collection_date] &lt;strong&gt;collection_date:&lt;/strong&gt; Filters datasets collected after the specified date and time.
+     * @param {number} [confidence_level] &lt;strong&gt;Confidence level:&lt;/strong&gt; Minimum confidence level required. Returns datasets with confidence level greater than the specified value. Range: 0 (very low) to 100 (very high).
+     * @param {string} [schema_version] &lt;strong&gt;Schema version:&lt;/strong&gt; Filters datasets that match the requested data type schema version. The list of supported versions can be found at &lt;code&gt;/api/v1/{data_type}/versions&lt;/code&gt;.
+     * @param {string} [tdei_project_group_id] &lt;strong&gt;TDEI project group ID:&lt;/strong&gt; Filters datasets that belong to the specified project group. Exact match.
+     * @param {string} [tdei_service_id] &lt;strong&gt;TDEI service ID:&lt;/strong&gt; Filters datasets that belong to the specified TDEI service. Exact match.
+     * @param {string} [valid_from] &lt;strong&gt;Valid from:&lt;/strong&gt; Filters datasets with a valid-from date later than the specified date-time.
+     * @param {string} [valid_to] &lt;strong&gt;Valid to:&lt;/strong&gt; Filters datasets with a valid-to date earlier than the specified date-time.
+     * @param {string} [tdei_dataset_id] &lt;strong&gt;TDEI dataset ID:&lt;/strong&gt; Filters datasets by the specified TDEI dataset ID.
+     * @param {Array<number>} [bbox] &lt;strong&gt;Bounding box:&lt;/strong&gt; Specifies the geographic area to search within, using a bounding box defined by four coordinates in the order: west, south, east, north. Accepts an array of four numeric values.
+     * @param {string} [other_published_locations] &lt;strong&gt;Other published locations:&lt;/strong&gt; Lists additional places where the dataset has been published. Supports contains match.
+     * @param {number} [dataset_update_frequency_months] &lt;strong&gt;Dataset update frequency in months:&lt;/strong&gt; Filters datasets based on how frequently they are updated. Uses a greater than or equal to match to include datasets updated at this frequency or more often.
+     * @param {string} [schema_validation_run_description] &lt;strong&gt;Schema validation run description:&lt;/strong&gt; Filters datasets based on the description of the schema validation run. Accepts a string value and uses contains match.
+     * @param {string} [full_dataset_name] &lt;strong&gt;Full dataset name:&lt;/strong&gt; Filters datasets based on their full name. Supports contains match.
+     * @param {string} [collection_name] &lt;strong&gt;Collection name:&lt;/strong&gt; Filters datasets based on their collection name. Supports contains match.
+     * @param {string} [department_name] &lt;strong&gt;Department name:&lt;/strong&gt; Filters datasets based on their department name. Supports contains match.
+     * @param {string} [city] &lt;strong&gt;Name of City:&lt;/strong&gt; Filters datasets based on the city name. Supports contains match.
+     * @param {string} [region] &lt;strong&gt;Region:&lt;/strong&gt; Filters datasets based on the region name. Supports contains match.
+     * @param {string} [county] &lt;strong&gt;County:&lt;/strong&gt; Filters datasets based on the county name. Supports contains match.
+     * @param {string} [key_limitations] &lt;strong&gt;Key limitations:&lt;/strong&gt; Filters datasets based on their key limitations. Supports contains match.
+     * @param {string} [release_notes] &lt;strong&gt;Release notes:&lt;/strong&gt; Filters datasets based on their release notes. Supports contains match.
+     * @param {string} [challenges] &lt;strong&gt;Challenges:&lt;/strong&gt; Filters datasets based on the challenges faced in collecting the data. Supports contains match.
+     * @param {Array<string>} [official_maintainer] &lt;strong&gt;Official maintainer:&lt;/strong&gt; Filters datasets based on the official maintainer. Supports contains match.
+     * @param {string} [last_updated] &lt;strong&gt;Last updated:&lt;/strong&gt; Filters datasets based on the last updated date. Accepts a date-time string match.
+     * @param {string} [update_frequency] &lt;strong&gt;Update frequency:&lt;/strong&gt; Filters datasets based on their update frequency. Supports contains match.
+     * @param {string} [authorization_chain] &lt;strong&gt;Authorization chain:&lt;/strong&gt; Filters datasets based on their authorization chain. Supports contains match.
+     * @param {boolean} [maintenance_funded] &lt;strong&gt;Maintenance funded:&lt;/strong&gt; Filters datasets based on whether they are funded for maintenance. Uses a boolean value.
+     * @param {string} [funding_details] &lt;strong&gt;Funding details:&lt;/strong&gt; Filters datasets based on their funding details. Supports contains match.
+     * @param {string} [point_data_collection_device] &lt;strong&gt;Point data collection device:&lt;/strong&gt; Filters datasets based on the device used for point data collection. Supports contains match.
+     * @param {string} [node_locations_and_attributes_editing_software] &lt;strong&gt;Node locations and attributes editing software:&lt;/strong&gt; Filters datasets based on the software used for editing node locations and attributes. Supports contains match.
+     * @param {boolean} [data_collected_by_people] &lt;strong&gt;Data collected by people:&lt;/strong&gt; Filters datasets based on whether the data was collected by people. Uses a boolean value.
+     * @param {string} [data_collectors] &lt;strong&gt;Data collectors:&lt;/strong&gt; Filters datasets based on the individuals or organizations that collected the data. Supports contains match.
+     * @param {boolean} [data_captured_automatically] &lt;strong&gt;Data captured automatically:&lt;/strong&gt; Filters datasets based on whether the data was captured automatically. Uses a boolean value.
+     * @param {string} [automated_collection] &lt;strong&gt;Automated collection:&lt;/strong&gt; Filters datasets based on whether the data was collected automatically. Supports contains match.
+     * @param {string} [data_collectors_organization] &lt;strong&gt;Data collectors organization:&lt;/strong&gt; Filters datasets based on the organization of the data collectors. Supports contains match.
+     * @param {string} [data_collector_compensation] &lt;strong&gt;Data collector compensation:&lt;/strong&gt; Filters datasets based on whether the data collectors were compensated. Supports contains match.
+     * @param {string} [preprocessing_location] &lt;strong&gt;Preprocessing location:&lt;/strong&gt; Filters datasets based on their preprocessing location. Supports contains match.
+     * @param {string} [preprocessing_by] &lt;strong&gt;Preprocessing by:&lt;/strong&gt; Filters datasets based on who performed the preprocessing. Supports contains match.
+     * @param {string} [preprocessing_steps] &lt;strong&gt;Preprocessing steps:&lt;/strong&gt; Filters datasets based on their preprocessing steps. Supports contains match.
+     * @param {boolean} [data_collection_preprocessing_documentation] &lt;strong&gt;Data collection preprocessing documentation:&lt;/strong&gt; Filters datasets based on the availability of data collection preprocessing documentation. Uses a boolean value.
+     * @param {string} [documentation_uri] &lt;strong&gt;Documentation URI:&lt;/strong&gt; Filters datasets based on their documentation URI. Supports contains match.
+     * @param {boolean} [validation_process_exists] &lt;strong&gt;Validation process exists:&lt;/strong&gt; Filters datasets based on whether a validation process exists. Uses a boolean value.
+     * @param {string} [validation_process_description] &lt;strong&gt;Validation process description:&lt;/strong&gt; Filters datasets based on the description of the validation process. Supports contains match.
+     * @param {string} [validation_conducted_by] &lt;strong&gt;Validation conducted by:&lt;/strong&gt; Filters datasets based on who conducted the validation. Supports contains match.
+     * @param {string} [excluded_data] &lt;strong&gt;Excluded data:&lt;/strong&gt; Filters datasets based on whether they contain excluded data. Supports contains match.
+     * @param {string} [excluded_data_reason] &lt;strong&gt;Excluded data reason:&lt;/strong&gt; Filters datasets based on the reason for excluding data. Supports contains match.
+     * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters datasets by retrieving results in pages.
+     * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+     * @param {string} [sort_field] &lt;strong&gt;Sort field:&lt;/strong&gt; The field by which to sort the results. By default, it is by uploaded timestamp. Matches the exact value from the supported enumeration.
+     * @param {string} [sort_order] &lt;strong&gt;Sort order:&lt;/strong&gt; By default, it is in descending order.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonAPIsApi
