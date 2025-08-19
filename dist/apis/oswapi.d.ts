@@ -12,8 +12,13 @@
 import { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 import { RequestArgs, BaseAPI } from '../base';
+import { DatasetviewerTdeiDatasetIdBody } from '../models';
+import { Feedback } from '../models';
+import { FeedbackMetadata } from '../models';
+import { InlineResponse200 } from '../models';
 import { OswSpatialjoinBody } from '../models';
 import { OswUnionBody } from '../models';
+import { ProjectIdTdeiDatasetIdBody } from '../models';
 import { VersionList } from '../models';
 /**
  * OSWApi - axios parameter creator
@@ -73,6 +78,47 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      * @throws {RequiredError}
      */
     oswConfidenceCalculateForm: (tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Updates the visibility preferences for a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter and modifies the dataset's visibility settings.
+     * @summary Updates the visibility preferences for the dataset viewer.
+     * @param {DatasetviewerTdeiDatasetIdBody} body
+     * @param {string} tdei_dataset_id Dataset ID for updating the dataset viewer preferences.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewer: (body: DatasetviewerTdeiDatasetIdBody, tdei_dataset_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset viewer experience.
+     * @summary Accepts the feedback from the dataset viewer.
+     * @param {ProjectIdTdeiDatasetIdBody} body
+     * @param {string} project_id ID of the project group.
+     * @param {string} tdei_dataset_id ID of the dataset.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewerFeedback: (body: ProjectIdTdeiDatasetIdBody, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Retrieves the feedbacks from the dataset viewer. Response includes a list of feedbacks provided by users regarding the dataset viewer. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
+     * @summary Retrieves the feedbacks from the dataset viewer.
+     * @param {string} tdei_project_group_id ID of the project group.
+     * @param {string} tdei_dataset_id ID of the dataset.
+     * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
+     * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
+     * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
+     * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
+     * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters feedbacks by retrieving results in pages.
+     * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewerFeedbacks: (tdei_project_group_id: string, tdei_dataset_id: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Retrieves the feedbacks metadata. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
+     * @summary Retrieves the feedbacks metadata.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewerFeedbacksMetadata: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary OSW dataset conversion on demand
@@ -206,6 +252,47 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      */
     oswConfidenceCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
     /**
+     * Updates the visibility preferences for a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter and modifies the dataset's visibility settings.
+     * @summary Updates the visibility preferences for the dataset viewer.
+     * @param {DatasetviewerTdeiDatasetIdBody} body
+     * @param {string} tdei_dataset_id Dataset ID for updating the dataset viewer preferences.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewer(body: DatasetviewerTdeiDatasetIdBody, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    /**
+     * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset viewer experience.
+     * @summary Accepts the feedback from the dataset viewer.
+     * @param {ProjectIdTdeiDatasetIdBody} body
+     * @param {string} project_id ID of the project group.
+     * @param {string} tdei_dataset_id ID of the dataset.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse200>>>;
+    /**
+     * Retrieves the feedbacks from the dataset viewer. Response includes a list of feedbacks provided by users regarding the dataset viewer. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
+     * @summary Retrieves the feedbacks from the dataset viewer.
+     * @param {string} tdei_project_group_id ID of the project group.
+     * @param {string} tdei_dataset_id ID of the dataset.
+     * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
+     * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
+     * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
+     * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
+     * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters feedbacks by retrieving results in pages.
+     * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewerFeedbacks(tdei_project_group_id: string, tdei_dataset_id: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Feedback>>>>;
+    /**
+     * Retrieves the feedbacks metadata. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
+     * @summary Retrieves the feedbacks metadata.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewerFeedbacksMetadata(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<FeedbackMetadata>>>>;
+    /**
      * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary OSW dataset conversion on demand
      * @param {Blob} file
@@ -337,6 +424,47 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @throws {RequiredError}
      */
     oswConfidenceCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Updates the visibility preferences for a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter and modifies the dataset's visibility settings.
+     * @summary Updates the visibility preferences for the dataset viewer.
+     * @param {DatasetviewerTdeiDatasetIdBody} body
+     * @param {string} tdei_dataset_id Dataset ID for updating the dataset viewer preferences.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewer(body: DatasetviewerTdeiDatasetIdBody, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset viewer experience.
+     * @summary Accepts the feedback from the dataset viewer.
+     * @param {ProjectIdTdeiDatasetIdBody} body
+     * @param {string} project_id ID of the project group.
+     * @param {string} tdei_dataset_id ID of the dataset.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse200>>;
+    /**
+     * Retrieves the feedbacks from the dataset viewer. Response includes a list of feedbacks provided by users regarding the dataset viewer. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
+     * @summary Retrieves the feedbacks from the dataset viewer.
+     * @param {string} tdei_project_group_id ID of the project group.
+     * @param {string} tdei_dataset_id ID of the dataset.
+     * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
+     * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
+     * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
+     * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
+     * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters feedbacks by retrieving results in pages.
+     * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewerFeedbacks(tdei_project_group_id: string, tdei_dataset_id: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Feedback>>>;
+    /**
+     * Retrieves the feedbacks metadata. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
+     * @summary Retrieves the feedbacks metadata.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewerFeedbacksMetadata(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<FeedbackMetadata>>>;
     /**
      * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary OSW dataset conversion on demand
@@ -477,6 +605,51 @@ export declare class OSWApi extends BaseAPI {
      * @memberof OSWApi
      */
     oswConfidenceCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Updates the visibility preferences for a specified dataset identified by the tdei_dataset_id. It takes the dataset ID as a parameter and modifies the dataset's visibility settings.
+     * @summary Updates the visibility preferences for the dataset viewer.
+     * @param {DatasetviewerTdeiDatasetIdBody} body
+     * @param {string} tdei_dataset_id Dataset ID for updating the dataset viewer preferences.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    oswDatasetViewer(body: DatasetviewerTdeiDatasetIdBody, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset viewer experience.
+     * @summary Accepts the feedback from the dataset viewer.
+     * @param {ProjectIdTdeiDatasetIdBody} body
+     * @param {string} project_id ID of the project group.
+     * @param {string} tdei_dataset_id ID of the dataset.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse200>>;
+    /**
+     * Retrieves the feedbacks from the dataset viewer. Response includes a list of feedbacks provided by users regarding the dataset viewer. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
+     * @summary Retrieves the feedbacks from the dataset viewer.
+     * @param {string} tdei_project_group_id ID of the project group.
+     * @param {string} tdei_dataset_id ID of the dataset.
+     * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
+     * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
+     * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
+     * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
+     * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters feedbacks by retrieving results in pages.
+     * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    oswDatasetViewerFeedbacks(tdei_project_group_id: string, tdei_dataset_id: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Feedback>>>;
+    /**
+     * Retrieves the feedbacks metadata. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
+     * @summary Retrieves the feedbacks metadata.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    oswDatasetViewerFeedbacksMetadata(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<FeedbackMetadata>>>;
     /**
      * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary OSW dataset conversion on demand
