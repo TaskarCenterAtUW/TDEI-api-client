@@ -9,7 +9,9 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { GeoJsonObject } from './geo-json-object';
+import { POC } from './poc';
+import { Polygon } from './polygon';
+import { ProjectGroupDataViewer } from './project-group-data-viewer';
 /**
  *
  * @export
@@ -17,13 +19,7 @@ import { GeoJsonObject } from './geo-json-object';
  */
 export interface ProjectGroup {
     /**
-     *
-     * @type {GeoJsonObject}
-     * @memberof ProjectGroup
-     */
-    polygon: GeoJsonObject;
-    /**
-     * Unique id that represents the project group.
+     * ProjectGroupId uniquely represented in the TDEI system. System generated.
      * @type {string}
      * @memberof ProjectGroup
      */
@@ -33,5 +29,41 @@ export interface ProjectGroup {
      * @type {string}
      * @memberof ProjectGroup
      */
-    project_group_name: string;
+    name?: string;
+    /**
+     * Phone of the project group for communication.
+     * @type {string}
+     * @memberof ProjectGroup
+     */
+    phone?: string;
+    /**
+     * Url of the transit project group.
+     * @type {string}
+     * @memberof ProjectGroup
+     */
+    url?: string;
+    /**
+     * Address of the transit project group.
+     * @type {string}
+     * @memberof ProjectGroup
+     */
+    address?: string;
+    /**
+     *
+     * @type {Polygon}
+     * @memberof ProjectGroup
+     */
+    polygon: Polygon;
+    /**
+     * Project group POC details
+     * @type {Array<POC>}
+     * @memberof ProjectGroup
+     */
+    poc?: Array<POC>;
+    /**
+     *
+     * @type {ProjectGroupDataViewer}
+     * @memberof ProjectGroup
+     */
+    data_viewer?: ProjectGroupDataViewer;
 }
