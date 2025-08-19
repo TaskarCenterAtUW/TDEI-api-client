@@ -100,8 +100,8 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
     /**
      * Retrieves the feedbacks from the dataset viewer. Response includes a list of feedbacks provided by users regarding the dataset viewer. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
      * @summary Retrieves the feedbacks from the dataset viewer.
-     * @param {string} tdei_project_group_id ID of the project group.
-     * @param {string} tdei_dataset_id ID of the dataset.
+     * @param {string} [tdei_project_group_id] ID of the project group.
+     * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
      * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
@@ -111,7 +111,7 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswDatasetViewerFeedbacks: (tdei_project_group_id: string, tdei_dataset_id: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    oswDatasetViewerFeedbacks: (tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Retrieves the feedbacks metadata. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
      * @summary Retrieves the feedbacks metadata.
@@ -273,8 +273,8 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
     /**
      * Retrieves the feedbacks from the dataset viewer. Response includes a list of feedbacks provided by users regarding the dataset viewer. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
      * @summary Retrieves the feedbacks from the dataset viewer.
-     * @param {string} tdei_project_group_id ID of the project group.
-     * @param {string} tdei_dataset_id ID of the dataset.
+     * @param {string} [tdei_project_group_id] ID of the project group.
+     * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
      * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
@@ -284,7 +284,7 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswDatasetViewerFeedbacks(tdei_project_group_id: string, tdei_dataset_id: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Feedback>>>>;
+    oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Feedback>>>>;
     /**
      * Retrieves the feedbacks metadata. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
      * @summary Retrieves the feedbacks metadata.
@@ -446,8 +446,8 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
     /**
      * Retrieves the feedbacks from the dataset viewer. Response includes a list of feedbacks provided by users regarding the dataset viewer. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
      * @summary Retrieves the feedbacks from the dataset viewer.
-     * @param {string} tdei_project_group_id ID of the project group.
-     * @param {string} tdei_dataset_id ID of the dataset.
+     * @param {string} [tdei_project_group_id] ID of the project group.
+     * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
      * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
@@ -457,7 +457,7 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswDatasetViewerFeedbacks(tdei_project_group_id: string, tdei_dataset_id: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Feedback>>>;
+    oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Feedback>>>;
     /**
      * Retrieves the feedbacks metadata. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
      * @summary Retrieves the feedbacks metadata.
@@ -629,8 +629,8 @@ export declare class OSWApi extends BaseAPI {
     /**
      * Retrieves the feedbacks from the dataset viewer. Response includes a list of feedbacks provided by users regarding the dataset viewer. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
      * @summary Retrieves the feedbacks from the dataset viewer.
-     * @param {string} tdei_project_group_id ID of the project group.
-     * @param {string} tdei_dataset_id ID of the dataset.
+     * @param {string} [tdei_project_group_id] ID of the project group.
+     * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
      * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
@@ -641,7 +641,7 @@ export declare class OSWApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    oswDatasetViewerFeedbacks(tdei_project_group_id: string, tdei_dataset_id: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Feedback>>>;
+    oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Feedback>>>;
     /**
      * Retrieves the feedbacks metadata. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
      * @summary Retrieves the feedbacks metadata.

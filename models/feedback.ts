@@ -20,6 +20,12 @@ import { FeedbackProjectGroup } from './feedback-project-group';
  */
 export interface Feedback {
     /**
+     * Unique identifier for the feedback.
+     * @type {string}
+     * @memberof Feedback
+     */
+    id?: string;
+    /**
      * 
      * @type {FeedbackProjectGroup}
      * @memberof Feedback
@@ -37,18 +43,6 @@ export interface Feedback {
      * @memberof Feedback
      */
     feedback_text?: string;
-    /**
-     * Timestamp when the feedback was created.
-     * @type {Date}
-     * @memberof Feedback
-     */
-    created_at?: Date;
-    /**
-     * Due date for the feedback response.
-     * @type {Date}
-     * @memberof Feedback
-     */
-    due_date?: Date;
     /**
      * ID of the specific dataset element related to the feedback.
      * @type {string}
@@ -74,11 +68,17 @@ export interface Feedback {
      */
     location_longitude?: number;
     /**
-     * Unique identifier for the feedback.
-     * @type {string}
+     * Due date for the feedback response.
+     * @type {Date}
      * @memberof Feedback
      */
-    id?: string;
+    due_date?: Date;
+    /**
+     * Timestamp when the feedback was created.
+     * @type {Date}
+     * @memberof Feedback
+     */
+    created_at?: Date;
     /**
      * Timestamp when the feedback was last updated.
      * @type {Date}
