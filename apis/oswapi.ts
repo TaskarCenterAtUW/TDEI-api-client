@@ -462,7 +462,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset viewer experience.
+         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
          * @summary Accepts the feedback from the dataset viewer.
          * @param {ProjectIdTdeiDatasetIdBody} body 
          * @param {string} project_id ID of the project group.
@@ -526,16 +526,16 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Retrieves the feedbacks from the dataset viewer. Response includes a list of feedbacks provided by users regarding the dataset viewer. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
-         * @summary Retrieves the feedbacks from the dataset viewer.
+         * Retrieves the dataset viewer feedbacks. Response includes a list of feedbacks provided by users regarding the dataset. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
+         * @summary Retrieves the dataset viewer feedbacks.
          * @param {string} [tdei_project_group_id] ID of the project group.
          * @param {string} [tdei_dataset_id] ID of the dataset.
          * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
          * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
          * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
          * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
-         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters feedbacks by retrieving results in pages.
-         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Specifies the page number to retrieve.
+         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10. Specifies total records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -613,8 +613,8 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Retrieves the feedbacks metadata. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
-         * @summary Retrieves the feedbacks metadata.
+         * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
+         * @summary Retrieves the feedbacks summary.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1311,7 +1311,7 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset viewer experience.
+         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
          * @summary Accepts the feedback from the dataset viewer.
          * @param {ProjectIdTdeiDatasetIdBody} body 
          * @param {string} project_id ID of the project group.
@@ -1327,16 +1327,16 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Retrieves the feedbacks from the dataset viewer. Response includes a list of feedbacks provided by users regarding the dataset viewer. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
-         * @summary Retrieves the feedbacks from the dataset viewer.
+         * Retrieves the dataset viewer feedbacks. Response includes a list of feedbacks provided by users regarding the dataset. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
+         * @summary Retrieves the dataset viewer feedbacks.
          * @param {string} [tdei_project_group_id] ID of the project group.
          * @param {string} [tdei_dataset_id] ID of the dataset.
          * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
          * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
          * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
          * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
-         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters feedbacks by retrieving results in pages.
-         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Specifies the page number to retrieve.
+         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10. Specifies total records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1348,8 +1348,8 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Retrieves the feedbacks metadata. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
-         * @summary Retrieves the feedbacks metadata.
+         * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
+         * @summary Retrieves the feedbacks summary.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1567,7 +1567,7 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).oswDatasetViewer(body, tdei_dataset_id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset viewer experience.
+         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
          * @summary Accepts the feedback from the dataset viewer.
          * @param {ProjectIdTdeiDatasetIdBody} body 
          * @param {string} project_id ID of the project group.
@@ -1579,16 +1579,16 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).oswDatasetViewerFeedback(body, project_id, tdei_dataset_id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieves the feedbacks from the dataset viewer. Response includes a list of feedbacks provided by users regarding the dataset viewer. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
-         * @summary Retrieves the feedbacks from the dataset viewer.
+         * Retrieves the dataset viewer feedbacks. Response includes a list of feedbacks provided by users regarding the dataset. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
+         * @summary Retrieves the dataset viewer feedbacks.
          * @param {string} [tdei_project_group_id] ID of the project group.
          * @param {string} [tdei_dataset_id] ID of the dataset.
          * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
          * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
          * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
          * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
-         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters feedbacks by retrieving results in pages.
-         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Specifies the page number to retrieve.
+         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10. Specifies total records per page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1596,8 +1596,8 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).oswDatasetViewerFeedbacks(tdei_project_group_id, tdei_dataset_id, from_date, to_date, sort_by, sort_order, page_no, page_size, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieves the feedbacks metadata. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
-         * @summary Retrieves the feedbacks metadata.
+         * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
+         * @summary Retrieves the feedbacks summary.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1787,7 +1787,7 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).oswDatasetViewer(body, tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset viewer experience.
+     * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
      * @summary Accepts the feedback from the dataset viewer.
      * @param {ProjectIdTdeiDatasetIdBody} body 
      * @param {string} project_id ID of the project group.
@@ -1800,16 +1800,16 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).oswDatasetViewerFeedback(body, project_id, tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Retrieves the feedbacks from the dataset viewer. Response includes a list of feedbacks provided by users regarding the dataset viewer. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
-     * @summary Retrieves the feedbacks from the dataset viewer.
+     * Retrieves the dataset viewer feedbacks. Response includes a list of feedbacks provided by users regarding the dataset. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
+     * @summary Retrieves the dataset viewer feedbacks.
      * @param {string} [tdei_project_group_id] ID of the project group.
      * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
      * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
      * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
-     * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters feedbacks by retrieving results in pages.
-     * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+     * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Specifies the page number to retrieve.
+     * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10. Specifies total records per page.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
@@ -1818,8 +1818,8 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).oswDatasetViewerFeedbacks(tdei_project_group_id, tdei_dataset_id, from_date, to_date, sort_by, sort_order, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Retrieves the feedbacks metadata. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
-     * @summary Retrieves the feedbacks metadata.
+     * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
+     * @summary Retrieves the feedbacks summary.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
