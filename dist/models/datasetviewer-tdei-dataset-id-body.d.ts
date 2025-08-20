@@ -16,7 +16,7 @@
  */
 export interface DatasetviewerTdeiDatasetIdBody {
     /**
-     * Indicates whether the dataset viewer access is allowed. If set to true, the dataset viewer is accessible to all users.
+     * Indicates whether the dataset viewer access is allowed.
      * @type {boolean}
      * @memberof DatasetviewerTdeiDatasetIdBody
      */
