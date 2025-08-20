@@ -120,6 +120,14 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      */
     oswDatasetViewerFeedbacksMetadata: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.
+     * @summary Retrives the PM tiles SAS url for the dataset.
+     * @param {string} tdei_dataset_id Dataset ID for retrieving the PM tiles SAS url.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewerPMTiles: (tdei_dataset_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary OSW dataset conversion on demand
      * @param {Blob} file
@@ -293,6 +301,14 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      */
     oswDatasetViewerFeedbacksMetadata(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<FeedbackMetadata>>>>;
     /**
+     * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.
+     * @summary Retrives the PM tiles SAS url for the dataset.
+     * @param {string} tdei_dataset_id Dataset ID for retrieving the PM tiles SAS url.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewerPMTiles(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    /**
      * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary OSW dataset conversion on demand
      * @param {Blob} file
@@ -465,6 +481,14 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @throws {RequiredError}
      */
     oswDatasetViewerFeedbacksMetadata(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<FeedbackMetadata>>>;
+    /**
+     * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.
+     * @summary Retrives the PM tiles SAS url for the dataset.
+     * @param {string} tdei_dataset_id Dataset ID for retrieving the PM tiles SAS url.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswDatasetViewerPMTiles(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary OSW dataset conversion on demand
@@ -650,6 +674,15 @@ export declare class OSWApi extends BaseAPI {
      * @memberof OSWApi
      */
     oswDatasetViewerFeedbacksMetadata(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<FeedbackMetadata>>>;
+    /**
+     * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.
+     * @summary Retrives the PM tiles SAS url for the dataset.
+     * @param {string} tdei_dataset_id Dataset ID for retrieving the PM tiles SAS url.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    oswDatasetViewerPMTiles(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary OSW dataset conversion on demand

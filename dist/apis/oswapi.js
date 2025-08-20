@@ -831,6 +831,66 @@ var OSWApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
+         * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.
+         * @summary Retrives the PM tiles SAS url for the dataset.
+         * @param {string} tdei_dataset_id Dataset ID for retrieving the PM tiles SAS url.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswDatasetViewerPMTiles: function (tdei_dataset_id, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, accessToken, _a, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            // verify required parameter 'tdei_dataset_id' is not null or undefined
+                            if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
+                                throw new base_1.RequiredError('tdei_dataset_id', 'Required parameter tdei_dataset_id was null or undefined when calling oswDatasetViewerPMTiles.');
+                            }
+                            localVarPath = "/api/v1/osw/dataset-viewer/pm-tiles/{tdei_dataset_id}"
+                                .replace("{".concat("tdei_dataset_id", "}"), encodeURIComponent(String(tdei_dataset_id)));
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 1:
+                            _a = _b.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.accessToken];
+                        case 3:
+                            _a = _b.sent();
+                            _b.label = 4;
+                        case 4:
+                            accessToken = _a;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _b.label = 5;
+                        case 5:
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
          * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary OSW dataset conversion on demand
          * @param {Blob} file
@@ -1759,6 +1819,31 @@ var OSWApiFp = function (configuration) {
             });
         },
         /**
+         * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.
+         * @summary Retrives the PM tiles SAS url for the dataset.
+         * @param {string} tdei_dataset_id Dataset ID for retrieving the PM tiles SAS url.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswDatasetViewerPMTiles: function (tdei_dataset_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswDatasetViewerPMTiles(tdei_dataset_id, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
          * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary OSW dataset conversion on demand
          * @param {Blob} file
@@ -2131,6 +2216,20 @@ var OSWApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
+         * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.
+         * @summary Retrives the PM tiles SAS url for the dataset.
+         * @param {string} tdei_dataset_id Dataset ID for retrieving the PM tiles SAS url.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswDatasetViewerPMTiles: function (tdei_dataset_id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswDatasetViewerPMTiles(tdei_dataset_id, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
          * This request facilitates the conversion of an OSW dataset to OSM format, or vice versa. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary OSW dataset conversion on demand
          * @param {Blob} file
@@ -2436,6 +2535,22 @@ var OSWApi = /** @class */ (function (_super) {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswDatasetViewerFeedbacksMetadata(options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.
+     * @summary Retrives the PM tiles SAS url for the dataset.
+     * @param {string} tdei_dataset_id Dataset ID for retrieving the PM tiles SAS url.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.oswDatasetViewerPMTiles = function (tdei_dataset_id, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswDatasetViewerPMTiles(tdei_dataset_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
