@@ -24,7 +24,7 @@ export interface FeedbackMetadata {
      */
     total_count?: string;
     /**
-     * Indicates number of overdue feedbacks.
+     * Count of feedback entries.
      * @type {number}
      * @memberof FeedbackMetadata
      */
