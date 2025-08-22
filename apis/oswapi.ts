@@ -532,6 +532,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
          * @param {string} [tdei_dataset_id] ID of the dataset.
          * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
          * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
+         * @param {string} [status] &lt;strong&gt;status:&lt;/strong&gt; Filters feedbacks by their status.
          * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
          * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
          * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Specifies the page number to retrieve.
@@ -539,7 +540,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswDatasetViewerFeedbacks: async (tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        oswDatasetViewerFeedbacks: async (tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/osw/dataset-viewer/feedbacks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -580,6 +581,10 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
                     to_date;
             }
 
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
             if (sort_by !== undefined) {
                 localVarQueryParameter['sort_by'] = sort_by;
             }
@@ -615,10 +620,11 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
          * @summary Retrieves the feedbacks summary.
+         * @param {string} [tdei_project_group_id] ID of the project group.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswDatasetViewerFeedbacksMetadata: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        oswDatasetViewerFeedbacksMetadata: async (tdei_project_group_id?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/osw/dataset-viewer/feedbacks/metadata`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -637,6 +643,10 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
                     ? await configuration.accessToken()
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (tdei_project_group_id !== undefined) {
+                localVarQueryParameter['tdei_project_group_id'] = tdei_project_group_id;
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -1382,6 +1392,7 @@ export const OSWApiFp = function(configuration?: Configuration) {
          * @param {string} [tdei_dataset_id] ID of the dataset.
          * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
          * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
+         * @param {string} [status] &lt;strong&gt;status:&lt;/strong&gt; Filters feedbacks by their status.
          * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
          * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
          * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Specifies the page number to retrieve.
@@ -1389,8 +1400,8 @@ export const OSWApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Feedback>>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswDatasetViewerFeedbacks(tdei_project_group_id, tdei_dataset_id, from_date, to_date, sort_by, sort_order, page_no, page_size, options);
+        async oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Feedback>>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswDatasetViewerFeedbacks(tdei_project_group_id, tdei_dataset_id, from_date, to_date, status, sort_by, sort_order, page_no, page_size, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1399,11 +1410,12 @@ export const OSWApiFp = function(configuration?: Configuration) {
         /**
          * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
          * @summary Retrieves the feedbacks summary.
+         * @param {string} [tdei_project_group_id] ID of the project group.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswDatasetViewerFeedbacksMetadata(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<FeedbackMetadata>>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswDatasetViewerFeedbacksMetadata(options);
+        async oswDatasetViewerFeedbacksMetadata(tdei_project_group_id?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<FeedbackMetadata>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswDatasetViewerFeedbacksMetadata(tdei_project_group_id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1648,6 +1660,7 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
          * @param {string} [tdei_dataset_id] ID of the dataset.
          * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
          * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
+         * @param {string} [status] &lt;strong&gt;status:&lt;/strong&gt; Filters feedbacks by their status.
          * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
          * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
          * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Specifies the page number to retrieve.
@@ -1655,17 +1668,18 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Feedback>>> {
-            return OSWApiFp(configuration).oswDatasetViewerFeedbacks(tdei_project_group_id, tdei_dataset_id, from_date, to_date, sort_by, sort_order, page_no, page_size, options).then((request) => request(axios, basePath));
+        async oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Feedback>>> {
+            return OSWApiFp(configuration).oswDatasetViewerFeedbacks(tdei_project_group_id, tdei_dataset_id, from_date, to_date, status, sort_by, sort_order, page_no, page_size, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
          * @summary Retrieves the feedbacks summary.
+         * @param {string} [tdei_project_group_id] ID of the project group.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswDatasetViewerFeedbacksMetadata(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<FeedbackMetadata>>> {
-            return OSWApiFp(configuration).oswDatasetViewerFeedbacksMetadata(options).then((request) => request(axios, basePath));
+        async oswDatasetViewerFeedbacksMetadata(tdei_project_group_id?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<FeedbackMetadata>> {
+            return OSWApiFp(configuration).oswDatasetViewerFeedbacksMetadata(tdei_project_group_id, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.
@@ -1879,6 +1893,7 @@ export class OSWApi extends BaseAPI {
      * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
+     * @param {string} [status] &lt;strong&gt;status:&lt;/strong&gt; Filters feedbacks by their status.
      * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
      * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
      * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Specifies the page number to retrieve.
@@ -1887,18 +1902,19 @@ export class OSWApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Feedback>>> {
-        return OSWApiFp(this.configuration).oswDatasetViewerFeedbacks(tdei_project_group_id, tdei_dataset_id, from_date, to_date, sort_by, sort_order, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
+    public async oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Feedback>>> {
+        return OSWApiFp(this.configuration).oswDatasetViewerFeedbacks(tdei_project_group_id, tdei_dataset_id, from_date, to_date, status, sort_by, sort_order, page_no, page_size, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
      * @summary Retrieves the feedbacks summary.
+     * @param {string} [tdei_project_group_id] ID of the project group.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async oswDatasetViewerFeedbacksMetadata(options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<FeedbackMetadata>>> {
-        return OSWApiFp(this.configuration).oswDatasetViewerFeedbacksMetadata(options).then((request) => request(this.axios, this.basePath));
+    public async oswDatasetViewerFeedbacksMetadata(tdei_project_group_id?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<FeedbackMetadata>> {
+        return OSWApiFp(this.configuration).oswDatasetViewerFeedbacksMetadata(tdei_project_group_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.

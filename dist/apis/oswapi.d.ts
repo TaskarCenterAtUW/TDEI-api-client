@@ -104,6 +104,7 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
+     * @param {string} [status] &lt;strong&gt;status:&lt;/strong&gt; Filters feedbacks by their status.
      * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
      * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
      * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Specifies the page number to retrieve.
@@ -111,14 +112,15 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswDatasetViewerFeedbacks: (tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    oswDatasetViewerFeedbacks: (tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
      * @summary Retrieves the feedbacks summary.
+     * @param {string} [tdei_project_group_id] ID of the project group.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswDatasetViewerFeedbacksMetadata: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    oswDatasetViewerFeedbacksMetadata: (tdei_project_group_id?: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.
      * @summary Retrives the PM tiles SAS url for the dataset.
@@ -285,6 +287,7 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
+     * @param {string} [status] &lt;strong&gt;status:&lt;/strong&gt; Filters feedbacks by their status.
      * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
      * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
      * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Specifies the page number to retrieve.
@@ -292,14 +295,15 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Feedback>>>>;
+    oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Feedback>>>>;
     /**
      * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
      * @summary Retrieves the feedbacks summary.
+     * @param {string} [tdei_project_group_id] ID of the project group.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswDatasetViewerFeedbacksMetadata(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<FeedbackMetadata>>>>;
+    oswDatasetViewerFeedbacksMetadata(tdei_project_group_id?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<FeedbackMetadata>>>;
     /**
      * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.
      * @summary Retrives the PM tiles SAS url for the dataset.
@@ -466,6 +470,7 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
+     * @param {string} [status] &lt;strong&gt;status:&lt;/strong&gt; Filters feedbacks by their status.
      * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
      * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
      * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Specifies the page number to retrieve.
@@ -473,14 +478,15 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Feedback>>>;
+    oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Feedback>>>;
     /**
      * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
      * @summary Retrieves the feedbacks summary.
+     * @param {string} [tdei_project_group_id] ID of the project group.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswDatasetViewerFeedbacksMetadata(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<FeedbackMetadata>>>;
+    oswDatasetViewerFeedbacksMetadata(tdei_project_group_id?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<FeedbackMetadata>>;
     /**
      * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.
      * @summary Retrives the PM tiles SAS url for the dataset.
@@ -657,6 +663,7 @@ export declare class OSWApi extends BaseAPI {
      * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedbacks created before this date.
+     * @param {string} [status] &lt;strong&gt;status:&lt;/strong&gt; Filters feedbacks by their status.
      * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
      * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
      * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Specifies the page number to retrieve.
@@ -665,15 +672,16 @@ export declare class OSWApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Feedback>>>;
+    oswDatasetViewerFeedbacks(tdei_project_group_id?: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, sort_order?: string, page_no?: number, page_size?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Feedback>>>;
     /**
      * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
      * @summary Retrieves the feedbacks summary.
+     * @param {string} [tdei_project_group_id] ID of the project group.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    oswDatasetViewerFeedbacksMetadata(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<FeedbackMetadata>>>;
+    oswDatasetViewerFeedbacksMetadata(tdei_project_group_id?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<FeedbackMetadata>>;
     /**
      * Retrieves the PM tiles SAS url for a specified dataset identified by the tdei_dataset_id.
      * @summary Retrives the PM tiles SAS url for the dataset.
