@@ -29,4 +29,10 @@ export interface DatasetItemProjectGroup {
      * @memberof DatasetItemProjectGroup
      */
     tdei_project_group_id: string;
+    /**
+     * Flag to indicate to allow dataset to be viewed on the dataset viewer.
+     * @type {boolean}
+     * @memberof DatasetItemProjectGroup
+     */
+    dataset_viewer_allowed?: boolean;
 }
