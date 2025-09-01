@@ -116,6 +116,7 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
     /**
      * Streams all feedback for the specified project group in CSV format. Requires poc or osw_data_generator role.
      * @summary Downloads dataset viewer feedbacks as a CSV.
+     * @param {string} tdei_project_group_id Valid TDEI project group id.
      * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created before this date.
@@ -129,7 +130,7 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswDatasetViewerFeedbacksDownload: (tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, due_date?: string, sort_order?: string, page_no?: number, page_size?: number, format?: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    oswDatasetViewerFeedbacksDownload: (tdei_project_group_id: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, due_date?: string, sort_order?: string, page_no?: number, page_size?: number, format?: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
      * @summary Retrieves the feedbacks summary.
@@ -316,6 +317,7 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
     /**
      * Streams all feedback for the specified project group in CSV format. Requires poc or osw_data_generator role.
      * @summary Downloads dataset viewer feedbacks as a CSV.
+     * @param {string} tdei_project_group_id Valid TDEI project group id.
      * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created before this date.
@@ -329,7 +331,7 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswDatasetViewerFeedbacksDownload(tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, due_date?: string, sort_order?: string, page_no?: number, page_size?: number, format?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Blob>>>;
+    oswDatasetViewerFeedbacksDownload(tdei_project_group_id: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, due_date?: string, sort_order?: string, page_no?: number, page_size?: number, format?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Blob>>>;
     /**
      * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
      * @summary Retrieves the feedbacks summary.
@@ -516,6 +518,7 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
     /**
      * Streams all feedback for the specified project group in CSV format. Requires poc or osw_data_generator role.
      * @summary Downloads dataset viewer feedbacks as a CSV.
+     * @param {string} tdei_project_group_id Valid TDEI project group id.
      * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created before this date.
@@ -529,7 +532,7 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswDatasetViewerFeedbacksDownload(tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, due_date?: string, sort_order?: string, page_no?: number, page_size?: number, format?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Blob>>;
+    oswDatasetViewerFeedbacksDownload(tdei_project_group_id: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, due_date?: string, sort_order?: string, page_no?: number, page_size?: number, format?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Blob>>;
     /**
      * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
      * @summary Retrieves the feedbacks summary.
@@ -727,6 +730,7 @@ export declare class OSWApi extends BaseAPI {
     /**
      * Streams all feedback for the specified project group in CSV format. Requires poc or osw_data_generator role.
      * @summary Downloads dataset viewer feedbacks as a CSV.
+     * @param {string} tdei_project_group_id Valid TDEI project group id.
      * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created before this date.
@@ -741,7 +745,7 @@ export declare class OSWApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    oswDatasetViewerFeedbacksDownload(tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, due_date?: string, sort_order?: string, page_no?: number, page_size?: number, format?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Blob>>;
+    oswDatasetViewerFeedbacksDownload(tdei_project_group_id: string, tdei_dataset_id?: string, from_date?: Date, to_date?: Date, status?: string, sort_by?: string, due_date?: string, sort_order?: string, page_no?: number, page_size?: number, format?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Blob>>;
     /**
      * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
      * @summary Retrieves the feedbacks summary.
