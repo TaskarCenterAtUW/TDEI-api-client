@@ -781,6 +781,104 @@ var OSWApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
+         * Streams all feedback for the specified project group in CSV format. Requires poc or osw_data_generator role.
+         * @summary Downloads dataset viewer feedbacks as a CSV.
+         * @param {string} [tdei_dataset_id] ID of the dataset.
+         * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created after this date.
+         * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created before this date.
+         * @param {string} [status] &lt;strong&gt;status:&lt;/strong&gt; Filters feedbacks by their status.
+         * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
+         * @param {string} [due_date] &lt;strong&gt;due_date:&lt;/strong&gt; Legacy alias for &lt;code&gt;sort_by&lt;/code&gt;. Use &#x27;created_at&#x27; or &#x27;due_date&#x27;.
+         * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
+         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, specifies the page number to retrieve. If omitted with page_size, the response is unpaginated.
+         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50. If omitted with page_no, the response is unpaginated.
+         * @param {string} [format] &lt;strong&gt;format:&lt;/strong&gt; Output format. Only &#x27;csv&#x27; is supported.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswDatasetViewerFeedbacksDownload: function (tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, accessToken, _a, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            localVarPath = "/api/v1/osw/dataset-viewer/feedbacks/download/{tdei_project_group_id}";
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 1:
+                            _a = _b.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.accessToken];
+                        case 3:
+                            _a = _b.sent();
+                            _b.label = 4;
+                        case 4:
+                            accessToken = _a;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _b.label = 5;
+                        case 5:
+                            if (tdei_dataset_id !== undefined) {
+                                localVarQueryParameter['tdei_dataset_id'] = tdei_dataset_id;
+                            }
+                            if (from_date !== undefined) {
+                                localVarQueryParameter['from_date'] = (from_date instanceof Date) ?
+                                    from_date.toISOString() :
+                                    from_date;
+                            }
+                            if (to_date !== undefined) {
+                                localVarQueryParameter['to_date'] = (to_date instanceof Date) ?
+                                    to_date.toISOString() :
+                                    to_date;
+                            }
+                            if (status !== undefined) {
+                                localVarQueryParameter['status'] = status;
+                            }
+                            if (sort_by !== undefined) {
+                                localVarQueryParameter['sort_by'] = sort_by;
+                            }
+                            if (due_date !== undefined) {
+                                localVarQueryParameter['due_date'] = due_date;
+                            }
+                            if (sort_order !== undefined) {
+                                localVarQueryParameter['sort_order'] = sort_order;
+                            }
+                            if (page_no !== undefined) {
+                                localVarQueryParameter['page_no'] = page_no;
+                            }
+                            if (page_size !== undefined) {
+                                localVarQueryParameter['page_size'] = page_size;
+                            }
+                            if (format !== undefined) {
+                                localVarQueryParameter['format'] = format;
+                            }
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
          * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
          * @summary Retrieves the feedbacks summary.
          * @param {string} [tdei_project_group_id] ID of the project group.
@@ -1804,6 +1902,40 @@ var OSWApiFp = function (configuration) {
             });
         },
         /**
+         * Streams all feedback for the specified project group in CSV format. Requires poc or osw_data_generator role.
+         * @summary Downloads dataset viewer feedbacks as a CSV.
+         * @param {string} [tdei_dataset_id] ID of the dataset.
+         * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created after this date.
+         * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created before this date.
+         * @param {string} [status] &lt;strong&gt;status:&lt;/strong&gt; Filters feedbacks by their status.
+         * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
+         * @param {string} [due_date] &lt;strong&gt;due_date:&lt;/strong&gt; Legacy alias for &lt;code&gt;sort_by&lt;/code&gt;. Use &#x27;created_at&#x27; or &#x27;due_date&#x27;.
+         * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
+         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, specifies the page number to retrieve. If omitted with page_size, the response is unpaginated.
+         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50. If omitted with page_no, the response is unpaginated.
+         * @param {string} [format] &lt;strong&gt;format:&lt;/strong&gt; Output format. Only &#x27;csv&#x27; is supported.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswDatasetViewerFeedbacksDownload: function (tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswDatasetViewerFeedbacksDownload(tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
          * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
          * @summary Retrieves the feedbacks summary.
          * @param {string} [tdei_project_group_id] ID of the project group.
@@ -2214,6 +2346,29 @@ var OSWApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
+         * Streams all feedback for the specified project group in CSV format. Requires poc or osw_data_generator role.
+         * @summary Downloads dataset viewer feedbacks as a CSV.
+         * @param {string} [tdei_dataset_id] ID of the dataset.
+         * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created after this date.
+         * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created before this date.
+         * @param {string} [status] &lt;strong&gt;status:&lt;/strong&gt; Filters feedbacks by their status.
+         * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
+         * @param {string} [due_date] &lt;strong&gt;due_date:&lt;/strong&gt; Legacy alias for &lt;code&gt;sort_by&lt;/code&gt;. Use &#x27;created_at&#x27; or &#x27;due_date&#x27;.
+         * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
+         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, specifies the page number to retrieve. If omitted with page_size, the response is unpaginated.
+         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50. If omitted with page_no, the response is unpaginated.
+         * @param {string} [format] &lt;strong&gt;format:&lt;/strong&gt; Output format. Only &#x27;csv&#x27; is supported.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswDatasetViewerFeedbacksDownload: function (tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswDatasetViewerFeedbacksDownload(tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
          * Retrieves the feedbacks summary. Response includes a summary of feedbacks such as total count, total overdue, and other relevant statistics.
          * @summary Retrieves the feedbacks summary.
          * @param {string} [tdei_project_group_id] ID of the project group.
@@ -2533,6 +2688,31 @@ var OSWApi = /** @class */ (function (_super) {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswDatasetViewerFeedbacks(tdei_project_group_id, tdei_dataset_id, from_date, to_date, status, sort_by, sort_order, page_no, page_size, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * Streams all feedback for the specified project group in CSV format. Requires poc or osw_data_generator role.
+     * @summary Downloads dataset viewer feedbacks as a CSV.
+     * @param {string} [tdei_dataset_id] ID of the dataset.
+     * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created after this date.
+     * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created before this date.
+     * @param {string} [status] &lt;strong&gt;status:&lt;/strong&gt; Filters feedbacks by their status.
+     * @param {string} [sort_by] &lt;strong&gt;sort_by:&lt;/strong&gt; String, defaults to &#x27;created_at&#x27;. Sorts feedbacks by the specified field.
+     * @param {string} [due_date] &lt;strong&gt;due_date:&lt;/strong&gt; Legacy alias for &lt;code&gt;sort_by&lt;/code&gt;. Use &#x27;created_at&#x27; or &#x27;due_date&#x27;.
+     * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
+     * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, specifies the page number to retrieve. If omitted with page_size, the response is unpaginated.
+     * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50. If omitted with page_no, the response is unpaginated.
+     * @param {string} [format] &lt;strong&gt;format:&lt;/strong&gt; Output format. Only &#x27;csv&#x27; is supported.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    OSWApi.prototype.oswDatasetViewerFeedbacksDownload = function (tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswDatasetViewerFeedbacksDownload(tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
