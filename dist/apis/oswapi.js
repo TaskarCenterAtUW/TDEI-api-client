@@ -783,6 +783,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
         /**
          * Streams all feedback for the specified project group in CSV format. Requires poc or osw_data_generator role.
          * @summary Downloads dataset viewer feedbacks as a CSV.
+         * @param {string} tdei_project_group_id Valid TDEI project group id.
          * @param {string} [tdei_dataset_id] ID of the dataset.
          * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created after this date.
          * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created before this date.
@@ -796,14 +797,19 @@ var OSWApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswDatasetViewerFeedbacksDownload: function (tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options) {
+        oswDatasetViewerFeedbacksDownload: function (tdei_project_group_id, tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, accessToken, _a, query, key, key, headersFromBaseOptions;
                 return __generator(this, function (_b) {
                     switch (_b.label) {
                         case 0:
-                            localVarPath = "/api/v1/osw/dataset-viewer/feedbacks/download/{tdei_project_group_id}";
+                            // verify required parameter 'tdei_project_group_id' is not null or undefined
+                            if (tdei_project_group_id === null || tdei_project_group_id === undefined) {
+                                throw new base_1.RequiredError('tdei_project_group_id', 'Required parameter tdei_project_group_id was null or undefined when calling oswDatasetViewerFeedbacksDownload.');
+                            }
+                            localVarPath = "/api/v1/osw/dataset-viewer/feedbacks/download/{tdei_project_group_id}"
+                                .replace("{".concat("tdei_project_group_id", "}"), encodeURIComponent(String(tdei_project_group_id)));
                             localVarUrlObj = new URL(localVarPath, 'https://example.com');
                             if (configuration) {
                                 baseOptions = configuration.baseOptions;
@@ -1904,6 +1910,7 @@ var OSWApiFp = function (configuration) {
         /**
          * Streams all feedback for the specified project group in CSV format. Requires poc or osw_data_generator role.
          * @summary Downloads dataset viewer feedbacks as a CSV.
+         * @param {string} tdei_project_group_id Valid TDEI project group id.
          * @param {string} [tdei_dataset_id] ID of the dataset.
          * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created after this date.
          * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created before this date.
@@ -1917,12 +1924,12 @@ var OSWApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswDatasetViewerFeedbacksDownload: function (tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options) {
+        oswDatasetViewerFeedbacksDownload: function (tdei_project_group_id, tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswDatasetViewerFeedbacksDownload(tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options)];
+                        case 0: return [4 /*yield*/, (0, exports.OSWApiAxiosParamCreator)(configuration).oswDatasetViewerFeedbacksDownload(tdei_project_group_id, tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -2348,6 +2355,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
         /**
          * Streams all feedback for the specified project group in CSV format. Requires poc or osw_data_generator role.
          * @summary Downloads dataset viewer feedbacks as a CSV.
+         * @param {string} tdei_project_group_id Valid TDEI project group id.
          * @param {string} [tdei_dataset_id] ID of the dataset.
          * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created after this date.
          * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created before this date.
@@ -2361,10 +2369,10 @@ var OSWApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswDatasetViewerFeedbacksDownload: function (tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options) {
+        oswDatasetViewerFeedbacksDownload: function (tdei_project_group_id, tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswDatasetViewerFeedbacksDownload(tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.OSWApiFp)(configuration).oswDatasetViewerFeedbacksDownload(tdei_project_group_id, tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -2694,6 +2702,7 @@ var OSWApi = /** @class */ (function (_super) {
     /**
      * Streams all feedback for the specified project group in CSV format. Requires poc or osw_data_generator role.
      * @summary Downloads dataset viewer feedbacks as a CSV.
+     * @param {string} tdei_project_group_id Valid TDEI project group id.
      * @param {string} [tdei_dataset_id] ID of the dataset.
      * @param {Date} [from_date] &lt;strong&gt;from_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created after this date.
      * @param {Date} [to_date] &lt;strong&gt;to_date:&lt;/strong&gt; Date in ISO 8601 format, filters feedback created before this date.
@@ -2708,11 +2717,11 @@ var OSWApi = /** @class */ (function (_super) {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    OSWApi.prototype.oswDatasetViewerFeedbacksDownload = function (tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options) {
+    OSWApi.prototype.oswDatasetViewerFeedbacksDownload = function (tdei_project_group_id, tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswDatasetViewerFeedbacksDownload(tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.OSWApiFp)(this.configuration).oswDatasetViewerFeedbacksDownload(tdei_project_group_id, tdei_dataset_id, from_date, to_date, status, sort_by, due_date, sort_order, page_no, page_size, format, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
