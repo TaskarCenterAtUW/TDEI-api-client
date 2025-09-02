@@ -23,6 +23,7 @@ export * from './geometry';
 export * from './gtfsflex-validate-body';
 export * from './gtfspathways-validate-body';
 export * from './inline-response200';
+export * from './inline-response2001';
 export * from './ixn-tdei-dataset-id-body';
 export * from './job-details';
 export * from './job-progress';

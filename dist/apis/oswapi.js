@@ -793,7 +793,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
          * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
          * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, specifies the page number to retrieve. If omitted with page_size, the response is unpaginated.
          * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50. If omitted with page_no, the response is unpaginated.
-         * @param {string} [format] &lt;strong&gt;format:&lt;/strong&gt; Output format. Only &#x27;csv&#x27; is supported.
+         * @param {string} [format] &lt;strong&gt;format:&lt;/strong&gt; Output format.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1920,7 +1920,7 @@ var OSWApiFp = function (configuration) {
          * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
          * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, specifies the page number to retrieve. If omitted with page_size, the response is unpaginated.
          * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50. If omitted with page_no, the response is unpaginated.
-         * @param {string} [format] &lt;strong&gt;format:&lt;/strong&gt; Output format. Only &#x27;csv&#x27; is supported.
+         * @param {string} [format] &lt;strong&gt;format:&lt;/strong&gt; Output format.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2365,7 +2365,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
          * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
          * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, specifies the page number to retrieve. If omitted with page_size, the response is unpaginated.
          * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50. If omitted with page_no, the response is unpaginated.
-         * @param {string} [format] &lt;strong&gt;format:&lt;/strong&gt; Output format. Only &#x27;csv&#x27; is supported.
+         * @param {string} [format] &lt;strong&gt;format:&lt;/strong&gt; Output format.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2712,7 +2712,7 @@ var OSWApi = /** @class */ (function (_super) {
      * @param {string} [sort_order] &lt;strong&gt;sort_order:&lt;/strong&gt; String, defaults to &#x27;desc&#x27;. Sorts feedbacks in ascending or descending order.
      * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, specifies the page number to retrieve. If omitted with page_size, the response is unpaginated.
      * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50. If omitted with page_no, the response is unpaginated.
-     * @param {string} [format] &lt;strong&gt;format:&lt;/strong&gt; Output format. Only &#x27;csv&#x27; is supported.
+     * @param {string} [format] &lt;strong&gt;format:&lt;/strong&gt; Output format.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
