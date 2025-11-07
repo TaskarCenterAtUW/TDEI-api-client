@@ -18,33 +18,46 @@
  */
 export interface ProjectIdTdeiDatasetIdBody {
     /**
-     * Dataset ID for which the feedback is provided.
-     * @type {string}
-     * @memberof ProjectIdTdeiDatasetIdBody
-     */
-    dataset_element_id?: string;
-    /**
-     * Feedback provided by the user regarding the dataset viewer.
-     * @type {string}
-     * @memberof ProjectIdTdeiDatasetIdBody
-     */
-    feedback_text: string;
-    /**
-     * Email address of the user providing feedback. This is optional and can be used for follow-up if needed.
-     * @type {string}
-     * @memberof ProjectIdTdeiDatasetIdBody
-     */
-    customer_email: string;
-    /**
-     * Latitude of the location where the feedback was provided.
+     * Feedback ID to be updated.
      * @type {number}
      * @memberof ProjectIdTdeiDatasetIdBody
      */
-    location_latitude?: number;
+    id: number;
     /**
-     * Longitude of the location where the feedback was provided.
-     * @type {number}
+     * Feedback status to be updated.
+     * @type {string}
      * @memberof ProjectIdTdeiDatasetIdBody
      */
-    location_longitude?: number;
+    status: ProjectIdTdeiDatasetIdBodyStatusEnum;
+    /**
+     * Resolution status of the feedback.
+     * @type {string}
+     * @memberof ProjectIdTdeiDatasetIdBody
+     */
+    resolved?: ProjectIdTdeiDatasetIdBodyResolvedEnum;
+    /**
+     * Description of the feedback status.
+     * @type {string}
+     * @memberof ProjectIdTdeiDatasetIdBody
+     */
+    status_description?: string;
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum ProjectIdTdeiDatasetIdBodyStatusEnum {
+    Open = 'open',
+    Resolved = 'resolved'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum ProjectIdTdeiDatasetIdBodyResolvedEnum {
+    Fixed = 'fixed',
+    WontFix = 'wont_fix',
+    NotAnIssue = 'not_an_issue'
+}
+

@@ -18,9 +18,31 @@
  */
 export interface InlineResponse200 {
     /**
+     * Feedback ID that was updated.
+     * @type {number}
+     * @memberof InlineResponse200
+     */
+    id?: number;
+    /**
      * 
      * @type {string}
      * @memberof InlineResponse200
      */
     message?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse200
+     */
+    status?: InlineResponse200StatusEnum;
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum InlineResponse200StatusEnum {
+    Success = 'Success',
+    Failed = 'Failed'
+}
+

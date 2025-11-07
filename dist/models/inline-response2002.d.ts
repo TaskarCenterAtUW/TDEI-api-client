@@ -9,36 +9,23 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Feature } from './feature';
 /**
  *
  * @export
- * @interface InlineResponse200
+ * @interface InlineResponse2002
  */
-export interface InlineResponse200 {
-    /**
-     * Feedback ID that was updated.
-     * @type {number}
-     * @memberof InlineResponse200
-     */
-    id?: number;
+export interface InlineResponse2002 {
     /**
      *
      * @type {string}
-     * @memberof InlineResponse200
+     * @memberof InlineResponse2002
      */
-    message?: string;
+    type: string;
     /**
      *
-     * @type {string}
-     * @memberof InlineResponse200
+     * @type {Array<Feature>}
+     * @memberof InlineResponse2002
      */
-    status?: InlineResponse200StatusEnum;
-}
-/**
-    * @export
-    * @enum {string}
-    */
-export declare enum InlineResponse200StatusEnum {
-    Success = "Success",
-    Failed = "Failed"
+    features: Array<Feature>;
 }
