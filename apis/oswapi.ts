@@ -20,9 +20,11 @@ import { DatasetviewerTdeiDatasetIdBody } from '../models';
 import { Feedback } from '../models';
 import { FeedbackMetadata } from '../models';
 import { InlineResponse200 } from '../models';
+import { InlineResponse2001 } from '../models';
 import { OswSpatialjoinBody } from '../models';
 import { OswUnionBody } from '../models';
 import { ProjectIdTdeiDatasetIdBody } from '../models';
+import { ProjectIdTdeiDatasetIdBody1 } from '../models';
 import { QualityMetricTagResponse } from '../models';
 import { VersionList } from '../models';
 /**
@@ -464,13 +466,13 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
          * @summary Accepts the feedback from the dataset viewer.
-         * @param {ProjectIdTdeiDatasetIdBody} body 
+         * @param {ProjectIdTdeiDatasetIdBody1} body 
          * @param {string} project_id ID of the project group.
          * @param {string} tdei_dataset_id ID of the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswDatasetViewerFeedback: async (body: ProjectIdTdeiDatasetIdBody, project_id: string, tdei_dataset_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        oswDatasetViewerFeedback: async (body: ProjectIdTdeiDatasetIdBody1, project_id: string, tdei_dataset_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling oswDatasetViewerFeedback.');
@@ -493,6 +495,70 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
                 baseOptions = configuration.baseOptions;
             }
             const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * API accepts array of feedbacks with status details to be updated. Returns response for each feedback update.
+         * @summary API to update the feedbacks status details
+         * @param {Array<ProjectIdTdeiDatasetIdBody>} body 
+         * @param {string} project_id ID of the project group.
+         * @param {string} tdei_dataset_id ID of the dataset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswDatasetViewerFeedbackStatusUpdate: async (body: Array<ProjectIdTdeiDatasetIdBody>, project_id: string, tdei_dataset_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling oswDatasetViewerFeedbackStatusUpdate.');
+            }
+            // verify required parameter 'project_id' is not null or undefined
+            if (project_id === null || project_id === undefined) {
+                throw new RequiredError('project_id','Required parameter project_id was null or undefined when calling oswDatasetViewerFeedbackStatusUpdate.');
+            }
+            // verify required parameter 'tdei_dataset_id' is not null or undefined
+            if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
+                throw new RequiredError('tdei_dataset_id','Required parameter tdei_dataset_id was null or undefined when calling oswDatasetViewerFeedbackStatusUpdate.');
+            }
+            const localVarPath = `/api/v1/osw/dataset-viewer/feedbacks/{project_id}/{tdei_dataset_id}`
+                .replace(`{${"project_id"}}`, encodeURIComponent(String(project_id)))
+                .replace(`{${"tdei_dataset_id"}}`, encodeURIComponent(String(tdei_dataset_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1475,14 +1541,30 @@ export const OSWApiFp = function(configuration?: Configuration) {
         /**
          * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
          * @summary Accepts the feedback from the dataset viewer.
-         * @param {ProjectIdTdeiDatasetIdBody} body 
+         * @param {ProjectIdTdeiDatasetIdBody1} body 
          * @param {string} project_id ID of the project group.
          * @param {string} tdei_dataset_id ID of the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse200>>> {
+        async oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody1, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2001>>> {
             const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswDatasetViewerFeedback(body, project_id, tdei_dataset_id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * API accepts array of feedbacks with status details to be updated. Returns response for each feedback update.
+         * @summary API to update the feedbacks status details
+         * @param {Array<ProjectIdTdeiDatasetIdBody>} body 
+         * @param {string} project_id ID of the project group.
+         * @param {string} tdei_dataset_id ID of the dataset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async oswDatasetViewerFeedbackStatusUpdate(body: Array<ProjectIdTdeiDatasetIdBody>, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse200>>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswDatasetViewerFeedbackStatusUpdate(body, project_id, tdei_dataset_id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1771,14 +1853,26 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
          * @summary Accepts the feedback from the dataset viewer.
-         * @param {ProjectIdTdeiDatasetIdBody} body 
+         * @param {ProjectIdTdeiDatasetIdBody1} body 
          * @param {string} project_id ID of the project group.
          * @param {string} tdei_dataset_id ID of the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse200>> {
+        async oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody1, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>> {
             return OSWApiFp(configuration).oswDatasetViewerFeedback(body, project_id, tdei_dataset_id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * API accepts array of feedbacks with status details to be updated. Returns response for each feedback update.
+         * @summary API to update the feedbacks status details
+         * @param {Array<ProjectIdTdeiDatasetIdBody>} body 
+         * @param {string} project_id ID of the project group.
+         * @param {string} tdei_dataset_id ID of the dataset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async oswDatasetViewerFeedbackStatusUpdate(body: Array<ProjectIdTdeiDatasetIdBody>, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse200>>> {
+            return OSWApiFp(configuration).oswDatasetViewerFeedbackStatusUpdate(body, project_id, tdei_dataset_id, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves the dataset viewer feedbacks. Response includes a list of feedbacks provided by users regarding the dataset. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.
@@ -2023,15 +2117,28 @@ export class OSWApi extends BaseAPI {
     /**
      * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
      * @summary Accepts the feedback from the dataset viewer.
-     * @param {ProjectIdTdeiDatasetIdBody} body 
+     * @param {ProjectIdTdeiDatasetIdBody1} body 
      * @param {string} project_id ID of the project group.
      * @param {string} tdei_dataset_id ID of the dataset.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse200>> {
+    public async oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody1, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2001>> {
         return OSWApiFp(this.configuration).oswDatasetViewerFeedback(body, project_id, tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * API accepts array of feedbacks with status details to be updated. Returns response for each feedback update.
+     * @summary API to update the feedbacks status details
+     * @param {Array<ProjectIdTdeiDatasetIdBody>} body 
+     * @param {string} project_id ID of the project group.
+     * @param {string} tdei_dataset_id ID of the dataset.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    public async oswDatasetViewerFeedbackStatusUpdate(body: Array<ProjectIdTdeiDatasetIdBody>, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse200>>> {
+        return OSWApiFp(this.configuration).oswDatasetViewerFeedbackStatusUpdate(body, project_id, tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Retrieves the dataset viewer feedbacks. Response includes a list of feedbacks provided by users regarding the dataset. Each feedback contains details such as the dataset element ID, feedback text, customer email, and location information.

@@ -1,3 +1,5 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  * TDEI Gateway Dev API
  * This is an API for interacting with the Transportation Data Equity Initiative (TDEI) system. It is intended for applications submitting data to and consuming data from the TDEI system. We currently support GTFS-Pathways, GTFS-Flex and OpenSidewalks (OSW) data schemas.
@@ -9,36 +11,23 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Feature } from './feature';
 /**
- *
+ * 
  * @export
- * @interface InlineResponse200
+ * @interface InlineResponse2002
  */
-export interface InlineResponse200 {
+export interface InlineResponse2002 {
     /**
-     * Feedback ID that was updated.
-     * @type {number}
-     * @memberof InlineResponse200
-     */
-    id?: number;
-    /**
-     *
+     * 
      * @type {string}
-     * @memberof InlineResponse200
+     * @memberof InlineResponse2002
      */
-    message?: string;
+    type: string;
     /**
-     *
-     * @type {string}
-     * @memberof InlineResponse200
+     * 
+     * @type {Array<Feature>}
+     * @memberof InlineResponse2002
      */
-    status?: InlineResponse200StatusEnum;
-}
-/**
-    * @export
-    * @enum {string}
-    */
-export declare enum InlineResponse200StatusEnum {
-    Success = "Success",
-    Failed = "Failed"
+    features: Array<Feature>;
 }
