@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FeedbackResolutionEnum = exports.FeedbackStatusEnum = void 0;
+exports.FeedbackResolutionStatusEnum = exports.FeedbackStatusEnum = void 0;
 /**
     * @export
     * @enum {string}
@@ -14,9 +14,9 @@ var FeedbackStatusEnum;
     * @export
     * @enum {string}
     */
-var FeedbackResolutionEnum;
-(function (FeedbackResolutionEnum) {
-    FeedbackResolutionEnum["Fixed"] = "fixed";
-    FeedbackResolutionEnum["WontFix"] = "wont_fix";
-    FeedbackResolutionEnum["NotAnIssue"] = "not_an_issue";
-})(FeedbackResolutionEnum = exports.FeedbackResolutionEnum || (exports.FeedbackResolutionEnum = {}));
+var FeedbackResolutionStatusEnum;
+(function (FeedbackResolutionStatusEnum) {
+    FeedbackResolutionStatusEnum["Fixed"] = "fixed";
+    FeedbackResolutionStatusEnum["WontFix"] = "wont_fix";
+    FeedbackResolutionStatusEnum["NotAnIssue"] = "not_an_issue";
+})(FeedbackResolutionStatusEnum = exports.FeedbackResolutionStatusEnum || (exports.FeedbackResolutionStatusEnum = {}));
