@@ -54,6 +54,24 @@ export interface Feedback {
      */
     status?: FeedbackStatusEnum;
     /**
+     * Description of the feedback resolution.
+     * @type {string}
+     * @memberof Feedback
+     */
+    resolution_description?: string;
+    /**
+     * User who resolved the feedback.
+     * @type {string}
+     * @memberof Feedback
+     */
+    resolved_by?: string;
+    /**
+     * Resolution status for the feedback.
+     * @type {string}
+     * @memberof Feedback
+     */
+    resolution?: FeedbackResolutionEnum;
+    /**
      * Latitude of the location related to the feedback.
      * @type {number}
      * @memberof Feedback
@@ -91,4 +109,13 @@ export interface Feedback {
 export declare enum FeedbackStatusEnum {
     Open = "open",
     Resolved = "resolved"
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export declare enum FeedbackResolutionEnum {
+    Fixed = "fixed",
+    WontFix = "wont_fix",
+    NotAnIssue = "not_an_issue"
 }

@@ -34,11 +34,11 @@ export interface ProjectIdTdeiDatasetIdBody {
      */
     resolved?: ProjectIdTdeiDatasetIdBodyResolvedEnum;
     /**
-     * Description of the feedback status.
+     * Description of the feedback resolution.
      * @type {string}
      * @memberof ProjectIdTdeiDatasetIdBody
      */
-    status_description?: string;
+    resolution_description?: string;
 }
 /**
     * @export
