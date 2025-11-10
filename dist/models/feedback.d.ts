@@ -70,7 +70,7 @@ export interface Feedback {
      * @type {string}
      * @memberof Feedback
      */
-    resolution?: FeedbackResolutionEnum;
+    resolution_status?: FeedbackResolutionStatusEnum;
     /**
      * Latitude of the location related to the feedback.
      * @type {number}
@@ -114,7 +114,7 @@ export declare enum FeedbackStatusEnum {
     * @export
     * @enum {string}
     */
-export declare enum FeedbackResolutionEnum {
+export declare enum FeedbackResolutionStatusEnum {
     Fixed = "fixed",
     WontFix = "wont_fix",
     NotAnIssue = "not_an_issue"

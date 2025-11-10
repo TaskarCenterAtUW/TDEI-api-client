@@ -34,7 +34,7 @@ export interface ProjectIdTdeiDatasetIdBody {
      * @type {string}
      * @memberof ProjectIdTdeiDatasetIdBody
      */
-    resolved?: ProjectIdTdeiDatasetIdBodyResolvedEnum;
+    resolution_status?: ProjectIdTdeiDatasetIdBodyResolutionStatusEnum;
     /**
      * Description of the feedback resolution.
      * @type {string}
@@ -55,7 +55,7 @@ export enum ProjectIdTdeiDatasetIdBodyStatusEnum {
     * @export
     * @enum {string}
     */
-export enum ProjectIdTdeiDatasetIdBodyResolvedEnum {
+export enum ProjectIdTdeiDatasetIdBodyResolutionStatusEnum {
     Fixed = 'fixed',
     WontFix = 'wont_fix',
     NotAnIssue = 'not_an_issue'
