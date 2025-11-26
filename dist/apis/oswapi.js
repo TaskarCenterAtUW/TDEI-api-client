@@ -613,7 +613,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
+         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset. Returns feedback ID upon successful submission.
          * @summary Accepts the feedback from the dataset viewer.
          * @param {ProjectIdTdeiDatasetIdBody1} body
          * @param {string} project_id ID of the project group.
@@ -1922,7 +1922,7 @@ var OSWApiFp = function (configuration) {
             });
         },
         /**
-         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
+         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset. Returns feedback ID upon successful submission.
          * @summary Accepts the feedback from the dataset viewer.
          * @param {ProjectIdTdeiDatasetIdBody1} body
          * @param {string} project_id ID of the project group.
@@ -2416,7 +2416,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
+         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset. Returns feedback ID upon successful submission.
          * @summary Accepts the feedback from the dataset viewer.
          * @param {ProjectIdTdeiDatasetIdBody1} body
          * @param {string} project_id ID of the project group.
@@ -2775,7 +2775,7 @@ var OSWApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
+     * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset. Returns feedback ID upon successful submission.
      * @summary Accepts the feedback from the dataset viewer.
      * @param {ProjectIdTdeiDatasetIdBody1} body
      * @param {string} project_id ID of the project group.

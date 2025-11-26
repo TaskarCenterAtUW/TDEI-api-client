@@ -20,7 +20,6 @@ import { DatasetviewerTdeiDatasetIdBody } from '../models';
 import { Feedback } from '../models';
 import { FeedbackMetadata } from '../models';
 import { InlineResponse200 } from '../models';
-import { InlineResponse2001 } from '../models';
 import { OswSpatialjoinBody } from '../models';
 import { OswUnionBody } from '../models';
 import { ProjectIdTdeiDatasetIdBody } from '../models';
@@ -464,7 +463,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
+         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset. Returns feedback ID upon successful submission.
          * @summary Accepts the feedback from the dataset viewer.
          * @param {ProjectIdTdeiDatasetIdBody1} body 
          * @param {string} project_id ID of the project group.
@@ -1539,7 +1538,7 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
+         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset. Returns feedback ID upon successful submission.
          * @summary Accepts the feedback from the dataset viewer.
          * @param {ProjectIdTdeiDatasetIdBody1} body 
          * @param {string} project_id ID of the project group.
@@ -1547,7 +1546,7 @@ export const OSWApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody1, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2001>>> {
+        async oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody1, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<number>>> {
             const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswDatasetViewerFeedback(body, project_id, tdei_dataset_id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1851,7 +1850,7 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).oswDatasetViewer(body, tdei_dataset_id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
+         * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset. Returns feedback ID upon successful submission.
          * @summary Accepts the feedback from the dataset viewer.
          * @param {ProjectIdTdeiDatasetIdBody1} body 
          * @param {string} project_id ID of the project group.
@@ -1859,7 +1858,7 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody1, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>> {
+        async oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody1, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<number>> {
             return OSWApiFp(configuration).oswDatasetViewerFeedback(body, project_id, tdei_dataset_id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2115,7 +2114,7 @@ export class OSWApi extends BaseAPI {
         return OSWApiFp(this.configuration).oswDatasetViewer(body, tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset.
+     * Accepts the feedback from the dataset viewer. The feedback is stored in the system for further analysis and improvement of the dataset. Returns feedback ID upon successful submission.
      * @summary Accepts the feedback from the dataset viewer.
      * @param {ProjectIdTdeiDatasetIdBody1} body 
      * @param {string} project_id ID of the project group.
@@ -2124,7 +2123,7 @@ export class OSWApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody1, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2001>> {
+    public async oswDatasetViewerFeedback(body: ProjectIdTdeiDatasetIdBody1, project_id: string, tdei_dataset_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<number>> {
         return OSWApiFp(this.configuration).oswDatasetViewerFeedback(body, project_id, tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
