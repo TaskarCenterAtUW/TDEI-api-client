@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Feature } from './feature';
 /**
  *
  * @export
@@ -20,5 +21,11 @@ export interface InlineResponse2001 {
      * @type {string}
      * @memberof InlineResponse2001
      */
-    message?: string;
+    type: string;
+    /**
+     *
+     * @type {Array<Feature>}
+     * @memberof InlineResponse2001
+     */
+    features: Array<Feature>;
 }
