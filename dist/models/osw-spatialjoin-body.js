@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OswSpatialjoinBodySourceDimensionEnum = exports.OswSpatialjoinBodyTargetDimensionEnum = void 0;
+exports.OswSpatialjoinBodyAssignmentMethodEnum = exports.OswSpatialjoinBodySourceDimensionEnum = exports.OswSpatialjoinBodyTargetDimensionEnum = void 0;
 /**
     * @export
     * @enum {string}
@@ -25,3 +25,12 @@ var OswSpatialjoinBodySourceDimensionEnum;
     OswSpatialjoinBodySourceDimensionEnum["Polygon"] = "polygon";
     OswSpatialjoinBodySourceDimensionEnum["Extension"] = "extension";
 })(OswSpatialjoinBodySourceDimensionEnum = exports.OswSpatialjoinBodySourceDimensionEnum || (exports.OswSpatialjoinBodySourceDimensionEnum = {}));
+/**
+    * @export
+    * @enum {string}
+    */
+var OswSpatialjoinBodyAssignmentMethodEnum;
+(function (OswSpatialjoinBodyAssignmentMethodEnum) {
+    OswSpatialjoinBodyAssignmentMethodEnum["Default"] = "default";
+    OswSpatialjoinBodyAssignmentMethodEnum["Exclusive"] = "exclusive";
+})(OswSpatialjoinBodyAssignmentMethodEnum = exports.OswSpatialjoinBodyAssignmentMethodEnum || (exports.OswSpatialjoinBodyAssignmentMethodEnum = {}));

@@ -63,6 +63,12 @@ export interface OswSpatialjoinBody {
      * @memberof OswSpatialjoinBody
      */
     aggregate?: Array<string>;
+    /**
+     * Method to assign the aggregated attribute value to target entity when multiple source entities match the join condition. 'default' assigns all the matched values, 'exclusive' assigns only when a single source entity based on competitive closest assignment algorithm.
+     * @type {string}
+     * @memberof OswSpatialjoinBody
+     */
+    assignment_method?: OswSpatialjoinBodyAssignmentMethodEnum;
 }
 /**
     * @export
@@ -85,4 +91,12 @@ export declare enum OswSpatialjoinBodySourceDimensionEnum {
     Line = "line",
     Polygon = "polygon",
     Extension = "extension"
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export declare enum OswSpatialjoinBodyAssignmentMethodEnum {
+    Default = "default",
+    Exclusive = "exclusive"
 }
