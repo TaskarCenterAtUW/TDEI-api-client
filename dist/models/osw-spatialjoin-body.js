@@ -33,4 +33,5 @@ var OswSpatialjoinBodyAssignmentMethodEnum;
 (function (OswSpatialjoinBodyAssignmentMethodEnum) {
     OswSpatialjoinBodyAssignmentMethodEnum["Default"] = "default";
     OswSpatialjoinBodyAssignmentMethodEnum["Exclusive"] = "exclusive";
+    OswSpatialjoinBodyAssignmentMethodEnum["Shared"] = "shared";
 })(OswSpatialjoinBodyAssignmentMethodEnum = exports.OswSpatialjoinBodyAssignmentMethodEnum || (exports.OswSpatialjoinBodyAssignmentMethodEnum = {}));
