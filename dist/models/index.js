@@ -26,6 +26,7 @@ __exportStar(require("./data-metrics-data-metrics-dataset-by-type-osw-aggregated
 __exportStar(require("./dataset-item"), exports);
 __exportStar(require("./dataset-item-project-group"), exports);
 __exportStar(require("./dataset-item-service"), exports);
+__exportStar(require("./dataset-upload-limit-entry"), exports);
 __exportStar(require("./datasetviewer-tdei-dataset-id-body"), exports);
 __exportStar(require("./feature"), exports);
 __exportStar(require("./feedback"), exports);
@@ -68,6 +69,8 @@ __exportStar(require("./service-metrics"), exports);
 __exportStar(require("./service-metrics-project-group"), exports);
 __exportStar(require("./service-metrics-services"), exports);
 __exportStar(require("./service-model"), exports);
+__exportStar(require("./system-capabilities"), exports);
+__exportStar(require("./system-capabilities-dataset-upload-limits"), exports);
 __exportStar(require("./system-metrics"), exports);
 __exportStar(require("./system-metrics-api-calls"), exports);
 __exportStar(require("./system-metrics-api-calls-by-api"), exports);

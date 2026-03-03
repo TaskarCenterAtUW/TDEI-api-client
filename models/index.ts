@@ -10,6 +10,7 @@ export * from './data-metrics-data-metrics-dataset-by-type-osw-aggregated-stats'
 export * from './dataset-item';
 export * from './dataset-item-project-group';
 export * from './dataset-item-service';
+export * from './dataset-upload-limit-entry';
 export * from './datasetviewer-tdei-dataset-id-body';
 export * from './feature';
 export * from './feedback';
@@ -52,6 +53,8 @@ export * from './service-metrics';
 export * from './service-metrics-project-group';
 export * from './service-metrics-services';
 export * from './service-model';
+export * from './system-capabilities';
+export * from './system-capabilities-dataset-upload-limits';
 export * from './system-metrics';
 export * from './system-metrics-api-calls';
 export * from './system-metrics-api-calls-by-api';

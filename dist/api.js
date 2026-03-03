@@ -32,3 +32,4 @@ __exportStar(require("./apis/gtfsflex-api"), exports);
 __exportStar(require("./apis/gtfspathways-api"), exports);
 __exportStar(require("./apis/metrics-api"), exports);
 __exportStar(require("./apis/oswapi"), exports);
+__exportStar(require("./apis/system-api"), exports);
