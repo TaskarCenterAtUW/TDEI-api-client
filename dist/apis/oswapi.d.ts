@@ -178,6 +178,14 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      */
     oswQualityCalculateForm: (tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Initiate Quality report generation for a dataset
+     * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswQualityReportGenerate: (tdei_dataset_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Performs a spatial join operation between two datasets within the TDEI system. It involves two datasets, target and source, specifying the spatial dimension entities of each to be joined, such as edges, nodes, zones, points, lines, or polygons. The join operation is guided by specified conditions that define how the geometries of the two datasets interact, typically involving spatial functions like intersections. Additionally, filters can be applied to both datasets to refine the data involved in the join. Aggregate functions are also defined to associate the attributes from source to target dataset entity.The geometry column for data elements is specified as `geometry_target` and `geometry_source`.Eg: Find all light poles in source dataset within 5 m of an edge in target dataset, and associate the attribute highway from source dataset with each edge in target dataset. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Performs a spatial join operation between two datasets within the TDEI system.
      * @param {OswSpatialjoinBody} body
@@ -389,6 +397,14 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      */
     oswQualityCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
     /**
+     * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Initiate Quality report generation for a dataset
+     * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswQualityReportGenerate(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    /**
      * Performs a spatial join operation between two datasets within the TDEI system. It involves two datasets, target and source, specifying the spatial dimension entities of each to be joined, such as edges, nodes, zones, points, lines, or polygons. The join operation is guided by specified conditions that define how the geometries of the two datasets interact, typically involving spatial functions like intersections. Additionally, filters can be applied to both datasets to refine the data involved in the join. Aggregate functions are also defined to associate the attributes from source to target dataset entity.The geometry column for data elements is specified as `geometry_target` and `geometry_source`.Eg: Find all light poles in source dataset within 5 m of an edge in target dataset, and associate the attribute highway from source dataset with each edge in target dataset. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Performs a spatial join operation between two datasets within the TDEI system.
      * @param {OswSpatialjoinBody} body
@@ -599,6 +615,14 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @throws {RequiredError}
      */
     oswQualityCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Initiate Quality report generation for a dataset
+     * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswQualityReportGenerate(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Performs a spatial join operation between two datasets within the TDEI system. It involves two datasets, target and source, specifying the spatial dimension entities of each to be joined, such as edges, nodes, zones, points, lines, or polygons. The join operation is guided by specified conditions that define how the geometries of the two datasets interact, typically involving spatial functions like intersections. Additionally, filters can be applied to both datasets to refine the data involved in the join. Aggregate functions are also defined to associate the attributes from source to target dataset entity.The geometry column for data elements is specified as `geometry_target` and `geometry_source`.Eg: Find all light poles in source dataset within 5 m of an edge in target dataset, and associate the attribute highway from source dataset with each edge in target dataset. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Performs a spatial join operation between two datasets within the TDEI system.
@@ -827,6 +851,15 @@ export declare class OSWApi extends BaseAPI {
      * @memberof OSWApi
      */
     oswQualityCalculateForm(tdei_dataset_id: string, file?: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Initiate Quality report generation for a dataset
+     * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    oswQualityReportGenerate(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Performs a spatial join operation between two datasets within the TDEI system. It involves two datasets, target and source, specifying the spatial dimension entities of each to be joined, such as edges, nodes, zones, points, lines, or polygons. The join operation is guided by specified conditions that define how the geometries of the two datasets interact, typically involving spatial functions like intersections. Additionally, filters can be applied to both datasets to refine the data involved in the join. Aggregate functions are also defined to associate the attributes from source to target dataset entity.The geometry column for data elements is specified as `geometry_target` and `geometry_source`.Eg: Find all light poles in source dataset within 5 m of an edge in target dataset, and associate the attribute highway from source dataset with each edge in target dataset. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Performs a spatial join operation between two datasets within the TDEI system.
