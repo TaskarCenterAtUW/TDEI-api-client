@@ -219,6 +219,14 @@ export declare const OSWApiAxiosParamCreator: (configuration?: Configuration) =>
      */
     qualityMetricTagForm: (file: Blob, tdei_dataset_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Allows a user to sanitize an OSW dataset by correcting invalid or unsupported values. The response includes a `job_id` for tracking the request. To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Sanitizes the osw dataset.
+     * @param {Blob} dataset
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sanitizeOswFileForm: (dataset: Blob, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * This endpoint enables users to upload an OSW dataset. The request must include the required parameters to complete the upload. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. By default, the dataset's status will be set to 'pre-release.' The dataset can be published using the `/publish` endpoint.
      * @summary Upload a OSW dataset.
      * @param {Blob} dataset
@@ -438,6 +446,14 @@ export declare const OSWApiFp: (configuration?: Configuration) => {
      */
     qualityMetricTagForm(file: Blob, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>>;
     /**
+     * Allows a user to sanitize an OSW dataset by correcting invalid or unsupported values. The response includes a `job_id` for tracking the request. To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Sanitizes the osw dataset.
+     * @param {Blob} dataset
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sanitizeOswFileForm(dataset: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    /**
      * This endpoint enables users to upload an OSW dataset. The request must include the required parameters to complete the upload. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. By default, the dataset's status will be set to 'pre-release.' The dataset can be published using the `/publish` endpoint.
      * @summary Upload a OSW dataset.
      * @param {Blob} dataset
@@ -656,6 +672,14 @@ export declare const OSWApiFactory: (configuration?: Configuration, basePath?: s
      * @throws {RequiredError}
      */
     qualityMetricTagForm(file: Blob, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<any>>;
+    /**
+     * Allows a user to sanitize an OSW dataset by correcting invalid or unsupported values. The response includes a `job_id` for tracking the request. To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Sanitizes the osw dataset.
+     * @param {Blob} dataset
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sanitizeOswFileForm(dataset: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * This endpoint enables users to upload an OSW dataset. The request must include the required parameters to complete the upload. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. By default, the dataset's status will be set to 'pre-release.' The dataset can be published using the `/publish` endpoint.
      * @summary Upload a OSW dataset.
@@ -897,6 +921,15 @@ export declare class OSWApi extends BaseAPI {
      * @memberof OSWApi
      */
     qualityMetricTagForm(file: Blob, tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<any>>;
+    /**
+     * Allows a user to sanitize an OSW dataset by correcting invalid or unsupported values. The response includes a `job_id` for tracking the request. To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Sanitizes the osw dataset.
+     * @param {Blob} dataset
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    sanitizeOswFileForm(dataset: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * This endpoint enables users to upload an OSW dataset. The request must include the required parameters to complete the upload. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. By default, the dataset's status will be set to 'pre-release.' The dataset can be published using the `/publish` endpoint.
      * @summary Upload a OSW dataset.
