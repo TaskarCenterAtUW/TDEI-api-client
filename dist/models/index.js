@@ -54,6 +54,7 @@ __exportStar(require("./metadata-model-methodology"), exports);
 __exportStar(require("./metadata-tdei-dataset-id-body"), exports);
 __exportStar(require("./osw-convert-body"), exports);
 __exportStar(require("./osw-sanitize-body"), exports);
+__exportStar(require("./osw-selfmerge-body"), exports);
 __exportStar(require("./osw-spatialjoin-body"), exports);
 __exportStar(require("./osw-union-body"), exports);
 __exportStar(require("./osw-validate-body"), exports);

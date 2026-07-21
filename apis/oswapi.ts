@@ -20,6 +20,7 @@ import { DatasetviewerTdeiDatasetIdBody } from '../models';
 import { Feedback } from '../models';
 import { FeedbackMetadata } from '../models';
 import { InlineResponse200 } from '../models';
+import { OswSelfmergeBody } from '../models';
 import { OswSpatialjoinBody } from '../models';
 import { OswUnionBody } from '../models';
 import { ProjectIdTdeiDatasetIdBody } from '../models';
@@ -1080,6 +1081,66 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
+         * This function merges spatial entities within one dataset by unifying nodes, edges, and polygons into consolidated geometries which are within the specified proximity. Entities that are within the specified proximity are treated as equivalent and merged. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Performs a self-merge of entities within a single OSW dataset.
+         * @param {OswSelfmergeBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswSelfMerge: async (body: OswSelfmergeBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling oswSelfMerge.');
+            }
+            const localVarPath = `/api/v1/osw/self-merge`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKey required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("x-api-key")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+            }
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Performs a spatial join operation between two datasets within the TDEI system. It involves two datasets, target and source, specifying the spatial dimension entities of each to be joined, such as edges, nodes, zones, points, lines, or polygons. The join operation is guided by specified conditions that define how the geometries of the two datasets interact, typically involving spatial functions like intersections. Additionally, filters can be applied to both datasets to refine the data involved in the join. Aggregate functions are also defined to associate the attributes from source to target dataset entity.The geometry column for data elements is specified as `geometry_target` and `geometry_source`.Eg: Find all light poles in source dataset within 5 m of an edge in target dataset, and associate the attribute highway from source dataset with each edge in target dataset. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Performs a spatial join operation between two datasets within the TDEI system.
          * @param {OswSpatialjoinBody} body 
@@ -1794,6 +1855,20 @@ export const OSWApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * This function merges spatial entities within one dataset by unifying nodes, edges, and polygons into consolidated geometries which are within the specified proximity. Entities that are within the specified proximity are treated as equivalent and merged. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Performs a self-merge of entities within a single OSW dataset.
+         * @param {OswSelfmergeBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async oswSelfMerge(body: OswSelfmergeBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswSelfMerge(body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Performs a spatial join operation between two datasets within the TDEI system. It involves two datasets, target and source, specifying the spatial dimension entities of each to be joined, such as edges, nodes, zones, points, lines, or polygons. The join operation is guided by specified conditions that define how the geometries of the two datasets interact, typically involving spatial functions like intersections. Additionally, filters can be applied to both datasets to refine the data involved in the join. Aggregate functions are also defined to associate the attributes from source to target dataset entity.The geometry column for data elements is specified as `geometry_target` and `geometry_source`.Eg: Find all light poles in source dataset within 5 m of an edge in target dataset, and associate the attribute highway from source dataset with each edge in target dataset. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Performs a spatial join operation between two datasets within the TDEI system.
          * @param {OswSpatialjoinBody} body 
@@ -2098,6 +2173,16 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
             return OSWApiFp(configuration).oswQualityReportGenerate(tdei_dataset_id, options).then((request) => request(axios, basePath));
         },
         /**
+         * This function merges spatial entities within one dataset by unifying nodes, edges, and polygons into consolidated geometries which are within the specified proximity. Entities that are within the specified proximity are treated as equivalent and merged. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Performs a self-merge of entities within a single OSW dataset.
+         * @param {OswSelfmergeBody} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async oswSelfMerge(body: OswSelfmergeBody, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return OSWApiFp(configuration).oswSelfMerge(body, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Performs a spatial join operation between two datasets within the TDEI system. It involves two datasets, target and source, specifying the spatial dimension entities of each to be joined, such as edges, nodes, zones, points, lines, or polygons. The join operation is guided by specified conditions that define how the geometries of the two datasets interact, typically involving spatial functions like intersections. Additionally, filters can be applied to both datasets to refine the data involved in the join. Aggregate functions are also defined to associate the attributes from source to target dataset entity.The geometry column for data elements is specified as `geometry_target` and `geometry_source`.Eg: Find all light poles in source dataset within 5 m of an edge in target dataset, and associate the attribute highway from source dataset with each edge in target dataset. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Performs a spatial join operation between two datasets within the TDEI system.
          * @param {OswSpatialjoinBody} body 
@@ -2389,6 +2474,17 @@ export class OSWApi extends BaseAPI {
      */
     public async oswQualityReportGenerate(tdei_dataset_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
         return OSWApiFp(this.configuration).oswQualityReportGenerate(tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This function merges spatial entities within one dataset by unifying nodes, edges, and polygons into consolidated geometries which are within the specified proximity. Entities that are within the specified proximity are treated as equivalent and merged. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Performs a self-merge of entities within a single OSW dataset.
+     * @param {OswSelfmergeBody} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    public async oswSelfMerge(body: OswSelfmergeBody, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return OSWApiFp(this.configuration).oswSelfMerge(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Performs a spatial join operation between two datasets within the TDEI system. It involves two datasets, target and source, specifying the spatial dimension entities of each to be joined, such as edges, nodes, zones, points, lines, or polygons. The join operation is guided by specified conditions that define how the geometries of the two datasets interact, typically involving spatial functions like intersections. Additionally, filters can be applied to both datasets to refine the data involved in the join. Aggregate functions are also defined to associate the attributes from source to target dataset entity.The geometry column for data elements is specified as `geometry_target` and `geometry_source`.Eg: Find all light poles in source dataset within 5 m of an edge in target dataset, and associate the attribute highway from source dataset with each edge in target dataset. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
