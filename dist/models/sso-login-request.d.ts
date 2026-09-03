@@ -12,25 +12,25 @@
 /**
  *
  * @export
- * @interface LoginModel
+ * @interface SsoLoginRequest
  */
-export interface LoginModel {
+export interface SsoLoginRequest {
     /**
-     * email that was used during registration
+     * Authorization code returned by Keycloak to the frontend redirect_uri after successful SSO authentication.
      * @type {string}
-     * @memberof LoginModel
+     * @memberof SsoLoginRequest
      */
-    username?: string;
+    code: string;
     /**
-     *
+     * Opaque state value returned by Keycloak. Used to validate the SSO callback and protect against CSRF.
      * @type {string}
-     * @memberof LoginModel
+     * @memberof SsoLoginRequest
      */
-    password?: string;
+    state: string;
     /**
-     * Keycloak client id used for authentication. Optional; defaults to the configured default client id when not provided.
+     * Keycloak client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
      * @type {string}
-     * @memberof LoginModel
+     * @memberof SsoLoginRequest
      */
     client_id?: string;
 }
