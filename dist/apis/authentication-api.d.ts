@@ -13,6 +13,8 @@ import { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 import { RequestArgs, BaseAPI } from '../base';
 import { LoginModel } from '../models';
+import { RefreshTokenRequest } from '../models';
+import { SsoLoginRequest } from '../models';
 import { TokenResponse } from '../models';
 /**
  * AuthenticationApi - axios parameter creator
@@ -20,7 +22,7 @@ import { TokenResponse } from '../models';
  */
 export declare const AuthenticationApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
-     * Authenticates the user with the TDEI system. Returns an access token, if successfully authenticated.
+     * Authenticates the user with the TDEI system using username and password. Returns an access token and refresh token if successfully authenticated. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
      * @summary Authenticates the user with the TDEI system.
      * @param {LoginModel} body
      * @param {*} [options] Override http request option.
@@ -36,13 +38,13 @@ export declare const AuthenticationApiAxiosParamCreator: (configuration?: Config
      */
     recoverPassword: (body: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Re-issues an access token, if a valid refresh token is sent to the server
+     * Re-issues an access token when a valid refresh token is sent to the server. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used. The `client_id` should match the client used when the original tokens were issued.
      * @summary Re-issue an access token
-     * @param {string} body
+     * @param {RefreshTokenRequest} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    refreshToken: (body: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    refreshToken: (body: RefreshTokenRequest, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
      * @summary Regenerates the API key for the user.
@@ -50,6 +52,23 @@ export declare const AuthenticationApiAxiosParamCreator: (configuration?: Config
      * @throws {RequiredError}
      */
     regenerateApiKey: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Completes the Single Sign-On (SSO) login flow by exchanging the authorization `code` and `state` returned from Keycloak for TDEI access and refresh tokens. Call this endpoint after the browser is redirected back to the frontend `redirect_uri` from `GET /api/v1/sso-redirect`. The server validates the `state`, exchanges the authorization code with Keycloak, and returns a `TokenResponse` that can be used with subsequent authenticated TDEI API requests. The returned tokens follow the same format as the username/password authenticate and refresh-token APIs.
+     * @summary Complete SSO login
+     * @param {SsoLoginRequest} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    ssoLogin: (body: SsoLoginRequest, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Starts the Single Sign-On (SSO) login flow by redirecting the browser to the Keycloak authorization endpoint. The caller must supply a `redirect_uri` that is already registered as a valid redirect URL for the Keycloak client. After the user authenticates with Keycloak, Keycloak redirects the browser back to that `redirect_uri` with an authorization `code` and `state` query parameters. The frontend should then call `POST /api/v1/sso-login` with those values to complete login and obtain TDEI access and refresh tokens. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
+     * @summary Initiate SSO login
+     * @param {string} redirect_uri Frontend callback URL where Keycloak will redirect after successful authentication. Must be registered in Keycloak for the selected client.
+     * @param {string} [client_id] Keycloak client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    ssoRedirect: (redirect_uri: string, client_id?: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
      * @summary Request for email verification link
@@ -65,7 +84,7 @@ export declare const AuthenticationApiAxiosParamCreator: (configuration?: Config
  */
 export declare const AuthenticationApiFp: (configuration?: Configuration) => {
     /**
-     * Authenticates the user with the TDEI system. Returns an access token, if successfully authenticated.
+     * Authenticates the user with the TDEI system using username and password. Returns an access token and refresh token if successfully authenticated. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
      * @summary Authenticates the user with the TDEI system.
      * @param {LoginModel} body
      * @param {*} [options] Override http request option.
@@ -81,13 +100,13 @@ export declare const AuthenticationApiFp: (configuration?: Configuration) => {
      */
     recoverPassword(body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
     /**
-     * Re-issues an access token, if a valid refresh token is sent to the server
+     * Re-issues an access token when a valid refresh token is sent to the server. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used. The `client_id` should match the client used when the original tokens were issued.
      * @summary Re-issue an access token
-     * @param {string} body
+     * @param {RefreshTokenRequest} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    refreshToken(body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenResponse>>>;
+    refreshToken(body: RefreshTokenRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenResponse>>>;
     /**
      * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
      * @summary Regenerates the API key for the user.
@@ -95,6 +114,23 @@ export declare const AuthenticationApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     regenerateApiKey(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
+    /**
+     * Completes the Single Sign-On (SSO) login flow by exchanging the authorization `code` and `state` returned from Keycloak for TDEI access and refresh tokens. Call this endpoint after the browser is redirected back to the frontend `redirect_uri` from `GET /api/v1/sso-redirect`. The server validates the `state`, exchanges the authorization code with Keycloak, and returns a `TokenResponse` that can be used with subsequent authenticated TDEI API requests. The returned tokens follow the same format as the username/password authenticate and refresh-token APIs.
+     * @summary Complete SSO login
+     * @param {SsoLoginRequest} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    ssoLogin(body: SsoLoginRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TokenResponse>>>;
+    /**
+     * Starts the Single Sign-On (SSO) login flow by redirecting the browser to the Keycloak authorization endpoint. The caller must supply a `redirect_uri` that is already registered as a valid redirect URL for the Keycloak client. After the user authenticates with Keycloak, Keycloak redirects the browser back to that `redirect_uri` with an authorization `code` and `state` query parameters. The frontend should then call `POST /api/v1/sso-login` with those values to complete login and obtain TDEI access and refresh tokens. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
+     * @summary Initiate SSO login
+     * @param {string} redirect_uri Frontend callback URL where Keycloak will redirect after successful authentication. Must be registered in Keycloak for the selected client.
+     * @param {string} [client_id] Keycloak client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    ssoRedirect(redirect_uri: string, client_id?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
     /**
      * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
      * @summary Request for email verification link
@@ -110,7 +146,7 @@ export declare const AuthenticationApiFp: (configuration?: Configuration) => {
  */
 export declare const AuthenticationApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
-     * Authenticates the user with the TDEI system. Returns an access token, if successfully authenticated.
+     * Authenticates the user with the TDEI system using username and password. Returns an access token and refresh token if successfully authenticated. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
      * @summary Authenticates the user with the TDEI system.
      * @param {LoginModel} body
      * @param {*} [options] Override http request option.
@@ -126,13 +162,13 @@ export declare const AuthenticationApiFactory: (configuration?: Configuration, b
      */
     recoverPassword(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
     /**
-     * Re-issues an access token, if a valid refresh token is sent to the server
+     * Re-issues an access token when a valid refresh token is sent to the server. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used. The `client_id` should match the client used when the original tokens were issued.
      * @summary Re-issue an access token
-     * @param {string} body
+     * @param {RefreshTokenRequest} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    refreshToken(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
+    refreshToken(body: RefreshTokenRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
     /**
      * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
      * @summary Regenerates the API key for the user.
@@ -140,6 +176,23 @@ export declare const AuthenticationApiFactory: (configuration?: Configuration, b
      * @throws {RequiredError}
      */
     regenerateApiKey(options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
+    /**
+     * Completes the Single Sign-On (SSO) login flow by exchanging the authorization `code` and `state` returned from Keycloak for TDEI access and refresh tokens. Call this endpoint after the browser is redirected back to the frontend `redirect_uri` from `GET /api/v1/sso-redirect`. The server validates the `state`, exchanges the authorization code with Keycloak, and returns a `TokenResponse` that can be used with subsequent authenticated TDEI API requests. The returned tokens follow the same format as the username/password authenticate and refresh-token APIs.
+     * @summary Complete SSO login
+     * @param {SsoLoginRequest} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    ssoLogin(body: SsoLoginRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
+    /**
+     * Starts the Single Sign-On (SSO) login flow by redirecting the browser to the Keycloak authorization endpoint. The caller must supply a `redirect_uri` that is already registered as a valid redirect URL for the Keycloak client. After the user authenticates with Keycloak, Keycloak redirects the browser back to that `redirect_uri` with an authorization `code` and `state` query parameters. The frontend should then call `POST /api/v1/sso-login` with those values to complete login and obtain TDEI access and refresh tokens. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
+     * @summary Initiate SSO login
+     * @param {string} redirect_uri Frontend callback URL where Keycloak will redirect after successful authentication. Must be registered in Keycloak for the selected client.
+     * @param {string} [client_id] Keycloak client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    ssoRedirect(redirect_uri: string, client_id?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
     /**
      * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
      * @summary Request for email verification link
@@ -157,7 +210,7 @@ export declare const AuthenticationApiFactory: (configuration?: Configuration, b
  */
 export declare class AuthenticationApi extends BaseAPI {
     /**
-     * Authenticates the user with the TDEI system. Returns an access token, if successfully authenticated.
+     * Authenticates the user with the TDEI system using username and password. Returns an access token and refresh token if successfully authenticated. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
      * @summary Authenticates the user with the TDEI system.
      * @param {LoginModel} body
      * @param {*} [options] Override http request option.
@@ -175,14 +228,14 @@ export declare class AuthenticationApi extends BaseAPI {
      */
     recoverPassword(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
     /**
-     * Re-issues an access token, if a valid refresh token is sent to the server
+     * Re-issues an access token when a valid refresh token is sent to the server. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used. The `client_id` should match the client used when the original tokens were issued.
      * @summary Re-issue an access token
-     * @param {string} body
+     * @param {RefreshTokenRequest} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    refreshToken(body: string, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
+    refreshToken(body: RefreshTokenRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
     /**
      * Regenerates the API key for the user. The old API key will be invalidated and a new API key will be generated.
      * @summary Regenerates the API key for the user.
@@ -191,6 +244,25 @@ export declare class AuthenticationApi extends BaseAPI {
      * @memberof AuthenticationApi
      */
     regenerateApiKey(options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
+    /**
+     * Completes the Single Sign-On (SSO) login flow by exchanging the authorization `code` and `state` returned from Keycloak for TDEI access and refresh tokens. Call this endpoint after the browser is redirected back to the frontend `redirect_uri` from `GET /api/v1/sso-redirect`. The server validates the `state`, exchanges the authorization code with Keycloak, and returns a `TokenResponse` that can be used with subsequent authenticated TDEI API requests. The returned tokens follow the same format as the username/password authenticate and refresh-token APIs.
+     * @summary Complete SSO login
+     * @param {SsoLoginRequest} body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    ssoLogin(body: SsoLoginRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<TokenResponse>>;
+    /**
+     * Starts the Single Sign-On (SSO) login flow by redirecting the browser to the Keycloak authorization endpoint. The caller must supply a `redirect_uri` that is already registered as a valid redirect URL for the Keycloak client. After the user authenticates with Keycloak, Keycloak redirects the browser back to that `redirect_uri` with an authorization `code` and `state` query parameters. The frontend should then call `POST /api/v1/sso-login` with those values to complete login and obtain TDEI access and refresh tokens. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
+     * @summary Initiate SSO login
+     * @param {string} redirect_uri Frontend callback URL where Keycloak will redirect after successful authentication. Must be registered in Keycloak for the selected client.
+     * @param {string} [client_id] Keycloak client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    ssoRedirect(redirect_uri: string, client_id?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
     /**
      * This request sends an email verification link to the specified email address. The email verification link is initially sent following successful registration. If the user does not receive the initial verification email, they can request to have the verification link resent.
      * @summary Request for email verification link

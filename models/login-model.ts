@@ -29,4 +29,10 @@ export interface LoginModel {
      * @memberof LoginModel
      */
     password?: string;
+    /**
+     * Keycloak client id used for authentication. Optional; defaults to the configured default client id when not provided.
+     * @type {string}
+     * @memberof LoginModel
+     */
+    client_id?: string;
 }
