@@ -27,7 +27,7 @@ import { TokenResponse } from '../models';
 export const AuthenticationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Authenticates the user with the TDEI system using username and password. Returns an access token and refresh token if successfully authenticated. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
+         * Authenticates the user with the TDEI system using username and password. Returns an access token and refresh token if successfully authenticated. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used.
          * @summary Authenticates the user with the TDEI system.
          * @param {LoginModel} body 
          * @param {*} [options] Override http request option.
@@ -147,7 +147,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Re-issues an access token when a valid refresh token is sent to the server. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used. The `client_id` should match the client used when the original tokens were issued.
+         * Re-issues an access token when a valid refresh token is sent to the server. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used. The `client_id` should match the client used when the original tokens were issued.
          * @summary Re-issue an access token
          * @param {RefreshTokenRequest} body 
          * @param {*} [options] Override http request option.
@@ -250,7 +250,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Completes the Single Sign-On (SSO) login flow by exchanging the authorization `code` and `state` returned from Keycloak for TDEI access and refresh tokens. Call this endpoint after the browser is redirected back to the frontend `redirect_uri` from `GET /api/v1/sso-redirect`. The server validates the `state`, exchanges the authorization code with Keycloak, and returns a `TokenResponse` that can be used with subsequent authenticated TDEI API requests. The returned tokens follow the same format as the username/password authenticate and refresh-token APIs.
+         * Completes the Single Sign-On (SSO) login flow by exchanging the authorization `code` and `state` returned from the auth server for TDEI access and refresh tokens. Call this endpoint after the browser is redirected back to the frontend `redirect_uri` from `GET /api/v1/sso-redirect`. The server validates the `state`, exchanges the authorization code with the auth server, and returns a `TokenResponse` that can be used with subsequent authenticated TDEI API requests. The returned tokens follow the same format as the username/password authenticate and refresh-token APIs.
          * @summary Complete SSO login
          * @param {SsoLoginRequest} body 
          * @param {*} [options] Override http request option.
@@ -310,10 +310,75 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Starts the Single Sign-On (SSO) login flow by redirecting the browser to the Keycloak authorization endpoint. The caller must supply a `redirect_uri` that is already registered as a valid redirect URL for the Keycloak client. After the user authenticates with Keycloak, Keycloak redirects the browser back to that `redirect_uri` with an authorization `code` and `state` query parameters. The frontend should then call `POST /api/v1/sso-login` with those values to complete login and obtain TDEI access and refresh tokens. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
+         * Starts the Single Sign-On (SSO) logout flow by redirecting the browser to the auth server logout endpoint. The caller must supply a `redirect_uri` that is already registered as a Valid post logout redirect URI for the auth server client. After the auth server completes logout, it redirects the browser back to that `redirect_uri`. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used. The frontend should clear any locally stored TDEI access and refresh tokens after initiating logout.
+         * @summary Initiate SSO logout
+         * @param {string} redirect_uri Frontend URL where the auth server will redirect after logout completes. Must be registered with the auth server as a Valid post logout redirect URI for the selected client.
+         * @param {string} [client_id] Auth server client id used for the SSO logout flow. Optional; defaults to the configured default client id when not provided.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        ssoLogout: async (redirect_uri: string, client_id?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'redirect_uri' is not null or undefined
+            if (redirect_uri === null || redirect_uri === undefined) {
+                throw new RequiredError('redirect_uri','Required parameter redirect_uri was null or undefined when calling ssoLogout.');
+            }
+            const localVarPath = `/api/v1/sso-logout`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication ApiKey required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("x-api-key")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
+            }
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (redirect_uri !== undefined) {
+                localVarQueryParameter['redirect_uri'] = redirect_uri;
+            }
+
+            if (client_id !== undefined) {
+                localVarQueryParameter['client_id'] = client_id;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Starts the Single Sign-On (SSO) login flow by redirecting the browser to the auth server authorization endpoint. The caller must supply a `redirect_uri` that is already registered as a valid redirect URL for the auth server client. After the user authenticates with the auth server, the auth server redirects the browser back to that `redirect_uri` with an authorization `code` and `state` query parameters. The frontend should then call `POST /api/v1/sso-login` with those values to complete login and obtain TDEI access and refresh tokens. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used.
          * @summary Initiate SSO login
-         * @param {string} redirect_uri Frontend callback URL where Keycloak will redirect after successful authentication. Must be registered in Keycloak for the selected client.
-         * @param {string} [client_id] Keycloak client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
+         * @param {string} redirect_uri Frontend callback URL where the auth server will redirect after successful authentication. Must be registered with the auth server for the selected client.
+         * @param {string} [client_id] Auth server client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -444,7 +509,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
 export const AuthenticationApiFp = function(configuration?: Configuration) {
     return {
         /**
-         * Authenticates the user with the TDEI system using username and password. Returns an access token and refresh token if successfully authenticated. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
+         * Authenticates the user with the TDEI system using username and password. Returns an access token and refresh token if successfully authenticated. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used.
          * @summary Authenticates the user with the TDEI system.
          * @param {LoginModel} body 
          * @param {*} [options] Override http request option.
@@ -472,7 +537,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Re-issues an access token when a valid refresh token is sent to the server. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used. The `client_id` should match the client used when the original tokens were issued.
+         * Re-issues an access token when a valid refresh token is sent to the server. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used. The `client_id` should match the client used when the original tokens were issued.
          * @summary Re-issue an access token
          * @param {RefreshTokenRequest} body 
          * @param {*} [options] Override http request option.
@@ -499,7 +564,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Completes the Single Sign-On (SSO) login flow by exchanging the authorization `code` and `state` returned from Keycloak for TDEI access and refresh tokens. Call this endpoint after the browser is redirected back to the frontend `redirect_uri` from `GET /api/v1/sso-redirect`. The server validates the `state`, exchanges the authorization code with Keycloak, and returns a `TokenResponse` that can be used with subsequent authenticated TDEI API requests. The returned tokens follow the same format as the username/password authenticate and refresh-token APIs.
+         * Completes the Single Sign-On (SSO) login flow by exchanging the authorization `code` and `state` returned from the auth server for TDEI access and refresh tokens. Call this endpoint after the browser is redirected back to the frontend `redirect_uri` from `GET /api/v1/sso-redirect`. The server validates the `state`, exchanges the authorization code with the auth server, and returns a `TokenResponse` that can be used with subsequent authenticated TDEI API requests. The returned tokens follow the same format as the username/password authenticate and refresh-token APIs.
          * @summary Complete SSO login
          * @param {SsoLoginRequest} body 
          * @param {*} [options] Override http request option.
@@ -513,10 +578,25 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Starts the Single Sign-On (SSO) login flow by redirecting the browser to the Keycloak authorization endpoint. The caller must supply a `redirect_uri` that is already registered as a valid redirect URL for the Keycloak client. After the user authenticates with Keycloak, Keycloak redirects the browser back to that `redirect_uri` with an authorization `code` and `state` query parameters. The frontend should then call `POST /api/v1/sso-login` with those values to complete login and obtain TDEI access and refresh tokens. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
+         * Starts the Single Sign-On (SSO) logout flow by redirecting the browser to the auth server logout endpoint. The caller must supply a `redirect_uri` that is already registered as a Valid post logout redirect URI for the auth server client. After the auth server completes logout, it redirects the browser back to that `redirect_uri`. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used. The frontend should clear any locally stored TDEI access and refresh tokens after initiating logout.
+         * @summary Initiate SSO logout
+         * @param {string} redirect_uri Frontend URL where the auth server will redirect after logout completes. Must be registered with the auth server as a Valid post logout redirect URI for the selected client.
+         * @param {string} [client_id] Auth server client id used for the SSO logout flow. Optional; defaults to the configured default client id when not provided.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async ssoLogout(redirect_uri: string, client_id?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await AuthenticationApiAxiosParamCreator(configuration).ssoLogout(redirect_uri, client_id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Starts the Single Sign-On (SSO) login flow by redirecting the browser to the auth server authorization endpoint. The caller must supply a `redirect_uri` that is already registered as a valid redirect URL for the auth server client. After the user authenticates with the auth server, the auth server redirects the browser back to that `redirect_uri` with an authorization `code` and `state` query parameters. The frontend should then call `POST /api/v1/sso-login` with those values to complete login and obtain TDEI access and refresh tokens. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used.
          * @summary Initiate SSO login
-         * @param {string} redirect_uri Frontend callback URL where Keycloak will redirect after successful authentication. Must be registered in Keycloak for the selected client.
-         * @param {string} [client_id] Keycloak client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
+         * @param {string} redirect_uri Frontend callback URL where the auth server will redirect after successful authentication. Must be registered with the auth server for the selected client.
+         * @param {string} [client_id] Auth server client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -551,7 +631,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
 export const AuthenticationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
-         * Authenticates the user with the TDEI system using username and password. Returns an access token and refresh token if successfully authenticated. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
+         * Authenticates the user with the TDEI system using username and password. Returns an access token and refresh token if successfully authenticated. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used.
          * @summary Authenticates the user with the TDEI system.
          * @param {LoginModel} body 
          * @param {*} [options] Override http request option.
@@ -571,7 +651,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return AuthenticationApiFp(configuration).recoverPassword(body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Re-issues an access token when a valid refresh token is sent to the server. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used. The `client_id` should match the client used when the original tokens were issued.
+         * Re-issues an access token when a valid refresh token is sent to the server. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used. The `client_id` should match the client used when the original tokens were issued.
          * @summary Re-issue an access token
          * @param {RefreshTokenRequest} body 
          * @param {*} [options] Override http request option.
@@ -590,7 +670,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return AuthenticationApiFp(configuration).regenerateApiKey(options).then((request) => request(axios, basePath));
         },
         /**
-         * Completes the Single Sign-On (SSO) login flow by exchanging the authorization `code` and `state` returned from Keycloak for TDEI access and refresh tokens. Call this endpoint after the browser is redirected back to the frontend `redirect_uri` from `GET /api/v1/sso-redirect`. The server validates the `state`, exchanges the authorization code with Keycloak, and returns a `TokenResponse` that can be used with subsequent authenticated TDEI API requests. The returned tokens follow the same format as the username/password authenticate and refresh-token APIs.
+         * Completes the Single Sign-On (SSO) login flow by exchanging the authorization `code` and `state` returned from the auth server for TDEI access and refresh tokens. Call this endpoint after the browser is redirected back to the frontend `redirect_uri` from `GET /api/v1/sso-redirect`. The server validates the `state`, exchanges the authorization code with the auth server, and returns a `TokenResponse` that can be used with subsequent authenticated TDEI API requests. The returned tokens follow the same format as the username/password authenticate and refresh-token APIs.
          * @summary Complete SSO login
          * @param {SsoLoginRequest} body 
          * @param {*} [options] Override http request option.
@@ -600,10 +680,21 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return AuthenticationApiFp(configuration).ssoLogin(body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Starts the Single Sign-On (SSO) login flow by redirecting the browser to the Keycloak authorization endpoint. The caller must supply a `redirect_uri` that is already registered as a valid redirect URL for the Keycloak client. After the user authenticates with Keycloak, Keycloak redirects the browser back to that `redirect_uri` with an authorization `code` and `state` query parameters. The frontend should then call `POST /api/v1/sso-login` with those values to complete login and obtain TDEI access and refresh tokens. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
+         * Starts the Single Sign-On (SSO) logout flow by redirecting the browser to the auth server logout endpoint. The caller must supply a `redirect_uri` that is already registered as a Valid post logout redirect URI for the auth server client. After the auth server completes logout, it redirects the browser back to that `redirect_uri`. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used. The frontend should clear any locally stored TDEI access and refresh tokens after initiating logout.
+         * @summary Initiate SSO logout
+         * @param {string} redirect_uri Frontend URL where the auth server will redirect after logout completes. Must be registered with the auth server as a Valid post logout redirect URI for the selected client.
+         * @param {string} [client_id] Auth server client id used for the SSO logout flow. Optional; defaults to the configured default client id when not provided.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async ssoLogout(redirect_uri: string, client_id?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return AuthenticationApiFp(configuration).ssoLogout(redirect_uri, client_id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Starts the Single Sign-On (SSO) login flow by redirecting the browser to the auth server authorization endpoint. The caller must supply a `redirect_uri` that is already registered as a valid redirect URL for the auth server client. After the user authenticates with the auth server, the auth server redirects the browser back to that `redirect_uri` with an authorization `code` and `state` query parameters. The frontend should then call `POST /api/v1/sso-login` with those values to complete login and obtain TDEI access and refresh tokens. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used.
          * @summary Initiate SSO login
-         * @param {string} redirect_uri Frontend callback URL where Keycloak will redirect after successful authentication. Must be registered in Keycloak for the selected client.
-         * @param {string} [client_id] Keycloak client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
+         * @param {string} redirect_uri Frontend callback URL where the auth server will redirect after successful authentication. Must be registered with the auth server for the selected client.
+         * @param {string} [client_id] Auth server client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -631,7 +722,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
  */
 export class AuthenticationApi extends BaseAPI {
     /**
-     * Authenticates the user with the TDEI system using username and password. Returns an access token and refresh token if successfully authenticated. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
+     * Authenticates the user with the TDEI system using username and password. Returns an access token and refresh token if successfully authenticated. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used.
      * @summary Authenticates the user with the TDEI system.
      * @param {LoginModel} body 
      * @param {*} [options] Override http request option.
@@ -653,7 +744,7 @@ export class AuthenticationApi extends BaseAPI {
         return AuthenticationApiFp(this.configuration).recoverPassword(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Re-issues an access token when a valid refresh token is sent to the server. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used. The `client_id` should match the client used when the original tokens were issued.
+     * Re-issues an access token when a valid refresh token is sent to the server. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used. The `client_id` should match the client used when the original tokens were issued.
      * @summary Re-issue an access token
      * @param {RefreshTokenRequest} body 
      * @param {*} [options] Override http request option.
@@ -674,7 +765,7 @@ export class AuthenticationApi extends BaseAPI {
         return AuthenticationApiFp(this.configuration).regenerateApiKey(options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Completes the Single Sign-On (SSO) login flow by exchanging the authorization `code` and `state` returned from Keycloak for TDEI access and refresh tokens. Call this endpoint after the browser is redirected back to the frontend `redirect_uri` from `GET /api/v1/sso-redirect`. The server validates the `state`, exchanges the authorization code with Keycloak, and returns a `TokenResponse` that can be used with subsequent authenticated TDEI API requests. The returned tokens follow the same format as the username/password authenticate and refresh-token APIs.
+     * Completes the Single Sign-On (SSO) login flow by exchanging the authorization `code` and `state` returned from the auth server for TDEI access and refresh tokens. Call this endpoint after the browser is redirected back to the frontend `redirect_uri` from `GET /api/v1/sso-redirect`. The server validates the `state`, exchanges the authorization code with the auth server, and returns a `TokenResponse` that can be used with subsequent authenticated TDEI API requests. The returned tokens follow the same format as the username/password authenticate and refresh-token APIs.
      * @summary Complete SSO login
      * @param {SsoLoginRequest} body 
      * @param {*} [options] Override http request option.
@@ -685,10 +776,22 @@ export class AuthenticationApi extends BaseAPI {
         return AuthenticationApiFp(this.configuration).ssoLogin(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Starts the Single Sign-On (SSO) login flow by redirecting the browser to the Keycloak authorization endpoint. The caller must supply a `redirect_uri` that is already registered as a valid redirect URL for the Keycloak client. After the user authenticates with Keycloak, Keycloak redirects the browser back to that `redirect_uri` with an authorization `code` and `state` query parameters. The frontend should then call `POST /api/v1/sso-login` with those values to complete login and obtain TDEI access and refresh tokens. An optional `client_id` may be provided to select a specific Keycloak client; when omitted, the system default client is used.
+     * Starts the Single Sign-On (SSO) logout flow by redirecting the browser to the auth server logout endpoint. The caller must supply a `redirect_uri` that is already registered as a Valid post logout redirect URI for the auth server client. After the auth server completes logout, it redirects the browser back to that `redirect_uri`. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used. The frontend should clear any locally stored TDEI access and refresh tokens after initiating logout.
+     * @summary Initiate SSO logout
+     * @param {string} redirect_uri Frontend URL where the auth server will redirect after logout completes. Must be registered with the auth server as a Valid post logout redirect URI for the selected client.
+     * @param {string} [client_id] Auth server client id used for the SSO logout flow. Optional; defaults to the configured default client id when not provided.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    public async ssoLogout(redirect_uri: string, client_id?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return AuthenticationApiFp(this.configuration).ssoLogout(redirect_uri, client_id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Starts the Single Sign-On (SSO) login flow by redirecting the browser to the auth server authorization endpoint. The caller must supply a `redirect_uri` that is already registered as a valid redirect URL for the auth server client. After the user authenticates with the auth server, the auth server redirects the browser back to that `redirect_uri` with an authorization `code` and `state` query parameters. The frontend should then call `POST /api/v1/sso-login` with those values to complete login and obtain TDEI access and refresh tokens. An optional `client_id` may be provided to select a specific auth server client; when omitted, the system default client is used.
      * @summary Initiate SSO login
-     * @param {string} redirect_uri Frontend callback URL where Keycloak will redirect after successful authentication. Must be registered in Keycloak for the selected client.
-     * @param {string} [client_id] Keycloak client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
+     * @param {string} redirect_uri Frontend callback URL where the auth server will redirect after successful authentication. Must be registered with the auth server for the selected client.
+     * @param {string} [client_id] Auth server client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApi
