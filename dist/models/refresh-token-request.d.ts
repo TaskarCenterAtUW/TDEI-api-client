@@ -22,7 +22,7 @@ export interface RefreshTokenRequest {
      */
     refresh_token: string;
     /**
-     * Keycloak client id used for the token refresh. Optional; defaults to the configured default client id when not provided. Should match the client used when the original tokens were issued.
+     * Auth server client id used for the token refresh. Optional; defaults to the configured default client id when not provided. Should match the client used when the original tokens were issued.
      * @type {string}
      * @memberof RefreshTokenRequest
      */

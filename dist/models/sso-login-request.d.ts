@@ -16,19 +16,19 @@
  */
 export interface SsoLoginRequest {
     /**
-     * Authorization code returned by Keycloak to the frontend redirect_uri after successful SSO authentication.
+     * Authorization code returned by the auth server to the frontend redirect_uri after successful SSO authentication.
      * @type {string}
      * @memberof SsoLoginRequest
      */
     code: string;
     /**
-     * Opaque state value returned by Keycloak. Used to validate the SSO callback and protect against CSRF.
+     * Opaque state value returned by the auth server. Used to validate the SSO callback and protect against CSRF.
      * @type {string}
      * @memberof SsoLoginRequest
      */
     state: string;
     /**
-     * Keycloak client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
+     * Auth server client id used for the SSO flow. Optional; defaults to the configured default client id when not provided.
      * @type {string}
      * @memberof SsoLoginRequest
      */
