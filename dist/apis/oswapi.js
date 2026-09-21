@@ -1469,7 +1469,7 @@ var OSWApiAxiosParamCreator = function (configuration) {
             });
         },
         /**
-         * This function merges spatial data from two datasets by unifying overlapping nodes, edges, and polygons into consolidated geometries. It identifies equivalent nodes based on proximity, aligns and merges overlapping edges, and combines adjacent polygons. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * This function merges spatial data from two datasets by unifying overlapping nodes, edges, and polygons into consolidated geometries. It identifies equivalent nodes based on proximity, aligns and merges overlapping edges, and combines adjacent polygons. The optional `entity_filters` object can limit which features are eligible to merge and tune duplicate detection per OSW file type (`edge`, `node`, `point`, `zone`, `line`, `polygon`). When `entity_filters` is omitted, every feature is eligible to merge. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Performs a union of the two input OSW datasets.
          * @param {OswUnionBody} body
          * @param {*} [options] Override http request option.
@@ -2424,7 +2424,7 @@ var OSWApiFp = function (configuration) {
             });
         },
         /**
-         * This function merges spatial data from two datasets by unifying overlapping nodes, edges, and polygons into consolidated geometries. It identifies equivalent nodes based on proximity, aligns and merges overlapping edges, and combines adjacent polygons. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * This function merges spatial data from two datasets by unifying overlapping nodes, edges, and polygons into consolidated geometries. It identifies equivalent nodes based on proximity, aligns and merges overlapping edges, and combines adjacent polygons. The optional `entity_filters` object can limit which features are eligible to merge and tune duplicate detection per OSW file type (`edge`, `node`, `point`, `zone`, `line`, `polygon`). When `entity_filters` is omitted, every feature is eligible to merge. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Performs a union of the two input OSW datasets.
          * @param {OswUnionBody} body
          * @param {*} [options] Override http request option.
@@ -2872,7 +2872,7 @@ var OSWApiFactory = function (configuration, basePath, axios) {
             });
         },
         /**
-         * This function merges spatial data from two datasets by unifying overlapping nodes, edges, and polygons into consolidated geometries. It identifies equivalent nodes based on proximity, aligns and merges overlapping edges, and combines adjacent polygons. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * This function merges spatial data from two datasets by unifying overlapping nodes, edges, and polygons into consolidated geometries. It identifies equivalent nodes based on proximity, aligns and merges overlapping edges, and combines adjacent polygons. The optional `entity_filters` object can limit which features are eligible to merge and tune duplicate detection per OSW file type (`edge`, `node`, `point`, `zone`, `line`, `polygon`). When `entity_filters` is omitted, every feature is eligible to merge. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Performs a union of the two input OSW datasets.
          * @param {OswUnionBody} body
          * @param {*} [options] Override http request option.
@@ -3295,7 +3295,7 @@ var OSWApi = /** @class */ (function (_super) {
         });
     };
     /**
-     * This function merges spatial data from two datasets by unifying overlapping nodes, edges, and polygons into consolidated geometries. It identifies equivalent nodes based on proximity, aligns and merges overlapping edges, and combines adjacent polygons. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * This function merges spatial data from two datasets by unifying overlapping nodes, edges, and polygons into consolidated geometries. It identifies equivalent nodes based on proximity, aligns and merges overlapping edges, and combines adjacent polygons. The optional `entity_filters` object can limit which features are eligible to merge and tune duplicate detection per OSW file type (`edge`, `node`, `point`, `zone`, `line`, `polygon`). When `entity_filters` is omitted, every feature is eligible to merge. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Performs a union of the two input OSW datasets.
      * @param {OswUnionBody} body
      * @param {*} [options] Override http request option.

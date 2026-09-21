@@ -72,5 +72,7 @@ export * from './tdei-project-group-id-tdei-service-id-body1';
 export * from './tdei-project-group-id-tdei-service-id-body2';
 export * from './tdei-project-group-id-tdei-service-id-body3';
 export * from './token-response';
+export * from './union-entity-filter-block';
+export * from './union-entity-filters';
 export * from './version-list';
 export * from './version-spec';
