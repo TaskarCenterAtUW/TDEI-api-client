@@ -11,6 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { UnionEntityFilters } from './union-entity-filters';
 /**
  * 
  * @export
@@ -35,4 +36,10 @@ export interface OswUnionBody {
      * @memberof OswUnionBody
      */
     proximity?: number;
+    /**
+     * 
+     * @type {UnionEntityFilters}
+     * @memberof OswUnionBody
+     */
+    entity_filters?: UnionEntityFilters;
 }

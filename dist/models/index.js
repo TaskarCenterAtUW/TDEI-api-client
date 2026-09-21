@@ -88,5 +88,7 @@ __exportStar(require("./tdei-project-group-id-tdei-service-id-body1"), exports);
 __exportStar(require("./tdei-project-group-id-tdei-service-id-body2"), exports);
 __exportStar(require("./tdei-project-group-id-tdei-service-id-body3"), exports);
 __exportStar(require("./token-response"), exports);
+__exportStar(require("./union-entity-filter-block"), exports);
+__exportStar(require("./union-entity-filters"), exports);
 __exportStar(require("./version-list"), exports);
 __exportStar(require("./version-spec"), exports);
