@@ -13,43 +13,43 @@
  */
 import { UnionEntityFilterBlock } from './union-entity-filter-block';
 /**
- * Optional per-file-type filters and duplicate-detection settings for the union operation. Keys must be OSW file types: `edge`, `node`, `point`, `zone`, `line`, or `polygon`. When omitted, every feature is eligible to merge.
+ * Optional per-file-type merge filters and duplicate-detection settings. Keys must be OSW file types: `edge`, `node`, `point`, `zone`, `line`, `polygon`; any other key is rejected.  - **Omitted entirely:** every feature of every file type is eligible to merge. - **A file type named:** only its features matching the filter are eligible. - **A file type not named:** default behaviour.  Filters decide **what is merged, never what is connected**.
  * @export
  * @interface UnionEntityFilters
  */
 export interface UnionEntityFilters {
     /**
-     * 
+     * Edge merging. Only eligible DS2 edges can be removed as duplicates, and only of eligible DS1 edges. Ineligible DS2 edges are always added, even when they duplicate a DS1 edge, and still connect to the network. The edge filter also narrows node attribute merging: attributes merge only when both nodes lie on eligible edges. Supports `filters`, `duplicate_buffer_width` and `duplicate_overlap_percentage` (default 80).
      * @type {UnionEntityFilterBlock}
      * @memberof UnionEntityFilters
      */
     edge?: UnionEntityFilterBlock;
     /**
-     * 
+     * Node **attribute** merging. Nodes always join by `proximity` (section 5 of the union description); this filter only decides whether DS2 attributes are merged onto the joined DS1 node. Both nodes must match (and lie on an eligible edge, if an edge filter is given). Withheld DS2 values are still recorded in `ext:union_audit_*`. Supports `filters` only.
      * @type {UnionEntityFilterBlock}
      * @memberof UnionEntityFilters
      */
     node?: UnionEntityFilterBlock;
     /**
-     * 
+     * Point merging. Two points of the same type within `proximity` merge only when both match. Others are kept or added unchanged. Supports `filters` only.
      * @type {UnionEntityFilterBlock}
      * @memberof UnionEntityFilters
      */
     point?: UnionEntityFilterBlock;
     /**
-     * 
+     * Zone merging. Two overlapping zones are treated as the same only when both match. Supports `filters` and `duplicate_overlap_percentage` (default 70).
      * @type {UnionEntityFilterBlock}
      * @memberof UnionEntityFilters
      */
     zone?: UnionEntityFilterBlock;
     /**
-     * 
+     * Line merging. A DS2 line inside a DS1 line's corridor merges only when both match. Supports `filters`, `duplicate_buffer_width` and `duplicate_overlap_percentage` (default 70).
      * @type {UnionEntityFilterBlock}
      * @memberof UnionEntityFilters
      */
     line?: UnionEntityFilterBlock;
     /**
-     * 
+     * Polygon merging. Intersecting polygons are merged or combined only when both match; otherwise both are kept unchanged. Supports `filters` and `duplicate_overlap_percentage` (default 70).
      * @type {UnionEntityFilterBlock}
      * @memberof UnionEntityFilters
      */

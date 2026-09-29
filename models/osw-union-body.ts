@@ -19,25 +19,25 @@ import { UnionEntityFilters } from './union-entity-filters';
  */
 export interface OswUnionBody {
     /**
-     * Dataset id defined to be unioned
+     * **DS1 — the base, authoritative dataset.** Its positions, geometry, IDs and attribute values win whenever the two datasets disagree. Road × crossing splits and T-junction splits are the only changes made to its edges.
      * @type {string}
      * @memberof OswUnionBody
      */
     tdei_dataset_id_one: string;
     /**
-     * Dataset id defined to be unioned
+     * **DS2 — the dataset merged into DS1.** Its features are joined onto DS1 where they match, removed where they duplicate DS1, and added where DS1 has nothing. Only attribute keys DS1 lacks are copied across.
      * @type {string}
      * @memberof OswUnionBody
      */
     tdei_dataset_id_two: string;
     /**
-     * Proximity value to identify equivalent nodes in meters. Default value is 0.5 meters.
+     * Distance in **metres** within which a DS2 node joins a DS1 node, a DS1 node splits a DS2 edge, a DS2 edge end is joined to a DS1 edge (T-junction), and two points of the same type are merged. Measured as true ground distance in every direction. **Optional — `0.5` when omitted.** Also the default duplicate corridor width for edges and lines unless `duplicate_buffer_width` is set.
      * @type {number}
      * @memberof OswUnionBody
      */
     proximity?: number;
     /**
-     * 
+     * **Optional.** Restricts which features are **eligible to merge** (duplicate removal and attribute merging), per file type, and tunes duplicate detection. **Omitted:** every feature is eligible. **Supplied:** only the file types named are restricted; the rest behave as default. Filters never affect **connectivity** — node joining, edge splitting, road × crossing nodes, T-junctions and every other step in section 5 always run.
      * @type {UnionEntityFilters}
      * @memberof OswUnionBody
      */
