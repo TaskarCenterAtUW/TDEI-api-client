@@ -12,25 +12,25 @@
  * Do not edit the class manually.
  */
 /**
- * Optional settings for a single OSW file type during union. Every property is optional.
+ * Settings for one OSW file type. Every property is optional. `filters` controls which features are eligible to merge; the `duplicate_*` settings tune when two features count as the same. None of them affect connectivity.
  * @export
  * @interface UnionEntityFilterBlock
  */
 export interface UnionEntityFilterBlock {
     /**
-     * Attribute filter groups for this file type. Each group is an object of OpenSidewalks attribute/value pairs (or `ext:*` extensions). Features must match at least one group to be eligible. An empty group is not allowed.
+     * List of filter groups. A feature is **eligible to merge** when it matches **at least one** group (OR). It matches a group when it has **every** attribute/value pair in it with exactly that value (AND; exact, case-sensitive). Any OSW attribute, including `ext:*`, can be used.  Only eligible features can be removed as duplicates or have attributes merged, and only with a counterpart that is also eligible. Ineligible features are never removed: DS1 features pass through and DS2 features are added. They still connect to the network.  An empty list is the same as no filter. A filter that matches no feature is not an error; nothing of that file type is merged.
      * @type {Array<{ [key: string]: string; }>}
      * @memberof UnionEntityFilterBlock
      */
     filters?: Array<{ [key: string]: string; }>;
     /**
-     * Corridor width in metres used when detecting duplicate linear features. Supported for `edge` and `line` only. Must be greater than 0.
+     * **`edge` and `line` only.** Width in metres of the corridor around each DS1 edge or line; a DS2 edge or line lying inside it counts as covered. **Default: the request's `proximity`.** Independent of `proximity`: widening the corridor never makes more nodes join. Rejected for `node`, `point`, `zone` and `polygon`.
      * @type {number}
      * @memberof UnionEntityFilterBlock
      */
     duplicate_buffer_width?: number;
     /**
-     * Minimum overlap percentage (greater than 0 and at most 100) used when detecting duplicate features. Supported for `edge`, `line`, `polygon`, and `zone`. Not supported for `node` or `point`, which are merged by proximity.
+     * Minimum overlap, in percent, for two features to count as the same.  - `edge` — share of the DS2 edge's length inside the corridor. **Default 80.** The edge must also run alongside the DS1 edge (within 30°). - `line` — share of the DS2 line's length inside the corridor. **Default 70.** - `polygon` — share of the DS1 polygon's area the two polygons share. **Default 70.** At or below it, intersecting polygons are combined into one shape. - `zone` — share of the DS1 zone's area the two zones share. **Default 70.**  Rejected for `node` and `point`, which merge by `proximity` only.
      * @type {number}
      * @memberof UnionEntityFilterBlock
      */
