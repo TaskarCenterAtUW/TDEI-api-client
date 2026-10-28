@@ -88,6 +88,159 @@ var GTFSPathwaysApiAxiosParamCreator = function (configuration) {
     var _this = this;
     return {
         /**
+         * Converts a station's CAD drawings into a first draft of GTFS Pathways, for review and editing in TDEI Workspaces before it is uploaded. The drawings are either a zip of DXF files (one per level) in `dataset`, or an ArcGIS MapServer or FeatureServer service in `arcgis_url`: provide exactly one. The output is POSM GeoJSON per station (stops, pathways and level outlines, with the GTFS columns as properties), a report of what to check, and the drawing each level was made from. The response includes a `job_id` for tracking the request. To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. Once the job completes, `/api/v1/job/download/{job_id}` downloads a zip of all the output.
+         * @summary Converts station drawings into GTFS Pathways.
+         * @param {Blob} dataset
+         * @param {string} arcgis_url
+         * @param {string} layers
+         * @param {string} crs
+         * @param {string} control
+         * @param {string} station
+         * @param {string} level_pattern
+         * @param {string} levels
+         * @param {string} exclude_levels
+         * @param {string} agency_gtfs_dataset_id
+         * @param {string} parent_station
+         * @param {string} platforms
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        convertGtfsPathwaysForm: function (dataset, arcgis_url, layers, crs, control, station, level_pattern, levels, exclude_levels, agency_gtfs_dataset_id, parent_station, platforms, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, accessToken, _a, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            // verify required parameter 'dataset' is not null or undefined
+                            if (dataset === null || dataset === undefined) {
+                                throw new base_1.RequiredError('dataset', 'Required parameter dataset was null or undefined when calling convertGtfsPathwaysForm.');
+                            }
+                            // verify required parameter 'arcgis_url' is not null or undefined
+                            if (arcgis_url === null || arcgis_url === undefined) {
+                                throw new base_1.RequiredError('arcgis_url', 'Required parameter arcgis_url was null or undefined when calling convertGtfsPathwaysForm.');
+                            }
+                            // verify required parameter 'layers' is not null or undefined
+                            if (layers === null || layers === undefined) {
+                                throw new base_1.RequiredError('layers', 'Required parameter layers was null or undefined when calling convertGtfsPathwaysForm.');
+                            }
+                            // verify required parameter 'crs' is not null or undefined
+                            if (crs === null || crs === undefined) {
+                                throw new base_1.RequiredError('crs', 'Required parameter crs was null or undefined when calling convertGtfsPathwaysForm.');
+                            }
+                            // verify required parameter 'control' is not null or undefined
+                            if (control === null || control === undefined) {
+                                throw new base_1.RequiredError('control', 'Required parameter control was null or undefined when calling convertGtfsPathwaysForm.');
+                            }
+                            // verify required parameter 'station' is not null or undefined
+                            if (station === null || station === undefined) {
+                                throw new base_1.RequiredError('station', 'Required parameter station was null or undefined when calling convertGtfsPathwaysForm.');
+                            }
+                            // verify required parameter 'level_pattern' is not null or undefined
+                            if (level_pattern === null || level_pattern === undefined) {
+                                throw new base_1.RequiredError('level_pattern', 'Required parameter level_pattern was null or undefined when calling convertGtfsPathwaysForm.');
+                            }
+                            // verify required parameter 'levels' is not null or undefined
+                            if (levels === null || levels === undefined) {
+                                throw new base_1.RequiredError('levels', 'Required parameter levels was null or undefined when calling convertGtfsPathwaysForm.');
+                            }
+                            // verify required parameter 'exclude_levels' is not null or undefined
+                            if (exclude_levels === null || exclude_levels === undefined) {
+                                throw new base_1.RequiredError('exclude_levels', 'Required parameter exclude_levels was null or undefined when calling convertGtfsPathwaysForm.');
+                            }
+                            // verify required parameter 'agency_gtfs_dataset_id' is not null or undefined
+                            if (agency_gtfs_dataset_id === null || agency_gtfs_dataset_id === undefined) {
+                                throw new base_1.RequiredError('agency_gtfs_dataset_id', 'Required parameter agency_gtfs_dataset_id was null or undefined when calling convertGtfsPathwaysForm.');
+                            }
+                            // verify required parameter 'parent_station' is not null or undefined
+                            if (parent_station === null || parent_station === undefined) {
+                                throw new base_1.RequiredError('parent_station', 'Required parameter parent_station was null or undefined when calling convertGtfsPathwaysForm.');
+                            }
+                            // verify required parameter 'platforms' is not null or undefined
+                            if (platforms === null || platforms === undefined) {
+                                throw new base_1.RequiredError('platforms', 'Required parameter platforms was null or undefined when calling convertGtfsPathwaysForm.');
+                            }
+                            localVarPath = "/api/v1/gtfs-pathways/convert";
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            localVarFormParams = new FormData();
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 1:
+                            _a = _b.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.accessToken];
+                        case 3:
+                            _a = _b.sent();
+                            _b.label = 4;
+                        case 4:
+                            accessToken = _a;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _b.label = 5;
+                        case 5:
+                            if (dataset !== undefined) {
+                                localVarFormParams.append('dataset', dataset);
+                            }
+                            if (arcgis_url !== undefined) {
+                                localVarFormParams.append('arcgis_url', arcgis_url);
+                            }
+                            if (layers !== undefined) {
+                                localVarFormParams.append('layers', layers);
+                            }
+                            if (crs !== undefined) {
+                                localVarFormParams.append('crs', crs);
+                            }
+                            if (control !== undefined) {
+                                localVarFormParams.append('control', control);
+                            }
+                            if (station !== undefined) {
+                                localVarFormParams.append('station', station);
+                            }
+                            if (level_pattern !== undefined) {
+                                localVarFormParams.append('level_pattern', level_pattern);
+                            }
+                            if (levels !== undefined) {
+                                localVarFormParams.append('levels', levels);
+                            }
+                            if (exclude_levels !== undefined) {
+                                localVarFormParams.append('exclude_levels', exclude_levels);
+                            }
+                            if (agency_gtfs_dataset_id !== undefined) {
+                                localVarFormParams.append('agency_gtfs_dataset_id', agency_gtfs_dataset_id);
+                            }
+                            if (parent_station !== undefined) {
+                                localVarFormParams.append('parent_station', parent_station);
+                            }
+                            if (platforms !== undefined) {
+                                localVarFormParams.append('platforms', platforms);
+                            }
+                            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            localVarRequestOptions.data = localVarFormParams;
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
          * Download a specific GTFS Pathways dataset as zip containing .txt files that represent transit details.
          * @summary Downloads the GTFS Pathways dataset
          * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
@@ -478,6 +631,42 @@ exports.GTFSPathwaysApiAxiosParamCreator = GTFSPathwaysApiAxiosParamCreator;
 var GTFSPathwaysApiFp = function (configuration) {
     return {
         /**
+         * Converts a station's CAD drawings into a first draft of GTFS Pathways, for review and editing in TDEI Workspaces before it is uploaded. The drawings are either a zip of DXF files (one per level) in `dataset`, or an ArcGIS MapServer or FeatureServer service in `arcgis_url`: provide exactly one. The output is POSM GeoJSON per station (stops, pathways and level outlines, with the GTFS columns as properties), a report of what to check, and the drawing each level was made from. The response includes a `job_id` for tracking the request. To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. Once the job completes, `/api/v1/job/download/{job_id}` downloads a zip of all the output.
+         * @summary Converts station drawings into GTFS Pathways.
+         * @param {Blob} dataset
+         * @param {string} arcgis_url
+         * @param {string} layers
+         * @param {string} crs
+         * @param {string} control
+         * @param {string} station
+         * @param {string} level_pattern
+         * @param {string} levels
+         * @param {string} exclude_levels
+         * @param {string} agency_gtfs_dataset_id
+         * @param {string} parent_station
+         * @param {string} platforms
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        convertGtfsPathwaysForm: function (dataset, arcgis_url, layers, crs, control, station, level_pattern, levels, exclude_levels, agency_gtfs_dataset_id, parent_station, platforms, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.GTFSPathwaysApiAxiosParamCreator)(configuration).convertGtfsPathwaysForm(dataset, arcgis_url, layers, crs, control, station, level_pattern, levels, exclude_levels, agency_gtfs_dataset_id, parent_station, platforms, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
          * Download a specific GTFS Pathways dataset as zip containing .txt files that represent transit details.
          * @summary Downloads the GTFS Pathways dataset
          * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
@@ -616,6 +805,31 @@ exports.GTFSPathwaysApiFp = GTFSPathwaysApiFp;
 var GTFSPathwaysApiFactory = function (configuration, basePath, axios) {
     return {
         /**
+         * Converts a station's CAD drawings into a first draft of GTFS Pathways, for review and editing in TDEI Workspaces before it is uploaded. The drawings are either a zip of DXF files (one per level) in `dataset`, or an ArcGIS MapServer or FeatureServer service in `arcgis_url`: provide exactly one. The output is POSM GeoJSON per station (stops, pathways and level outlines, with the GTFS columns as properties), a report of what to check, and the drawing each level was made from. The response includes a `job_id` for tracking the request. To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. Once the job completes, `/api/v1/job/download/{job_id}` downloads a zip of all the output.
+         * @summary Converts station drawings into GTFS Pathways.
+         * @param {Blob} dataset
+         * @param {string} arcgis_url
+         * @param {string} layers
+         * @param {string} crs
+         * @param {string} control
+         * @param {string} station
+         * @param {string} level_pattern
+         * @param {string} levels
+         * @param {string} exclude_levels
+         * @param {string} agency_gtfs_dataset_id
+         * @param {string} parent_station
+         * @param {string} platforms
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        convertGtfsPathwaysForm: function (dataset, arcgis_url, layers, crs, control, station, level_pattern, levels, exclude_levels, agency_gtfs_dataset_id, parent_station, platforms, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(configuration).convertGtfsPathwaysForm(dataset, arcgis_url, layers, crs, control, station, level_pattern, levels, exclude_levels, agency_gtfs_dataset_id, parent_station, platforms, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
          * Download a specific GTFS Pathways dataset as zip containing .txt files that represent transit details.
          * @summary Downloads the GTFS Pathways dataset
          * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
@@ -703,6 +917,33 @@ var GTFSPathwaysApi = /** @class */ (function (_super) {
     function GTFSPathwaysApi() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    /**
+     * Converts a station's CAD drawings into a first draft of GTFS Pathways, for review and editing in TDEI Workspaces before it is uploaded. The drawings are either a zip of DXF files (one per level) in `dataset`, or an ArcGIS MapServer or FeatureServer service in `arcgis_url`: provide exactly one. The output is POSM GeoJSON per station (stops, pathways and level outlines, with the GTFS columns as properties), a report of what to check, and the drawing each level was made from. The response includes a `job_id` for tracking the request. To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. Once the job completes, `/api/v1/job/download/{job_id}` downloads a zip of all the output.
+     * @summary Converts station drawings into GTFS Pathways.
+     * @param {Blob} dataset
+     * @param {string} arcgis_url
+     * @param {string} layers
+     * @param {string} crs
+     * @param {string} control
+     * @param {string} station
+     * @param {string} level_pattern
+     * @param {string} levels
+     * @param {string} exclude_levels
+     * @param {string} agency_gtfs_dataset_id
+     * @param {string} parent_station
+     * @param {string} platforms
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GTFSPathwaysApi
+     */
+    GTFSPathwaysApi.prototype.convertGtfsPathwaysForm = function (dataset, arcgis_url, layers, crs, control, station, level_pattern, levels, exclude_levels, agency_gtfs_dataset_id, parent_station, platforms, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.GTFSPathwaysApiFp)(this.configuration).convertGtfsPathwaysForm(dataset, arcgis_url, layers, crs, control, station, level_pattern, levels, exclude_levels, agency_gtfs_dataset_id, parent_station, platforms, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
     /**
      * Download a specific GTFS Pathways dataset as zip containing .txt files that represent transit details.
      * @summary Downloads the GTFS Pathways dataset

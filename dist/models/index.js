@@ -38,6 +38,7 @@ __exportStar(require("./geo-jsonpolygon"), exports);
 __exportStar(require("./geo-json-object"), exports);
 __exportStar(require("./geometry"), exports);
 __exportStar(require("./gtfsflex-validate-body"), exports);
+__exportStar(require("./gtfspathways-convert-body"), exports);
 __exportStar(require("./gtfspathways-validate-body"), exports);
 __exportStar(require("./inline-response200"), exports);
 __exportStar(require("./inline-response2001"), exports);
