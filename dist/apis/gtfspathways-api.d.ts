@@ -19,6 +19,25 @@ import { VersionList } from '../models';
  */
 export declare const GTFSPathwaysApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
+     * Converts a station's CAD drawings into a first draft of GTFS Pathways, for review and editing in TDEI Workspaces before it is uploaded. The drawings are either a zip of DXF files (one per level) in `dataset`, or an ArcGIS MapServer or FeatureServer service in `arcgis_url`: provide exactly one. The output is POSM GeoJSON per station (stops, pathways and level outlines, with the GTFS columns as properties), a report of what to check, and the drawing each level was made from. The response includes a `job_id` for tracking the request. To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. Once the job completes, `/api/v1/job/download/{job_id}` downloads a zip of all the output.
+     * @summary Converts station drawings into GTFS Pathways.
+     * @param {Blob} dataset
+     * @param {string} arcgis_url
+     * @param {string} layers
+     * @param {string} crs
+     * @param {string} control
+     * @param {string} station
+     * @param {string} level_pattern
+     * @param {string} levels
+     * @param {string} exclude_levels
+     * @param {string} agency_gtfs_dataset_id
+     * @param {string} parent_station
+     * @param {string} platforms
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    convertGtfsPathwaysForm: (dataset: Blob, arcgis_url: string, layers: string, crs: string, control: string, station: string, level_pattern: string, levels: string, exclude_levels: string, agency_gtfs_dataset_id: string, parent_station: string, platforms: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Download a specific GTFS Pathways dataset as zip containing .txt files that represent transit details.
      * @summary Downloads the GTFS Pathways dataset
      * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
@@ -69,6 +88,25 @@ export declare const GTFSPathwaysApiAxiosParamCreator: (configuration?: Configur
  */
 export declare const GTFSPathwaysApiFp: (configuration?: Configuration) => {
     /**
+     * Converts a station's CAD drawings into a first draft of GTFS Pathways, for review and editing in TDEI Workspaces before it is uploaded. The drawings are either a zip of DXF files (one per level) in `dataset`, or an ArcGIS MapServer or FeatureServer service in `arcgis_url`: provide exactly one. The output is POSM GeoJSON per station (stops, pathways and level outlines, with the GTFS columns as properties), a report of what to check, and the drawing each level was made from. The response includes a `job_id` for tracking the request. To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. Once the job completes, `/api/v1/job/download/{job_id}` downloads a zip of all the output.
+     * @summary Converts station drawings into GTFS Pathways.
+     * @param {Blob} dataset
+     * @param {string} arcgis_url
+     * @param {string} layers
+     * @param {string} crs
+     * @param {string} control
+     * @param {string} station
+     * @param {string} level_pattern
+     * @param {string} levels
+     * @param {string} exclude_levels
+     * @param {string} agency_gtfs_dataset_id
+     * @param {string} parent_station
+     * @param {string} platforms
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    convertGtfsPathwaysForm(dataset: Blob, arcgis_url: string, layers: string, crs: string, control: string, station: string, level_pattern: string, levels: string, exclude_levels: string, agency_gtfs_dataset_id: string, parent_station: string, platforms: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    /**
      * Download a specific GTFS Pathways dataset as zip containing .txt files that represent transit details.
      * @summary Downloads the GTFS Pathways dataset
      * @param {string} tdei_dataset_id Dataset id of the dataset to be downloaded.
@@ -118,6 +156,25 @@ export declare const GTFSPathwaysApiFp: (configuration?: Configuration) => {
  * @export
  */
 export declare const GTFSPathwaysApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Converts a station's CAD drawings into a first draft of GTFS Pathways, for review and editing in TDEI Workspaces before it is uploaded. The drawings are either a zip of DXF files (one per level) in `dataset`, or an ArcGIS MapServer or FeatureServer service in `arcgis_url`: provide exactly one. The output is POSM GeoJSON per station (stops, pathways and level outlines, with the GTFS columns as properties), a report of what to check, and the drawing each level was made from. The response includes a `job_id` for tracking the request. To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. Once the job completes, `/api/v1/job/download/{job_id}` downloads a zip of all the output.
+     * @summary Converts station drawings into GTFS Pathways.
+     * @param {Blob} dataset
+     * @param {string} arcgis_url
+     * @param {string} layers
+     * @param {string} crs
+     * @param {string} control
+     * @param {string} station
+     * @param {string} level_pattern
+     * @param {string} levels
+     * @param {string} exclude_levels
+     * @param {string} agency_gtfs_dataset_id
+     * @param {string} parent_station
+     * @param {string} platforms
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    convertGtfsPathwaysForm(dataset: Blob, arcgis_url: string, layers: string, crs: string, control: string, station: string, level_pattern: string, levels: string, exclude_levels: string, agency_gtfs_dataset_id: string, parent_station: string, platforms: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Download a specific GTFS Pathways dataset as zip containing .txt files that represent transit details.
      * @summary Downloads the GTFS Pathways dataset
@@ -170,6 +227,26 @@ export declare const GTFSPathwaysApiFactory: (configuration?: Configuration, bas
  * @extends {BaseAPI}
  */
 export declare class GTFSPathwaysApi extends BaseAPI {
+    /**
+     * Converts a station's CAD drawings into a first draft of GTFS Pathways, for review and editing in TDEI Workspaces before it is uploaded. The drawings are either a zip of DXF files (one per level) in `dataset`, or an ArcGIS MapServer or FeatureServer service in `arcgis_url`: provide exactly one. The output is POSM GeoJSON per station (stops, pathways and level outlines, with the GTFS columns as properties), a report of what to check, and the drawing each level was made from. The response includes a `job_id` for tracking the request. To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint. Once the job completes, `/api/v1/job/download/{job_id}` downloads a zip of all the output.
+     * @summary Converts station drawings into GTFS Pathways.
+     * @param {Blob} dataset
+     * @param {string} arcgis_url
+     * @param {string} layers
+     * @param {string} crs
+     * @param {string} control
+     * @param {string} station
+     * @param {string} level_pattern
+     * @param {string} levels
+     * @param {string} exclude_levels
+     * @param {string} agency_gtfs_dataset_id
+     * @param {string} parent_station
+     * @param {string} platforms
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GTFSPathwaysApi
+     */
+    convertGtfsPathwaysForm(dataset: Blob, arcgis_url: string, layers: string, crs: string, control: string, station: string, level_pattern: string, levels: string, exclude_levels: string, agency_gtfs_dataset_id: string, parent_station: string, platforms: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
     /**
      * Download a specific GTFS Pathways dataset as zip containing .txt files that represent transit details.
      * @summary Downloads the GTFS Pathways dataset
