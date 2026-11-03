@@ -9,7 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { UnionEntityFilters } from './union-entity-filters';
+import { UnionConfig } from './union-config';
 /**
  *
  * @export
@@ -17,27 +17,21 @@ import { UnionEntityFilters } from './union-entity-filters';
  */
 export interface OswUnionBody {
     /**
-     * **DS1 — the base, authoritative dataset.** Its positions, geometry, IDs and attribute values win whenever the two datasets disagree. Road × crossing splits and T-junction splits are the only changes made to its edges.
+     * **DS1 — the default anchor.** Where a node moves or a duplicate is dropped, DS1's stays (unless a rule sets `\"anchor\": \"ds2\"`).
      * @type {string}
      * @memberof OswUnionBody
      */
     tdei_dataset_id_one: string;
     /**
-     * **DS2 — the dataset merged into DS1.** Its features are joined onto DS1 where they match, removed where they duplicate DS1, and added where DS1 has nothing. Only attribute keys DS1 lacks are copied across.
+     * **DS2.** Moved onto DS1 or dropped where it duplicates DS1; everything else is added. Must be a different dataset from DS1.
      * @type {string}
      * @memberof OswUnionBody
      */
     tdei_dataset_id_two: string;
     /**
-     * Distance in **metres** within which a DS2 node joins a DS1 node, a DS1 node splits a DS2 edge, a DS2 edge end is joined to a DS1 edge (T-junction), and two points of the same type are merged. Measured as true ground distance in every direction. **Optional — `0.5` when omitted.** Also the default duplicate corridor width for edges and lines unless `duplicate_buffer_width` is set.
-     * @type {number}
+     * **Optional.** What the union does: sections `snap`, `dedup`, `connect`, `extensions`. Omitted: the two datasets combined, unchanged. An object, or a JSON string of one.
+     * @type {UnionConfig}
      * @memberof OswUnionBody
      */
-    proximity?: number;
-    /**
-     * **Optional.** Restricts which features are **eligible to merge** (duplicate removal and attribute merging), per file type, and tunes duplicate detection. **Omitted:** every feature is eligible. **Supplied:** only the file types named are restricted; the rest behave as default. Filters never affect **connectivity** — node joining, edge splitting, road × crossing nodes, T-junctions and every other step in section 5 always run.
-     * @type {UnionEntityFilters}
-     * @memberof OswUnionBody
-     */
-    entity_filters?: UnionEntityFilters;
+    config?: UnionConfig;
 }
