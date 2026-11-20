@@ -68,6 +68,8 @@ __exportStar(require("./project-id-tdei-dataset-id-body"), exports);
 __exportStar(require("./project-id-tdei-dataset-id-body1"), exports);
 __exportStar(require("./quality-metric-request"), exports);
 __exportStar(require("./quality-metric-tag-response"), exports);
+__exportStar(require("./qualityreport-tdei-dataset-id-body"), exports);
+__exportStar(require("./qualityreport-tdei-dataset-id-body1"), exports);
 __exportStar(require("./refresh-token-request"), exports);
 __exportStar(require("./service-metrics"), exports);
 __exportStar(require("./service-metrics-project-group"), exports);

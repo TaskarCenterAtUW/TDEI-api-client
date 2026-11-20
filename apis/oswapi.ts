@@ -26,6 +26,7 @@ import { OswUnionBody } from '../models';
 import { ProjectIdTdeiDatasetIdBody } from '../models';
 import { ProjectIdTdeiDatasetIdBody1 } from '../models';
 import { QualityMetricTagResponse } from '../models';
+import { QualityreportTdeiDatasetIdBody } from '../models';
 import { VersionList } from '../models';
 /**
  * OSWApi - axios parameter creator
@@ -1035,10 +1036,11 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
          * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Initiate Quality report generation for a dataset
          * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+         * @param {QualityreportTdeiDatasetIdBody} [body] Optional. Which points of interest (POIs) the report uses. As JSON, choose which POI types to fetch; leave out the body, or &#x60;poi_types&#x60;, to include every POI type. Overture places are fetched only in the US state(s) the dataset&#x27;s area overlaps; for an area outside every state, they are fetched without a state filter. As multipart/form-data, upload your own &#x60;pois_file&#x60; instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswQualityReportGenerate: async (tdei_dataset_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        oswQualityReportGenerate: async (tdei_dataset_id: string, body?: QualityreportTdeiDatasetIdBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tdei_dataset_id' is not null or undefined
             if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
                 throw new RequiredError('tdei_dataset_id','Required parameter tdei_dataset_id was null or undefined when calling oswQualityReportGenerate.');
@@ -1054,6 +1056,7 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
 
             // authentication AuthorizationToken required
             // http bearer authentication required
@@ -1063,6 +1066,8 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
             }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -1074,6 +1079,66 @@ export const OSWApiAxiosParamCreator = function (configuration?: Configuration) 
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Initiate Quality report generation for a dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+         * @param {Blob} [pois_file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswQualityReportGenerateForm: async (tdei_dataset_id: string, pois_file?: Blob, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tdei_dataset_id' is not null or undefined
+            if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
+                throw new RequiredError('tdei_dataset_id','Required parameter tdei_dataset_id was null or undefined when calling oswQualityReportGenerateForm.');
+            }
+            const localVarPath = `/api/v1/osw/quality-report/{tdei_dataset_id}`
+                .replace(`{${"tdei_dataset_id"}}`, encodeURIComponent(String(tdei_dataset_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
+
+            // authentication AuthorizationToken required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+
+            if (pois_file !== undefined) { 
+                localVarFormParams.append('pois_file', pois_file as any);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -1844,11 +1909,27 @@ export const OSWApiFp = function(configuration?: Configuration) {
          * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Initiate Quality report generation for a dataset
          * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+         * @param {QualityreportTdeiDatasetIdBody} [body] Optional. Which points of interest (POIs) the report uses. As JSON, choose which POI types to fetch; leave out the body, or &#x60;poi_types&#x60;, to include every POI type. Overture places are fetched only in the US state(s) the dataset&#x27;s area overlaps; for an area outside every state, they are fetched without a state filter. As multipart/form-data, upload your own &#x60;pois_file&#x60; instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswQualityReportGenerate(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
-            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswQualityReportGenerate(tdei_dataset_id, options);
+        async oswQualityReportGenerate(tdei_dataset_id: string, body?: QualityreportTdeiDatasetIdBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswQualityReportGenerate(tdei_dataset_id, body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Initiate Quality report generation for a dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+         * @param {Blob} [pois_file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async oswQualityReportGenerateForm(tdei_dataset_id: string, pois_file?: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>> {
+            const localVarAxiosArgs = await OSWApiAxiosParamCreator(configuration).oswQualityReportGenerateForm(tdei_dataset_id, pois_file, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -2166,11 +2247,23 @@ export const OSWApiFactory = function (configuration?: Configuration, basePath?:
          * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Initiate Quality report generation for a dataset
          * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+         * @param {QualityreportTdeiDatasetIdBody} [body] Optional. Which points of interest (POIs) the report uses. As JSON, choose which POI types to fetch; leave out the body, or &#x60;poi_types&#x60;, to include every POI type. Overture places are fetched only in the US state(s) the dataset&#x27;s area overlaps; for an area outside every state, they are fetched without a state filter. As multipart/form-data, upload your own &#x60;pois_file&#x60; instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async oswQualityReportGenerate(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
-            return OSWApiFp(configuration).oswQualityReportGenerate(tdei_dataset_id, options).then((request) => request(axios, basePath));
+        async oswQualityReportGenerate(tdei_dataset_id: string, body?: QualityreportTdeiDatasetIdBody, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return OSWApiFp(configuration).oswQualityReportGenerate(tdei_dataset_id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Initiate Quality report generation for a dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+         * @param {Blob} [pois_file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async oswQualityReportGenerateForm(tdei_dataset_id: string, pois_file?: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
+            return OSWApiFp(configuration).oswQualityReportGenerateForm(tdei_dataset_id, pois_file, options).then((request) => request(axios, basePath));
         },
         /**
          * This function merges spatial entities within one dataset by unifying nodes, edges, and polygons into consolidated geometries which are within the specified proximity. Entities that are within the specified proximity are treated as equivalent and merged. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
@@ -2468,12 +2561,26 @@ export class OSWApi extends BaseAPI {
      * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Initiate Quality report generation for a dataset
      * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {QualityreportTdeiDatasetIdBody} [body] Optional. Which points of interest (POIs) the report uses. As JSON, choose which POI types to fetch; leave out the body, or &#x60;poi_types&#x60;, to include every POI type. Overture places are fetched only in the US state(s) the dataset&#x27;s area overlaps; for an area outside every state, they are fetched without a state filter. As multipart/form-data, upload your own &#x60;pois_file&#x60; instead.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OSWApi
      */
-    public async oswQualityReportGenerate(tdei_dataset_id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
-        return OSWApiFp(this.configuration).oswQualityReportGenerate(tdei_dataset_id, options).then((request) => request(this.axios, this.basePath));
+    public async oswQualityReportGenerate(tdei_dataset_id: string, body?: QualityreportTdeiDatasetIdBody, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return OSWApiFp(this.configuration).oswQualityReportGenerate(tdei_dataset_id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Initiate Quality report generation for a dataset
+     * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {Blob} [pois_file] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OSWApi
+     */
+    public async oswQualityReportGenerateForm(tdei_dataset_id: string, pois_file?: Blob, options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
+        return OSWApiFp(this.configuration).oswQualityReportGenerateForm(tdei_dataset_id, pois_file, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This function merges spatial entities within one dataset by unifying nodes, edges, and polygons into consolidated geometries which are within the specified proximity. Entities that are within the specified proximity are treated as equivalent and merged. The function outputs a single cohesive dataset.The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.

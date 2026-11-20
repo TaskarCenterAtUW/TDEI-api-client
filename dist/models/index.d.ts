@@ -52,6 +52,8 @@ export * from './project-id-tdei-dataset-id-body';
 export * from './project-id-tdei-dataset-id-body1';
 export * from './quality-metric-request';
 export * from './quality-metric-tag-response';
+export * from './qualityreport-tdei-dataset-id-body';
+export * from './qualityreport-tdei-dataset-id-body1';
 export * from './refresh-token-request';
 export * from './service-metrics';
 export * from './service-metrics-project-group';
