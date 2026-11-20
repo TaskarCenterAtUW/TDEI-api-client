@@ -91,13 +91,14 @@ var QualityReportApiAxiosParamCreator = function (configuration) {
          * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Initiate Quality report generation for a dataset
          * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+         * @param {QualityreportTdeiDatasetIdBody} [body] Optional. Which points of interest (POIs) the report uses. As JSON, choose which POI types to fetch; leave out the body, or &#x60;poi_types&#x60;, to include every POI type. Overture places are fetched only in the US state(s) the dataset&#x27;s area overlaps; for an area outside every state, they are fetched without a state filter. As multipart/form-data, upload your own &#x60;pois_file&#x60; instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswQualityReportGenerate: function (tdei_dataset_id, options) {
+        oswQualityReportGenerate: function (tdei_dataset_id, body, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, accessToken, _a, query, key, key, headersFromBaseOptions;
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, accessToken, _a, query, key, key, headersFromBaseOptions, needsSerialization;
                 return __generator(this, function (_b) {
                     switch (_b.label) {
                         case 0:
@@ -114,6 +115,7 @@ var QualityReportApiAxiosParamCreator = function (configuration) {
                             localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
                             localVarHeaderParameter = {};
                             localVarQueryParameter = {};
+                            localVarFormParams = new FormData();
                             if (!(configuration && configuration.accessToken)) return [3 /*break*/, 5];
                             if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 2];
                             return [4 /*yield*/, configuration.accessToken()];
@@ -129,6 +131,7 @@ var QualityReportApiAxiosParamCreator = function (configuration) {
                             localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
                             _b.label = 5;
                         case 5:
+                            localVarHeaderParameter['Content-Type'] = 'application/json';
                             query = new URLSearchParams(localVarUrlObj.search);
                             for (key in localVarQueryParameter) {
                                 query.set(key, localVarQueryParameter[key]);
@@ -139,6 +142,75 @@ var QualityReportApiAxiosParamCreator = function (configuration) {
                             localVarUrlObj.search = (new URLSearchParams(query)).toString();
                             headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
                             localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+                            localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+                            return [2 /*return*/, {
+                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                                    options: localVarRequestOptions,
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Initiate Quality report generation for a dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+         * @param {Blob} [pois_file]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswQualityReportGenerateForm: function (tdei_dataset_id, pois_file, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarFormParams, accessToken, _a, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            // verify required parameter 'tdei_dataset_id' is not null or undefined
+                            if (tdei_dataset_id === null || tdei_dataset_id === undefined) {
+                                throw new base_1.RequiredError('tdei_dataset_id', 'Required parameter tdei_dataset_id was null or undefined when calling oswQualityReportGenerateForm.');
+                            }
+                            localVarPath = "/api/v1/osw/quality-report/{tdei_dataset_id}"
+                                .replace("{".concat("tdei_dataset_id", "}"), encodeURIComponent(String(tdei_dataset_id)));
+                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                            if (configuration) {
+                                baseOptions = configuration.baseOptions;
+                            }
+                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                            localVarHeaderParameter = {};
+                            localVarQueryParameter = {};
+                            localVarFormParams = new FormData();
+                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 5];
+                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 2];
+                            return [4 /*yield*/, configuration.accessToken()];
+                        case 1:
+                            _a = _b.sent();
+                            return [3 /*break*/, 4];
+                        case 2: return [4 /*yield*/, configuration.accessToken];
+                        case 3:
+                            _a = _b.sent();
+                            _b.label = 4;
+                        case 4:
+                            accessToken = _a;
+                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+                            _b.label = 5;
+                        case 5:
+                            if (pois_file !== undefined) {
+                                localVarFormParams.append('pois_file', pois_file);
+                            }
+                            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+                            query = new URLSearchParams(localVarUrlObj.search);
+                            for (key in localVarQueryParameter) {
+                                query.set(key, localVarQueryParameter[key]);
+                            }
+                            for (key in options.params) {
+                                query.set(key, options.params[key]);
+                            }
+                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                            localVarRequestOptions.data = localVarFormParams;
                             return [2 /*return*/, {
                                     url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
                                     options: localVarRequestOptions,
@@ -160,15 +232,42 @@ var QualityReportApiFp = function (configuration) {
          * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Initiate Quality report generation for a dataset
          * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+         * @param {QualityreportTdeiDatasetIdBody} [body] Optional. Which points of interest (POIs) the report uses. As JSON, choose which POI types to fetch; leave out the body, or &#x60;poi_types&#x60;, to include every POI type. Overture places are fetched only in the US state(s) the dataset&#x27;s area overlaps; for an area outside every state, they are fetched without a state filter. As multipart/form-data, upload your own &#x60;pois_file&#x60; instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswQualityReportGenerate: function (tdei_dataset_id, options) {
+        oswQualityReportGenerate: function (tdei_dataset_id, body, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, (0, exports.QualityReportApiAxiosParamCreator)(configuration).oswQualityReportGenerate(tdei_dataset_id, options)];
+                        case 0: return [4 /*yield*/, (0, exports.QualityReportApiAxiosParamCreator)(configuration).oswQualityReportGenerate(tdei_dataset_id, body, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Initiate Quality report generation for a dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+         * @param {Blob} [pois_file]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswQualityReportGenerateForm: function (tdei_dataset_id, pois_file, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, (0, exports.QualityReportApiAxiosParamCreator)(configuration).oswQualityReportGenerateForm(tdei_dataset_id, pois_file, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -194,13 +293,29 @@ var QualityReportApiFactory = function (configuration, basePath, axios) {
          * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
          * @summary Initiate Quality report generation for a dataset
          * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+         * @param {QualityreportTdeiDatasetIdBody} [body] Optional. Which points of interest (POIs) the report uses. As JSON, choose which POI types to fetch; leave out the body, or &#x60;poi_types&#x60;, to include every POI type. Overture places are fetched only in the US state(s) the dataset&#x27;s area overlaps; for an area outside every state, they are fetched without a state filter. As multipart/form-data, upload your own &#x60;pois_file&#x60; instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        oswQualityReportGenerate: function (tdei_dataset_id, options) {
+        oswQualityReportGenerate: function (tdei_dataset_id, body, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, (0, exports.QualityReportApiFp)(configuration).oswQualityReportGenerate(tdei_dataset_id, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, (0, exports.QualityReportApiFp)(configuration).oswQualityReportGenerate(tdei_dataset_id, body, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+         * @summary Initiate Quality report generation for a dataset
+         * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+         * @param {Blob} [pois_file]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oswQualityReportGenerateForm: function (tdei_dataset_id, pois_file, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, (0, exports.QualityReportApiFp)(configuration).oswQualityReportGenerateForm(tdei_dataset_id, pois_file, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -222,15 +337,33 @@ var QualityReportApi = /** @class */ (function (_super) {
      * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Initiate Quality report generation for a dataset
      * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {QualityreportTdeiDatasetIdBody} [body] Optional. Which points of interest (POIs) the report uses. As JSON, choose which POI types to fetch; leave out the body, or &#x60;poi_types&#x60;, to include every POI type. Overture places are fetched only in the US state(s) the dataset&#x27;s area overlaps; for an area outside every state, they are fetched without a state filter. As multipart/form-data, upload your own &#x60;pois_file&#x60; instead.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QualityReportApi
      */
-    QualityReportApi.prototype.oswQualityReportGenerate = function (tdei_dataset_id, options) {
+    QualityReportApi.prototype.oswQualityReportGenerate = function (tdei_dataset_id, body, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, (0, exports.QualityReportApiFp)(this.configuration).oswQualityReportGenerate(tdei_dataset_id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, (0, exports.QualityReportApiFp)(this.configuration).oswQualityReportGenerate(tdei_dataset_id, body, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Initiate Quality report generation for a dataset
+     * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {Blob} [pois_file]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QualityReportApi
+     */
+    QualityReportApi.prototype.oswQualityReportGenerateForm = function (tdei_dataset_id, pois_file, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, (0, exports.QualityReportApiFp)(this.configuration).oswQualityReportGenerateForm(tdei_dataset_id, pois_file, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

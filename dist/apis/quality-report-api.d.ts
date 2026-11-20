@@ -12,6 +12,7 @@
 import { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 import { RequestArgs, BaseAPI } from '../base';
+import { QualityreportTdeiDatasetIdBody } from '../models';
 /**
  * QualityReportApi - axios parameter creator
  * @export
@@ -21,10 +22,20 @@ export declare const QualityReportApiAxiosParamCreator: (configuration?: Configu
      * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Initiate Quality report generation for a dataset
      * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {QualityreportTdeiDatasetIdBody} [body] Optional. Which points of interest (POIs) the report uses. As JSON, choose which POI types to fetch; leave out the body, or &#x60;poi_types&#x60;, to include every POI type. Overture places are fetched only in the US state(s) the dataset&#x27;s area overlaps; for an area outside every state, they are fetched without a state filter. As multipart/form-data, upload your own &#x60;pois_file&#x60; instead.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswQualityReportGenerate: (tdei_dataset_id: string, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    oswQualityReportGenerate: (tdei_dataset_id: string, body?: QualityreportTdeiDatasetIdBody, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Initiate Quality report generation for a dataset
+     * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {Blob} [pois_file]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswQualityReportGenerateForm: (tdei_dataset_id: string, pois_file?: Blob, options?: AxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * QualityReportApi - functional programming interface
@@ -35,10 +46,20 @@ export declare const QualityReportApiFp: (configuration?: Configuration) => {
      * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Initiate Quality report generation for a dataset
      * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {QualityreportTdeiDatasetIdBody} [body] Optional. Which points of interest (POIs) the report uses. As JSON, choose which POI types to fetch; leave out the body, or &#x60;poi_types&#x60;, to include every POI type. Overture places are fetched only in the US state(s) the dataset&#x27;s area overlaps; for an area outside every state, they are fetched without a state filter. As multipart/form-data, upload your own &#x60;pois_file&#x60; instead.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswQualityReportGenerate(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    oswQualityReportGenerate(tdei_dataset_id: string, body?: QualityreportTdeiDatasetIdBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
+    /**
+     * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Initiate Quality report generation for a dataset
+     * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {Blob} [pois_file]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswQualityReportGenerateForm(tdei_dataset_id: string, pois_file?: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<string>>>;
 };
 /**
  * QualityReportApi - factory interface
@@ -49,10 +70,20 @@ export declare const QualityReportApiFactory: (configuration?: Configuration, ba
      * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Initiate Quality report generation for a dataset
      * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {QualityreportTdeiDatasetIdBody} [body] Optional. Which points of interest (POIs) the report uses. As JSON, choose which POI types to fetch; leave out the body, or &#x60;poi_types&#x60;, to include every POI type. Overture places are fetched only in the US state(s) the dataset&#x27;s area overlaps; for an area outside every state, they are fetched without a state filter. As multipart/form-data, upload your own &#x60;pois_file&#x60; instead.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    oswQualityReportGenerate(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    oswQualityReportGenerate(tdei_dataset_id: string, body?: QualityreportTdeiDatasetIdBody, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Initiate Quality report generation for a dataset
+     * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {Blob} [pois_file]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    oswQualityReportGenerateForm(tdei_dataset_id: string, pois_file?: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
 };
 /**
  * QualityReportApi - object-oriented interface
@@ -65,9 +96,20 @@ export declare class QualityReportApi extends BaseAPI {
      * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
      * @summary Initiate Quality report generation for a dataset
      * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {QualityreportTdeiDatasetIdBody} [body] Optional. Which points of interest (POIs) the report uses. As JSON, choose which POI types to fetch; leave out the body, or &#x60;poi_types&#x60;, to include every POI type. Overture places are fetched only in the US state(s) the dataset&#x27;s area overlaps; for an area outside every state, they are fetched without a state filter. As multipart/form-data, upload your own &#x60;pois_file&#x60; instead.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof QualityReportApi
      */
-    oswQualityReportGenerate(tdei_dataset_id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    oswQualityReportGenerate(tdei_dataset_id: string, body?: QualityreportTdeiDatasetIdBody, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
+    /**
+     * Initiates the Quality report generation for requested `tdei_dataset_id`. The response includes a `job_id` for tracking the request.To check the request status, refer to the location header in the response, which provides the URL for the status API endpoint.
+     * @summary Initiate Quality report generation for a dataset
+     * @param {string} tdei_dataset_id Dataset id of the dataset for which Quality report is to be generated.
+     * @param {Blob} [pois_file]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof QualityReportApi
+     */
+    oswQualityReportGenerateForm(tdei_dataset_id: string, pois_file?: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
 }
