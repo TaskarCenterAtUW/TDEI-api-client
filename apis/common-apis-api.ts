@@ -326,7 +326,7 @@ export const CommonAPIsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * <p>This API returns filtered and sorted lists of TDEI datasets. The matching behavior of filter parameters may vary depending on the attribute type.</p> <p>By default results will include all datasets in released status AND all dataset in pre-release status within the requesting user's project group. This behavior can be controlled by the status parameter.  In no situation can a user see pre-release datasets from a project group the user is not part of.</p>    <b>Primary use cases include</b>: <ul> <li><b>name search</b>: Given a search string X, return all datasets with a name that contains the search string X </li> <li><b>dataset id lookup</b>: Given a tdei_dataset_id, return the dataset with the matching id </li> <li> <b>bounding box</b>: Given xmin, xmax, ymin, ymax, return datasets with dataset_area overlapping the bounding box </li> </ul>    <b>Sorting</b>:<br> <p>Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'.</p>
+         * <p>This API returns filtered and sorted lists of TDEI datasets. The matching behavior of filter parameters may vary depending on the attribute type.</p> <p>By default results will include all datasets in released status AND all dataset in pre-release status within the requesting user's project group. This behavior can be controlled by the status parameter.  In no situation can a user see pre-release datasets from a project group the user is not part of.</p>    <b>Primary use cases include</b>: <ul> <li><b>name search</b>: Given a search string X, return all datasets with a name that contains the search string X </li> <li><b>dataset id lookup</b>: Given a tdei_dataset_id, return the dataset with the matching id </li> <li> <b>bounding box</b>: Given xmin, xmax, ymin, ymax, return datasets with dataset_area overlapping the bounding box </li> </ul>    <b>Sorting</b>:<br> <p>Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'.</p> <p><b>Pagination</b>: The body is one page of matches. page_no defaults to 1 and page_size defaults to 10 (values above 50 are capped at 50). X-Total-Count, X-Page-No, and X-Page-Size are always set. A Link header with rel=\"next\" is set only when another page exists, and it keeps the other query filters.</p>
          * @summary Lists the TDEI datasets in the system.
          * @param {string} [data_type] &lt;strong&gt;Type of the dataset&lt;/strong&gt;. Filters datasets by matching the exact value from the supported enumeration.
          * @param {string} [status] &lt;p&gt;&lt;strong&gt;Status of the dataset:&lt;/strong&gt; Filters datasets by status — &lt;code&gt;All&lt;/code&gt; (default) returns released datasets and pre-release datasets from the user&#x27;s project groups; &lt;code&gt;Pre-Release&lt;/code&gt; and &lt;code&gt;Publish&lt;/code&gt; return only datasets in that status from affiliated project groups.&lt;/p&gt;
@@ -383,8 +383,8 @@ export const CommonAPIsApiAxiosParamCreator = function (configuration?: Configur
          * @param {string} [excluded_data_reason] &lt;strong&gt;Excluded data reason:&lt;/strong&gt; Filters datasets based on the reason for excluding data. Supports contains match.
          * @param {boolean} [data_viewer_allowed] &lt;strong&gt;Data viewer allowed:&lt;/strong&gt; Filters datasets based on whether data viewer access is allowed. Uses a boolean value.
          * @param {boolean} [include_my_groups] &lt;strong&gt;Include my Group:&lt;/strong&gt; When true, the API returns datasets only from project groups the authenticated user belongs to.
-         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters datasets by retrieving results in pages.
-         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer. Page of matching datasets to return. Defaults to 1 when omitted, not a number, or less than 1. The resolved page is returned in the X-Page-No response header.
+         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer. Number of datasets in the page. Defaults to 10 when omitted or invalid, and values above 50 are capped at 50. The resolved size is returned in the X-Page-Size response header.
          * @param {string} [sort_field] &lt;strong&gt;Sort field:&lt;/strong&gt; The field by which to sort the results. By default, it is by uploaded timestamp. Matches the exact value from the supported enumeration.
          * @param {string} [sort_order] &lt;strong&gt;Sort order:&lt;/strong&gt; By default, it is in descending order.
          * @param {*} [options] Override http request option.
@@ -672,15 +672,15 @@ export const CommonAPIsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Returns a list of jobs including request and reponse details. By default only shows the jobs that are submitted by the user.
+         * Returns a list of jobs including request and reponse details. By default only shows the jobs that are submitted by the user. Results are always one page. page_no defaults to 1 and page_size defaults to 10 (values above 50 are capped at 50). X-Total-Count, X-Page-No, and X-Page-Size are always set. A Link header with rel=\"next\" is set only when another page exists, and it keeps the other query filters.
          * @summary Shows the details of the jobs that the user has access to.
          * @param {string} tdei_project_group_id project group id of the user for which the jobs are listed for.
          * @param {string} [job_id] Get the details for the job with id&#x3D;job_id only.
          * @param {boolean} [show_group_jobs] Make this &#x60;true&#x60; to see the jobs submitted by others also in the given project group
          * @param {string} [job_type] Use this to filter for a specific type of job
          * @param {string} [status] Status of the job. Use this to filter jobs by a specific status
-         * @param {number} [page_no] Pagination: page number to start the list from. Defaults to 1.
-         * @param {number} [page_size] Total records to retrieve.Page size ranges between 1 to 50, defaults to 10.
+         * @param {number} [page_no] Page of matching jobs to return. Defaults to 1 when omitted, not a number, or less than 1. The resolved page is returned in the X-Page-No response header.
+         * @param {number} [page_size] Number of jobs in the page. Defaults to 10 when omitted or invalid, and values above 50 are capped at 50. The resolved size is returned in the X-Page-Size response header.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -997,7 +997,7 @@ export const CommonAPIsApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * <p>This API returns filtered and sorted lists of TDEI datasets. The matching behavior of filter parameters may vary depending on the attribute type.</p> <p>By default results will include all datasets in released status AND all dataset in pre-release status within the requesting user's project group. This behavior can be controlled by the status parameter.  In no situation can a user see pre-release datasets from a project group the user is not part of.</p>    <b>Primary use cases include</b>: <ul> <li><b>name search</b>: Given a search string X, return all datasets with a name that contains the search string X </li> <li><b>dataset id lookup</b>: Given a tdei_dataset_id, return the dataset with the matching id </li> <li> <b>bounding box</b>: Given xmin, xmax, ymin, ymax, return datasets with dataset_area overlapping the bounding box </li> </ul>    <b>Sorting</b>:<br> <p>Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'.</p>
+         * <p>This API returns filtered and sorted lists of TDEI datasets. The matching behavior of filter parameters may vary depending on the attribute type.</p> <p>By default results will include all datasets in released status AND all dataset in pre-release status within the requesting user's project group. This behavior can be controlled by the status parameter.  In no situation can a user see pre-release datasets from a project group the user is not part of.</p>    <b>Primary use cases include</b>: <ul> <li><b>name search</b>: Given a search string X, return all datasets with a name that contains the search string X </li> <li><b>dataset id lookup</b>: Given a tdei_dataset_id, return the dataset with the matching id </li> <li> <b>bounding box</b>: Given xmin, xmax, ymin, ymax, return datasets with dataset_area overlapping the bounding box </li> </ul>    <b>Sorting</b>:<br> <p>Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'.</p> <p><b>Pagination</b>: The body is one page of matches. page_no defaults to 1 and page_size defaults to 10 (values above 50 are capped at 50). X-Total-Count, X-Page-No, and X-Page-Size are always set. A Link header with rel=\"next\" is set only when another page exists, and it keeps the other query filters.</p>
          * @summary Lists the TDEI datasets in the system.
          * @param {string} [data_type] &lt;strong&gt;Type of the dataset&lt;/strong&gt;. Filters datasets by matching the exact value from the supported enumeration.
          * @param {string} [status] &lt;p&gt;&lt;strong&gt;Status of the dataset:&lt;/strong&gt; Filters datasets by status — &lt;code&gt;All&lt;/code&gt; (default) returns released datasets and pre-release datasets from the user&#x27;s project groups; &lt;code&gt;Pre-Release&lt;/code&gt; and &lt;code&gt;Publish&lt;/code&gt; return only datasets in that status from affiliated project groups.&lt;/p&gt;
@@ -1054,8 +1054,8 @@ export const CommonAPIsApiFp = function(configuration?: Configuration) {
          * @param {string} [excluded_data_reason] &lt;strong&gt;Excluded data reason:&lt;/strong&gt; Filters datasets based on the reason for excluding data. Supports contains match.
          * @param {boolean} [data_viewer_allowed] &lt;strong&gt;Data viewer allowed:&lt;/strong&gt; Filters datasets based on whether data viewer access is allowed. Uses a boolean value.
          * @param {boolean} [include_my_groups] &lt;strong&gt;Include my Group:&lt;/strong&gt; When true, the API returns datasets only from project groups the authenticated user belongs to.
-         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters datasets by retrieving results in pages.
-         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer. Page of matching datasets to return. Defaults to 1 when omitted, not a number, or less than 1. The resolved page is returned in the X-Page-No response header.
+         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer. Number of datasets in the page. Defaults to 10 when omitted or invalid, and values above 50 are capped at 50. The resolved size is returned in the X-Page-Size response header.
          * @param {string} [sort_field] &lt;strong&gt;Sort field:&lt;/strong&gt; The field by which to sort the results. By default, it is by uploaded timestamp. Matches the exact value from the supported enumeration.
          * @param {string} [sort_order] &lt;strong&gt;Sort order:&lt;/strong&gt; By default, it is in descending order.
          * @param {*} [options] Override http request option.
@@ -1069,15 +1069,15 @@ export const CommonAPIsApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Returns a list of jobs including request and reponse details. By default only shows the jobs that are submitted by the user.
+         * Returns a list of jobs including request and reponse details. By default only shows the jobs that are submitted by the user. Results are always one page. page_no defaults to 1 and page_size defaults to 10 (values above 50 are capped at 50). X-Total-Count, X-Page-No, and X-Page-Size are always set. A Link header with rel=\"next\" is set only when another page exists, and it keeps the other query filters.
          * @summary Shows the details of the jobs that the user has access to.
          * @param {string} tdei_project_group_id project group id of the user for which the jobs are listed for.
          * @param {string} [job_id] Get the details for the job with id&#x3D;job_id only.
          * @param {boolean} [show_group_jobs] Make this &#x60;true&#x60; to see the jobs submitted by others also in the given project group
          * @param {string} [job_type] Use this to filter for a specific type of job
          * @param {string} [status] Status of the job. Use this to filter jobs by a specific status
-         * @param {number} [page_no] Pagination: page number to start the list from. Defaults to 1.
-         * @param {number} [page_size] Total records to retrieve.Page size ranges between 1 to 50, defaults to 10.
+         * @param {number} [page_no] Page of matching jobs to return. Defaults to 1 when omitted, not a number, or less than 1. The resolved page is returned in the X-Page-No response header.
+         * @param {number} [page_size] Number of jobs in the page. Defaults to 10 when omitted or invalid, and values above 50 are capped at 50. The resolved size is returned in the X-Page-Size response header.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1188,7 +1188,7 @@ export const CommonAPIsApiFactory = function (configuration?: Configuration, bas
             return CommonAPIsApiFp(configuration).listApiVersions(options).then((request) => request(axios, basePath));
         },
         /**
-         * <p>This API returns filtered and sorted lists of TDEI datasets. The matching behavior of filter parameters may vary depending on the attribute type.</p> <p>By default results will include all datasets in released status AND all dataset in pre-release status within the requesting user's project group. This behavior can be controlled by the status parameter.  In no situation can a user see pre-release datasets from a project group the user is not part of.</p>    <b>Primary use cases include</b>: <ul> <li><b>name search</b>: Given a search string X, return all datasets with a name that contains the search string X </li> <li><b>dataset id lookup</b>: Given a tdei_dataset_id, return the dataset with the matching id </li> <li> <b>bounding box</b>: Given xmin, xmax, ymin, ymax, return datasets with dataset_area overlapping the bounding box </li> </ul>    <b>Sorting</b>:<br> <p>Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'.</p>
+         * <p>This API returns filtered and sorted lists of TDEI datasets. The matching behavior of filter parameters may vary depending on the attribute type.</p> <p>By default results will include all datasets in released status AND all dataset in pre-release status within the requesting user's project group. This behavior can be controlled by the status parameter.  In no situation can a user see pre-release datasets from a project group the user is not part of.</p>    <b>Primary use cases include</b>: <ul> <li><b>name search</b>: Given a search string X, return all datasets with a name that contains the search string X </li> <li><b>dataset id lookup</b>: Given a tdei_dataset_id, return the dataset with the matching id </li> <li> <b>bounding box</b>: Given xmin, xmax, ymin, ymax, return datasets with dataset_area overlapping the bounding box </li> </ul>    <b>Sorting</b>:<br> <p>Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'.</p> <p><b>Pagination</b>: The body is one page of matches. page_no defaults to 1 and page_size defaults to 10 (values above 50 are capped at 50). X-Total-Count, X-Page-No, and X-Page-Size are always set. A Link header with rel=\"next\" is set only when another page exists, and it keeps the other query filters.</p>
          * @summary Lists the TDEI datasets in the system.
          * @param {string} [data_type] &lt;strong&gt;Type of the dataset&lt;/strong&gt;. Filters datasets by matching the exact value from the supported enumeration.
          * @param {string} [status] &lt;p&gt;&lt;strong&gt;Status of the dataset:&lt;/strong&gt; Filters datasets by status — &lt;code&gt;All&lt;/code&gt; (default) returns released datasets and pre-release datasets from the user&#x27;s project groups; &lt;code&gt;Pre-Release&lt;/code&gt; and &lt;code&gt;Publish&lt;/code&gt; return only datasets in that status from affiliated project groups.&lt;/p&gt;
@@ -1245,8 +1245,8 @@ export const CommonAPIsApiFactory = function (configuration?: Configuration, bas
          * @param {string} [excluded_data_reason] &lt;strong&gt;Excluded data reason:&lt;/strong&gt; Filters datasets based on the reason for excluding data. Supports contains match.
          * @param {boolean} [data_viewer_allowed] &lt;strong&gt;Data viewer allowed:&lt;/strong&gt; Filters datasets based on whether data viewer access is allowed. Uses a boolean value.
          * @param {boolean} [include_my_groups] &lt;strong&gt;Include my Group:&lt;/strong&gt; When true, the API returns datasets only from project groups the authenticated user belongs to.
-         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters datasets by retrieving results in pages.
-         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+         * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer. Page of matching datasets to return. Defaults to 1 when omitted, not a number, or less than 1. The resolved page is returned in the X-Page-No response header.
+         * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer. Number of datasets in the page. Defaults to 10 when omitted or invalid, and values above 50 are capped at 50. The resolved size is returned in the X-Page-Size response header.
          * @param {string} [sort_field] &lt;strong&gt;Sort field:&lt;/strong&gt; The field by which to sort the results. By default, it is by uploaded timestamp. Matches the exact value from the supported enumeration.
          * @param {string} [sort_order] &lt;strong&gt;Sort order:&lt;/strong&gt; By default, it is in descending order.
          * @param {*} [options] Override http request option.
@@ -1256,15 +1256,15 @@ export const CommonAPIsApiFactory = function (configuration?: Configuration, bas
             return CommonAPIsApiFp(configuration).listDatasetFiles(data_type, status, name, version, data_source, collection_method, collected_by, derived_from_dataset_id, collection_date, confidence_level, schema_version, tdei_project_group_id, tdei_service_id, valid_from, valid_to, tdei_dataset_id, bbox, other_published_locations, dataset_update_frequency_months, schema_validation_run_description, full_dataset_name, collection_name, department_name, city, region, county, key_limitations, release_notes, challenges, official_maintainer, last_updated, update_frequency, authorization_chain, maintenance_funded, funding_details, point_data_collection_device, node_locations_and_attributes_editing_software, data_collected_by_people, data_collectors, data_captured_automatically, automated_collection, data_collectors_organization, data_collector_compensation, preprocessing_location, preprocessing_by, preprocessing_steps, data_collection_preprocessing_documentation, documentation_uri, validation_process_exists, validation_process_description, validation_conducted_by, excluded_data, excluded_data_reason, data_viewer_allowed, include_my_groups, page_no, page_size, sort_field, sort_order, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of jobs including request and reponse details. By default only shows the jobs that are submitted by the user.
+         * Returns a list of jobs including request and reponse details. By default only shows the jobs that are submitted by the user. Results are always one page. page_no defaults to 1 and page_size defaults to 10 (values above 50 are capped at 50). X-Total-Count, X-Page-No, and X-Page-Size are always set. A Link header with rel=\"next\" is set only when another page exists, and it keeps the other query filters.
          * @summary Shows the details of the jobs that the user has access to.
          * @param {string} tdei_project_group_id project group id of the user for which the jobs are listed for.
          * @param {string} [job_id] Get the details for the job with id&#x3D;job_id only.
          * @param {boolean} [show_group_jobs] Make this &#x60;true&#x60; to see the jobs submitted by others also in the given project group
          * @param {string} [job_type] Use this to filter for a specific type of job
          * @param {string} [status] Status of the job. Use this to filter jobs by a specific status
-         * @param {number} [page_no] Pagination: page number to start the list from. Defaults to 1.
-         * @param {number} [page_size] Total records to retrieve.Page size ranges between 1 to 50, defaults to 10.
+         * @param {number} [page_no] Page of matching jobs to return. Defaults to 1 when omitted, not a number, or less than 1. The resolved page is returned in the X-Page-No response header.
+         * @param {number} [page_size] Number of jobs in the page. Defaults to 10 when omitted or invalid, and values above 50 are capped at 50. The resolved size is returned in the X-Page-Size response header.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1369,7 +1369,7 @@ export class CommonAPIsApi extends BaseAPI {
         return CommonAPIsApiFp(this.configuration).listApiVersions(options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * <p>This API returns filtered and sorted lists of TDEI datasets. The matching behavior of filter parameters may vary depending on the attribute type.</p> <p>By default results will include all datasets in released status AND all dataset in pre-release status within the requesting user's project group. This behavior can be controlled by the status parameter.  In no situation can a user see pre-release datasets from a project group the user is not part of.</p>    <b>Primary use cases include</b>: <ul> <li><b>name search</b>: Given a search string X, return all datasets with a name that contains the search string X </li> <li><b>dataset id lookup</b>: Given a tdei_dataset_id, return the dataset with the matching id </li> <li> <b>bounding box</b>: Given xmin, xmax, ymin, ymax, return datasets with dataset_area overlapping the bounding box </li> </ul>    <b>Sorting</b>:<br> <p>Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'.</p>
+     * <p>This API returns filtered and sorted lists of TDEI datasets. The matching behavior of filter parameters may vary depending on the attribute type.</p> <p>By default results will include all datasets in released status AND all dataset in pre-release status within the requesting user's project group. This behavior can be controlled by the status parameter.  In no situation can a user see pre-release datasets from a project group the user is not part of.</p>    <b>Primary use cases include</b>: <ul> <li><b>name search</b>: Given a search string X, return all datasets with a name that contains the search string X </li> <li><b>dataset id lookup</b>: Given a tdei_dataset_id, return the dataset with the matching id </li> <li> <b>bounding box</b>: Given xmin, xmax, ymin, ymax, return datasets with dataset_area overlapping the bounding box </li> </ul>    <b>Sorting</b>:<br> <p>Users can sort datasets by 'valid_to', 'valid_from', 'uploaded date', 'project group name', and 'status'.</p> <p><b>Pagination</b>: The body is one page of matches. page_no defaults to 1 and page_size defaults to 10 (values above 50 are capped at 50). X-Total-Count, X-Page-No, and X-Page-Size are always set. A Link header with rel=\"next\" is set only when another page exists, and it keeps the other query filters.</p>
      * @summary Lists the TDEI datasets in the system.
      * @param {string} [data_type] &lt;strong&gt;Type of the dataset&lt;/strong&gt;. Filters datasets by matching the exact value from the supported enumeration.
      * @param {string} [status] &lt;p&gt;&lt;strong&gt;Status of the dataset:&lt;/strong&gt; Filters datasets by status — &lt;code&gt;All&lt;/code&gt; (default) returns released datasets and pre-release datasets from the user&#x27;s project groups; &lt;code&gt;Pre-Release&lt;/code&gt; and &lt;code&gt;Publish&lt;/code&gt; return only datasets in that status from affiliated project groups.&lt;/p&gt;
@@ -1426,8 +1426,8 @@ export class CommonAPIsApi extends BaseAPI {
      * @param {string} [excluded_data_reason] &lt;strong&gt;Excluded data reason:&lt;/strong&gt; Filters datasets based on the reason for excluding data. Supports contains match.
      * @param {boolean} [data_viewer_allowed] &lt;strong&gt;Data viewer allowed:&lt;/strong&gt; Filters datasets based on whether data viewer access is allowed. Uses a boolean value.
      * @param {boolean} [include_my_groups] &lt;strong&gt;Include my Group:&lt;/strong&gt; When true, the API returns datasets only from project groups the authenticated user belongs to.
-     * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer, defaults to 1. Filters datasets by retrieving results in pages.
-     * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer, between 1 to 50, defaults to 10.Specifies total records per page.
+     * @param {number} [page_no] &lt;strong&gt;page_no:&lt;/strong&gt; Integer. Page of matching datasets to return. Defaults to 1 when omitted, not a number, or less than 1. The resolved page is returned in the X-Page-No response header.
+     * @param {number} [page_size] &lt;strong&gt;Page size:&lt;/strong&gt; Integer. Number of datasets in the page. Defaults to 10 when omitted or invalid, and values above 50 are capped at 50. The resolved size is returned in the X-Page-Size response header.
      * @param {string} [sort_field] &lt;strong&gt;Sort field:&lt;/strong&gt; The field by which to sort the results. By default, it is by uploaded timestamp. Matches the exact value from the supported enumeration.
      * @param {string} [sort_order] &lt;strong&gt;Sort order:&lt;/strong&gt; By default, it is in descending order.
      * @param {*} [options] Override http request option.
@@ -1438,15 +1438,15 @@ export class CommonAPIsApi extends BaseAPI {
         return CommonAPIsApiFp(this.configuration).listDatasetFiles(data_type, status, name, version, data_source, collection_method, collected_by, derived_from_dataset_id, collection_date, confidence_level, schema_version, tdei_project_group_id, tdei_service_id, valid_from, valid_to, tdei_dataset_id, bbox, other_published_locations, dataset_update_frequency_months, schema_validation_run_description, full_dataset_name, collection_name, department_name, city, region, county, key_limitations, release_notes, challenges, official_maintainer, last_updated, update_frequency, authorization_chain, maintenance_funded, funding_details, point_data_collection_device, node_locations_and_attributes_editing_software, data_collected_by_people, data_collectors, data_captured_automatically, automated_collection, data_collectors_organization, data_collector_compensation, preprocessing_location, preprocessing_by, preprocessing_steps, data_collection_preprocessing_documentation, documentation_uri, validation_process_exists, validation_process_description, validation_conducted_by, excluded_data, excluded_data_reason, data_viewer_allowed, include_my_groups, page_no, page_size, sort_field, sort_order, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Returns a list of jobs including request and reponse details. By default only shows the jobs that are submitted by the user.
+     * Returns a list of jobs including request and reponse details. By default only shows the jobs that are submitted by the user. Results are always one page. page_no defaults to 1 and page_size defaults to 10 (values above 50 are capped at 50). X-Total-Count, X-Page-No, and X-Page-Size are always set. A Link header with rel=\"next\" is set only when another page exists, and it keeps the other query filters.
      * @summary Shows the details of the jobs that the user has access to.
      * @param {string} tdei_project_group_id project group id of the user for which the jobs are listed for.
      * @param {string} [job_id] Get the details for the job with id&#x3D;job_id only.
      * @param {boolean} [show_group_jobs] Make this &#x60;true&#x60; to see the jobs submitted by others also in the given project group
      * @param {string} [job_type] Use this to filter for a specific type of job
      * @param {string} [status] Status of the job. Use this to filter jobs by a specific status
-     * @param {number} [page_no] Pagination: page number to start the list from. Defaults to 1.
-     * @param {number} [page_size] Total records to retrieve.Page size ranges between 1 to 50, defaults to 10.
+     * @param {number} [page_no] Page of matching jobs to return. Defaults to 1 when omitted, not a number, or less than 1. The resolved page is returned in the X-Page-No response header.
+     * @param {number} [page_size] Number of jobs in the page. Defaults to 10 when omitted or invalid, and values above 50 are capped at 50. The resolved size is returned in the X-Page-Size response header.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonAPIsApi
