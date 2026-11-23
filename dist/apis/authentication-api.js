@@ -97,70 +97,37 @@ var AuthenticationApiAxiosParamCreator = function (configuration) {
         authenticate: function (body, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions, needsSerialization;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
-                        case 0:
-                            // verify required parameter 'body' is not null or undefined
-                            if (body === null || body === undefined) {
-                                throw new base_1.RequiredError('body', 'Required parameter body was null or undefined when calling authenticate.');
-                            }
-                            localVarPath = "/api/v1/authenticate";
-                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
-                            if (configuration) {
-                                baseOptions = configuration.baseOptions;
-                            }
-                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
-                            localVarHeaderParameter = {};
-                            localVarQueryParameter = {};
-                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
-                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
-                        case 1:
-                            _a = _c.sent();
-                            return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, configuration.apiKey];
-                        case 3:
-                            _a = _c.sent();
-                            _c.label = 4;
-                        case 4:
-                            localVarApiKeyValue = _a;
-                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _c.label = 5;
-                        case 5:
-                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
-                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
-                            return [4 /*yield*/, configuration.accessToken()];
-                        case 6:
-                            _b = _c.sent();
-                            return [3 /*break*/, 9];
-                        case 7: return [4 /*yield*/, configuration.accessToken];
-                        case 8:
-                            _b = _c.sent();
-                            _c.label = 9;
-                        case 9:
-                            accessToken = _b;
-                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-                            _c.label = 10;
-                        case 10:
-                            localVarHeaderParameter['Content-Type'] = 'application/json';
-                            query = new URLSearchParams(localVarUrlObj.search);
-                            for (key in localVarQueryParameter) {
-                                query.set(key, localVarQueryParameter[key]);
-                            }
-                            for (key in options.params) {
-                                query.set(key, options.params[key]);
-                            }
-                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                            needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-                            localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-                            return [2 /*return*/, {
-                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                                    options: localVarRequestOptions,
-                                }];
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, query, key, key, headersFromBaseOptions, needsSerialization;
+                return __generator(this, function (_a) {
+                    // verify required parameter 'body' is not null or undefined
+                    if (body === null || body === undefined) {
+                        throw new base_1.RequiredError('body', 'Required parameter body was null or undefined when calling authenticate.');
                     }
+                    localVarPath = "/api/v1/authenticate";
+                    localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    localVarHeaderParameter['Content-Type'] = 'application/json';
+                    query = new URLSearchParams(localVarUrlObj.search);
+                    for (key in localVarQueryParameter) {
+                        query.set(key, localVarQueryParameter[key]);
+                    }
+                    for (key in options.params) {
+                        query.set(key, options.params[key]);
+                    }
+                    localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+                    localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+                    return [2 /*return*/, {
+                            url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                            options: localVarRequestOptions,
+                        }];
                 });
             });
         },
@@ -174,70 +141,37 @@ var AuthenticationApiAxiosParamCreator = function (configuration) {
         recoverPassword: function (body, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions, needsSerialization;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
-                        case 0:
-                            // verify required parameter 'body' is not null or undefined
-                            if (body === null || body === undefined) {
-                                throw new base_1.RequiredError('body', 'Required parameter body was null or undefined when calling recoverPassword.');
-                            }
-                            localVarPath = "/api/v1/recover-password";
-                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
-                            if (configuration) {
-                                baseOptions = configuration.baseOptions;
-                            }
-                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
-                            localVarHeaderParameter = {};
-                            localVarQueryParameter = {};
-                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
-                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
-                        case 1:
-                            _a = _c.sent();
-                            return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, configuration.apiKey];
-                        case 3:
-                            _a = _c.sent();
-                            _c.label = 4;
-                        case 4:
-                            localVarApiKeyValue = _a;
-                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _c.label = 5;
-                        case 5:
-                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
-                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
-                            return [4 /*yield*/, configuration.accessToken()];
-                        case 6:
-                            _b = _c.sent();
-                            return [3 /*break*/, 9];
-                        case 7: return [4 /*yield*/, configuration.accessToken];
-                        case 8:
-                            _b = _c.sent();
-                            _c.label = 9;
-                        case 9:
-                            accessToken = _b;
-                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-                            _c.label = 10;
-                        case 10:
-                            localVarHeaderParameter['Content-Type'] = 'text/plain';
-                            query = new URLSearchParams(localVarUrlObj.search);
-                            for (key in localVarQueryParameter) {
-                                query.set(key, localVarQueryParameter[key]);
-                            }
-                            for (key in options.params) {
-                                query.set(key, options.params[key]);
-                            }
-                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                            needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-                            localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-                            return [2 /*return*/, {
-                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                                    options: localVarRequestOptions,
-                                }];
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, query, key, key, headersFromBaseOptions, needsSerialization;
+                return __generator(this, function (_a) {
+                    // verify required parameter 'body' is not null or undefined
+                    if (body === null || body === undefined) {
+                        throw new base_1.RequiredError('body', 'Required parameter body was null or undefined when calling recoverPassword.');
                     }
+                    localVarPath = "/api/v1/recover-password";
+                    localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    localVarHeaderParameter['Content-Type'] = 'text/plain';
+                    query = new URLSearchParams(localVarUrlObj.search);
+                    for (key in localVarQueryParameter) {
+                        query.set(key, localVarQueryParameter[key]);
+                    }
+                    for (key in options.params) {
+                        query.set(key, options.params[key]);
+                    }
+                    localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+                    localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+                    return [2 /*return*/, {
+                            url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                            options: localVarRequestOptions,
+                        }];
                 });
             });
         },
@@ -382,70 +316,37 @@ var AuthenticationApiAxiosParamCreator = function (configuration) {
         ssoLogin: function (body, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions, needsSerialization;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
-                        case 0:
-                            // verify required parameter 'body' is not null or undefined
-                            if (body === null || body === undefined) {
-                                throw new base_1.RequiredError('body', 'Required parameter body was null or undefined when calling ssoLogin.');
-                            }
-                            localVarPath = "/api/v1/sso-login";
-                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
-                            if (configuration) {
-                                baseOptions = configuration.baseOptions;
-                            }
-                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
-                            localVarHeaderParameter = {};
-                            localVarQueryParameter = {};
-                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
-                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
-                        case 1:
-                            _a = _c.sent();
-                            return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, configuration.apiKey];
-                        case 3:
-                            _a = _c.sent();
-                            _c.label = 4;
-                        case 4:
-                            localVarApiKeyValue = _a;
-                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _c.label = 5;
-                        case 5:
-                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
-                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
-                            return [4 /*yield*/, configuration.accessToken()];
-                        case 6:
-                            _b = _c.sent();
-                            return [3 /*break*/, 9];
-                        case 7: return [4 /*yield*/, configuration.accessToken];
-                        case 8:
-                            _b = _c.sent();
-                            _c.label = 9;
-                        case 9:
-                            accessToken = _b;
-                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-                            _c.label = 10;
-                        case 10:
-                            localVarHeaderParameter['Content-Type'] = 'application/json';
-                            query = new URLSearchParams(localVarUrlObj.search);
-                            for (key in localVarQueryParameter) {
-                                query.set(key, localVarQueryParameter[key]);
-                            }
-                            for (key in options.params) {
-                                query.set(key, options.params[key]);
-                            }
-                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                            needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-                            localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-                            return [2 /*return*/, {
-                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                                    options: localVarRequestOptions,
-                                }];
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, query, key, key, headersFromBaseOptions, needsSerialization;
+                return __generator(this, function (_a) {
+                    // verify required parameter 'body' is not null or undefined
+                    if (body === null || body === undefined) {
+                        throw new base_1.RequiredError('body', 'Required parameter body was null or undefined when calling ssoLogin.');
                     }
+                    localVarPath = "/api/v1/sso-login";
+                    localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    localVarHeaderParameter['Content-Type'] = 'application/json';
+                    query = new URLSearchParams(localVarUrlObj.search);
+                    for (key in localVarQueryParameter) {
+                        query.set(key, localVarQueryParameter[key]);
+                    }
+                    for (key in options.params) {
+                        query.set(key, options.params[key]);
+                    }
+                    localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+                    localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+                    return [2 /*return*/, {
+                            url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                            options: localVarRequestOptions,
+                        }];
                 });
             });
         },
@@ -460,73 +361,40 @@ var AuthenticationApiAxiosParamCreator = function (configuration) {
         ssoLogout: function (redirect_uri, client_id, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
-                        case 0:
-                            // verify required parameter 'redirect_uri' is not null or undefined
-                            if (redirect_uri === null || redirect_uri === undefined) {
-                                throw new base_1.RequiredError('redirect_uri', 'Required parameter redirect_uri was null or undefined when calling ssoLogout.');
-                            }
-                            localVarPath = "/api/v1/sso-logout";
-                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
-                            if (configuration) {
-                                baseOptions = configuration.baseOptions;
-                            }
-                            localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
-                            localVarHeaderParameter = {};
-                            localVarQueryParameter = {};
-                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
-                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
-                        case 1:
-                            _a = _c.sent();
-                            return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, configuration.apiKey];
-                        case 3:
-                            _a = _c.sent();
-                            _c.label = 4;
-                        case 4:
-                            localVarApiKeyValue = _a;
-                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _c.label = 5;
-                        case 5:
-                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
-                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
-                            return [4 /*yield*/, configuration.accessToken()];
-                        case 6:
-                            _b = _c.sent();
-                            return [3 /*break*/, 9];
-                        case 7: return [4 /*yield*/, configuration.accessToken];
-                        case 8:
-                            _b = _c.sent();
-                            _c.label = 9;
-                        case 9:
-                            accessToken = _b;
-                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-                            _c.label = 10;
-                        case 10:
-                            if (redirect_uri !== undefined) {
-                                localVarQueryParameter['redirect_uri'] = redirect_uri;
-                            }
-                            if (client_id !== undefined) {
-                                localVarQueryParameter['client_id'] = client_id;
-                            }
-                            query = new URLSearchParams(localVarUrlObj.search);
-                            for (key in localVarQueryParameter) {
-                                query.set(key, localVarQueryParameter[key]);
-                            }
-                            for (key in options.params) {
-                                query.set(key, options.params[key]);
-                            }
-                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                            return [2 /*return*/, {
-                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                                    options: localVarRequestOptions,
-                                }];
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_a) {
+                    // verify required parameter 'redirect_uri' is not null or undefined
+                    if (redirect_uri === null || redirect_uri === undefined) {
+                        throw new base_1.RequiredError('redirect_uri', 'Required parameter redirect_uri was null or undefined when calling ssoLogout.');
                     }
+                    localVarPath = "/api/v1/sso-logout";
+                    localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    if (redirect_uri !== undefined) {
+                        localVarQueryParameter['redirect_uri'] = redirect_uri;
+                    }
+                    if (client_id !== undefined) {
+                        localVarQueryParameter['client_id'] = client_id;
+                    }
+                    query = new URLSearchParams(localVarUrlObj.search);
+                    for (key in localVarQueryParameter) {
+                        query.set(key, localVarQueryParameter[key]);
+                    }
+                    for (key in options.params) {
+                        query.set(key, options.params[key]);
+                    }
+                    localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    return [2 /*return*/, {
+                            url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                            options: localVarRequestOptions,
+                        }];
                 });
             });
         },
@@ -541,73 +409,40 @@ var AuthenticationApiAxiosParamCreator = function (configuration) {
         ssoRedirect: function (redirect_uri, client_id, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
-                        case 0:
-                            // verify required parameter 'redirect_uri' is not null or undefined
-                            if (redirect_uri === null || redirect_uri === undefined) {
-                                throw new base_1.RequiredError('redirect_uri', 'Required parameter redirect_uri was null or undefined when calling ssoRedirect.');
-                            }
-                            localVarPath = "/api/v1/sso-redirect";
-                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
-                            if (configuration) {
-                                baseOptions = configuration.baseOptions;
-                            }
-                            localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
-                            localVarHeaderParameter = {};
-                            localVarQueryParameter = {};
-                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
-                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
-                        case 1:
-                            _a = _c.sent();
-                            return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, configuration.apiKey];
-                        case 3:
-                            _a = _c.sent();
-                            _c.label = 4;
-                        case 4:
-                            localVarApiKeyValue = _a;
-                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _c.label = 5;
-                        case 5:
-                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
-                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
-                            return [4 /*yield*/, configuration.accessToken()];
-                        case 6:
-                            _b = _c.sent();
-                            return [3 /*break*/, 9];
-                        case 7: return [4 /*yield*/, configuration.accessToken];
-                        case 8:
-                            _b = _c.sent();
-                            _c.label = 9;
-                        case 9:
-                            accessToken = _b;
-                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-                            _c.label = 10;
-                        case 10:
-                            if (redirect_uri !== undefined) {
-                                localVarQueryParameter['redirect_uri'] = redirect_uri;
-                            }
-                            if (client_id !== undefined) {
-                                localVarQueryParameter['client_id'] = client_id;
-                            }
-                            query = new URLSearchParams(localVarUrlObj.search);
-                            for (key in localVarQueryParameter) {
-                                query.set(key, localVarQueryParameter[key]);
-                            }
-                            for (key in options.params) {
-                                query.set(key, options.params[key]);
-                            }
-                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                            return [2 /*return*/, {
-                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                                    options: localVarRequestOptions,
-                                }];
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_a) {
+                    // verify required parameter 'redirect_uri' is not null or undefined
+                    if (redirect_uri === null || redirect_uri === undefined) {
+                        throw new base_1.RequiredError('redirect_uri', 'Required parameter redirect_uri was null or undefined when calling ssoRedirect.');
                     }
+                    localVarPath = "/api/v1/sso-redirect";
+                    localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    if (redirect_uri !== undefined) {
+                        localVarQueryParameter['redirect_uri'] = redirect_uri;
+                    }
+                    if (client_id !== undefined) {
+                        localVarQueryParameter['client_id'] = client_id;
+                    }
+                    query = new URLSearchParams(localVarUrlObj.search);
+                    for (key in localVarQueryParameter) {
+                        query.set(key, localVarQueryParameter[key]);
+                    }
+                    for (key in options.params) {
+                        query.set(key, options.params[key]);
+                    }
+                    localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    return [2 /*return*/, {
+                            url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                            options: localVarRequestOptions,
+                        }];
                 });
             });
         },
@@ -621,70 +456,37 @@ var AuthenticationApiAxiosParamCreator = function (configuration) {
         verifyEmail: function (body, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, localVarApiKeyValue, _a, accessToken, _b, query, key, key, headersFromBaseOptions, needsSerialization;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
-                        case 0:
-                            // verify required parameter 'body' is not null or undefined
-                            if (body === null || body === undefined) {
-                                throw new base_1.RequiredError('body', 'Required parameter body was null or undefined when calling verifyEmail.');
-                            }
-                            localVarPath = "/api/v1/verify-email";
-                            localVarUrlObj = new URL(localVarPath, 'https://example.com');
-                            if (configuration) {
-                                baseOptions = configuration.baseOptions;
-                            }
-                            localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
-                            localVarHeaderParameter = {};
-                            localVarQueryParameter = {};
-                            if (!(configuration && configuration.apiKey)) return [3 /*break*/, 5];
-                            if (!(typeof configuration.apiKey === 'function')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, configuration.apiKey("x-api-key")];
-                        case 1:
-                            _a = _c.sent();
-                            return [3 /*break*/, 4];
-                        case 2: return [4 /*yield*/, configuration.apiKey];
-                        case 3:
-                            _a = _c.sent();
-                            _c.label = 4;
-                        case 4:
-                            localVarApiKeyValue = _a;
-                            localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-                            _c.label = 5;
-                        case 5:
-                            if (!(configuration && configuration.accessToken)) return [3 /*break*/, 10];
-                            if (!(typeof configuration.accessToken === 'function')) return [3 /*break*/, 7];
-                            return [4 /*yield*/, configuration.accessToken()];
-                        case 6:
-                            _b = _c.sent();
-                            return [3 /*break*/, 9];
-                        case 7: return [4 /*yield*/, configuration.accessToken];
-                        case 8:
-                            _b = _c.sent();
-                            _c.label = 9;
-                        case 9:
-                            accessToken = _b;
-                            localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-                            _c.label = 10;
-                        case 10:
-                            localVarHeaderParameter['Content-Type'] = 'text/plain';
-                            query = new URLSearchParams(localVarUrlObj.search);
-                            for (key in localVarQueryParameter) {
-                                query.set(key, localVarQueryParameter[key]);
-                            }
-                            for (key in options.params) {
-                                query.set(key, options.params[key]);
-                            }
-                            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-                            headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-                            localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                            needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-                            localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-                            return [2 /*return*/, {
-                                    url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                                    options: localVarRequestOptions,
-                                }];
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, query, key, key, headersFromBaseOptions, needsSerialization;
+                return __generator(this, function (_a) {
+                    // verify required parameter 'body' is not null or undefined
+                    if (body === null || body === undefined) {
+                        throw new base_1.RequiredError('body', 'Required parameter body was null or undefined when calling verifyEmail.');
                     }
+                    localVarPath = "/api/v1/verify-email";
+                    localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    localVarHeaderParameter['Content-Type'] = 'text/plain';
+                    query = new URLSearchParams(localVarUrlObj.search);
+                    for (key in localVarQueryParameter) {
+                        query.set(key, localVarQueryParameter[key]);
+                    }
+                    for (key in options.params) {
+                        query.set(key, options.params[key]);
+                    }
+                    localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+                    localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+                    return [2 /*return*/, {
+                            url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                            options: localVarRequestOptions,
+                        }];
                 });
             });
         },

@@ -49,23 +49,6 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication ApiKey required
-            if (configuration && configuration.apiKey) {
-                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
-                    ? await configuration.apiKey("x-api-key")
-                    : await configuration.apiKey;
-                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-            }
-
-            // authentication AuthorizationToken required
-            // http bearer authentication required
-            if (configuration && configuration.accessToken) {
-                const accessToken = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken()
-                    : await configuration.accessToken;
-                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-            }
-
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -108,23 +91,6 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication ApiKey required
-            if (configuration && configuration.apiKey) {
-                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
-                    ? await configuration.apiKey("x-api-key")
-                    : await configuration.apiKey;
-                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-            }
-
-            // authentication AuthorizationToken required
-            // http bearer authentication required
-            if (configuration && configuration.accessToken) {
-                const accessToken = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken()
-                    : await configuration.accessToken;
-                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-            }
 
             localVarHeaderParameter['Content-Type'] = 'text/plain';
 
@@ -272,23 +238,6 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication ApiKey required
-            if (configuration && configuration.apiKey) {
-                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
-                    ? await configuration.apiKey("x-api-key")
-                    : await configuration.apiKey;
-                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-            }
-
-            // authentication AuthorizationToken required
-            // http bearer authentication required
-            if (configuration && configuration.accessToken) {
-                const accessToken = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken()
-                    : await configuration.accessToken;
-                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-            }
-
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -332,23 +281,6 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication ApiKey required
-            if (configuration && configuration.apiKey) {
-                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
-                    ? await configuration.apiKey("x-api-key")
-                    : await configuration.apiKey;
-                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-            }
-
-            // authentication AuthorizationToken required
-            // http bearer authentication required
-            if (configuration && configuration.accessToken) {
-                const accessToken = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken()
-                    : await configuration.accessToken;
-                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-            }
 
             if (redirect_uri !== undefined) {
                 localVarQueryParameter['redirect_uri'] = redirect_uri;
@@ -398,23 +330,6 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication ApiKey required
-            if (configuration && configuration.apiKey) {
-                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
-                    ? await configuration.apiKey("x-api-key")
-                    : await configuration.apiKey;
-                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-            }
-
-            // authentication AuthorizationToken required
-            // http bearer authentication required
-            if (configuration && configuration.accessToken) {
-                const accessToken = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken()
-                    : await configuration.accessToken;
-                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-            }
-
             if (redirect_uri !== undefined) {
                 localVarQueryParameter['redirect_uri'] = redirect_uri;
             }
@@ -461,23 +376,6 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication ApiKey required
-            if (configuration && configuration.apiKey) {
-                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
-                    ? await configuration.apiKey("x-api-key")
-                    : await configuration.apiKey;
-                localVarHeaderParameter["x-api-key"] = localVarApiKeyValue;
-            }
-
-            // authentication AuthorizationToken required
-            // http bearer authentication required
-            if (configuration && configuration.accessToken) {
-                const accessToken = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken()
-                    : await configuration.accessToken;
-                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-            }
 
             localVarHeaderParameter['Content-Type'] = 'text/plain';
 
